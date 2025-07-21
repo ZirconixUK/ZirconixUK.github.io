@@ -59,10 +59,13 @@
     "stage": 5,
     "path": "parallel",
     "images": [
-      "Journal_v4_10.png",
-      "Journal_v4_11.png"
+      "Journal_v4_2.png",
+      "Journal_v4_3.png"
     ],
-    "answerHash": "76a796208b71779c0331e79e8ac17df979c7d2c5bd10b491c94bd1e16d422088",
+  "answers": [
+"8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
+"9da12f5fd9feb4a1a7e8d8c10f7e6ad398043cd9d52378d6cf138a177a0c2032"
+  ],
     "hintHash": "5faed653f56701f72756c9fe429b16d25d990613d9404f6b2ca0c961c2fa60e7"
   },
   {
