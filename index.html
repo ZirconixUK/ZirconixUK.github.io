@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Circle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Import desired web fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="hint-icon" onclick="showHint()">🔍</div>
+  <div class="reset-icon" onclick="resetProgress()">🔄</div>
+  <div id="navControls">
+    <button id="togglePathBtn" onclick="togglePath()">Switch to Meridian</button>
+    <label for="stageSelect">Stage:</label>
+    <select id="stageSelect" onchange="onStageChange(this.value)"></select>
+  </div>
+  <div id="textContent" style="display:none; text-align:left; max-width:800px; margin:20px auto; font-size:1.1em;"></div>
+  <div class="images">
+    <img id="img1" src="" alt="Puzzle Image 1" onclick="showOverlay(this.src)">
+    <img id="img2" src="" alt="Puzzle Image 2" onclick="showOverlay(this.src)">
+    <span id="choiceParallel" class="choice-text" onclick="choosePath('parallel')" style="display:none;">Parallel Path</span>
+    <span id="choiceMeridian" class="choice-text" onclick="choosePath('meridian')" style="display:none;">Meridian Path</span>
+  </div>
+  <div class="input-section">
+    <input id="guessInput" type="text" placeholder="Enter your guess">
+    <button id="submitBtn" onclick="checkGuess()">Submit</button>
+    <button id="nextBtn" onclick="nextPuzzle()" style="display:none;">Next</button>
+  </div>
+  <div class="overlay" id="overlay" onclick="hideOverlay()"><img id="overlayImg" src=""></div>
+  <div id="toast" class="toast" onclick="this.className='toast'"></div>
+  <div id="hintBox" class="hint-box"><h3>Hint<span class="close" onclick="hideHint()">✖</span></h3><p id="hintText"></p></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    let puzzles = [];
+    let pathProgress = {intro:1, parallel:1, meridian:1};
+    ['intro','parallel','meridian'].forEach(p => pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1);
+    let currentPath = 'intro';
+    let currentStage = 1;
+
+    const introCount = () => puzzles.filter(p => p.path === 'intro').length;
+
+    fetch('puzzles_with_paths.json')
+      .then(r => r.json())
+      .then(data => { puzzles = data; init(); });
+
+    function init() {
+      const iCount = introCount();
+      const pTotal = puzzles.filter(p => p.path === 'parallel').length;
+      const mTotal = puzzles.filter(p => p.path === 'meridian').length;
+      if (pathProgress.intro <= iCount) {
+        loadStageFor('intro');
+      } else if (pathProgress.parallel <= pTotal) {
+        startBranch('parallel');
+      } else if (pathProgress.meridian <= mTotal) {
+        startBranch('meridian');
+      } else {
+        startBranch('meridian');
+      }
+    }
+
+    function loadStageFor(path) {
+      currentPath = path;
+      const list = puzzles.filter(p => p.path === path);
+      const unlocked = Math.min(pathProgress[path], list.length);
+      currentStage = list[unlocked - 1]?.stage || list[0].stage;
+      document.getElementById('togglePathBtn').style.display = path === 'intro' ? 'none' : 'inline-block';
+      if (path !== 'intro') updateToggleText();
+      populateStages();
+      loadStage();
+    }
+
+    function startBranch(path) {
+      loadStageFor(path);
+    }
+
+    function updateToggleText() {
+      const btn = document.getElementById('togglePathBtn');
+      btn.textContent = currentPath === 'parallel' ? 'Switch to Meridian' : 'Switch to Parallel';
+    }
+
+    function togglePath() {
+      loadStageFor(currentPath === 'parallel' ? 'meridian' : 'parallel');
+    }
+
+    function populateStages() {
+      const list = puzzles.filter(p => p.path === currentPath);
+      const sel = document.getElementById('stageSelect'); sel.innerHTML = '';
+      let count = pathProgress[currentPath] || 1;
+      if (currentPath === 'final') count = list.length;
+      count = Math.min(count, list.length);
+      for (let i = 0; i < count; i++) {
+        const p = list[i];
+        const o = document.createElement('option'); o.value = p.stage;
+        o.text = p.title || `Puzzle ${p.stage}`;
+        sel.add(o);
+      }
+      sel.value = currentStage;
+    }
+
+    function onStageChange(val) {
+      currentStage = parseInt(val);
+      populateStages();
+      loadStage();
+    }
+
+    function loadStage() {
+      window.scrollTo(0, 0);
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      const txtDiv = document.getElementById('textContent');
+      const imgsDiv = document.querySelector('.images');
+      const hasAnswer = puz.hasAnswer !== false;
+      const hasChoice = puz.hasChoice === true;
+
+      // Text-only or choice pages
+      if (puz.htmlContent) {
+        let content = puz.htmlContent;
+        if (hasChoice) {
+          content += '<div class="choice-links"><a href="#" onclick="choosePath(\'parallel\')">Parallel Path</a><span>|</span><a href="#" onclick="choosePath(\'meridian\')">Meridian Path</a></div>';
+        }
+        txtDiv.innerHTML = content;
+        txtDiv.style.display = 'block';
+        imgsDiv.style.display = 'none';
+      } else {
+        txtDiv.style.display = 'none';
+        imgsDiv.style.display = 'flex';
+
+        document.getElementById('img1').src = puz.images[0] || '';
+        document.getElementById('img2').src = puz.images[1] || '';
+      }
+
+      // Reset input
+      document.getElementById('guessInput').value = '';
+      document.getElementById('guessInput').style.display = hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('submitBtn').style.display = hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('nextBtn').style.display   = !hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('choiceParallel').style.display = hasChoice ? 'inline-block' : 'none';
+      document.getElementById('choiceMeridian').style.display = hasChoice ? 'inline-block' : 'none';
+    }
+
+    function checkGuess() {
+      const inp = document.getElementById('guessInput').value.trim().toLowerCase();
+      const hash = CryptoJS.SHA256(inp).toString();
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      const valid = puz.answers || (puz.answerHash ? [puz.answerHash] : []);
+      if (valid.includes(hash)) {
+        showToast('CORRECT', true);
+        advanceProgress();
+        setTimeout(autoAdvance, 800);
+      } else showToast('WRONG', false);
+    }
+
+    function nextPuzzle() {
+      advanceProgress();
+      setTimeout(autoAdvance, 200);
+    }
+
+    function advanceProgress() {
+      if (currentStage === pathProgress[currentPath]) {
+        pathProgress[currentPath]++;
+        localStorage.setItem('progress_' + currentPath, pathProgress[currentPath]);
+      }
+      if (currentPath === 'intro' && currentStage === introCount()) startBranch('parallel');
+    }
+
+    function autoAdvance() {
+      populateStages();
+      const list = puzzles.filter(p => p.path === currentPath);
+      const idx = list.findIndex(p => p.stage === currentStage);
+      const next = list[idx + 1]; if (next) onStageChange(next.stage);
+    }
+
+    function showToast(msg, success) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className   = `toast show ${success?'success':'error'}`;
+      setTimeout(() => { t.className = 'toast'; }, 2000);
+    }
+
+    function showOverlay(src) { const overlay = document.getElementById('overlay'); document.getElementById('overlayImg').src = src; overlay.classList.add('show'); }
+    function hideOverlay() { document.getElementById('overlay').classList.remove('show'); }
+    function showHint() { const puz = puzzles.find(p=>p.path===currentPath&&p.stage===currentStage); if (!puz) return; fetch('hints.json', { cache: 'no-cache' }).then(r=>r.json()).then(h=>{ document.getElementById('hintText').textContent=h[puz.hintHash]||'No hint.'; document.getElementById('hintBox').classList.add('show'); }); }
+    function hideHint() { document.getElementById('hintBox').classList.remove('show'); }
+    function choosePath(path) { loadStageFor(path); }
+    function resetProgress() { if (confirm('Reset progress?')) { ['intro','parallel','meridian'].forEach(p=>{ localStorage.removeItem('progress_' + p); pathProgress[p]=1; }); init(); }}
+  </script>
+</body>
+</html>

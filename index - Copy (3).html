@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Puzzle Hunt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4e1c1; margin: 0; padding: 20px; text-align: center; }
+    .images { display: flex; justify-content: center; flex-wrap: wrap; }
+    .images img { width: 50%; cursor: pointer; display: block; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 999; }
+    .overlay img { max-width: 90%; max-height: 90%; border: 5px solid #fff; }
+    .input-section { margin-top: 30px; }
+    input[type="text"] { padding: 10px; width: 300px; font-size: 1.2em; }
+    button { padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin: 5px; }
+    select { padding: 8px 12px; margin: 20px 10px; border-radius: 6px; border: 1px solid #888; background: #fff8f0; }
+    .toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 6px; padding: 12px 24px; position: fixed; left: 50%; bottom: -100px; transform: translateX(-50%); z-index: 1000; transition: bottom .5s, visibility .3s; cursor: pointer; }
+    .toast.show { visibility: visible; bottom: 30px; } .toast.success { background: #2ecc71; } .toast.error { background: #e74c3c; }
+    .hint-box { visibility: hidden; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #444; color: #fff; padding: 20px 30px; border-radius: 8px; z-index: 2000; max-width: 80%; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .hint-box.show { visibility: visible; }
+    .hint-box h3 { margin: 0 0 10px; font-size: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .hint-box h3::before { content: "🔍"; margin-right: 8px; }
+    .hint-box .close { cursor: pointer; }
+    .hint-icon, .reset-icon { position: fixed; top: 20px; font-size: 28px; cursor: pointer; z-index: 1100; }
+    .hint-icon { right: 20px; } .reset-icon { left: 20px; }
+    #togglePathBtn { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Puzzle Hunt</h1>
+  <div class="hint-icon" onclick="showHint()">🔍</div>
+  <div class="reset-icon" onclick="resetProgress()">🔄</div>
+  <div id="navControls">
+    <button id="togglePathBtn" onclick="togglePath()">Switch to Meridian</button>
+    <label for="stageSelect">Puzzle:</label>
+    <select id="stageSelect" onchange="onStageChange(this.value)"></select>
+  </div>
+  <div class="images">
+    <img id="img1" src="" onclick="showOverlay(this.src)">
+    <img id="img2" src="" onclick="showOverlay(this.src)">
+  </div>
+  <div class="input-section">
+    <input id="guessInput" type="text" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Submit</button>
+  </div>
+  <div class="overlay" id="overlay" onclick="hideOverlay()"><img id="overlayImg"></div>
+  <div id="toast" class="toast" onclick="this.className='toast'"></div>
+  <div id="hintBox" class="hint-box"><h3>Hint<span class="close" onclick="hideHint()">✖</span></h3><p id="hintText"></p></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    let puzzles = [];
+    let pathProgress = {intro:1, parallel:1, meridian:1};
+    ['intro','parallel','meridian'].forEach(p => pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1);
+    let currentPath = 'intro';
+    let currentStage = 1;
+
+    const introCount = () => puzzles.filter(p => p.path === 'intro').length;
+
+    fetch('puzzles_with_paths.json')
+      .then(r => r.json())
+      .then(data => { puzzles = data; init(); });
+
+    function init() {
+      const iCount = introCount();
+      const pTotal = puzzles.filter(p => p.path === 'parallel').length;
+      const mTotal = puzzles.filter(p => p.path === 'meridian').length;
+      // Decide starting point based on saved progress
+      if (pathProgress.intro <= iCount) {
+        // Still in intro
+        loadIntro();
+      } else if (pathProgress.parallel <= pTotal) {
+        // In parallel branch
+        currentPath = 'parallel';
+        // Set to last unlocked parallel stage
+        const pList = puzzles.filter(p => p.path === 'parallel');
+        const unlockedP = Math.min(pathProgress.parallel, pList.length);
+        currentStage = pList[unlockedP - 1].stage;
+        document.getElementById('togglePathBtn').style.display = 'inline-block';
+        updateToggleText();
+        populateStages();
+        loadStage();
+      } else if (pathProgress.meridian <= mTotal) {
+        // In meridian branch
+        currentPath = 'meridian';
+        const mList = puzzles.filter(p => p.path === 'meridian');
+        const unlockedM = Math.min(pathProgress.meridian, mList.length);
+        currentStage = mList[unlockedM - 1].stage;
+        document.getElementById('togglePathBtn').style.display = 'inline-block';
+        updateToggleText();
+        populateStages();
+        loadStage();
+      } else {
+        // Both branches completed; default to final meridian stage
+        currentPath = 'meridian';
+        const mList = puzzles.filter(p => p.path === 'meridian');
+        currentStage = mList[mList.length - 1].stage;
+        document.getElementById('togglePathBtn').style.display = 'inline-block';
+        updateToggleText();
+        populateStages();
+        loadStage();
+      }
+    }
+
+    function loadIntro() {
+      currentPath = 'intro';
+      // Jump to latest unlocked intro puzzle on load
+      const iCount = introCount();
+      const unlockedIntro = Math.min(pathProgress.intro, iCount);
+      currentStage = unlockedIntro >= 1 ? unlockedIntro : 1;
+      document.getElementById('togglePathBtn').style.display = 'none';
+      populateStages();
+      loadStage();
+    }
+
+    function enterBranches() {
+      currentPath = 'parallel';
+      let list = puzzles.filter(p => p.path === 'parallel');
+      currentStage = list[0].stage;
+      document.getElementById('togglePathBtn').style.display = 'inline-block';
+      updateToggleText();
+      populateStages();
+      loadStage();
+    }
+
+    function updateToggleText() {
+      const btn = document.getElementById('togglePathBtn');
+      btn.textContent = currentPath === 'parallel' ? 'Switch to Meridian' : 'Switch to Parallel';
+    }
+
+    function togglePath() {
+      currentPath = currentPath === 'parallel' ? 'meridian' : 'parallel';
+      let list = puzzles.filter(p => p.path === currentPath);
+      let unlocked = Math.min(pathProgress[currentPath], list.length);
+      currentStage = list[unlocked - 1]?.stage || list[0].stage;
+      updateToggleText();
+      populateStages();
+      loadStage();
+    }
+
+    function populateStages() {
+      const list = puzzles.filter(p => p.path === currentPath);
+      const sel = document.getElementById('stageSelect');
+      sel.innerHTML = '';
+      let count = pathProgress[currentPath] || 1;
+      if (currentPath === 'final') count = list.length;
+      count = Math.min(count, list.length);
+      for (let i = 0; i < count; i++) {
+        const p = list[i];
+        const o = document.createElement('option');
+        o.value = p.stage;
+        o.text = 'Puzzle ' + p.stage;
+        sel.add(o);
+      }
+      sel.value = currentStage;
+    }
+
+    function onStageChange(val) {
+      currentStage = parseInt(val);
+      loadStage();
+    }
+
+    function loadStage() {
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      document.getElementById('img1').src = puz.images[0];
+      document.getElementById('img2').src = puz.images[1];
+      document.getElementById('guessInput').value = '';
+    }
+
+    function checkGuess() {
+      const inp = document.getElementById('guessInput').value.trim().toLowerCase();
+      const hash = CryptoJS.SHA256(inp).toString();
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      if (hash === puz.answerHash) {
+        showToast('CORRECT', true);
+        // Intro logic
+        if (currentPath === 'intro') {
+          if (currentStage === pathProgress.intro) {
+            pathProgress.intro++;
+            localStorage.setItem('progress_intro', pathProgress.intro);
+          }
+          if (currentStage === introCount()) {
+            enterBranches();
+            return;
+          }
+        } else {
+          // Branch logic
+          if (currentStage === pathProgress[currentPath]) {
+            pathProgress[currentPath]++;
+            localStorage.setItem('progress_' + currentPath, pathProgress[currentPath]);
+          }
+        }
+        // Auto advance
+        setTimeout(() => {
+          const list = puzzles.filter(p => p.path === currentPath);
+          const idx = list.findIndex(p => p.stage === currentStage);
+          const next = list[idx + 1];
+          if (next) {
+            onStageChange(next.stage);
+            populateStages();
+          }
+        }, 800);
+      } else {
+        showToast('WRONG', false);
+      }
+    }
+
+    function showToast(msg, success) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = `toast show ${success?'success':'error'}`;
+      // Automatically hide after 2 seconds
+      setTimeout(() => { t.className = 'toast'; }, 2000);
+    }
+
+    function showOverlay(src) {
+      document.getElementById('overlayImg').src = src;
+      document.getElementById('overlay').style.display = 'flex';
+    }
+
+    function hideOverlay() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    function showHint() {
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      fetch('hints.json').then(r=>r.json()).then(h=>{
+        document.getElementById('hintText').textContent = h[puz.hintHash]||'No hint.';
+        document.getElementById('hintBox').classList.add('show');
+      });
+    }
+
+    function hideHint() {
+      document.getElementById('hintBox').classList.remove('show');
+    }
+
+    function resetProgress() {
+      if (confirm('Reset progress?')) {
+        ['intro','parallel','meridian'].forEach(p => {
+          localStorage.removeItem('progress_' + p);
+          pathProgress[p] = 1;
+        });
+        init();
+      }
+    }
+  </script>
+</body>
+</html>

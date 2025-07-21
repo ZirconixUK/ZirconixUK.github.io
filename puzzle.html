@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Puzzle Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4e1c1;
+      margin: 0;
+      padding: 20px;
+    }
+    .images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .images img {
+      width: 45%;
+      cursor: pointer;
+      border: 2px solid #555;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid white;
+    }
+    .input-section {
+      margin-top: 30px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 1.2em;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Circle Puzzle</h1>
+  <div class="images">
+    <img src="Journal_v4_2.png" alt="Puzzle Image 1" onclick="showOverlay(this.src)">
+    <img src="Journal_v4_3.png" alt="Puzzle Image 2" onclick="showOverlay(this.src)">
+  </div>
+
+  <div class="input-section">
+    <input type="text" id="guessInput" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Submit</button>
+  </div>
+
+  <div class="overlay" id="imageOverlay" onclick="hideOverlay()">
+    <img id="overlayImg" src="">
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    function showOverlay(src) {
+      document.getElementById('overlayImg').src = src;
+      document.getElementById('imageOverlay').style.display = 'flex';
+    }
+
+    function hideOverlay() {
+      document.getElementById('imageOverlay').style.display = 'none';
+    }
+
+    function sha256(str) {
+      return CryptoJS.SHA256(str.toLowerCase().trim()).toString();
+    }
+
+    function checkGuess() {
+      const input = document.getElementById('guessInput').value;
+      const correctHash = "79f950e57d58f374c9ad4f40680ec2d2560644de2acfe9ccd282f61974759028";
+
+      if (sha256(input) === correctHash) {
+        alert("CORRECT");
+      } else {
+        alert("WRONG");
+      }
+    }
+  </script>
+</body>
+</html>

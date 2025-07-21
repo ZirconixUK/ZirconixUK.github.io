@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SHA-256 Puzzle Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; }
+    input { font-size: 18px; padding: 8px; width: 200px; }
+    button { font-size: 18px; padding: 8px 16px; }
+    #resultMessage { margin-top: 20px; font-size: 24px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>Enter your answer</h1>
+  <input type="text" id="guessInput" placeholder="Your guess">
+  <button onclick="checkGuess()">Submit</button>
+
+  <div id="resultMessage"></div>
+
+  <script>
+    function sha256(str) {
+      return CryptoJS.SHA256(str.toLowerCase().trim()).toString();
+    }
+
+    function checkGuess() {
+      const input = document.getElementById('guessInput').value;
+      const hash = sha256(input);
+      const correctHash = "79f950e57d58f374c9ad4f40680ec2d2560644de2acfe9ccd282f61974759028";
+
+      const message = document.getElementById('resultMessage');
+
+      if (hash === correctHash) {
+        message.textContent = "CORRECT";
+        message.style.color = "green";
+      } else {
+        message.textContent = hash;
+        message.style.color = "red";
+      }
+
+      console.log("Input:", input);
+      console.log("SHA256:", hash);
+    }
+  </script>
+
+</body>
+</html>

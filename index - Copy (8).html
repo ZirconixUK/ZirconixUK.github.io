@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Puzzle Hunt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4e1c1; margin: 0; padding: 20px; text-align: center; }
+    .images { display: flex; justify-content: center; flex-wrap: wrap; position: relative; }
+    .images img { width: 50%; cursor: pointer; display: block; }
+    /* Choice text positioned over images */
+    .choice-text { position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.2em; color: #007bff; cursor: pointer; text-decoration: underline; }
+    #choiceParallel { left: 30%; }
+    #choiceMeridian { left: 70%; }
+    .input-section { margin-top: 30px; }
+    input[type="text"] { padding: 10px; width: 300px; font-size: 1.2em; }
+    select { padding: 8px 12px; margin: 20px 10px; border-radius: 6px; border: 1px solid #888; background: #fff8f0; }
+    button { padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin: 5px; }
+    .toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 6px; padding: 12px 24px;
+             position: fixed; left: 50%; bottom: -100px; transform: translateX(-50%); z-index: 1000;
+             transition: bottom .5s, visibility .3s; cursor: pointer; }
+    .toast.show { visibility: visible; bottom: 30px; }
+    .toast.success { background: #2ecc71; }
+    .toast.error { background: #e74c3c; }
+    .hint-box { visibility: hidden; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: #444; color: #fff; padding: 20px 30px; border-radius: 8px; z-index: 2000;
+                max-width: 80%; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .hint-box.show { visibility: visible; }
+    .hint-box h3 { margin: 0 0 10px; font-size: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .hint-box h3::before { content: "🔍"; margin-right: 8px; }
+    .hint-box .close { cursor: pointer; }
+    .hint-icon, .reset-icon { position: fixed; top: 20px; font-size: 28px; cursor: pointer; z-index: 1100; }
+    .hint-icon { right: 20px; }
+    .reset-icon { left: 20px; }
+    #togglePathBtn { display: none; }
+    /* Image overlay popup */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .overlay.show {
+      display: flex;
+    }
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    .overlay.show {
+      visibility: visible;
+      display: flex;
+    }
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>Puzzle Hunt</h1>
+  <div class="hint-icon" onclick="showHint()">🔍</div>
+  <div class="reset-icon" onclick="resetProgress()">🔄</div>
+  <div id="navControls">
+    <button id="togglePathBtn" onclick="togglePath()">Switch to Meridian</button>
+    <label for="stageSelect">Puzzle:</label>
+    <select id="stageSelect" onchange="onStageChange(this.value)"></select>
+  </div>
+  <div id="textContent" style="display:none; text-align:left; max-width:800px; margin:20px auto; font-size:1.1em;"></div>
+  <div class="images">
+    <img id="img1" src="" alt="Puzzle Image 1" onclick="showOverlay(this.src)">
+    <img id="img2" src="" alt="Puzzle Image 2" onclick="showOverlay(this.src)">
+    <span id="choiceParallel" class="choice-text" onclick="choosePath('parallel')" style="display:none;">Parallel Path</span>
+    <span id="choiceMeridian" class="choice-text" onclick="choosePath('meridian')" style="display:none;">Meridian Path</span>
+  </div>
+  <div class="input-section">
+    <input id="guessInput" type="text" placeholder="Enter your guess">
+    <button id="submitBtn" onclick="checkGuess()">Submit</button>
+    <button id="nextBtn" onclick="nextPuzzle()" style="display:none;">Next</button>
+  </div>
+  <div class="overlay" id="overlay" onclick="hideOverlay()"><img id="overlayImg" src=""></div>
+  <div id="toast" class="toast" onclick="this.className='toast'"></div>
+  <div id="hintBox" class="hint-box"><h3>Hint<span class="close" onclick="hideHint()">✖</span></h3><p id="hintText"></p></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    let puzzles = [];
+    let pathProgress = {intro:1, parallel:1, meridian:1};
+    ['intro','parallel','meridian'].forEach(p => pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1);
+    let currentPath = 'intro';
+    let currentStage = 1;
+
+    const introCount = () => puzzles.filter(p => p.path === 'intro').length;
+
+    fetch('puzzles_with_paths.json')
+      .then(r => r.json())
+      .then(data => { puzzles = data; init(); });
+
+    function init() {
+      const iCount = introCount();
+      const pTotal = puzzles.filter(p => p.path === 'parallel').length;
+      const mTotal = puzzles.filter(p => p.path === 'meridian').length;
+      if (pathProgress.intro <= iCount) {
+        loadStageFor('intro');
+      } else if (pathProgress.parallel <= pTotal) {
+        startBranch('parallel');
+      } else if (pathProgress.meridian <= mTotal) {
+        startBranch('meridian');
+      } else {
+        startBranch('meridian');
+      }
+    }
+
+    function loadStageFor(path) {
+      currentPath = path;
+      const list = puzzles.filter(p => p.path === path);
+      const unlocked = Math.min(pathProgress[path], list.length);
+      currentStage = list[unlocked - 1]?.stage || list[0].stage;
+      document.getElementById('togglePathBtn').style.display = path === 'intro' ? 'none' : 'inline-block';
+      if (path !== 'intro') updateToggleText();
+      populateStages();
+      loadStage();
+    }
+
+    function startBranch(path) {
+      loadStageFor(path);
+    }
+
+    function updateToggleText() {
+      const btn = document.getElementById('togglePathBtn');
+      btn.textContent = currentPath === 'parallel' ? 'Switch to Meridian' : 'Switch to Parallel';
+    }
+
+    function togglePath() {
+      loadStageFor(currentPath === 'parallel' ? 'meridian' : 'parallel');
+    }
+
+    function populateStages() {
+      const list = puzzles.filter(p => p.path === currentPath);
+      const sel = document.getElementById('stageSelect'); sel.innerHTML = '';
+      let count = pathProgress[currentPath] || 1;
+      if (currentPath === 'final') count = list.length;
+      count = Math.min(count, list.length);
+      for (let i = 0; i < count; i++) {
+        const p = list[i];
+        const o = document.createElement('option'); o.value = p.stage;
+        o.text = p.title || `Puzzle ${p.stage}`;
+        sel.add(o);
+      }
+      sel.value = currentStage;
+    }
+
+    function onStageChange(val) {
+      currentStage = parseInt(val);
+      populateStages();
+      loadStage();
+    }
+
+    function loadStage() {
+      window.scrollTo(0, 0);
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      // Text-only pages
+      const txtDiv = document.getElementById('textContent');
+      const imgsDiv = document.querySelector('.images');
+      if (puz.htmlContent) {
+        txtDiv.innerHTML = puz.htmlContent;
+        txtDiv.style.display = 'block';
+        imgsDiv.style.display = 'none';
+      } else {
+        txtDiv.style.display = 'none';
+        imgsDiv.style.display = 'flex';
+      }
+      // Images
+      if (!puz.htmlContent) {
+        document.getElementById('img1').src = puz.images[0] || '';
+        document.getElementById('img2').src = puz.images[1] || '';
+      }
+      // Reset input
+      document.getElementById('guessInput').value = '';
+      const hasAnswer = puz.hasAnswer !== false;
+      const hasChoice = puz.hasChoice === true;
+      // Toggle controls
+      document.getElementById('guessInput').style.display      = hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('submitBtn').style.display       = hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('nextBtn').style.display         = !hasAnswer && !hasChoice ? 'inline-block' : 'none';
+      document.getElementById('choiceParallel').style.display  = hasChoice ? 'inline-block' : 'none';
+      document.getElementById('choiceMeridian').style.display  = hasChoice ? 'inline-block' : 'none';
+    }
+
+function checkGuess() {
+      const inp = document.getElementById('guessInput').value.trim().toLowerCase();
+      const hash = CryptoJS.SHA256(inp).toString();
+      const puz = puzzles.find(p => p.path === currentPath && p.stage === currentStage);
+      if (!puz) return;
+      // Check against multiple valid answers
+      const valid = puz.answers || (puz.answerHash ? [puz.answerHash] : []);
+      if (valid.includes(hash)) {
+        showToast('CORRECT', true);
+        advanceProgress();
+        setTimeout(autoAdvance, 800);
+      } else showToast('WRONG', false);
+    }
+
+    function nextPuzzle() {
+      advanceProgress();
+      setTimeout(autoAdvance, 200);
+    }
+
+    function advanceProgress() {
+      if (currentStage === pathProgress[currentPath]) {
+        pathProgress[currentPath]++;
+        localStorage.setItem('progress_' + currentPath, pathProgress[currentPath]);
+      }
+      if (currentPath === 'intro' && currentStage === introCount()) startBranch('parallel');
+    }
+
+    function autoAdvance() {
+      populateStages();
+      const list = puzzles.filter(p => p.path === currentPath);
+      const idx = list.findIndex(p => p.stage === currentStage);
+      const next = list[idx + 1]; if (next) onStageChange(next.stage);
+    }
+
+    function showToast(msg, success) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className   = `toast show ${success?'success':'error'}`;
+      setTimeout(() => { t.className = 'toast'; }, 2000);
+    }
+
+    function showOverlay(src) {
+      const overlay = document.getElementById('overlay');
+      document.getElementById('overlayImg').src = src;
+      overlay.classList.add('show');
+    }
+    function hideOverlay() {
+      const overlay = document.getElementById('overlay');
+      overlay.classList.remove('show');
+    }
+    function showHint() { const puz = puzzles.find(p=>p.path===currentPath&&p.stage===currentStage); if (!puz) return; fetch('hints.json').then(r=>r.json()).then(h=>{ document.getElementById('hintText').textContent=h[puz.hintHash]||'No hint.'; document.getElementById('hintBox').classList.add('show'); }); }
+    function hideHint() { document.getElementById('hintBox').classList.remove('show'); }
+    function choosePath(path) { loadStageFor(path); }
+    function resetProgress() { if (confirm('Reset progress?')) { ['intro','parallel','meridian'].forEach(p=>{ localStorage.removeItem('progress_' + p); pathProgress[p]=1; }); init(); }}
+  </script>
+</body>
+</html>

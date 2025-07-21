@@ -1,0 +1,155 @@
+[
+  {
+    "stage": 1,
+    "images": [
+      "Journal_v4_2.png",
+      "Journal_v4_3.png"
+    ],
+    "answerHash": "8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
+    "hintHash": "54e05e94db2513381c7e11452ad3b8832b122d12c63add2f831126eaa7da1016"
+  },
+  {
+    "stage": 2,
+    "images": [
+      "Journal_v4_4.png",
+      "Journal_v4_5.png"
+    ],
+    "answerHash": "8c2a25260209b2db50e9d7c369876ddeeaebde2472a38426ca4907fbe4135921",
+    "hintHash": "22ba96a29dd2bb817d4f2b2ef7b4ad77371d595c508287f483802ff1899bfe1a"
+  },
+  {
+    "stage": 3,
+    "images": [
+      "Journal_v4_6.png",
+      "Journal_v4_7.png"
+    ],
+    "answerHash": "1785cfc3bc6ac7738e8b38cdccd1af12563c2b9070e07af336a1bf8c0f772b6a",
+    "hintHash": "b6b8009600a65e8d5e1283db6ee6e0bca6ea351c0c8f188f8f24c0ac183c4b17"
+  },
+  {
+    "stage": 4,
+    "images": [
+      "Journal_v4_8.png",
+      "Journal_v4_9.png"
+    ],
+    "answerHash": "4097889236a2af26c293033feb964c4cf118c0224e0d063fec0a89e9d0569ef2",
+    "hintHash": "9b72c2ed94078328aaf2f2556afedef612ea2820887cd61963ac4b739be5a3ba"
+  },
+  {
+    "stage": 5,
+    "images": [
+      "Journal_v4_10.png",
+      "Journal_v4_11.png"
+    ],
+    "answerHash": "76a796208b71779c0331e79e8ac17df979c7d2c5bd10b491c94bd1e16d422088",
+    "hintHash": "5faed653f56701f72756c9fe429b16d25d990613d9404f6b2ca0c961c2fa60e7"
+  },
+  {
+    "stage": 6,
+    "images": [
+      "Journal_v4_12.png",
+      "Journal_v4_13.png"
+    ],
+    "answerHash": "4097889236a2af26c293033feb964c4cf118c0224e0d063fec0a89e9d0569ef2",
+    "hintHash": "637ccc91445a985adc77876fa353f9f04092e47b5db33e6c155b71429145b371"
+  },
+  {
+    "stage": 7,
+    "images": [
+      "Journal_v4_14.png",
+      "Journal_v4_15.png"
+    ],
+    "answerHash": "59fefacb1435ff4908656175f679fedcde6eb4a8363d766f72c5218f36adff25",
+    "hintHash": "3ba7626d3361f2a6723e3a59707385d30026879dcf8026134afd5bf954a07fb5"
+  },
+  {
+    "stage": 8,
+    "images": [
+      "Journal_v4_16.png",
+      "Journal_v4_17.png"
+    ],
+    "answerHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "hintHash": "f61bf3475377cf314d749bdc8c97fc7a269314bfa928919d22d07a9463cd945d"
+  },
+  {
+    "stage": 9,
+    "images": [
+      "Journal_v4_18.png",
+      "Journal_v4_19.png"
+    ],
+    "answerHash": "6dcdffaeac040a7037ac862b518ff7356e8784a791fb6c712931ab3dfb248393",
+    "hintHash": "0c26a2fb370203aef68d2729146ca7341c428f8b474bf35f5f646748982626d6"
+  },
+  {
+    "stage": 10,
+    "images": [
+      "Journal_v4_20.png",
+      "Journal_v4_21.png"
+    ],
+    "answerHash": "032e65cb927668647072ea37fa9c0c454615a21937cd8720ce9102876b76863e",
+    "hintHash": "f8bde6bda15d33b3343b7ac2e0dc1c7ca5a463e34ebcff8c995f1b5de336ab8c"
+  },
+  {
+    "stage": 11,
+    "images": [
+      "Journal_v4_22.png",
+      "Journal_v4_23.png"
+    ],
+    "answerHash": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "hintHash": "344d182e86bf8abdf546892eb04fd2119d7ada77fe983a6b3054afed71081227"
+  },
+  {
+    "stage": 12,
+    "images": [
+      "Journal_v4_24.png",
+      "Journal_v4_25.png"
+    ],
+    "answerHash": "327fb97d65cd3e8a4455360fe34d4480ee7e2774149c849e0c018f68a297eb86",
+    "hintHash": "990e9dcd5e79728ce523caa4c3e8cec75fa0c4a7813105f8a5074889a4d18b2d"
+  },
+  {
+    "stage": 13,
+    "images": [
+      "Journal_v4_26.png",
+      "Journal_v4_27.png"
+    ],
+    "answerHash": "0bb646d65aa53161584666b13589a2a54812f180b458b416723aecdb1803beca",
+    "hintHash": "31f45a04c7566cfc379d80ed5e8dd787aec64586d26d1a4b48590207f36c65b1"
+  },
+  {
+    "stage": 14,
+    "images": [
+      "Journal_v4_28.png",
+      "Journal_v4_29.png"
+    ],
+    "answerHash": "e96e35a376f8bb39cd7cb24e11f9efbfbe372aba9477a9e90bd094915c71fa9c",
+    "hintHash": "0893c09b383d41b62bbe1ff3c6a30161ff6b0c776805d960e07b7e5801de4351"
+  },
+  {
+    "stage": 15,
+    "images": [
+      "Journal_v4_30.png",
+      "Journal_v4_31.png"
+    ],
+    "answerHash": "5f9c4ab08cac7457e9111a30e4664920607ea2c115a1433d7be98e97e64244ca",
+    "hintHash": "db32872e2c0ad6521884c2b5ae6568c26eda657bf177dff85ce79136a9fd8c3a"
+  },
+  {
+    "stage": 16,
+    "images": [
+      "Journal_v4_32.png",
+      "Journal_v4_33.png"
+    ],
+    "answerHash": "4097889236a2af26c293033feb964c4cf118c0224e0d063fec0a89e9d0569ef2",
+    "hintHash": "499ea28ddd3d261b158347360b2499ca4de63861626a94a92904043fd3e77009"
+  },
+  {
+    "stage": 17,
+    "images": [
+      "Journal_v4_34.png",
+      "Journal_v4_35.png"
+    ],
+    "answerHash": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "hintHash": "32fad5053833aa58f923546d77c7dbe53e28d28cdd5ea27eb8f1a8c5ae6996df"
+  }
+]
