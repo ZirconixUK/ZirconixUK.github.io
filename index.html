@@ -8,22 +8,64 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
   <link href="assets\style.css" rel="stylesheet">
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+   <style type="text/tailwindcss">
+    @layer components {
+     /* add vertical spacing between immediate child divs */
+      .instructions-text > * + * {
+        @apply mt-3;
+      } 
+	   .typewriter-text > * + * {
+        @apply mt-3;
+      } 
+	  .instructions-text {
+         @apply bg-[#3b2f1f] text-[#F6F1E0] p-4 rounded-lg border border-[#CFAE6A] ;
+      }
+	  .typewriter-text {
+         @apply bg-[#F6F1E0] text-[#333333] p-4 rounded-lg border border-[#CFAE6A] ;
+		 font-family: 'Special Elite', cursive;
+      }
+	  .instructions-text ul {
+    @apply list-disc list-inside mb-2;
+		}
+	  /* Styled path selection buttons */
+     .path-btn {
+        @apply inline-block bg-[#F6F1E0] text-[#3b2f1f] px-4 py-2 rounded-lg border border-[#CFAE6A] font-semibold shadow-inner shadow-black/20 shadow-md hover:bg-[#E3D1B5] transition-colors;
+   
+      }
+    
+	.instructions-text ul li {
+	  @apply mt-1;
+	}
+      .grandad-text {
+        @apply bg-[#F6F1E0] text-[#333333] p-4 rounded-lg border border-[#CFAE6A] ;
+		font-family: 'Architects Daughter';
+      }
+	  /* add vertical spacing between immediate child divs */
+      .grandad-text > * + * {
+        @apply mt-3;
+      }
+    }
+  </style>
 </head>
 <body class="bg-[url('/assets/wood.jpg')] bg-repeat bg-center text-white font-sans p-4 text-center">
 
   <!-- Hint Tab & Reset Icon -->
-  <div class="fixed bottom-16 right-0 flex items-center bg-blue-200 shadow-[7px_7px_10px_rgba(0,0,0,0.5)] rounded-l-lg pl-1 pr-0 py-1 cursor-pointer z-50" onclick="showHint()">
-    <div class="border-l-2 border-t-2 border-b-2 border-dashed border-white border-r-0 py-1 pl-2 pr-0 rounded-r">
+  <div class="fixed bottom-16 right-0 flex items-center bg-[#3D5B3D] shadow-[7px_7px_10px_rgba(0,0,0,0.5)] rounded-l-lg pl-1 pr-0 py-1 cursor-pointer z-50" onclick="showHint()">
+    <div class="border-l-2 border-t-2 border-b-2 border-dashed border-gray-400 border-r-0 py-1 pl-2 pr-0 rounded-r">
       <span class="text-2xl">🔍</span>
   </div>
   </div>
   <div class="fixed top-5 left-5 text-2xl cursor-pointer z-50" onclick="resetProgress()">🔄</div>
 
   <!-- Navigation Controls -->
-  <div id="navControls" class="flex items-center justify-center gap-4 mb-6">
+  <div id="navControls" class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+
     <button id="togglePathBtn" onclick="togglePath()" class="
   px-6 py-2 rounded-lg
   bg-[#5B2A2A] border-2 border-[#CFAE6A]
@@ -68,18 +110,9 @@
     <input id="guessInput" type="text" placeholder="Enter your guess"
            class="flex-grow max-w-xs px-4 py-2 bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] rounded-lg shadow-inner shadow-black/25 placeholder-[#F6F1E0] focus:outline-none focus:ring-2 focus:ring-[#CFAE6A] transition-colors duration-300 hidden">
     <button id="submitBtn" onclick="checkGuess()"
-            class="
-  px-5 py-2 rounded-lg
-  bg-[#3D5B3D] border-2 border-dashed border-[#CFAE6A]
-  text-[#F6F1E0] font-medium
-  hover:bg-[#4A6A4A] transition-colors
- hidden">Submit</button>
+            class="path-btn hidden">Submit</button>
     <button id="nextBtn" onclick="nextPuzzle()"
-            class="px-5 py-2 rounded-lg
-  bg-[#3D5B3D] border-2 border-dashed border-[#CFAE6A]
-  text-[#F6F1E0] font-medium
-  hover:bg-[#4A6A4A] transition-colors
- hidden">Next</button>
+            class="path-btn hidden">Next</button>
   </div>
 
   <!-- Overlay for Image Preview -->
@@ -107,50 +140,283 @@
   <!-- CryptoJS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <!-- Game Logic -->
-  <script>
-    let puzzles = [];
-    let pathProgress = { intro:1, parallel:1, meridian:1 };
-    ['intro','parallel','meridian'].forEach(p => pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1);
-    let currentPath = 'intro';
-    let currentStage = 1;
+<script>
+  let puzzles = [];
+  let pathProgress = { intro: 1, parallel: 1, meridian: 1 };
+  ['intro', 'parallel', 'meridian'].forEach(p => 
+    pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1
+  );
 
-    const listFor = p=> puzzles.filter(x=>x.path===p).sort((a,b)=>a.stage-b.stage);
-    const introCount = ()=> listFor('intro').length;
+  let currentPath = 'intro';
+  let currentStage = 1;
 
-    fetch('puzzles_with_paths.json')
-      .then(r=>r.json()).then(d=>{ puzzles=d; init(); }).catch(console.error);
+  const listFor = p =>
+    puzzles
+      .filter(x => x.path === p)
+      .sort((a, b) => a.stage - b.stage);
 
-    function init(){ ['intro','parallel','meridian'].forEach(p=>{ const m=listFor(p).length; if(pathProgress[p]>m){ pathProgress[p]=1; localStorage.setItem('progress_'+p,'1'); }});
-      if(pathProgress.intro<=introCount()) loadStageFor('intro');
-      else if(pathProgress.parallel<=listFor('parallel').length) loadStageFor('parallel');
-      else loadStageFor('meridian');
+  const introCount = () =>
+    listFor('intro').length;
+
+  fetch('content.json')
+    .then(r => r.json())
+    .then(d => {
+      puzzles = d;
+      init();
+    })
+    .catch(console.error);
+
+  function init() {
+    ['intro', 'parallel', 'meridian'].forEach(p => {
+      const m = listFor(p).length;
+      if (pathProgress[p] > m) {
+        pathProgress[p] = 1;
+        localStorage.setItem('progress_' + p, '1');
+      }
+    });
+
+    if (pathProgress.intro <= introCount()) {
+      loadStageFor('intro');
+    } else if (pathProgress.parallel <= listFor('parallel').length) {
+      loadStageFor('parallel');
+    } else {
+      loadStageFor('meridian');
+    }
+  }
+
+  function loadStageFor(path) {
+    currentPath = path;
+    const lst = listFor(path);
+    const u = Math.min(pathProgress[path], lst.length);
+    currentStage = lst[u - 1].stage;
+
+    const btn = document.getElementById('togglePathBtn');
+    if (path === 'intro') {
+      btn.classList.add('hidden');
+    } else {
+      btn.classList.remove('hidden');
+      btn.textContent = path === 'parallel'
+        ? 'Switch to Meridian'
+        : 'Switch to Parallel';
     }
 
-    function loadStageFor(path){ currentPath=path; const lst=listFor(path); const u=Math.min(pathProgress[path],lst.length); currentStage=lst[u-1].stage;
-      const btn=document.getElementById('togglePathBtn'); if(path==='intro') btn.classList.add('hidden'); else { btn.classList.remove('hidden'); btn.textContent=path==='parallel'?'Switch to Meridian':'Switch to Parallel'; }
-      populateStages(); loadStage(); }
-    function togglePath(){ loadStageFor(currentPath==='parallel'?'meridian':'parallel'); }
-    function populateStages(){ const sel=document.getElementById('stageSelect'), lst=listFor(currentPath); sel.innerHTML=''; let cnt=Math.min(pathProgress[currentPath],lst.length); if(cnt<1) cnt=1; for(let i=0;i<cnt;i++){ const p=lst[i], o=document.createElement('option'); o.value=p.stage; o.text=p.title||`Stage ${p.stage}`; sel.add(o);} sel.value=currentStage; }
-    function onStageChange(v){ currentStage=parseInt(v); populateStages(); loadStage(); }
-    function loadStage(){ window.scrollTo(0,0); const puz=puzzles.find(x=>x.path===currentPath&&x.stage===currentStage); if(!puz) return;
-      const txt=document.getElementById('textContent'), imgs=document.querySelector('.images'); const inp=document.getElementById('guessInput'), sb=document.getElementById('submitBtn'), nb=document.getElementById('nextBtn'), cp=document.getElementById('choiceParallel'), cm=document.getElementById('choiceMeridian');
-      const ans=(puz.hasAnswer!==false&&!puz.hasChoice), cho=(puz.hasChoice===true);
-      if(puz.htmlContent){ let h=puz.htmlContent; if(cho) h+=`<div class="mt-4 flex justify-center gap-8"><span onclick="choosePath('parallel')" class="text-blue-400 underline cursor-pointer">Parallel Path</span><span onclick="choosePath('meridian')" class="text-blue-400 underline cursor-pointer">Meridian Path</span></div>`; txt.innerHTML=h; txt.classList.remove('hidden'); imgs.classList.add('hidden'); }
-      else { txt.classList.add('hidden'); imgs.classList.remove('hidden'); document.getElementById('img1').src=puz.images[0]||''; document.getElementById('img2').src=puz.images[1]||''; }
-      inp.classList.toggle('hidden',!ans); sb.classList.toggle('hidden',!ans); nb.classList.toggle('hidden',ans||cho); cp.classList.toggle('hidden',!cho); cm.classList.toggle('hidden',!cho); inp.value=''; }
-    function checkGuess(){ const v=document.getElementById('guessInput').value.trim().toLowerCase(); const h=CryptoJS.SHA256(v).toString(); const puz=puzzles.find(x=>x.path===currentPath&&x.stage===currentStage); const val=puz.answers||(puz.answerHash?[puz.answerHash]:[]); if(val.includes(h)){ showToast('Correct!',true); advanceProgress(); setTimeout(autoAdvance,500);} else showToast('Incorrect',false);}    
-    function nextPuzzle(){ advanceProgress(); setTimeout(autoAdvance,200);}    
-    function advanceProgress(){ const lst=listFor(currentPath), idx=lst.findIndex(x=>x.stage===currentStage); if(idx===pathProgress[currentPath]-1&&pathProgress[currentPath]<lst.length){ pathProgress[currentPath]++; localStorage.setItem('progress_'+currentPath,pathProgress[currentPath]); } if(currentPath==='intro'&&idx+1===lst.length) loadStageFor('parallel'); }
-    function autoAdvance(){ populateStages(); const lst=listFor(currentPath), idx=lst.findIndex(x=>x.stage===currentStage); if(idx+1<lst.length) onStageChange(lst[idx+1].stage); }
-    function showToast(msg,ok){ const inner=document.getElementById('toastInner'); inner.textContent=msg; inner.classList.remove('hidden'); inner.classList.toggle('bg-red-600',!ok); setTimeout(()=>inner.classList.add('hidden'),1500);}    
-    function showOverlay(src){ const ov=document.getElementById('overlay'); document.getElementById('overlayImg').src=src; ov.classList.remove('hidden'); }    
-    function hideOverlay(){ document.getElementById('overlay').classList.add('hidden'); }    
-    function showHint(){ const puz=puzzles.find(x=>x.path===currentPath&&x.stage===currentStage); if(!puz) return; fetch('hints.json').then(r=>r.json()).then(h=>{ document.getElementById('hintText').textContent=h[puz.hintHash]||'No hint.'; document.getElementById('hintBox').classList.remove('hidden'); setTimeout(()=>document.addEventListener('click',onAnyClickToHide),0); }); }
-    function onAnyClickToHide(){ hideHint(); document.removeEventListener('click',onAnyClickToHide);}    
-    function hideHint(){ document.getElementById('hintBox').classList.add('hidden'); }    
-    function choosePath(p){ loadStageFor(p);}    
-    function resetProgress(){ if(!confirm('Are you sure you want to reset all progress?')) return; ['intro','parallel','meridian'].forEach(p=>{ localStorage.setItem('progress_'+p,'1'); pathProgress[p]=1; }); loadStageFor('intro'); }    
-    document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); const sb=document.getElementById('submitBtn'), nb=document.getElementById('nextBtn'); if(!sb.classList.contains('hidden')) checkGuess(); else if(!nb.classList.contains('hidden')) nextPuzzle(); }});
-  </script>
+    populateStages();
+    loadStage();
+  }
+
+  function togglePath() {
+    loadStageFor(
+      currentPath === 'parallel'
+        ? 'meridian'
+        : 'parallel'
+    );
+  }
+
+  function populateStages() {
+    const sel = document.getElementById('stageSelect');
+    const lst = listFor(currentPath);
+    sel.innerHTML = '';
+
+    let cnt = Math.min(pathProgress[currentPath], lst.length);
+    if (cnt < 1) cnt = 1;
+
+    for (let i = 0; i < cnt; i++) {
+      const p = lst[i];
+      const o = document.createElement('option');
+      o.value = p.stage;
+      o.text = p.title || `Stage ${p.stage}`;
+      sel.add(o);
+    }
+
+    sel.value = currentStage;
+  }
+
+  function onStageChange(v) {
+    currentStage = parseInt(v);
+    populateStages();
+    loadStage();
+  }
+
+  function loadStage() {
+    window.scrollTo(0, 0);
+
+    const puz = puzzles.find(x =>
+      x.path === currentPath && x.stage === currentStage
+    );
+    if (!puz) return;
+
+    const txt = document.getElementById('textContent');
+    const imgs = document.querySelector('.images');
+    const inp = document.getElementById('guessInput');
+    const sb = document.getElementById('submitBtn');
+    const nb = document.getElementById('nextBtn');
+    const cp = document.getElementById('choiceParallel');
+    const cm = document.getElementById('choiceMeridian');
+
+    const ans = (puz.hasAnswer !== false && !puz.hasChoice);
+    const cho = (puz.hasChoice === true);
+
+    if (puz.htmlContent) {
+      let h = puz.htmlContent;
+      if (cho) {
+        h += `
+          <div class="mt-4 flex justify-center gap-8">
+            <span onclick="choosePath('parallel')" class="path-btn mx-2">
+              Parallel Path
+            </span>
+            <span onclick="choosePath('meridian')" class="path-btn mx-2">
+              Meridian Path
+            </span>
+          </div>
+        `;
+      }
+      txt.innerHTML = h;
+      txt.classList.remove('hidden');
+      imgs.classList.add('hidden');
+    } else {
+      txt.classList.add('hidden');
+      imgs.classList.remove('hidden');
+      document.getElementById('img1').src = puz.images[0] || '';
+      document.getElementById('img2').src = puz.images[1] || '';
+    }
+
+    inp.classList.toggle('hidden', !ans);
+    sb.classList.toggle('hidden', !ans);
+    nb.classList.toggle('hidden', ans || cho);
+    cp.classList.toggle('hidden', !cho);
+    cm.classList.toggle('hidden', !cho);
+    inp.value = '';
+  }
+
+  function checkGuess() {
+    const v = document.getElementById('guessInput')
+      .value
+      .trim()
+      .toLowerCase();
+    const h = CryptoJS.SHA256(v).toString();
+
+    const puz = puzzles.find(x =>
+      x.path === currentPath && x.stage === currentStage
+    );
+    const val = puz.answers || (puz.answerHash ? [puz.answerHash] : []);
+
+    if (val.includes(h)) {
+      showToast('Correct!', true);
+      advanceProgress();
+      setTimeout(autoAdvance, 500);
+    } else {
+      showToast('Incorrect', false);
+    }
+  }
+
+  function nextPuzzle() {
+    advanceProgress();
+    setTimeout(autoAdvance, 200);
+  }
+
+  function advanceProgress() {
+    const lst = listFor(currentPath);
+    const idx = lst.findIndex(x => x.stage === currentStage);
+
+    if (
+      idx === pathProgress[currentPath] - 1 &&
+      pathProgress[currentPath] < lst.length
+    ) {
+      pathProgress[currentPath]++;
+      localStorage.setItem(
+        'progress_' + currentPath,
+        pathProgress[currentPath]
+      );
+    }
+
+    if (currentPath === 'intro' && idx + 1 === lst.length) {
+      loadStageFor('parallel');
+    }
+  }
+
+  function autoAdvance() {
+    populateStages();
+    const lst = listFor(currentPath);
+    const idx = lst.findIndex(x => x.stage === currentStage);
+
+    if (idx + 1 < lst.length) {
+      onStageChange(lst[idx + 1].stage);
+    }
+  }
+
+  function showToast(msg, ok) {
+    const inner = document.getElementById('toastInner');
+    inner.textContent = msg;
+    inner.classList.remove('hidden');
+    inner.classList.toggle('bg-red-600', !ok);
+    setTimeout(() => inner.classList.add('hidden'), 1500);
+  }
+
+  function showOverlay(src) {
+    const ov = document.getElementById('overlay');
+    document.getElementById('overlayImg').src = src;
+    ov.classList.remove('hidden');
+  }
+
+  function hideOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+  }
+
+function showHint() {
+  const puz = puzzles.find(x =>
+    x.path === currentPath && x.stage === currentStage
+  );
+  if (!puz || !puz.hint) return;
+
+  // Inject your HTML‐formatted hint
+  const hintEl = document.getElementById('hintText');
+  hintEl.innerHTML = puz.hint;
+
+  // Show the modal
+  document.getElementById('hintBox').classList.remove('hidden');
+  setTimeout(() => document.addEventListener('click', onAnyClickToHide), 0);
+}
+
+  function onAnyClickToHide() {
+    hideHint();
+    document.removeEventListener('click', onAnyClickToHide);
+  }
+
+  function hideHint() {
+    document.getElementById('hintBox')
+      .classList.add('hidden');
+  }
+
+  function choosePath(p) {
+    loadStageFor(p);
+  }
+
+  function resetProgress() {
+    if (!confirm('Are you sure you want to reset all progress?'))
+      return;
+
+    ['intro', 'parallel', 'meridian'].forEach(p => {
+      localStorage.setItem('progress_' + p, '1');
+      pathProgress[p] = 1;
+    });
+
+    loadStageFor('intro');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const sb = document.getElementById('submitBtn');
+      const nb = document.getElementById('nextBtn');
+
+      if (!sb.classList.contains('hidden')) {
+        checkGuess();
+      } else if (!nb.classList.contains('hidden')) {
+        nextPuzzle();
+      }
+    }
+  });
+</script>
+
 </body>
 </html>

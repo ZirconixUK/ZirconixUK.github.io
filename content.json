@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+	"stage": 1,
+    "path": "intro",
+    "hint": "On each page you can click this icon to receive a hint if you get stuck!",
+	"hasAnswer": false,
+	 "title": "Introduction",
+	 "htmlContent": "<div class=\"instructions-text\"><div>This game takes you on a pub crawl through Liverpool, solving puzzles to uncover a hidden story.</div><div>It begins with a letter from your Grandad, hinting at a secret he's been researching - one that requires your help to uncover its final location.</div><div>Your journey starts outside Lime Street Station. Once there, turn to the first page of the Story Booklet to begin.</div><div>Each puzzle leads you to the next pub. Once there, consult the Journal Booklet for the corresponding entry. Every journal page contains a puzzle that can only be solved by physically being at the pub.</div><div>Knowledge of the city’s pubs will be advantageous, but a smartphone or other way of searching the internet is expected.</div><div>If you get stuck, the back of the Story Booklet contains hints and solutions for each puzzle.</div><div>Note - after the first location, the story splits into two independent paths:</div><div><ul><li>Route 1: Through the Commercial District (approx. 3km)</li><li>Route 2: Through the Georgian Quarter and University area (approx. 2km)</li></ul></div><div>Both routes must be completed to uncover the final destination, but they can be done on separate occasions.</div></div>"
+  },
+  {
+	"id": 1,
+    "stage": 2,
+    "path": "intro",
+    "answers": [
+"0dcfafab5f8035e779d7bea495f8177b9b7c5b892b81d7a687df96410a0ba304",
+"b54689746b8389ca52e8a964e22a999d20434fe2a393cab917ad46bd258d83af",
+"721f9d5dc3bbc12ca065858bb039d0887a59b6a8bbd9e9ba09a68f2f708510fc",
+"1e7f9700c5f5544f7c65d220131fe8f312d6b3bc5b89cf12f99f25b3cef3fcc4",
+"acde551c324b82e51b1b4c9074be6a2b04e7b76241799fd67652a1f78d4a30f1"
+  ],
+    "hint": "Grandad said the beginnings are important.\nLook at each line of the riddle closely",
+	"title": "Grandad's Letter",
+	"htmlContent": "<div class=\"instructions-text\">It had arrived without warning - a battered envelope, corners frayed, the address written in a familiar scrawl you hadn’t seen for years. Inside, there was a weathered leather journal, its pages thick with notes, sketches, and newspaper clippings, some decades old. Tucked within the cover there was a folded letter, yellowed and faintly smelling of pipe smoke.</div><div class=\"grandad-text\"><div>My dearest grandchild,</div><div>I’ve spent a lifetime chasing whispers, shadows that led me through archives, alehouses, graveyards, and government buildings; all in search of The Circle. Not many believe it existed, but I do. I know it did. A secret society of influence and vision - men and women, some of great influence and renown, statesmen, industrialists, merchants, and others more humble, artists, musicians, publicans; working behind the scenes to guide the city’s fortunes and culture.</div><div>I believe they left behind a final truth. A map, or something like it, leading to their last great secret. I've uncovered fragments, coded messages, even a few locations. I’m close to uncovering it all. But time’s caught up with me. My hands shake too much these days, and my memory… well, you know how it goes.</div><div>That’s where you come in. I need you to follow the clues left by The Circle and walk their paths, uncover their secrets.</div><div>Before you can take up the trail, though, I need to know you're ready. So I’ve left you a test - the first puzzle, but one of my own creation. Make your way to Lime Street Station, long a gateway to Liverpool and a departure point for travellers since the 19th century. Head outside through the main entrance and begin.</div><div>Solve the riddle, and you’ll find a place I believe The Circle marked - a place that’s stood watch for generations. Head there, and speak to the bar staff. Tell them I sent you. If you’ve solved this properly, they’ll know what to do.</div><div>Remember: pay attention to every word. I never was one for spelling things out… but sometimes, the beginning of things is more important than you think.</div></div><div class=\"grandad-text\"><div>Close to where all journeys begin, an old gem waits in plain sight, wrapped in carved wood and stained light. </div><div>Rich with the roots of Victorian flair, its walls have heard more tales than timetables can bear. </div><div>Outside, the walls wear a coat of black, a signal to pause, to look, to turn back. </div><div>Windows flicker with stories told slow - let this be your starting point, not the end of the show. </div><div>Nestled near Lime Street’s restless stream, the first to welcome those chasing a dream.</div></div>"
+  },
+  {
+    "id": 3,
+	"stage": 3,
+    "path": "intro",
+	"hasAnswer": false,
+    "answerHash": "1785cfc3bc6ac7738e8b38cdccd1af12563c2b9070e07af336a1bf8c0f772b6a",
+    "hint": "Click next to make your choice!",
+	"title": "The Crown Hotel",
+	"htmlContent":"<div class=\"instructions-text\"><div>You enter the Crown Hotel and head to the bar. As you order your drinks you mention to the staff that your Grandad sent you. They look confused at first but then nod, as if remembering instructions. They hand you an envelope, similar to the one you received in the post from Grandad.</div><div>You unfold the page. Grandad’s writing greets you again, but this time the tone is different. This page was written with care.</div></div><div class=\"grandad-text\"><div>You’ve done well to get this far. This place - though many just pass through it for pints and passing time - was once a listening post for The Circle. Beneath the pressed tiles and glinting brass, members of the Circle would meet in whispers. A brewer sat where you now stand. A firebrand union man drank two stools to your left. </div><div>You’ve probably figured it out already that this is no ordinary treasure hunt. It’s not about gold or plaques or free pints (though wouldn’t that be nice?).</div><div>It’s about a map. Not the kind you can fold.</div><div>The Circle, as far as I can tell, left behind a map in motion - one made of places, not drawings. And the only way to reveal it is to walk it.</div><div>Now your task begins properly. From here, the path divides.</div><div>The Circle is not one thing. Two sides, both needed. Two routes. You must walk both, though not necessarily today. Choose the order yourself. They will wait.</div><div>I’ve gathered fragments, scribbles, and coded messages to uncover clues pointing to the starting locations of the two paths. If The Circle gave them names, I’ve never learned them, so I’ve come up with my own.</div><div><u><b>The Parallel Path</b></u> - built of commerce, order, and civic weight. From what I’ve uncovered, it runs through the business quarter .Old offices, shipping houses, counting rooms turned drinking dens.</div><div><b><u>The Meridian Path</u></b> - shaped by voice, art, and rebellion. This one twists through the Georgian Quarter, past Hope Street, Mount Pleasant, near the university and the minds that reshaped the city in ink.</div><div>I don’t yet know what lies at the end - but I’m certain both lines must be walked. One won’t do it. Each gives only part of the pattern. I’ve traced the beginnings of both, but the rest will reveal itself as you go.</div><div>The Parallel Path begins:</div><div>Where stars once entered through the alley, and the city’s back door heard more truth than the stage ever saw.</div><div>The Meridian Path begins:</div><div>Where bars replaced bars and drinks are served rather than time, Dickens wore the badge, and forgotten names still echo behind the brick.</div><div>Walk one. Walk the other. Walk them in your own time.</div><div>Only then will the map reveal what The Circle meant you to find.</div><div>- Grandad.</div></div>"
+  },
+  {
+    "id": 4,
+	"stage": 4,
+    "path": "intro",
+	"title": "Choose your path",
+    "answerHash": "4097889236a2af26c293033feb964c4cf118c0224e0d063fec0a89e9d0569ef2",
+    "hint": "Pick whichever you'd like to start with - you can switch between the two paths later.",
+	"hasChoice": true,
+	"htmlContent": "<div class=\"instructions-text  text-center\"><div>Which path do you wish to take first?</div><div>You can switch between these freely at any time.</div></div>"
+  },
+  {
+        "id": 5,
+		"stage": 1,
+    "path": "parallel",
+	"title": "The Parallel Path",
+  "answers": [
+"786b33db3236f852e8d353864eb86c0e3de3c1a335b794cd3a6dfcbddce9dc60",
+"5e271d86b85051190ddf2b50e35529473a941d56051789cfa3d6fa8eb827049c",
+"ab39c92a8c56762a620bc05b2a458e6945ea1783833f23d33feaabc5b2bdef77",
+"0b44a4058896066394eeb58db3bed51f0eb74911c1277eaae725327931335dd9",
+"030c053e13096a7bfb0a05289a374a870510d68052479bad61ed73390e542ead",
+"e2669131a5a519665e664a2a7c4914d7f555b50eb41725464bc6226045b09e44",
+"92947481c4ad0dc64abe043454d0c715e3cc9d775995012e8d55c72ab5ad45e3"
+
+  ],
+    "hint": "Stars and stage, perhaps there is a nearby pub with a theatrical name?",
+	"htmlContent":"<div class=\"instructions-text  text-center\"><div>The Parallel Path</div><div>Dale Street, North John Street, Tithebarn Street</div></div><div class=\"grandad-text\"><div>Where stars once entered through the alley, and the city’s back door heard more truth than the stage ever saw.</div></div>"
+  },
+  {
+        "id": 6,
+		"stage": 2,
+    "path": "parallel",
+    "images": [
+      "Journal_v4_2.png",
+      "Journal_v4_3.png"
+    ],
+	"title": "Ma Egerton's Stage Door",
+  "answers": [
+"8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
+"9da12f5fd9feb4a1a7e8d8c10f7e6ad398043cd9d52378d6cf138a177a0c2032"
+  ],
+    "hint": "Look around at the pictures on the wall - something doesn't quite match..."
+  },
+  
+   {
+       "id": 7,
+	   "stage": 3,
+    "path": "parallel",
+	"title": "Ma Egerton's - Part 2",
+  "answers": [
+"f2cf3ef471497b85a565f23435b5a61c4e6df54dbc6288c1bd148b4249c074aa",
+"d59066612ba0a6bc4cc92742fef11d6724bcab58d7966a245c127faebfb15e3a",
+"b7a809cea8c72e00cf126f8ca8b8e3f7f8712c17b6d8e23ba8ad0a7d3fbfd655",
+"6d319498574120973e2be52efcec79c51d16006a86928bd4e90e836a0ad03668"
+  ],
+    "hint": "Who wrote the medical pamphlet?",
+	"htmlContent":"<div class=\"instructions-text\"><div>Your pint is still half - full, but the atmosphere shifts as you say the name \"Vesta Tilley\", the famed music hall performer of the Victorian era. The chatter from the bar fades, though not entirely, but as though it’s happening through a pane of glass. You turn your head.</div><div>Something is sitting on the table now. You’re certain it wasn’t there before.</div><div>It’s a folded medical pamphlet, the paper brittle with age. In the top left, written in red ink, is the number 5, underlined and circled. </div><div>The title is nearly gone, but one line remains legible:</div><div>“Sanitation as a Civic Duty - Liverpool Medical Officer of Health, 1847”</div><div>Inside, someone used it to hide a slip of paper - a carbon copy, stamped and stained, torn from what looks like an old health board report.</div><div>The ink is faded. The language is formal. But a few lines catch your eye:</div></div><div class=\"typewriter-text\"><div>There can be little doubt that the causes of the unusual prevalence of this disease in Liverpool are to be found principally in the condition of the dwellings of the labouring classes, who are almost exclusively its victims</div></div><div class=\"instructions-text\"><div>Beneath the last line is an embossed emblem - a shield marked with a Liver bird and two crossed keys.</div><div>You think you know the place. You’ve walked past it a hundred times, never noticing what the walls were really saying.</div><div>The next step on the path is clear.</div></div>"
+  },
+  {
+    "id": 8,
+	"stage": 4,
+    "path": "parallel",
+    "images": [
+      "Journal_v4_4.png",
+      "Journal_v4_5.png"
+    ],
+	"title": "Doctor Duncan's",
+	 "answers": [
+"8c2a25260209b2db50e9d7c369876ddeeaebde2472a38426ca4907fbe4135921"
+  ],
+    "hint": "The numbers seem to relate to the labels of these jars. Find the jars and relate the numbers to the text"
+  },
+  
+  {
+    "id": 9,
+	"stage": 5,
+    "path": "parallel",
+   "title": "Doctor Duncan's - Part 2",
+	 "answers": [
+"4e829fc648312045a7abee59c14f64f16b26c13c2f2308cac1f3c2bbaed94d45",
+"bc76de7160fb5154057a03538a6fc800ddb9b2447d68848db524b6f79b126f7c",
+"f27323400664e3dd30ad9bc0174948c5d4d6f9483589e0fddebe3675e5a64143",
+"9e22cf4c3337c7674c406c14ce54298e5ba021ac35bf7a3d48decf55e5793f6a"
+	],
+    "hint": "The word \"Line\" is capitalised. What is the Titanic Line?",
+	"htmlContent":"<div class=\"instructions-text\"><div>The moment you speak the word \"Titanic\"  it feels like the room exhales. The change is faint, but present. A slight hush. A shift in weight, like someone - or something - just took notice of you.</div><div>A barmaid approaches the table next to you to clear away the used glasses. She accidentally bumps against your table and apologises.</div><div>You glance at your table. Your pint sits untouched, but beneath it, a corner of parchment now curls outward - a slip of paper that wasn’t there before. It's damp from condensation, folded crisply in quarters. The paper smells faintly of seawater and tobacco. Written on the outside in red ink is the number 3.</div><div>You open it.</div><div>It's part of a damaged shipping memo, yellowed and creased. The top reads:</div></div><div class=\"typewriter-text\"><div>Liverpool Cargo Office</div><div>Internal Memo - 14 April 1912</div><div>Origin: Mathew Storage Vault</div><div>Crate #3 – circular stamp only, no serial</div><div>Transfer by hand - no mechanical lift</div><div>Recipient initials: M. Talbot, W.S.P.</div><div>Do not forward. Manifest closed.</div></div><div class=\"instructions-text\"><div>There’s a red underline beneath the final line, circled twice in pencil.</div><div>On the back, written in a looping, hurried hand:</div></div><div class=\"grandad-text text-center\"><div>The third crate was never opened.</div><div>Find the place where this titanic Line remains on the maps.</div></div><div class=\"instructions-text\"><div>You scan the pub again. The barmaid who was cleaning up is nowhere to be seen. You realise you haven’t seen her before in all the time you’ve been here.</div><div>You tuck the note into your journal. </div></div>"
+  },
+  {
+    "id": 10,
+	"stage": 6,
+    "path": "parallel",
+    "images": [
+      "Journal_v4_6.png",
+      "Journal_v4_7.png"
+    ],
+	"title": "The White Star",
+	 "answers": [
+"1785cfc3bc6ac7738e8b38cdccd1af12563c2b9070e07af336a1bf8c0f772b6a"
+  ],
+    "hint": "The numbers seem to relate to the labels of these jars. Find the jars and relate the numbers to the text"
+  },
+  
+   {
+        "id": 100,
+		"stage": 1,
+    "path": "meridian",
+	"title": "The Meridian Path",
+  "answers": [
+"beb2fb916a75567301fc8839d44bd5444d4a3ef399cd73695a2f54ee00959bb0",
+"68031b490be4dd74aefcad38b27b38e32e3a11da9dd8a226b8cd827068e39360"
+  ],
+    "hint": "What sort of place would people serve time in? What relation does Dickens have to this in Liverpool?",
+	"htmlContent":"<div class=\"instructions-text  text-center\"><div>The Meridian Path</div><div>Elsewhere</div></div><div class=\"grandad-text\"><div>Where bars replaced bars and drinks are served rather than time, Dickens wore the badge, and forgotten names still echo behind the brick.</div></div>"
+  }
+]

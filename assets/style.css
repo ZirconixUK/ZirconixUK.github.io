@@ -1,3 +1,99 @@
 @layer base {
   body { font-family: 'Merriweather', serif; }
 }
+/* style.css */
+
+
+.book-spread {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+  position: relative;
+  perspective: 1200px;
+  background: url("../table/wood.jpg") center/cover no-repeat;
+}
+
+/* Gutter shadow between pages */
+.book-spread::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 30px; transform: translateX(-50%);
+  background: linear-gradient(to right, rgba(0,0,0,0.15), transparent);
+  pointer-events: none; z-index: 5;
+}
+
+/* Container for each side’s stack */
+.page-stack {
+  position: relative;
+  width: 45%;
+  margin: 0 1%;
+  transform-style: preserve-3d;
+}
+
+/* UNDER-PAGES: two layers, slightly offset & rotated */
+.under-page {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #f5f3ee;
+  box-shadow: inset 0 0 0 1px #eee;
+  z-index: 1;
+}
+
+.left-stack .under-page.u1 {
+  top: 15px; left: 15px;
+  transform: rotate(-1deg);
+  z-index: 1;
+}
+.left-stack .under-page.u2 {
+  top: 30px; left: 30px;
+  transform: rotate(-2deg);
+  z-index: 0;
+}
+
+.right-stack .under-page.u1 {
+  top: 15px; left: -15px;
+  transform: rotate(1deg);
+  z-index: 1;
+}
+.right-stack .under-page.u2 {
+  top: 30px; left: -30px;
+  transform: rotate(2deg);
+  z-index: 0;
+}
+
+/* TOP PAGE—the one carrying your image */
+.book-page {
+  position: relative;
+  padding: 2rem;
+  background:
+    url("../paper/paper-noise.png") repeat,
+    linear-gradient(120deg, #fcf6e5 0%, #f9f1da 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.1),
+    0 8px 20px rgba(0,0,0,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Angle the left and right top pages open */
+.left-stack .book-page {
+  transform-origin: center left;
+  transform: rotateY(2deg);
+}
+.right-stack .book-page {
+  transform-origin: center right;
+  transform: rotateY(-2deg);
+}
+
+/* Your puzzle images */
+.book-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+
