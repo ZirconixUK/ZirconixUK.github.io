@@ -1,24 +1,17 @@
 [
   {
-    "stage": 1,
+    "id": 1,
+	"stage": 1,
     "path": "intro",
-    "images": [
-      "Journal_v4_2.png",
-      "Journal_v4_3.png"
-    ],
-    "answerHash": "8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
     "hintHash": "54e05e94db2513381c7e11452ad3b8832b122d12c63add2f831126eaa7da1016",
 	"hasAnswer": false,
 	 "title": "Introduction",
 	 "htmlContent": "<div class=\"instructions-text\">This game takes you on a pub crawl through Liverpool, solving puzzles to uncover a hidden story.</div><div class=\"instructions-text\">It begins with a letter from your Grandad, hinting at a secret he's been researching - one that requires your help to uncover its final location.</div><div class=\"instructions-text\">Your journey starts outside Lime Street Station. Once there, turn to the first page of the Story Booklet to begin.</div><div class=\"instructions-text\">Each puzzle leads you to the next pub. Once there, consult the Journal Booklet for the corresponding entry. Every journal page contains a puzzle that can only be solved by physically being at the pub.</div><div class=\"instructions-text\">Knowledge of the city’s pubs will be advantageous, but a smartphone or other way of searching the internet is expected.</div><div class=\"instructions-text\">If you get stuck, the back of the Story Booklet contains hints and solutions for each puzzle.</div><div class=\"instructions-text\">Note - after the first location, the story splits into two independent paths:</div><div class=\"instructions-text instructions-text--large\">Route 1: Through the Commercial District (approx. 3km)<br>Route 2: Through the Georgian Quarter and University area (approx. 2km)</div><div class=\"instructions-text\">Both routes must be completed to uncover the final destination, but they can be done on separate occasions.</div>"
   },
   {
+	"id": 1,
     "stage": 2,
     "path": "intro",
-    "images": [
-      "Journal_v4_4.png",
-      "Journal_v4_5.png"
-    ],
     "answers": [
 "0dcfafab5f8035e779d7bea495f8177b9b7c5b892b81d7a687df96410a0ba304",
 "b54689746b8389ca52e8a964e22a999d20434fe2a393cab917ad46bd258d83af",
@@ -31,12 +24,9 @@
 	"htmlContent": "<div class=\"instructions-text\">It had arrived without warning - a battered envelope, corners frayed, the address written in a familiar scrawl you hadn’t seen for years. Inside, there was a weathered leather journal, its pages thick with notes, sketches, and newspaper clippings, some decades old. Tucked within the cover there was a folded letter, yellowed and faintly smelling of pipe smoke.</div><div class=\"grandad-text\">My dearest grandchild,</div><div class=\"grandad-text\">I’ve spent a lifetime chasing whispers, shadows that led me through archives, alehouses, graveyards, and government buildings; all in search of The Circle. Not many believe it existed, but I do. I know it did. A secret society of influence and vision - men and women, some of great influence and renown, statesmen, industrialists, merchants, and others more humble, artists, musicians, publicans; working behind the scenes to guide the city’s fortunes and culture.</div><div class=\"grandad-text\">I believe they left behind a final truth. A map, or something like it, leading to their last great secret. I've uncovered fragments, coded messages, even a few locations. I’m close to uncovering it all. But time’s caught up with me. My hands shake too much these days, and my memory… well, you know how it goes.</div><div class=\"grandad-text\">That’s where you come in. I need you to follow the clues left by The Circle and walk their paths, uncover their secrets.</div><div class=\"grandad-text\">Before you can take up the trail, though, I need to know you're ready. So I’ve left you a test - the first puzzle, but one of my own creation. Make your way to Lime Street Station, long a gateway to Liverpool and a departure point for travellers since the 19th century. Head outside through the main entrance and begin.</div><div class=\"grandad-text\">Solve the riddle, and you’ll find a place I believe The Circle marked - a place that’s stood watch for generations. Head there, and speak to the bar staff. Tell them I sent you. If you’ve solved this properly, they’ll know what to do.</div><div class=\"grandad-text\">Remember: pay attention to every word. I never was one for spelling things out… but sometimes, the beginning of things is more important than you think.</div><div class=\"grandad-text\">Close to where all journeys begin, an old gem waits in plain sight, wrapped in carved wood and stained light. </div><div class=\"grandad-text\">Rich with the roots of Victorian flair, its walls have heard more tales than timetables can bear. </div><div class=\"grandad-text\">Outside, the walls wear a coat of black, a signal to pause, to look, to turn back. </div><div class=\"grandad-text\">Windows flicker with stories told slow - let this be your starting point, not the end of the show. </div><div class=\"grandad-text\">Nestled near Lime Street’s restless stream, the first to welcome those chasing a dream.</div>"
   },
   {
-    "stage": 3,
+    "id": 3,
+	"stage": 3,
     "path": "intro",
-    "images": [
-      "Journal_v4_6.png",
-      "Journal_v4_7.png"
-    ],
 	"hasAnswer": false,
     "answerHash": "1785cfc3bc6ac7738e8b38cdccd1af12563c2b9070e07af336a1bf8c0f772b6a",
     "hintHash": "b6b8009600a65e8d5e1283db6ee6e0bca6ea351c0c8f188f8f24c0ac183c4b17",
@@ -44,24 +34,24 @@
 	"htmlContent":"<div class=\"instructions-text\">You enter the Crown Hotel and head to the bar. As you order your drinks you mention to the staff that your Grandad sent you. They look confused at first but then nod, as if remembering instructions. They hand you an envelope, similar to the one you received in the post from Grandad.</div><div class=\"instructions-text\">You unfold the page. Grandad’s writing greets you again, but this time the tone is different. This page was written with care.</div><div class=\"grandad-text\">You’ve done well to get this far. This place - though many just pass through it for pints and passing time - was once a listening post for The Circle. Beneath the pressed tiles and glinting brass, members of the Circle would meet in whispers. A brewer sat where you now stand. A firebrand union man drank two stools to your left. </div><div class=\"grandad-text\">You’ve probably figured it out already that this is no ordinary treasure hunt. It’s not about gold or plaques or free pints (though wouldn’t that be nice?).</div><div class=\"grandad-text\">It’s about a map. Not the kind you can fold.</div><div class=\"grandad-text\">The Circle, as far as I can tell, left behind a map in motion - one made of places, not drawings. And the only way to reveal it is to walk it.</div><div class=\"grandad-text\">Now your task begins properly. From here, the path divides.</div><div class=\"grandad-text\">The Circle is not one thing. Two sides, both needed. Two routes. You must walk both, though not necessarily today. Choose the order yourself. They will wait.</div><div class=\"grandad-text\">I’ve gathered fragments, scribbles, and coded messages to uncover clues pointing to the starting locations of the two paths. If The Circle gave them names, I’ve never learned them, so I’ve come up with my own.</div><div class=\"grandad-text\">The Parallel Path - built of commerce, order, and civic weight. From what I’ve uncovered, it runs through the business quarter .Old offices, shipping houses, counting rooms turned drinking dens.</div><div class=\"grandad-text\">The Meridian Path - shaped by voice, art, and rebellion. This one twists through the Georgian Quarter, past Hope Street, Mount Pleasant, near the university and the minds that reshaped the city in ink.</div><div class=\"grandad-text\">I don’t yet know what lies at the end - but I’m certain both lines must be walked. One won’t do it. Each gives only part of the pattern. I’ve traced the beginnings of both, but the rest will reveal itself as you go.</div><div class=\"grandad-text\">The Parallel Path begins:</div><div class=\"grandad-text\">Where stars once entered through the alley, and the city’s back door heard more truth than the stage ever saw.</div><div class=\"grandad-text\">The Meridian Path begins:</div><div class=\"grandad-text\">Where bars replaced bars and drinks are served rather than time, Dickens wore the badge, and forgotten names still echo behind the brick.</div><div class=\"grandad-text\">Walk one. Walk the other. Walk them in your own time.</div><div class=\"grandad-text\">Only then will the map reveal what The Circle meant you to find.</div><div class=\"grandad-text\">- Grandad.</div>"
   },
   {
-    "stage": 4,
+    "id": 4,
+	"stage": 4,
     "path": "intro",
-    "images": [
-      "Journal_v4_8.png",
-      "Journal_v4_9.png"
-    ],
+	"title": "Choose your path",
     "answerHash": "4097889236a2af26c293033feb964c4cf118c0224e0d063fec0a89e9d0569ef2",
     "hintHash": "9b72c2ed94078328aaf2f2556afedef612ea2820887cd61963ac4b739be5a3ba",
 	"hasChoice": true,
 	"htmlContent": "<div class=\"instructions-text\">Choose your path</div>"
   },
   {
-    "stage": 5,
+        "id": 5,
+		"stage": 1,
     "path": "parallel",
     "images": [
       "Journal_v4_2.png",
       "Journal_v4_3.png"
     ],
+	"title": "Ma Egerton's",
   "answers": [
 "8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
 "9da12f5fd9feb4a1a7e8d8c10f7e6ad398043cd9d52378d6cf138a177a0c2032"
@@ -69,87 +59,45 @@
     "hintHash": "5faed653f56701f72756c9fe429b16d25d990613d9404f6b2ca0c961c2fa60e7"
   },
   {
-    "stage": 6,
+        "id": 6,
+		"stage": 2,
     "path": "parallel",
     "images": [
-      "Journal_v4_12.png",
-      "Journal_v4_13.png"
+      "Journal_v4_4.png",
+      "Journal_v4_5.png"
     ],
+	"title": "Doctor Duncan's",
     "answerHash": "59fefacb1435ff4908656175f679fedcde6eb4a8363d766f72c5218f36adff25",
     "hintHash": "637ccc91445a985adc77876fa353f9f04092e47b5db33e6c155b71429145b371"
   },
-  {
-    "stage": 7,
-    "path": "parallel",
-    "images": [
-      "Journal_v4_14.png",
-      "Journal_v4_15.png"
-    ],
-    "answerHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-    "hintHash": "3ba7626d3361f2a6723e3a59707385d30026879dcf8026134afd5bf954a07fb5"
-  },
-  {
-    "stage": 8,
-    "path": "parallel",
-    "images": [
-      "Journal_v4_16.png",
-      "Journal_v4_17.png"
-    ],
-    "answerHash": "6dcdffaeac040a7037ac862b518ff7356e8784a791fb6c712931ab3dfb248393",
-    "hintHash": "f61bf3475377cf314d749bdc8c97fc7a269314bfa928919d22d07a9463cd945d"
-  },
-  {
-    "stage": 9,
+   {
+       "id": 7,
+	   "stage": 1,
     "path": "meridian",
     "images": [
       "Journal_v4_18.png",
       "Journal_v4_19.png"
     ],
-    "answerHash": "032e65cb927668647072ea37fa9c0c454615a21937cd8720ce9102876b76863e",
+		"title": "The Bridewell",
+    "answerHash": "6dcdffaeac040a7037ac862b518ff7356e8784a791fb6c712931ab3dfb248393",
     "hintHash": "0c26a2fb370203aef68d2729146ca7341c428f8b474bf35f5f646748982626d6"
   },
   {
-    "stage": 10,
+        "id": 8,
+		"stage": 2,
     "path": "meridian",
     "images": [
       "Journal_v4_20.png",
       "Journal_v4_21.png"
     ],
+	"title": "The Jacaranda",
     "answerHash": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
     "hintHash": "f8bde6bda15d33b3343b7ac2e0dc1c7ca5a463e34ebcff8c995f1b5de336ab8c"
   },
+  
   {
-    "stage": 11,
-    "path": "meridian",
-    "images": [
-      "Journal_v4_22.png",
-      "Journal_v4_23.png"
-    ],
-    "answerHash": "327fb97d65cd3e8a4455360fe34d4480ee7e2774149c849e0c018f68a297eb86",
-    "hintHash": "344d182e86bf8abdf546892eb04fd2119d7ada77fe983a6b3054afed71081227"
-  },
-  {
-    "stage": 12,
-    "path": "meridian",
-    "images": [
-      "Journal_v4_24.png",
-      "Journal_v4_25.png"
-    ],
-    "answerHash": "0bb646d65aa53161584666b13589a2a54812f180b458b416723aecdb1803beca",
-    "hintHash": "990e9dcd5e79728ce523caa4c3e8cec75fa0c4a7813105f8a5074889a4d18b2d"
-  },
-  {
-    "stage": 13,
-    "path": "meridian",
-    "images": [
-      "Journal_v4_26.png",
-      "Journal_v4_27.png"
-    ],
-    "answerHash": "e96e35a376f8bb39cd7cb24e11f9efbfbe372aba9477a9e90bd094915c71fa9c",
-    "hintHash": "31f45a04c7566cfc379d80ed5e8dd787aec64586d26d1a4b48590207f36c65b1"
-  },
-  {
-    "stage": 14,
+    "id": 9,
+	"stage": 1,
     "path": "final",
     "images": [
       "Journal_v4_28.png",
@@ -159,7 +107,8 @@
     "hintHash": "0893c09b383d41b62bbe1ff3c6a30161ff6b0c776805d960e07b7e5801de4351"
   },
   {
-    "stage": 15,
+       "id": 10,
+	   "stage": 2,
     "path": "final",
     "images": [
       "Journal_v4_30.png",
