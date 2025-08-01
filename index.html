@@ -237,7 +237,7 @@
     loadStage();
   }
 
- function loadStage() {
+function loadStage() {
   window.scrollTo(0, 0);
 
   const puz = puzzles.find(x =>
@@ -247,6 +247,8 @@
 
   const txt = document.getElementById('textContent');
   const imgs = document.querySelector('.images');
+  const img1 = document.getElementById('img1');
+  const img2 = document.getElementById('img2');
   const inp = document.getElementById('guessInput');
   const sb = document.getElementById('submitBtn');
   const nb = document.getElementById('nextBtn');
@@ -256,7 +258,7 @@
   const ans = (puz.hasAnswer !== false && !puz.hasChoice);
   const cho = (puz.hasChoice === true);
 
-  // ----- HTML CONTENT -----
+  // ---- TEXT CONTENT ----
   let h = puz.htmlContent || "";
   if (cho) {
     h += `
@@ -271,20 +273,21 @@
     `;
   }
   txt.innerHTML = h;
-  txt.classList.toggle('hidden', !puz.htmlContent);
+  txt.classList.toggle('hidden', h.trim() === "");
 
-  // ----- IMAGES -----
-  if (Array.isArray(puz.images) && puz.images.length > 0) {
-    document.getElementById('img1').src = puz.images[0] || "";
-    document.getElementById('img2').src = puz.images[1] || "";
+  // ---- IMAGES ----
+  const hasImages = Array.isArray(puz.images) && puz.images.some(src => src && src.trim() !== "");
+  if (hasImages) {
+    img1.src = puz.images[0] || "";
+    img2.src = puz.images[1] || "";
     imgs.classList.remove('hidden');
   } else {
-    document.getElementById('img1').src = "";
-    document.getElementById('img2').src = "";
+    img1.src = "";
+    img2.src = "";
     imgs.classList.add('hidden');
   }
 
-  // ----- CONTROLS -----
+  // ---- CONTROLS ----
   inp.classList.toggle('hidden', !ans);
   sb.classList.toggle('hidden', !ans);
   nb.classList.toggle('hidden', ans || cho);
