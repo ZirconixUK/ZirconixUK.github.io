@@ -256,29 +256,29 @@
     const ans = (puz.hasAnswer !== false && !puz.hasChoice);
     const cho = (puz.hasChoice === true);
 
-    if (puz.htmlContent) {
-      let h = puz.htmlContent;
-      if (cho) {
-        h += `
-          <div class="mt-4 flex justify-center gap-8">
-            <span onclick="choosePath('parallel')" class="path-btn mx-2">
-              Parallel Path
-            </span>
-            <span onclick="choosePath('meridian')" class="path-btn mx-2">
-              Meridian Path
-            </span>
-          </div>
-        `;
-      }
-      txt.innerHTML = h;
-      txt.classList.remove('hidden');
-      imgs.classList.add('hidden');
-    } else {
-      txt.classList.add('hidden');
-      imgs.classList.remove('hidden');
-      document.getElementById('img1').src = puz.images[0] || '';
-      document.getElementById('img2').src = puz.images[1] || '';
-    }
+let h = puz.htmlContent || "";
+if (cho) {
+  h += `
+    <div class="mt-4 flex justify-center gap-8">
+      <span onclick="choosePath('parallel')" class="path-btn mx-2">
+        Parallel Path
+      </span>
+      <span onclick="choosePath('meridian')" class="path-btn mx-2">
+        Meridian Path
+      </span>
+    </div>
+  `;
+}
+txt.innerHTML = h;
+txt.classList.toggle('hidden', !puz.htmlContent);
+
+if (puz.images && puz.images.length > 0) {
+  imgs.classList.remove('hidden');
+  document.getElementById('img1').src = puz.images[0] || '';
+  document.getElementById('img2').src = puz.images[1] || '';
+} else {
+  imgs.classList.add('hidden');
+}
 
     inp.classList.toggle('hidden', !ans);
     sb.classList.toggle('hidden', !ans);
