@@ -69,7 +69,7 @@
       "Journal_v4_2.png",
       "Journal_v4_3.png"
     ],
-    "htmlContent":"<<div class=\"instructions-text  text-center\"><div>You emerge onto Pudsey Street, the stage door of The Empire theatre spilling onto the side of Lime Street Station. Opposite, the sign above the door reads Ma Egerton’s Stage Door, paint faded but still proud. This was once the city’s quiet entrance to the spotlight - not for the audience, but for those who lived behind the scenes.</div><div>Inside, the pub hums with the hush of old stories. Deep red walls cradle sepia portraits of comedians, singers, and dancers mid-spin. The piano in the corner sits silent, like it’s seen too much to speak first.</div><div>You find a seat near the window. The bar’s low murmur fades into the background as you pull out Grandad’s journal. The next clue has to be here, hidden in the pages - waiting, like the final act before the curtain falls.</div></div>",
+    "htmlContent":"<div class=\"instructions-text\"><div>You emerge onto Pudsey Street, the stage door of The Empire theatre spilling onto the side of Lime Street Station. Opposite, the sign above the door reads Ma Egerton’s Stage Door, paint faded but still proud. This was once the city’s quiet entrance to the spotlight - not for the audience, but for those who lived behind the scenes.</div><div>Inside, the pub hums with the hush of old stories. Deep red walls cradle sepia portraits of comedians, singers, and dancers mid-spin. The piano in the corner sits silent, like it’s seen too much to speak first.</div><div>You find a seat near the window. The bar’s low murmur fades into the background as you pull out Grandad’s journal. The next clue has to be here, hidden in the pages - waiting, like the final act before the curtain falls.</div></div>",
 	"title": "Ma Egerton's Stage Door",
   "answers": [
 "8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
@@ -104,7 +104,8 @@
 	 "answers": [
 "8c2a25260209b2db50e9d7c369876ddeeaebde2472a38426ca4907fbe4135921"
   ],
-    "hint": "The numbers seem to relate to the labels of these jars. Find the jars and relate the numbers to the text"
+    "hint": "The numbers seem to relate to the labels of these jars. Find the jars and relate the numbers to the text",
+    "htmlContent":"<div class=\"instructions-text\"><div>The sandstone front of Doctor Duncan’s rises like a civic monument - which, in a way, it is.</div><div>You step inside.</div><div>The front room feels cosy, but you feel the grandeur of the rooms behind. The pharmacy cabinet near the door is imposing, a symbol of the man the pub is named for.</div><div>To the right of the bar lies a grand room, built to convey trust and order - a legacy of the Victorian age. Polished tiles, high ceilings, stained glass filtered light. A place meant to reassure the public that someone was in charge, watching the city's health like a doctor watches a patient. You wonder now if the Circle chose this place for that reason.</div><div>Dr. William Duncan. Liverpool’s first Medical Officer of Health. A reformer, yes, but his name appears in Grandad’s journal more than once, always in proximity to the Circle’s symbols. You flip to the marked page as you take a seat. Grandad clearly believed the Circle left something here - or came through it themselves.</div><div>The air is still. The pub hums with quiet conversation, but it all feels peripheral now. The Circle has led you here. Somewhere in this room, or in these pages, they’ve left another piece of the puzzle.</div><div>Time to find it.</div></div>"
   },
   
   {
