@@ -237,56 +237,61 @@
     loadStage();
   }
 
-  function loadStage() {
-    window.scrollTo(0, 0);
+ function loadStage() {
+  window.scrollTo(0, 0);
 
-    const puz = puzzles.find(x =>
-      x.path === currentPath && x.stage === currentStage
-    );
-    if (!puz) return;
+  const puz = puzzles.find(x =>
+    x.path === currentPath && x.stage === currentStage
+  );
+  if (!puz) return;
 
-    const txt = document.getElementById('textContent');
-    const imgs = document.querySelector('.images');
-    const inp = document.getElementById('guessInput');
-    const sb = document.getElementById('submitBtn');
-    const nb = document.getElementById('nextBtn');
-    const cp = document.getElementById('choiceParallel');
-    const cm = document.getElementById('choiceMeridian');
+  const txt = document.getElementById('textContent');
+  const imgs = document.querySelector('.images');
+  const inp = document.getElementById('guessInput');
+  const sb = document.getElementById('submitBtn');
+  const nb = document.getElementById('nextBtn');
+  const cp = document.getElementById('choiceParallel');
+  const cm = document.getElementById('choiceMeridian');
 
-    const ans = (puz.hasAnswer !== false && !puz.hasChoice);
-    const cho = (puz.hasChoice === true);
+  const ans = (puz.hasAnswer !== false && !puz.hasChoice);
+  const cho = (puz.hasChoice === true);
 
-let h = puz.htmlContent || "";
-if (cho) {
-  h += `
-    <div class="mt-4 flex justify-center gap-8">
-      <span onclick="choosePath('parallel')" class="path-btn mx-2">
-        Parallel Path
-      </span>
-      <span onclick="choosePath('meridian')" class="path-btn mx-2">
-        Meridian Path
-      </span>
-    </div>
-  `;
-}
-txt.innerHTML = h;
-txt.classList.toggle('hidden', !puz.htmlContent);
-
-if (puz.images && puz.images.length > 0) {
-  imgs.classList.remove('hidden');
-  document.getElementById('img1').src = puz.images[0] || '';
-  document.getElementById('img2').src = puz.images[1] || '';
-} else {
-  imgs.classList.add('hidden');
-}
-
-    inp.classList.toggle('hidden', !ans);
-    sb.classList.toggle('hidden', !ans);
-    nb.classList.toggle('hidden', ans || cho);
-    cp.classList.toggle('hidden', !cho);
-    cm.classList.toggle('hidden', !cho);
-    inp.value = '';
+  // ----- HTML CONTENT -----
+  let h = puz.htmlContent || "";
+  if (cho) {
+    h += `
+      <div class="mt-4 flex justify-center gap-8">
+        <span onclick="choosePath('parallel')" class="path-btn mx-2">
+          Parallel Path
+        </span>
+        <span onclick="choosePath('meridian')" class="path-btn mx-2">
+          Meridian Path
+        </span>
+      </div>
+    `;
   }
+  txt.innerHTML = h;
+  txt.classList.toggle('hidden', !puz.htmlContent);
+
+  // ----- IMAGES -----
+  if (Array.isArray(puz.images) && puz.images.length > 0) {
+    document.getElementById('img1').src = puz.images[0] || "";
+    document.getElementById('img2').src = puz.images[1] || "";
+    imgs.classList.remove('hidden');
+  } else {
+    document.getElementById('img1').src = "";
+    document.getElementById('img2').src = "";
+    imgs.classList.add('hidden');
+  }
+
+  // ----- CONTROLS -----
+  inp.classList.toggle('hidden', !ans);
+  sb.classList.toggle('hidden', !ans);
+  nb.classList.toggle('hidden', ans || cho);
+  cp.classList.toggle('hidden', !cho);
+  cm.classList.toggle('hidden', !cho);
+  inp.value = '';
+}
 
   function checkGuess() {
     const v = document.getElementById('guessInput')
