@@ -159,12 +159,20 @@
     listFor('intro').length;
 
   fetch('content.json')
-    .then(r => r.json())
-    .then(d => {
-      puzzles = d;
-      init();
-    })
-    .catch(console.error);
+  .then(response => {
+    if (!response.ok) throw new Error("Failed to load content.json");
+    return response.json();
+  })
+  .then(data => {
+    if (!Array.isArray(data)) throw new Error("Invalid puzzle data format");
+    puzzles = data;
+    init();
+  })
+  .catch(err => {
+    console.error("Error loading puzzle data:", err);
+    alert("Failed to load puzzle data. Check console for details.");
+  });
+
 
   function init() {
     ['intro', 'parallel', 'meridian'].forEach(p => {
