@@ -69,7 +69,7 @@
       "Journal_v4_2.png",
       "Journal_v4_3.png"
     ],
-    "htmlContent":"<div class=\"instructions-text  text-center\"><div>This is some test html content in a journal page</div></div>",
+    "htmlContent":"<<div class=\"instructions-text  text-center\"><div>You emerge onto Pudsey Street, the stage door of The Empire theatre spilling onto the side of Lime Street Station. Opposite, the sign above the door reads Ma Egerton’s Stage Door, paint faded but still proud. This was once the city’s quiet entrance to the spotlight - not for the audience, but for those who lived behind the scenes.</div><div>Inside, the pub hums with the hush of old stories. Deep red walls cradle sepia portraits of comedians, singers, and dancers mid-spin. The piano in the corner sits silent, like it’s seen too much to speak first.</div><div>You find a seat near the window. The bar’s low murmur fades into the background as you pull out Grandad’s journal. The next clue has to be here, hidden in the pages - waiting, like the final act before the curtain falls.</div></div>",
 	"title": "Ma Egerton's Stage Door",
   "answers": [
 "8f034c6eef692c2972bf798065220b4a60f26a4918692680c67bba3f0606acdf",
