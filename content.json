@@ -137,7 +137,6 @@
     "hint": "The numbers seem to relate to the labels of these jars. Find the jars and relate the numbers to the text",
     "htmlContent":"<div class=\"instructions-text\"><div>The street narrows as you step into Rainford Gardens, a small respite against the storm of tourism that is Mathew Street around the corner. Nestled against the brick like a memory half-forgotten is the White Star, its hanging sign gently swaying, a ship’s prow etched in gold above the door.</div><div>Inside, the pub is smaller than you expected - close, wood-panelled, and warm, like the captain’s quarters of a ship that never quite docked. Maritime relics line the walls: framed route maps, model ships, old passenger tickets under glass. The air smells of ale and polish, with just the faintest trace of brine, as if the sea never fully let go.</div><div>There’s no music. Just the low murmur of voices and the occasional creak of the floorboards. You slide into a corner booth, beneath a faded photo of a White Star Line vessel gliding into the Mersey. Not the ship - but close enough to stir something uneasy.</div><div>You open Grandad’s journal and flick to the next page he marked. His notes on the Circle grow more frantic around this place. Crate #3. Mathew Vault. M. Talbot. Whatever it means, it led you here.</div><div>And if the Circle left anything behind… it’s waiting to be found.</div></div>"
   },
-  
    {
         "id": 100,
 		"stage": 1,
@@ -149,5 +148,21 @@
   ],
     "hint": "What sort of place would people serve time in? What relation does Dickens have to this in Liverpool?",
 	"htmlContent":"<div class=\"instructions-text  text-center\"><div>The Meridian Path</div><div>Elsewhere</div></div><div class=\"grandad-text\"><div>Where bars replaced bars and drinks are served rather than time, Dickens wore the badge, and forgotten names still echo behind the brick.</div></div>"
-  }
+  },
+  {
+    "id": 101,
+	"stage": 2,
+    "path": "meridian",
+    "images": [
+      "Journal_v4_18.png",
+      "Journal_v4_19.png"
+    ],
+	"title": "The Bridewell",
+	 "answers": [
+"1785cfc3bc6ac7738e8b38cdccd1af12563c2b9070e07af336a1bf8c0f772b6a"
+  ],
+    "hint": "The journal shows various items strewn around the Bridewell, but are they there in the pub itself?",
+    "htmlContent":"<div class=\"instructions-text\"><div>The first thing you notice is the brick.</div><div>The Bridewell doesn’t hide what it was. Thick red clay walls rise like a fortress, angular and windowless in places - a building designed to keep people in. But now the heavy doors open with ease, and the only thing held here is stories.</div><div>Inside, the transformation is striking, but not total. The cells remain - repurposed as booths, fitted with low tables and cushioned seats, but still unmistakably cells. Iron bars once locked these doors. Now they creak open under the weight of history and laughter.</div><div>You step into one and take a seat. The brick walls press close, the ceiling low. The air smells faintly of polish and old stone. It’s quieter here. More still. Outside the booth, conversation flows easily, but in here, it’s as if the room is listening.</div><div>You open the journal, the first page of a new path. The Meridian begins here.</div></div>"
+  },
+
 ]
