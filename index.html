@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>The Circle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   The Circle
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-
-  <link href="assets\style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Charm&family=Indie+Flower&family=Montserrat:wght@300;600&family=Reenie+Beanie&family=Roboto:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet"/>
+  <link href="assets/style.css" rel="stylesheet"/>
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-   <style type="text/tailwindcss">
-    @layer components {
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style type="text/tailwindcss">
+   @layer components {
      /* add vertical spacing between immediate child divs */
       .instructions-text > * + * {
         @apply mt-3;
@@ -50,102 +50,126 @@
       .grandad-text > * + * {
         @apply mt-3;
       }
+	   .handwritten-text {
+        @apply bg-[#F6F1E0] text-[#333333] p-4 rounded-lg border border-[#CFAE6A]  text-2xl;
+		font-family: 'Reenie Beanie';
+      }
+	  /* add vertical spacing between immediate child divs */
+      .handwritten-text > * + * {
+        @apply mt-3;
+      }
+	  	   .handwritten-friendly-text {
+        @apply bg-[#F6F1E0] text-[#333333] p-4 rounded-lg border border-[#CFAE6A]  text-lg;
+		font-family: 'Indie Flower';
+      }
+	  /* add vertical spacing between immediate child divs */
+      .handwritten-friendly-text > * + * {
+        @apply mt-3;
+      }
+	     .script-text {
+        @apply bg-[#F6F1E0] text-[#333333] p-4 rounded-lg border border-[#CFAE6A] text-xl;
+		font-family: 'Charm';
+      }
+	  /* add vertical spacing between immediate child divs */
+      .script-text > * + * {
+        @apply mt-3;
+      }
     }
   </style>
-</head>
-<body class="bg-[url('/assets/wood.jpg')] bg-repeat bg-center text-white font-sans p-4 text-center">
-
+ </head>
+ <body class="bg-[url('/assets/wood.jpg')] bg-repeat bg-center text-white font-sans p-4 text-center">
   <!-- Hint Tab & Reset Icon -->
   <div class="fixed bottom-16 right-0 flex items-center bg-[#3D5B3D] shadow-[7px_7px_10px_rgba(0,0,0,0.5)] rounded-l-lg pl-1 pr-0 py-1 cursor-pointer z-50" onclick="showHint()">
-    <div class="border-l-2 border-t-2 border-b-2 border-dashed border-gray-400 border-r-0 py-1 pl-2 pr-0 rounded-r">
-      <span class="text-2xl">🔍</span>
+   <div class="border-l-2 border-t-2 border-b-2 border-dashed border-gray-400 border-r-0 py-1 pl-2 pr-0 rounded-r">
+    <span class="text-2xl">
+     🔍
+    </span>
+   </div>
   </div>
+  <div class="fixed top-5 left-5 text-2xl cursor-pointer z-50" onclick="resetProgress()">
+   🔄
   </div>
-  <div class="fixed top-5 left-5 text-2xl cursor-pointer z-50" onclick="resetProgress()">🔄</div>
-
   <!-- Navigation Controls -->
-  <div id="navControls" class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
-
-    <button id="togglePathBtn" onclick="togglePath()" class="
-  px-6 py-2 rounded-lg
-  bg-[#5B2A2A] border-2 border-[#CFAE6A]
-  text-[#F6F1E0] uppercase tracking-wider font-semibold
-  shadow-inner shadow-black/25
-  hover:bg-[#4A2020] hover:ring-1 hover:ring-[#CFAE6A] transition
-">Switch Path</button>
-    <label for="stageSelect" class="font-medium"></label>
-    <div class="relative inline-block">
-      <select id="stageSelect" onchange="onStageChange(this.value)" class="appearance-none w-full bg-[#F6F1E0] text-[#333333]
-    border border-[#CFAE6A] rounded-lg
-    py-2 px-3 pr-8 leading-tight
-    shadow-inner shadow-black/10
-    focus:outline-none focus:ring-[1px] focus:ring-[#CFAE6A]
-    transition">
-      </select>
-      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-        <svg class="w-4 h-4 text-[#CFAE6A]" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M5.5 7.5L10 12l4.5-4.5L16 8l-6 6-6-6z"/>
-        </svg>
-      </div>
+  <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 mb-6" id="navControls">
+   <button class="px-6 py-2 rounded-lg bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] uppercase tracking-wider font-semibold shadow-inner shadow-black/25 hover:bg-[#4A2020] hover:ring-1 hover:ring-[#CFAE6A] transition" id="togglePathBtn" onclick="togglePath()">
+    Switch Path
+   </button>
+   <label class="font-medium" for="stageSelect">
+   </label>
+   <div class="relative inline-block">
+    <select class="appearance-none w-full bg-[#F6F1E0] text-[#333333] border border-[#CFAE6A] rounded-lg py-2 px-3 pr-8 leading-tight shadow-inner shadow-black/10 focus:outline-none focus:ring-[1px] focus:ring-[#CFAE6A] transition" id="stageSelect" onchange="onStageChange(this.value)">
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+     <svg class="w-4 h-4 text-[#CFAE6A]" fill="currentColor" viewbox="0 0 20 20">
+      <path d="M5.5 7.5L10 12l4.5-4.5L16 8l-6 6-6-6z">
+      </path>
+     </svg>
     </div>
+   </div>
   </div>
-
   <!-- Text Content -->
-  <div id="textContent" class="filter drop-shadow-2xl max-w-3xl mx-auto mb-6 text-left text-lg space-y-4 hidden"></div>
-
+  <div class="filter drop-shadow-2xl max-w-3xl mx-auto mb-6 text-left text-lg space-y-4 hidden" id="textContent">
+  </div>
   <!-- Images & Choices -->
   <div class="images mb-6">
-    <div class="flex">
-      <img id="img1" src="" alt="Puzzle Image 1" class="w-1/2 h-auto cursor-pointer" onclick="showOverlay(this.src)">
-      <img id="img2" src="" alt="Puzzle Image 2" class="w-1/2 h-auto cursor-pointer" onclick="showOverlay(this.src)">
-    </div>
-    <div class="mt-4 flex justify-center gap-8">
-      <span id="choiceParallel" onclick="choosePath('parallel')" class="text-blue-600 underline cursor-pointer hidden">Parallel Path</span>
-      <span id="choiceMeridian" onclick="choosePath('meridian')" class="text-blue-600 underline cursor-pointer hidden">Meridian Path</span>
-    </div>
+   <div class="flex">
+    <img alt="Puzzle Image 1" class="w-1/2 h-auto cursor-pointer" id="img1" onclick="showOverlay(this.src)" src=""/>
+    <img alt="Puzzle Image 2" class="w-1/2 h-auto cursor-pointer" id="img2" onclick="showOverlay(this.src)" src=""/>
+   </div>
+   <div class="mt-4 flex justify-center gap-8">
+    <span class="text-blue-600 underline cursor-pointer hidden" id="choiceParallel" onclick="choosePath('parallel')">
+     Parallel Path
+    </span>
+    <span class="text-blue-600 underline cursor-pointer hidden" id="choiceMeridian" onclick="choosePath('meridian')">
+     Meridian Path
+    </span>
+   </div>
   </div>
-
   <!-- Input & Buttons -->
   <div class="input-section mb-6 flex flex-col sm:flex-row items-center gap-4 justify-center">
-    <input id="guessInput" type="text" placeholder="Enter your guess"
-           class="flex-grow max-w-xs px-4 py-2 bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] rounded-lg shadow-inner shadow-black/25 placeholder-[#F6F1E0] focus:outline-none focus:ring-2 focus:ring-[#CFAE6A] transition-colors duration-300 hidden">
-    <button id="submitBtn" onclick="checkGuess()"
-            class="path-btn hidden">Submit</button>
-    <button id="nextBtn" onclick="nextPuzzle()"
-            class="path-btn hidden">Next</button>
+   <input class="flex-grow max-w-xs px-4 py-2 bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] rounded-lg shadow-inner shadow-black/25 placeholder-[#F6F1E0] focus:outline-none focus:ring-2 focus:ring-[#CFAE6A] transition-colors duration-300 hidden" id="guessInput" placeholder="Enter your guess" type="text"/>
+   <button class="path-btn hidden" id="submitBtn" onclick="checkGuess()">
+    Submit
+   </button>
+   <button class="path-btn hidden" id="nextBtn" onclick="nextPuzzle()">
+    Next
+   </button>
   </div>
-
   <!-- Overlay for Image Preview -->
-  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40" onclick="hideOverlay()">
-    <img id="overlayImg" src="" class="max-w-[90%] max-h-[90%] border-4 border-white shadow-xl">
+  <div class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40" id="overlay" onclick="hideOverlay()">
+   <img class="max-w-[90%] max-h-[90%] border-4 border-white shadow-xl" id="overlayImg" src=""/>
   </div>
-
   <!-- Toast Message -->
-  <div id="toast" class="fixed inset-0 flex items-end justify-center pb-8 pointer-events-none">
-    <div id="toastInner" class="bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] font-semibold px-6 py-3 rounded-lg shadow-lg hidden" onclick="this.classList.add('hidden')"></div>
+  <div class="fixed inset-0 flex items-end justify-center pb-8 pointer-events-none" id="toast">
+   <div class="bg-[#5B2A2A] border-2 border-[#CFAE6A] text-[#F6F1E0] font-semibold px-6 py-3 rounded-lg shadow-lg hidden" id="toastInner" onclick="this.classList.add('hidden')">
+   </div>
   </div>
-
   <!-- Hint Box -->
-  <div id="hintBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onclick="hideHint()">
-<div class="relative bg-[#E3D1B5] text-[#333333] border-2 border-[#CFAE6A] rounded-lg shadow-lg p-6 prose max-w-md">
-    <p id="hintText"></p>
+  <div class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" id="hintBox" onclick="hideHint()">
+   <div class="relative bg-[#E3D1B5] text-[#333333] border-2 border-[#CFAE6A] rounded-lg shadow-lg p-6 prose max-w-md">
+    <p id="hintText">
+    </p>
     <!-- Brass-corner accents for a Victorian “frame” -->
-    <div class="absolute top-0 left-0   w-4 h-4 border-t-2 border-l-2 border-[#CFAE6A]"></div>
-    <div class="absolute top-0 right-0  w-4 h-4 border-t-2 border-r-2 border-[#CFAE6A]"></div>
-    <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#CFAE6A]"></div>
-    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#CFAE6A]"></div>
+    <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#CFAE6A]">
+    </div>
+   </div>
   </div>
-  </div>
-
   <!-- CryptoJS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">
+  </script>
   <!-- Game Logic -->
-<script>
-  let puzzles = [];
-  let pathProgress = { intro: 1, parallel: 1, meridian: 1 };
-  ['intro', 'parallel', 'meridian'].forEach(p => 
-    pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1
-  );
+  <script>
+   let puzzles = [];
+let pathProgress = { intro: 1, parallel: 1, meridian: 1, final: 1 };
+['intro', 'parallel', 'meridian', 'final'].forEach(p => 
+  pathProgress[p] = parseInt(localStorage.getItem('progress_' + p)) || 1
+);
 
   let currentPath = 'intro';
   let currentStage = 1;
@@ -174,52 +198,72 @@ fetch('content.json?nocache=${Date.now()}')
   });
 
 
-  function init() {
-    ['intro', 'parallel', 'meridian'].forEach(p => {
-      const m = listFor(p).length;
-      if (pathProgress[p] > m) {
-        pathProgress[p] = 1;
-        localStorage.setItem('progress_' + p, '1');
-      }
-    });
-
-    if (pathProgress.intro <= introCount()) {
-      loadStageFor('intro');
-    } else if (pathProgress.parallel <= listFor('parallel').length) {
-      loadStageFor('parallel');
-    } else {
-      loadStageFor('meridian');
+function init() {
+  ['intro', 'parallel', 'meridian', 'final'].forEach(p => {
+    const m = listFor(p).length;
+    if (pathProgress[p] > m) {
+      pathProgress[p] = 1;
+      localStorage.setItem('progress_' + p, '1');
     }
+  });
+
+  const parallelComplete = pathProgress.parallel > listFor('parallel').length;
+  const meridianComplete = pathProgress.meridian > listFor('meridian').length;
+
+  if (pathProgress.final >= 1 && parallelComplete && meridianComplete) {
+    loadStageFor('final');
+  } else if (pathProgress.intro <= listFor('intro').length) {
+    loadStageFor('intro');
+  } else if (!parallelComplete) {
+    loadStageFor('parallel');
+  } else if (!meridianComplete) {
+    loadStageFor('meridian');
+  } else {
+    document.getElementById('textContent').innerHTML =
+      '<div class="instructions-text text-center">You’ve completed all paths. Thank you for playing!</div>';
+  }
+}
+
+
+
+
+
+function loadStageFor(path) {
+  currentPath = path;
+  const lst = listFor(path);
+  const u = Math.min(pathProgress[path], lst.length);
+
+  currentStage = lst[u - 1].stage;  // FIXED: make sure currentStage aligns to the correct object
+
+  const btn = document.getElementById('togglePathBtn');
+  if (path === 'intro' || path === 'final') {
+    btn.classList.add('hidden');
+  } else {
+    btn.classList.remove('hidden');
+    btn.textContent = path === 'parallel'
+      ? 'Switch to Meridian'
+      : 'Switch to Parallel';
   }
 
-  function loadStageFor(path) {
-    currentPath = path;
-    const lst = listFor(path);
-    const u = Math.min(pathProgress[path], lst.length);
-    currentStage = lst[u - 1].stage;
+  populateStages();
+  loadStage();
+}
 
-    const btn = document.getElementById('togglePathBtn');
-    if (path === 'intro') {
-      btn.classList.add('hidden');
-    } else {
-      btn.classList.remove('hidden');
-      btn.textContent = path === 'parallel'
-        ? 'Switch to Meridian'
-        : 'Switch to Parallel';
-    }
+function togglePath() {
+  const otherPath = currentPath === 'parallel' ? 'meridian' : 'parallel';
 
-    populateStages();
-    loadStage();
+  // Get list and progress for the other path
+  const otherList = listFor(otherPath);
+  const nextStage = Math.min(pathProgress[otherPath], otherList.length);
+  const nextStageObj = otherList.find(p => p.stage === nextStage);
+
+  if (nextStageObj) {
+    currentStage = nextStageObj.stage;
+    loadStageFor(otherPath);
+  } else {
+    showToast("No progress in the other path yet.", false);
   }
-
-  function togglePath() {
-    loadStageFor(
-      currentPath === 'parallel'
-        ? 'meridian'
-        : 'parallel'
-    );
-  }
-
+}
   function populateStages() {
     const sel = document.getElementById('stageSelect');
     const lst = listFor(currentPath);
@@ -244,6 +288,11 @@ fetch('content.json?nocache=${Date.now()}')
     populateStages();
     loadStage();
   }
+  
+  function isPathComplete(path) {
+  const maxStage = listFor(path).length;
+  return pathProgress[path] >= maxStage;
+}
 
 function loadStage() {
   window.scrollTo(0, 0);
@@ -263,10 +312,82 @@ function loadStage() {
   const cp = document.getElementById('choiceParallel');
   const cm = document.getElementById('choiceMeridian');
 
+  const isFinalParallel = currentPath === 'parallel' && currentStage === 17;
+  const isFinalMeridian = currentPath === 'meridian' && currentStage === 15;
+  const isFinalEpilogue = currentPath === 'final' && currentStage === 3;
+
+  // Special case: final epilogue (no controls)
+if (isFinalEpilogue) {
+  txt.innerHTML = puz.htmlContent;
+  txt.classList.remove('hidden');
+
+  const hasImages = Array.isArray(puz.images) && puz.images.some(src => src && src.trim() !== "");
+  if (hasImages) {
+    img1.src = puz.images[0] ? `assets/${puz.images[0]}` : "";
+    img2.src = puz.images[1] ? `assets/${puz.images[1]}` : "";
+    imgs.classList.remove('hidden');
+  } else {
+    img1.src = "";
+    img2.src = "";
+    imgs.classList.add('hidden');
+  }
+
+  inp.classList.add('hidden');
+  sb.classList.add('hidden');
+  cp.classList.add('hidden');
+  cm.classList.add('hidden');
+
+  nb.textContent = "FINISH";
+  nb.classList.remove('hidden');
+  nb.onclick = showFinishModal;
+
+  return;
+}
+
+
+  // Final stage of either path — wait for both to finish
+  if (isFinalParallel || isFinalMeridian) {
+    const otherComplete = isFinalParallel
+      ? isPathComplete('meridian')
+      : isPathComplete('parallel');
+
+    txt.innerHTML = puz.htmlContent;
+    txt.classList.remove('hidden');
+
+	const hasImages = Array.isArray(puz.images) && puz.images.some(src => src && src.trim() !== "");
+	if (hasImages) {
+	  img1.src = puz.images[0] ? `assets/${puz.images[0]}` : "";
+	  img2.src = puz.images[1] ? `assets/${puz.images[1]}` : "";
+	  imgs.classList.remove('hidden');
+	} else {
+	  img1.src = "";
+	  img2.src = "";
+	  imgs.classList.add('hidden');
+	}
+
+
+    inp.classList.add('hidden');
+    sb.classList.add('hidden');
+
+    if (otherComplete) {
+      nb.classList.remove('hidden');
+      nb.onclick = () => {
+        pathProgress['final'] = 1;
+        localStorage.setItem('progress_final', '1');
+        loadStageFor('final');
+      };
+    } else {
+      nb.classList.add('hidden');
+      txt.innerHTML += `<div class="instructions-text text-center text-xl mt-6">You've completed one path. To continue, return and complete the other path.</div>`;
+    }
+
+    return;
+  }
+
+  // Regular logic
   const ans = (puz.hasAnswer !== false && !puz.hasChoice);
   const cho = (puz.hasChoice === true);
 
-  // ---- TEXT CONTENT ----
   let h = puz.htmlContent || "";
   if (cho) {
     h += `
@@ -283,19 +404,18 @@ function loadStage() {
   txt.innerHTML = h;
   txt.classList.toggle('hidden', h.trim() === "");
 
-  // ---- IMAGES ----
-  const hasImages = Array.isArray(puz.images) && puz.images.some(src => src && src.trim() !== "");
-  if (hasImages) {
-    img1.src = puz.images[0] || "";
-    img2.src = puz.images[1] || "";
-    imgs.classList.remove('hidden');
-  } else {
-    img1.src = "";
-    img2.src = "";
-    imgs.classList.add('hidden');
-  }
+	const hasImages = Array.isArray(puz.images) && puz.images.some(src => src && src.trim() !== "");
+	if (hasImages) {
+	  img1.src = puz.images[0] ? `assets/${puz.images[0]}` : "";
+	  img2.src = puz.images[1] ? `assets/${puz.images[1]}` : "";
+	  imgs.classList.remove('hidden');
+	} else {
+	  img1.src = "";
+	  img2.src = "";
+	  imgs.classList.add('hidden');
+	}
 
-  // ---- CONTROLS ----
+
   inp.classList.toggle('hidden', !ans);
   sb.classList.toggle('hidden', !ans);
   nb.classList.toggle('hidden', ans || cho);
@@ -303,6 +423,7 @@ function loadStage() {
   cm.classList.toggle('hidden', !cho);
   inp.value = '';
 }
+
 
   function checkGuess() {
     const v = document.getElementById('guessInput')
@@ -411,12 +532,16 @@ function showHint() {
     if (!confirm('Are you sure you want to reset all progress?'))
       return;
 
-    ['intro', 'parallel', 'meridian'].forEach(p => {
-      localStorage.setItem('progress_' + p, '1');
-      pathProgress[p] = 1;
-    });
+	['intro', 'parallel', 'meridian', 'final'].forEach(p => {
+	  localStorage.setItem('progress_' + p, '1');
+	  pathProgress[p] = 1;
+	});
+
 
     loadStageFor('intro');
+	document.getElementById('nextBtn').textContent = "Next";
+	document.getElementById('nextBtn').onclick = nextPuzzle;
+
   }
 
   document.addEventListener('keydown', e => {
@@ -432,7 +557,36 @@ function showHint() {
       }
     }
   });
-</script>
+  
+  function showFinishModal() {
+  document.getElementById('finishModal').classList.remove('hidden');
+}
 
-</body>
+function hideFinishModal() {
+  document.getElementById('finishModal').classList.add('hidden');
+}
+  </script>
+  <!-- Finish Modal -->
+  <div class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" id="finishModal">
+   <div class="relative bg-[#E3D1B5] text-[#333333] border-2 border-[#CFAE6A] rounded-lg shadow-lg p-6 max-w-lg text-center">
+    <p class="text-xl mb-4">
+     Thank you for playing!
+    </p>
+    <p class="text-lg mb-4">
+     The Circle turns again - now through you.
+    </p>
+    <button class="mt-4 px-4 py-2 bg-[#5B2A2A] text-[#F6F1E0] rounded-lg border border-[#CFAE6A] hover:bg-[#4A2020] transition" onclick="hideFinishModal()">
+     Close
+    </button>
+    <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#CFAE6A]">
+    </div>
+    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#CFAE6A]">
+    </div>
+   </div>
+  </div>
+ </body>
 </html>
