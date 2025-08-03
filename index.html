@@ -419,6 +419,12 @@ if (isFinalEpilogue) {
   inp.classList.toggle('hidden', !ans);
   sb.classList.toggle('hidden', !ans);
   nb.classList.toggle('hidden', ans || cho);
+  // rename “Next” → “Begin” on the very first intro stage
+if (currentPath === 'intro' && currentStage === 1) {
+  nb.textContent = 'Begin';
+} else {
+  nb.textContent = 'Next';
+}
   cp.classList.toggle('hidden', !cho);
   cm.classList.toggle('hidden', !cho);
   inp.value = '';
