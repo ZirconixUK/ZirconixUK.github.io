@@ -1,0 +1,6041 @@
+[
+  {
+    "id": "osm_way_1126354152",
+    "name": "Abbey Road",
+    "lat": 53.4058613,
+    "lon": -2.9893732,
+    "osm": {
+      "type": "way",
+      "id": 1126354152
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "11-17",
+      "addr:postcode": "L2 9QA",
+      "addr:street": "Harrington Street",
+      "amenity": "pub",
+      "building:part": "yes",
+      "level": "0",
+      "name": "Abbey Road"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_464339045",
+    "name": "Abdullah Quilliam Mosque",
+    "lat": 53.4142884,
+    "lon": -2.9605132,
+    "osm": {
+      "type": "way",
+      "id": 464339045
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "8-10",
+      "addr:street": "Brougham Terrace",
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "sunni",
+      "name": "Abdullah Quilliam Mosque",
+      "religion": "muslim"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_24728022",
+    "name": "Abercromby Square",
+    "lat": 53.4028303,
+    "lon": -2.9649795,
+    "osm": {
+      "type": "way",
+      "id": 24728022
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "access": "permissive",
+      "leisure": "park",
+      "name": "Abercromby Square",
+      "wikidata": "Q4666835",
+      "wikipedia": "en:Abercromby Square"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271731109",
+    "name": "Al-Rahma Mosque",
+    "lat": 53.3943047,
+    "lon": -2.9606484,
+    "osm": {
+      "type": "way",
+      "id": 271731109
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "name": "Al-Rahma Mosque",
+      "religion": "muslim",
+      "wikidata": "Q311444",
+      "wikipedia": "en:Al-Rahma Mosque, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1337824505",
+    "name": "All Together Now",
+    "lat": 53.4018789,
+    "lon": -2.9750484,
+    "osm": {
+      "type": "way",
+      "id": 1337824505
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "alt_name": "The Christmas Truce Memorial Statue",
+      "historic": "memorial",
+      "memorial": "war_memorial",
+      "name": "All Together Now",
+      "wikidata": "Q131323714"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_567422269",
+    "name": "Baa Bar",
+    "lat": 53.4013438,
+    "lon": -2.9683438,
+    "osm": {
+      "type": "node",
+      "id": 567422269
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Baa Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_244449045",
+    "name": "Baltic Fleet",
+    "lat": 53.3985987,
+    "lon": -2.9867252,
+    "osm": {
+      "type": "way",
+      "id": 244449045
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "33a",
+      "addr:postcode": "L1 8DQ",
+      "addr:street": "Wapping",
+      "amenity": "pub",
+      "building": "yes",
+      "building:levels": "3",
+      "food": "yes",
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "listed_status": "Grade II",
+      "microbrewery": "yes",
+      "name": "Baltic Fleet",
+      "real_ale": "yes",
+      "smoking": "outside",
+      "website": "http://www.wappingbeers.co.uk/",
+      "wikidata": "Q26513078"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_101422414",
+    "name": "Barton Rouge",
+    "lat": 53.4079223,
+    "lon": -2.9910894,
+    "osm": {
+      "type": "node",
+      "id": 101422414
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "cuisine": "indian",
+      "name": "Barton Rouge"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1126354138",
+    "name": "Be At One Cocktail Bar",
+    "lat": 53.4062336,
+    "lon": -2.9888594,
+    "osm": {
+      "type": "way",
+      "id": 1126354138
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "18",
+      "addr:postcode": "L2 9RL",
+      "addr:street": "North John Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Be At One Cocktail Bar",
+      "operator": "BeAtOne",
+      "source:addr": "FHRS Open Data",
+      "website": "https://www.beatone.co.uk/liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10695634967",
+    "name": "Belgian Merchant Navy Memorial",
+    "lat": 53.4037833,
+    "lon": -2.9967345,
+    "osm": {
+      "type": "node",
+      "id": 10695634967
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Belgian Merchant Navy Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_node_5698869621",
+    "name": "black lodge brewing",
+    "lat": 53.3970653,
+    "lon": -2.9821285,
+    "osm": {
+      "type": "node",
+      "id": 5698869621
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "4",
+      "addr:postcode": "L1 0AN",
+      "addr:street": "Kitchen Street",
+      "amenity": "pub",
+      "name": "black lodge brewing"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_8281349360",
+    "name": "Blackstock Gardens Memorial",
+    "lat": 53.4155479,
+    "lon": -2.9900673,
+    "osm": {
+      "type": "node",
+      "id": 8281349360
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "In memory of those who died on December 21st 1940",
+      "memorial": "war_memorial",
+      "name": "Blackstock Gardens Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_204484137",
+    "name": "Blessed Sacrament Shrine",
+    "lat": 53.4067617,
+    "lon": -2.9841758,
+    "osm": {
+      "type": "way",
+      "id": 204484137
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "Blessed Sacrament Shrine",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_348173736",
+    "name": "Blitz Memorial",
+    "lat": 53.4069136,
+    "lon": -2.9951114,
+    "osm": {
+      "type": "node",
+      "id": 348173736
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "statue",
+      "name": "Blitz Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_157502482",
+    "name": "Borough Hotel",
+    "lat": 53.4111977,
+    "lon": -2.9861296,
+    "osm": {
+      "type": "node",
+      "id": 157502482
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Borough Hotel"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4402678489",
+    "name": "BrewDog",
+    "lat": 53.4017596,
+    "lon": -2.9772471,
+    "osm": {
+      "type": "node",
+      "id": 4402678489
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Manolis Yard",
+      "addr:housenumber": "8",
+      "addr:postcode": "L1 4DE",
+      "addr:street": "Colquitt Street",
+      "addr:unit": "Unit 1",
+      "amenity": "pub",
+      "brand": "BrewDog",
+      "brand:wikidata": "Q911367",
+      "brand:wikipedia": "en:BrewDog",
+      "diet:vegan": "yes",
+      "diet:vegetarian": "yes",
+      "fhrs:id": "1243788",
+      "fhrs:local_authority_id": "71702",
+      "internet_access": "wlan",
+      "level": "0",
+      "name": "BrewDog",
+      "name:en": "BrewDog"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12376566801",
+    "name": "British Nuclear Tests Veterans",
+    "lat": 53.4088812,
+    "lon": -2.9812931,
+    "osm": {
+      "type": "node",
+      "id": 12376566801
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "British Nuclear Tests Veterans"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_8143662437",
+    "name": "Brow Side Gardens, Everton Park",
+    "lat": 53.4232048,
+    "lon": -2.9717818,
+    "osm": {
+      "type": "node",
+      "id": 8143662437
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Brow Side Gardens, Everton Park"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1222283335",
+    "name": "Brownlows Inn",
+    "lat": 53.4047665,
+    "lon": -2.9772739,
+    "osm": {
+      "type": "way",
+      "id": 1222283335
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Brownlows Inn"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1174416056",
+    "name": "C3 Liverpool",
+    "lat": 53.4108994,
+    "lon": -2.9702344,
+    "osm": {
+      "type": "way",
+      "id": 1174416056
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "79-81",
+      "addr:postcode": "L3 8HE",
+      "addr:street": "Kempston Street",
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "name": "C3 Liverpool",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_10757671567",
+    "name": "Canada Boulevard",
+    "lat": 53.4039018,
+    "lon": -2.9955399,
+    "osm": {
+      "type": "node",
+      "id": 10757671567
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Canada Boulevard"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_relation_11944393",
+    "name": "Canalside Park",
+    "lat": 53.4242306,
+    "lon": -2.9893484,
+    "osm": {
+      "type": "relation",
+      "id": 11944393
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Canalside Park",
+      "type": "multipolygon",
+      "wikidata": "Q5031099",
+      "wikipedia": "en:Canalside Park"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_221893886",
+    "name": "Carnarvon Castle",
+    "lat": 53.4055621,
+    "lon": -2.9841879,
+    "osm": {
+      "type": "way",
+      "id": 221893886
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "5",
+      "addr:postcode": "L1 1DS",
+      "addr:street": "Tarleton Street",
+      "amenity": "pub",
+      "building": "yes",
+      "fhrs:id": "497325",
+      "name": "Carnarvon Castle",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_271116151",
+    "name": "Catholic Church of St. Peter and St. Paul (FSSPX)",
+    "lat": 53.3958435,
+    "lon": -2.9705367,
+    "osm": {
+      "type": "way",
+      "id": 271116151
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "HE_ref": "1359857",
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "catholic",
+      "listed_status": "Grade II",
+      "name": "Catholic Church of St. Peter and St. Paul (FSSPX)",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_5612243075",
+    "name": "Cavern Pub",
+    "lat": 53.406379,
+    "lon": -2.9881653,
+    "osm": {
+      "type": "node",
+      "id": 5612243075
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "check_date": "2025-08-05",
+      "name": "Cavern Pub"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_371206704",
+    "name": "Chameleon",
+    "lat": 53.4019071,
+    "lon": -2.9776221,
+    "osm": {
+      "type": "node",
+      "id": 371206704
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Chameleon"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_7737452366",
+    "name": "Charles Wotten",
+    "lat": 53.3953268,
+    "lon": -2.9864853,
+    "osm": {
+      "type": "node",
+      "id": 7737452366
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "Victim of the Liverpool Race Riots/Charles Wotten/Born Bermuda 1895/Died in these waters 5 June 1919/A BBC History Project",
+      "material": "metal",
+      "memorial": "plaque",
+      "name": "Charles Wotten",
+      "wikimedia_commons": "Category:Wotten memorial, Queens Dock"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_24626860",
+    "name": "Chavasse Park",
+    "lat": 53.4034807,
+    "lon": -2.9885679,
+    "osm": {
+      "type": "way",
+      "id": 24626860
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "layer": "2",
+      "leisure": "park",
+      "level": "2",
+      "name": "Chavasse Park",
+      "name:ko": "차바스 공원",
+      "wikidata": "Q5088476",
+      "wikipedia": "en:Chavasse Park"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_10695634971",
+    "name": "Chinese Merchant Seamen",
+    "lat": 53.4037673,
+    "lon": -2.9968051,
+    "osm": {
+      "type": "node",
+      "id": 10695634971
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Chinese Merchant Seamen"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_583810600",
+    "name": "Church of Saint Mary of the Angels",
+    "lat": 53.4159288,
+    "lon": -2.9757553,
+    "osm": {
+      "type": "way",
+      "id": 583810600
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "roman_catholic",
+      "name": "Church of Saint Mary of the Angels",
+      "religion": "christian",
+      "wikidata": "Q7594631"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271118169",
+    "name": "Church of St. Nicholas",
+    "lat": 53.3954068,
+    "lon": -2.9671591,
+    "osm": {
+      "type": "way",
+      "id": 271118169
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "greek_orthodox",
+      "name": "Church of St. Nicholas",
+      "religion": "christian",
+      "wikidata": "Q5601848",
+      "wikipedia": "en:Greek Orthodox Church of St Nicholas, Toxteth"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_316610847",
+    "name": "Coopers",
+    "lat": 53.4052974,
+    "lon": -2.9804315,
+    "osm": {
+      "type": "way",
+      "id": 316610847
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13",
+      "addr:postcode": "L1 1HW",
+      "addr:street": "Cases Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Coopers"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_272759720",
+    "name": "Cross Keys",
+    "lat": 53.4098188,
+    "lon": -2.9937054,
+    "osm": {
+      "type": "way",
+      "id": 272759720
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13",
+      "addr:postcode": "L3 9NS",
+      "addr:street": "Earle Street",
+      "amenity": "pub",
+      "building": "yes",
+      "fhrs:id": "948006",
+      "name": "Cross Keys",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1117631272",
+    "name": "Crown Hotel",
+    "lat": 53.4066875,
+    "lon": -2.9789385,
+    "osm": {
+      "type": "way",
+      "id": 1117631272
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "43",
+      "addr:postcode": "L1 1JQ",
+      "addr:street": "Lime Street",
+      "amenity": "pub",
+      "building": "yes",
+      "cask_marque": "yes",
+      "fhrs:id": "498233",
+      "food": "yes",
+      "name": "Crown Hotel",
+      "real_ale": "yes",
+      "wikidata": "Q5189381",
+      "wikipedia": "en:Crown Hotel, Liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_269335812",
+    "name": "Danny Mac's Tavern",
+    "lat": 53.4027774,
+    "lon": -2.9757131,
+    "osm": {
+      "type": "way",
+      "id": 269335812
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1",
+      "addr:postcode": "L1 2SU",
+      "addr:street": "Oldham Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Danny Mac's Tavern",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_5864978247",
+    "name": "Dead Crafty Beer",
+    "lat": 53.408996,
+    "lon": -2.9854716,
+    "osm": {
+      "type": "node",
+      "id": 5864978247
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Dead Crafty Beer"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12384575101",
+    "name": "Diana, Princess of Wales",
+    "lat": 53.4078392,
+    "lon": -2.98247,
+    "osm": {
+      "type": "node",
+      "id": 12384575101
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "Diana, Princess of Wales"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1175740073",
+    "name": "Dirty O'Sheas",
+    "lat": 53.4020019,
+    "lon": -2.9783606,
+    "osm": {
+      "type": "way",
+      "id": 1175740073
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "57",
+      "addr:postcode": "L1 4FB",
+      "addr:street": "Seel Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Dirty O'Sheas",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1241183502",
+    "name": "Doctor Duncan's",
+    "lat": 53.4083829,
+    "lon": -2.9822638,
+    "osm": {
+      "type": "node",
+      "id": 1241183502
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L1 1HF",
+      "addr:street": "St Johns Lane",
+      "amenity": "pub",
+      "fhrs:id": "1064298",
+      "name": "Doctor Duncan's",
+      "outdoor_seating": "yes",
+      "real_ale": "yes (a few, lots of craft ales too)",
+      "source": "Bing & Memory",
+      "website": "https://www.doctorduncansliverpool.com/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_11592441736",
+    "name": "Duck & Swagger",
+    "lat": 53.3967116,
+    "lon": -2.9814116,
+    "osm": {
+      "type": "node",
+      "id": 11592441736
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Duck & Swagger"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_279397321",
+    "name": "Einstein",
+    "lat": 53.4030582,
+    "lon": -2.9806621,
+    "osm": {
+      "type": "way",
+      "id": 279397321
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "26",
+      "addr:postcode": "L1 4AN",
+      "addr:street": "Fleet Street",
+      "amenity": "pub",
+      "brand:wikipedia": "en:Walkabout (pub chain)",
+      "building": "yes",
+      "name": "Einstein"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_relation_6028297",
+    "name": "Everton Park",
+    "lat": 53.4190353,
+    "lon": -2.971213,
+    "osm": {
+      "type": "relation",
+      "id": 6028297
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Everton Park",
+      "opening_hours": "24/7",
+      "operator": "Liverpool City Council",
+      "type": "multipolygon",
+      "website": "https://liverpool.gov.uk/leisure-parks-and-wellbeing/parks-and-greenspaces/everton-park/",
+      "wikidata": "Q5417410",
+      "wikipedia": "en:Everton Park, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_101421581",
+    "name": "Exchange",
+    "lat": 53.4082008,
+    "lon": -2.9930284,
+    "osm": {
+      "type": "node",
+      "id": 101421581
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1",
+      "addr:postcode": "L3 9HF",
+      "addr:street": "Old Hall Street",
+      "amenity": "pub",
+      "fhrs:id": "521553",
+      "name": "Exchange",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_24728485",
+    "name": "Falkner Square Gardens",
+    "lat": 53.3982277,
+    "lon": -2.9629966,
+    "osm": {
+      "type": "way",
+      "id": 24728485
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Falkner Square Gardens",
+      "wikidata": "Q5431985",
+      "wikipedia": "en:Falkner Square"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_11991131502",
+    "name": "Fallen Officer Memorial",
+    "lat": 53.4153361,
+    "lon": -2.9800983,
+    "osm": {
+      "type": "node",
+      "id": 11991131502
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "List the names of Merseyside Police Officers who died in the line of duty",
+      "name": "Fallen Officer Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_296226807",
+    "name": "Farmers Arms",
+    "lat": 53.4196646,
+    "lon": -2.9998637,
+    "osm": {
+      "type": "node",
+      "id": 296226807
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Farmers Arms"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1161156439",
+    "name": "Fitzgeralds",
+    "lat": 53.4023419,
+    "lon": -2.9796756,
+    "osm": {
+      "type": "way",
+      "id": 1161156439
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "25-27",
+      "addr:postcode": "L1 4BW",
+      "addr:street": "Slater Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "name": "Fitzgeralds",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1065915477",
+    "name": "Flanagan's Apple",
+    "lat": 53.4062876,
+    "lon": -2.9868996,
+    "osm": {
+      "type": "way",
+      "id": 1065915477
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "18",
+      "addr:postcode": "L2 6RE",
+      "addr:street": "Mathew Street",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-08-05",
+      "name": "Flanagan's Apple",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_218535090",
+    "name": "Fly in the Loaf",
+    "lat": 53.4020193,
+    "lon": -2.9722951,
+    "osm": {
+      "type": "way",
+      "id": 218535090
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13",
+      "addr:postcode": "L1 9AS",
+      "addr:street": "Hardman Street",
+      "amenity": "pub",
+      "brand": "Okell's",
+      "building": "yes",
+      "cask_marque": "yes",
+      "fhrs:id": "496571",
+      "name": "Fly in the Loaf",
+      "operator": "Heron and Brearley",
+      "real_ale": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_619521920",
+    "name": "Frederiks",
+    "lat": 53.4019111,
+    "lon": -2.9704742,
+    "osm": {
+      "type": "node",
+      "id": 619521920
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Frederiks"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_221893884",
+    "name": "Futurist",
+    "lat": 53.4050339,
+    "lon": -2.9855202,
+    "osm": {
+      "type": "way",
+      "id": 221893884
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7",
+      "addr:postcode": "L1 3BL",
+      "addr:street": "Paradise Street",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-01-10",
+      "name": "Futurist",
+      "opening_hours": "Mo-Su 11:00-11:00",
+      "website": "https://www.facebook.com/thefuturistL1/?profile_tab_item_selected=about"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_999636326",
+    "name": "Garstang Museum",
+    "lat": 53.4022159,
+    "lon": -2.9643277,
+    "osm": {
+      "type": "node",
+      "id": 999636326
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "description": "By appointment only",
+      "fee": "no",
+      "name": "Garstang Museum",
+      "tourism": "museum",
+      "website": "https://www.liverpool.ac.uk/garstang-museum/",
+      "wikidata": "Q29468675"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_5871727882",
+    "name": "Grand Central",
+    "lat": 53.4040697,
+    "lon": -2.9769913,
+    "osm": {
+      "type": "node",
+      "id": 5871727882
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "check_date:opening_hours": "2026-02-08",
+      "name": "Grand Central",
+      "opening_hours:signed": "no"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_31291516",
+    "name": "Grant Gardens",
+    "lat": 53.4155935,
+    "lon": -2.9623307,
+    "osm": {
+      "type": "way",
+      "id": 31291516
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Grant Gardens",
+      "source": "yahoo"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_268979223",
+    "name": "Gustav Adolf Church",
+    "lat": 53.3996103,
+    "lon": -2.9844238,
+    "osm": {
+      "type": "way",
+      "id": 268979223
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Patk Lane",
+      "alt_name": "Scandinavian Seamen's Church",
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "lutheran",
+      "description": "The spelling on the building itself \"Gustaf Adolfs kyrka\" is \"old swedish\" the modern form is \"Gustav ...\"",
+      "name": "Gustav Adolf Church",
+      "name:sv": "Gustav Adolfs Kyrka",
+      "religion": "christian",
+      "start_date": "1884",
+      "wikidata": "Q5621056",
+      "wikipedia": "en:Gustav Adolf Church, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_12376582901",
+    "name": "Hillsborough Stadium Disaster",
+    "lat": 53.4092213,
+    "lon": -2.9821577,
+    "osm": {
+      "type": "node",
+      "id": 12376582901
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "Hillsborough Stadium Disaster"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_10695634968",
+    "name": "HMT Lancastria Memorial",
+    "lat": 53.4037928,
+    "lon": -2.9967415,
+    "osm": {
+      "type": "node",
+      "id": 10695634968
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "HMT Lancastria Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_node_8281349361",
+    "name": "Holy Cross Pieta",
+    "lat": 53.4115756,
+    "lon": -2.9857952,
+    "osm": {
+      "type": "node",
+      "id": 8281349361
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "A life-sized Pieta in a vandalism proof case, as well as the old sandstone cross from the former Holy Cross Catholic Church",
+      "name": "Holy Cross Pieta"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_1621838264",
+    "name": "Hope & Anchor",
+    "lat": 53.4023473,
+    "lon": -2.9712403,
+    "osm": {
+      "type": "node",
+      "id": 1621838264
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Hope & Anchor",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176",
+      "website": "https://www.crafted-social.co.uk/hope-and-anchor-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1309027201",
+    "name": "International Slavery Museum",
+    "lat": 53.4012117,
+    "lon": -2.9932201,
+    "osm": {
+      "type": "node",
+      "id": 1309027201
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L3 4AQ",
+      "addr:street": "Royal Albert Dock",
+      "fee": "no",
+      "name": "International Slavery Museum",
+      "note": "Temporarily closed for refurbishment. Expected to reopen 2028",
+      "opening_hours": "closed",
+      "operational_status": "closed",
+      "phone": "+44 1514784499",
+      "source": "survey;visit",
+      "tourism": "museum",
+      "website": "https://www.liverpoolmuseums.org.uk/ism/",
+      "wheelchair": "yes",
+      "wikidata": "Q6053221",
+      "wikipedia": "en:International Slavery Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12376575001",
+    "name": "Irish Guards",
+    "lat": 53.4089245,
+    "lon": -2.9812544,
+    "osm": {
+      "type": "node",
+      "id": 12376575001
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "Irish Guards"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1161156440",
+    "name": "Jacaranda",
+    "lat": 53.4024285,
+    "lon": -2.9795802,
+    "osm": {
+      "type": "way",
+      "id": 1161156440
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "21-23",
+      "addr:postcode": "L1 4BW",
+      "addr:street": "Slater Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "name": "Jacaranda",
+      "wheelchair": "no"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_2482985463",
+    "name": "Kazimier Garden",
+    "lat": 53.402863,
+    "lon": -2.9818075,
+    "osm": {
+      "type": "node",
+      "id": 2482985463
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:street": "Seel Street",
+      "amenity": "pub",
+      "name": "Kazimier Garden"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_348097790",
+    "name": "King Edward VII",
+    "lat": 53.4047577,
+    "lon": -2.9966585,
+    "osm": {
+      "type": "node",
+      "id": 348097790
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1068224",
+      "historic": "memorial",
+      "listed_status": "Grade II",
+      "memorial": "statue",
+      "name": "King Edward VII",
+      "wikidata": "Q26320984"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_10234611882",
+    "name": "King John",
+    "lat": 53.4064275,
+    "lon": -2.987529,
+    "osm": {
+      "type": "node",
+      "id": 10234611882
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "King John"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_272759777",
+    "name": "Kitty's Showbar",
+    "lat": 53.4102554,
+    "lon": -2.989245,
+    "osm": {
+      "type": "way",
+      "id": 272759777
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:street": "Tithebarn Street",
+      "amenity": "pub",
+      "building": "yes",
+      "lgbtq": "primary",
+      "name": "Kitty's Showbar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_272759778",
+    "name": "Lady of Mann",
+    "lat": 53.4079478,
+    "lon": -2.9901257,
+    "osm": {
+      "type": "way",
+      "id": 272759778
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Lady of Mann"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_316610850",
+    "name": "Lanigans",
+    "lat": 53.4052475,
+    "lon": -2.9798948,
+    "osm": {
+      "type": "way",
+      "id": 316610850
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "33-35",
+      "addr:postcode": "L1 1JP",
+      "addr:street": "Ranelagh Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Lanigans",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1085218462",
+    "name": "Liverpool Beatles Museum",
+    "lat": 53.4065169,
+    "lon": -2.9872015,
+    "osm": {
+      "type": "way",
+      "id": 1085218462
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "23",
+      "addr:postcode": "L2 6RE",
+      "addr:street": "Mathew Street",
+      "building": "yes",
+      "fee": "yes",
+      "name": "Liverpool Beatles Museum",
+      "tourism": "museum",
+      "website": "https://liverpoolbeatlesmuseum.com/",
+      "wikidata": "Q104853511",
+      "wikipedia": "en:Liverpool Beatles Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_263988289",
+    "name": "Liverpool Cathedral",
+    "lat": 53.3973823,
+    "lon": -2.9732617,
+    "osm": {
+      "type": "way",
+      "id": 263988289
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:street": "St James Road",
+      "amenity": "place_of_worship",
+      "architect": "Giles Gilbert Scott",
+      "architect:wikidata": "Q1524274",
+      "building": "cathedral",
+      "building:architecture": "neo-gothic",
+      "building:part": "no",
+      "check_date": "2025-08-05",
+      "denomination": "anglican",
+      "diocese": "Diocese of Liverpool",
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1361681",
+      "listed_status": "Grade I",
+      "name": "Liverpool Cathedral",
+      "name:fr": "Cathédrale de Liverpool",
+      "name:ko": "리버풀 성당",
+      "name:pl": "Katedra w Liverpoolu",
+      "name:ru": "Ливерпульский собор",
+      "note:building": "put whole building info here, other ways are 3d definition",
+      "official_name": "Cathedral Church of Christ in Liverpool",
+      "place_of_worship": "cathedral",
+      "ref:GB:nhle": "1361681",
+      "religion": "christian",
+      "source": "Bing;OS_OpenData_StreetView",
+      "tourism": "attraction",
+      "website": "https://www.liverpoolcathedral.org.uk/",
+      "wheelchair": "yes",
+      "wikidata": "Q1866506",
+      "wikipedia": "en:Liverpool Cathedral",
+      "year_of_construction": "1904–1978"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_4112993324",
+    "name": "Liverpool Cenotaph",
+    "lat": 53.4085398,
+    "lon": -2.979489,
+    "osm": {
+      "type": "node",
+      "id": 4112993324
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "war_memorial",
+      "name": "Liverpool Cenotaph",
+      "wikidata": "Q15794860"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_7154329895",
+    "name": "Liverpool Central",
+    "lat": 53.4042207,
+    "lon": -2.9795092,
+    "osm": {
+      "type": "node",
+      "id": 7154329895
+    },
+    "categories": [
+      "transport_hub"
+    ],
+    "osm_tags": {
+      "name": "Liverpool Central",
+      "naptan:AtcoCode": "9100LVRPLCH",
+      "network": "National Rail",
+      "network:website": "https://www.nationalrail.co.uk/stations/lvc/",
+      "network:wikidata": "Q26334",
+      "operator": "Merseyrail",
+      "public_transport": "station",
+      "railway": "station",
+      "ref:crs": "LVC",
+      "wheelchair": "yes",
+      "wikidata": "Q2519286",
+      "wikipedia": "en:Liverpool Central railway station"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_268974288",
+    "name": "Liverpool Chinese Gospel Church",
+    "lat": 53.3977128,
+    "lon": -2.9790046,
+    "osm": {
+      "type": "way",
+      "id": 268974288
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "name": "Liverpool Chinese Gospel Church",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_5008334489",
+    "name": "Liverpool Heroes Memorial",
+    "lat": 53.4032123,
+    "lon": -2.9658359,
+    "osm": {
+      "type": "node",
+      "id": 5008334489
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "description": "Captain Chavasse and a Liverpool Scottish Stretcher Bearer Attending a Wounded Soldier",
+      "historic": "memorial",
+      "memorial": "war_memorial",
+      "name": "Liverpool Heroes Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_7147294467",
+    "name": "Liverpool James Street",
+    "lat": 53.4050028,
+    "lon": -2.9922097,
+    "osm": {
+      "type": "node",
+      "id": 7147294467
+    },
+    "categories": [
+      "transport_hub"
+    ],
+    "osm_tags": {
+      "alt_name": "James Street",
+      "name": "Liverpool James Street",
+      "naptan:AtcoCode": "9100JAMESST",
+      "network": "National Rail",
+      "network:website": "https://www.nationalrail.co.uk/stations/lvj/",
+      "network:wikidata": "Q26334",
+      "note:platforms": "platforms 1 and 3 in normal use, platform 2 generally disused",
+      "operator": "Merseyrail",
+      "platforms": "3",
+      "public_transport": "station",
+      "railway": "station",
+      "ref:crs": "LVJ",
+      "train": "yes",
+      "wheelchair": "yes",
+      "wikidata": "Q1928945",
+      "wikipedia": "en:Liverpool James Street railway station"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_6960405293",
+    "name": "Liverpool Lime Street",
+    "lat": 53.4076085,
+    "lon": -2.9775854,
+    "osm": {
+      "type": "node",
+      "id": 6960405293
+    },
+    "categories": [
+      "transport_hub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L1 1JD",
+      "addr:street": "Lime Street",
+      "alt_name": "LIVERPOOL LIME STREET LL",
+      "name": "Liverpool Lime Street",
+      "name:ko": "리버풀 라임 스트리트 역",
+      "naptan:AtcoCode": "9100LVRPLSH",
+      "network": "National Rail",
+      "network:website": "https://www.nationalrail.co.uk/stations/liv/",
+      "network:wikidata": "Q26334",
+      "operator": "Network Rail",
+      "public_transport": "station",
+      "railway": "station",
+      "ref:alt_crs": "LVL",
+      "ref:crs": "LIV",
+      "train": "yes",
+      "wheelchair": "yes",
+      "wikidata": "Q801113",
+      "wikipedia": "en:Liverpool Lime Street railway station"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_681276980",
+    "name": "Liverpool Naval Memorial",
+    "lat": 53.4034874,
+    "lon": -2.9966588,
+    "osm": {
+      "type": "node",
+      "id": 681276980
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "listed_status": "Grade II",
+      "material": "portland_stone",
+      "memorial": "war_memorial",
+      "name": "Liverpool Naval Memorial",
+      "wikidata": "Q19840374",
+      "wikipedia": "en:Liverpool Naval Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_60261716",
+    "name": "Liverpool Town Hall",
+    "lat": 53.4071694,
+    "lon": -2.9916367,
+    "osm": {
+      "type": "way",
+      "id": 60261716
+    },
+    "categories": [
+      "civic"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L2 3SW",
+      "addr:street": "High Street",
+      "alt_name:ja": "リバプール市庁舎",
+      "amenity": "townhall",
+      "architect": "John Wood the Elder, James Wyatt",
+      "architect:wikidata": "Q1389094;Q1350728",
+      "building": "yes",
+      "building:architecture": "georgian",
+      "building:part": "no",
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1360219",
+      "historic": "townhall",
+      "listed_status": "Grade I",
+      "name": "Liverpool Town Hall",
+      "name:ja": "リヴァプール市庁舎",
+      "name:ko": "리버풀 시청",
+      "ref:GB:nhle": "1360219",
+      "start_date": "1754",
+      "tourism": "attraction",
+      "website": "http://www.civichalls.liverpool.gov.uk/townhall/",
+      "wikidata": "Q1855296",
+      "wikipedia": "en:Liverpool Town Hall"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_101437407",
+    "name": "Ma Boyles Alehouse & Eatery",
+    "lat": 53.4066104,
+    "lon": -2.9943231,
+    "osm": {
+      "type": "node",
+      "id": 101437407
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7",
+      "addr:postcode": "L3 1LG",
+      "addr:street": "Tower Gardens",
+      "amenity": "pub",
+      "contact:email": "hello@mapubgroup.co.uk",
+      "contact:phone": "+44 151 236 0070",
+      "food": "yes",
+      "name": "Ma Boyles Alehouse & Eatery",
+      "website": "https://www.maboyles.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_213185600",
+    "name": "Ma Egertons",
+    "lat": 53.4086011,
+    "lon": -2.9777309,
+    "osm": {
+      "type": "way",
+      "id": 213185600
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "9",
+      "addr:postcode": "L1 1JA",
+      "addr:street": "Pudsey Street",
+      "amenity": "pub",
+      "building": "retail",
+      "fhrs:id": "499059",
+      "name": "Ma Egertons",
+      "phone": "+44 151 345 3525",
+      "real_ale": "2 beers, may vary",
+      "website": "https://www.maegertons.com/",
+      "wheelchair": "limited",
+      "wheelchair:description": "Small step at entrance"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4513693596",
+    "name": "Mackenzies",
+    "lat": 53.4020676,
+    "lon": -2.9733925,
+    "osm": {
+      "type": "node",
+      "id": 4513693596
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "check_date:opening_hours": "2023-03-07",
+      "name": "Mackenzies",
+      "opening_hours:signed": "no"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1293475852",
+    "name": "Mazenod Court Serenity Garden",
+    "lat": 53.4127819,
+    "lon": -2.9860943,
+    "osm": {
+      "type": "way",
+      "id": 1293475852
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "description": "Serenity Garden built and maintained by local community, winner of the 2022 Toruns Foundation Gardening Competition",
+      "leisure": "park",
+      "name": "Mazenod Court Serenity Garden",
+      "opening_hours": "24/7",
+      "operator": "Torus Foundation",
+      "operator:type": "community"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_11599884321",
+    "name": "McCartneys Bar",
+    "lat": 53.4040236,
+    "lon": -2.9823071,
+    "osm": {
+      "type": "node",
+      "id": 11599884321
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Hanover Hotel & McCartneys Bar",
+      "addr:housenumber": "62",
+      "addr:postcode": "L1 4AF",
+      "addr:street": "Hanover Street",
+      "amenity": "pub",
+      "check_date": "2025-05-23",
+      "level": "0",
+      "name": "McCartneys Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1133250985",
+    "name": "McCooley's",
+    "lat": 53.406581,
+    "lon": -2.9866842,
+    "osm": {
+      "type": "way",
+      "id": 1133250985
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-08-05",
+      "indoor_seating": "yes",
+      "name": "McCooley's",
+      "outdoor_seating": "yes",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1174024625",
+    "name": "McGreavy's",
+    "lat": 53.4066364,
+    "lon": -2.9838613,
+    "osm": {
+      "type": "way",
+      "id": 1174024625
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "3-4",
+      "addr:postcode": "L1 1EQ",
+      "addr:street": "Williamson Square",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-05-23",
+      "name": "McGreavy's",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1119040240",
+    "name": "McHales Irish American",
+    "lat": 53.4058754,
+    "lon": -2.9789264,
+    "osm": {
+      "type": "way",
+      "id": 1119040240
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "62",
+      "addr:postcode": "L1 1JN",
+      "addr:street": "Lime Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "check_date": "2025-05-24",
+      "fhrs:id": "1034579",
+      "name": "McHales Irish American",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4513844971",
+    "name": "Memorial of Renshaw Street Chapel",
+    "lat": 53.4044175,
+    "lon": -2.9762289,
+    "osm": {
+      "type": "node",
+      "id": 4513844971
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "Memorial of Renshaw Street Chapel"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1078727110",
+    "name": "Memorial to Heroes of the Marine Engine Room",
+    "lat": 53.4061362,
+    "lon": -2.9980987,
+    "osm": {
+      "type": "way",
+      "id": 1078727110
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "alt_name": "Titanic Monument",
+      "height": "14.6",
+      "historic": "memorial",
+      "memorial": "obelisk",
+      "name": "Memorial to Heroes of the Marine Engine Room",
+      "source": "Survey",
+      "wikidata": "Q3305518",
+      "wikipedia": "en:Memorial to Heroes of the Marine Engine Room"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_681276915",
+    "name": "Merchant Navy Memorial",
+    "lat": 53.403864,
+    "lon": -2.9968352,
+    "osm": {
+      "type": "node",
+      "id": 681276915
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "war_memorial",
+      "name": "Merchant Navy Memorial"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_1309027202",
+    "name": "Merseyside Maritime Museum",
+    "lat": 53.4013379,
+    "lon": -2.9927496,
+    "osm": {
+      "type": "node",
+      "id": 1309027202
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L3 4AQ",
+      "addr:street": "Royal Albert Dock",
+      "fee": "no",
+      "name": "Merseyside Maritime Museum",
+      "note": "Temporarily closed for refurbishment. Expected to reopen 2028",
+      "opening_hours": "closed",
+      "operational_status": "closed",
+      "source": "survey;visit",
+      "tourism": "museum",
+      "website": "https://www.liverpoolmuseums.org.uk/maritime-museum",
+      "wheelchair": "yes",
+      "wikidata": "Q12061716",
+      "wikipedia": "en:Merseyside Maritime Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_269332134",
+    "name": "Metrocola",
+    "lat": 53.4018109,
+    "lon": -2.9739042,
+    "osm": {
+      "type": "way",
+      "id": 269332134
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "2",
+      "addr:postcode": "L1 2TR",
+      "addr:street": "Leece Street",
+      "amenity": "pub",
+      "building": "yes",
+      "fhrs:id": "1533494",
+      "name": "Metrocola",
+      "website": "https://www.metrocolaliverpool.com/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_44722328",
+    "name": "Metropolitan Cathedral of Christ the King",
+    "lat": 53.4047219,
+    "lon": -2.9685879,
+    "osm": {
+      "type": "way",
+      "id": 44722328
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:street": "Mount Pleasant",
+      "amenity": "place_of_worship",
+      "architect": "Edwin Lutyens, Frederick Gibberd",
+      "architect:wikidata": "Q378157;Q5497851",
+      "building": "cathedral",
+      "building:architecture": "modern",
+      "denomination": "roman_catholic",
+      "diocese": "Roman Catholic Archdiocese of Liverpool",
+      "height": "84.9",
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1070607",
+      "name": "Metropolitan Cathedral of Christ the King",
+      "name:en": "Metropolitan Cathedral of Christ the King",
+      "name:ko": "메트로폴리탄 성당",
+      "name:pl": "Katedra Metropolitarna w Liverpoolu",
+      "place_of_worship": "cathedral",
+      "ref:GB:nhle": "1070607",
+      "religion": "christian",
+      "start_date": "1967",
+      "tourism": "attraction",
+      "website": "http://liverpoolmetrocathedral.org.uk/",
+      "wikidata": "Q1470975",
+      "wikipedia": "en:Liverpool Metropolitan Cathedral"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_316610855",
+    "name": "Midland Hotel",
+    "lat": 53.4051508,
+    "lon": -2.9801776,
+    "osm": {
+      "type": "way",
+      "id": 316610855
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "25",
+      "addr:postcode": "L1 1JP",
+      "addr:street": "Ranelagh Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Midland Hotel",
+      "website": "https://www.themidlandliverpool.co.uk/",
+      "wikidata": "Q26647481"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1106026676",
+    "name": "Molly Malones",
+    "lat": 53.4071884,
+    "lon": -2.9872422,
+    "osm": {
+      "type": "way",
+      "id": 1106026676
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "25-27",
+      "addr:postcode": "L1 6BD",
+      "addr:street": "Victoria Street",
+      "amenity": "pub",
+      "check_date": "2025-08-05",
+      "fhrs:id": "1371958",
+      "name": "Molly Malones",
+      "source:addr:postcode": "code-point_open",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12376582801",
+    "name": "Monsignor James Nugent",
+    "lat": 53.4086339,
+    "lon": -2.9818192,
+    "osm": {
+      "type": "node",
+      "id": 12376582801
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "name": "Monsignor James Nugent"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_7153736019",
+    "name": "Moorfields",
+    "lat": 53.4085494,
+    "lon": -2.9892356,
+    "osm": {
+      "type": "node",
+      "id": 7153736019
+    },
+    "categories": [
+      "transport_hub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L2 2BS",
+      "addr:street": "Moorfields",
+      "name": "Moorfields",
+      "naptan:AtcoCode": "9100MORFLDS",
+      "network": "National Rail",
+      "network:website": "https://www.nationalrail.co.uk/stations/mrf/",
+      "network:wikidata": "Q26334",
+      "operator": "Merseyrail",
+      "platforms": "3",
+      "public_transport": "station",
+      "railway": "station",
+      "ref:crs": "MRF",
+      "train": "yes",
+      "wikidata": "Q2261745",
+      "wikipedia": "en:Moorfields railway station"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_84758669",
+    "name": "Museum of Liverpool",
+    "lat": 53.4029738,
+    "lon": -2.9955805,
+    "osm": {
+      "type": "way",
+      "id": 84758669
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "building": "yes",
+      "building:part": "no",
+      "fee": "no",
+      "height": "26",
+      "name": "Museum of Liverpool",
+      "name:ko": "리버풀 박물관",
+      "opening_hours": "Tu-Su 10:00-16:00",
+      "toilets:wheelchair": "yes",
+      "tourism": "museum",
+      "website": "https://www.liverpoolmuseums.org.uk/mol/",
+      "wheelchair": "yes",
+      "wikidata": "Q6940928",
+      "wikipedia": "en:Museum of Liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1091833105",
+    "name": "Nelly Foley's",
+    "lat": 53.4055842,
+    "lon": -2.9792015,
+    "osm": {
+      "type": "way",
+      "id": 1091833105
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L1 1HU",
+      "addr:street": "Great Charlotte Street",
+      "amenity": "pub",
+      "check_date:opening_hours": "2023-02-16",
+      "name": "Nelly Foley's",
+      "opening_hours:signed": "no",
+      "room": "yes",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10695634969",
+    "name": "Netherlands Merchant Navy, Fishing Fleet & Royal Navy Memorial",
+    "lat": 53.4038078,
+    "lon": -2.9967755,
+    "osm": {
+      "type": "node",
+      "id": 10695634969
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Netherlands Merchant Navy, Fishing Fleet & Royal Navy Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_279397183",
+    "name": "Newington Temple",
+    "lat": 53.4034944,
+    "lon": -2.978479,
+    "osm": {
+      "type": "way",
+      "id": 279397183
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:county": "Merseyside",
+      "addr:housenumber": "8",
+      "addr:postcode": "L1 4EU;L1 4ED",
+      "addr:street": "Bold Street;Newington",
+      "alt_name": "The Newington Temple",
+      "amenity": "pub",
+      "building": "commercial",
+      "fhrs:id": "1244002",
+      "fhrs:local_authority_id": "71963",
+      "name": "Newington Temple"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10695634966",
+    "name": "Norwegian Sailors & Airmen Memorial",
+    "lat": 53.4037581,
+    "lon": -2.9967775,
+    "osm": {
+      "type": "node",
+      "id": 10695634966
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Norwegian Sailors & Airmen Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_1085218465",
+    "name": "O'Briens",
+    "lat": 53.4062884,
+    "lon": -2.986528,
+    "osm": {
+      "type": "way",
+      "id": 1085218465
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "20",
+      "addr:postcode": "L2 6RE",
+      "addr:street": "Mathew Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "O'Briens"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1247828042",
+    "name": "O'Neill's",
+    "lat": 53.4042311,
+    "lon": -2.9819169,
+    "osm": {
+      "type": "way",
+      "id": 1247828042
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "brand": "O'Neill's",
+      "brand:wikidata": "Q7071905",
+      "building": "yes",
+      "check_date": "2025-05-23",
+      "name": "O'Neill's",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1119040250",
+    "name": "Old Post Office",
+    "lat": 53.4045159,
+    "lon": -2.9829557,
+    "osm": {
+      "type": "way",
+      "id": 1119040250
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Old Post Office",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176",
+      "website": "https://www.craftunionpubs.com/old-post-office-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4541388783",
+    "name": "Open Eye Gallery",
+    "lat": 53.4037196,
+    "lon": -2.9936487,
+    "osm": {
+      "type": "node",
+      "id": 4541388783
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "artwork_type": "photo",
+      "name": "Open Eye Gallery",
+      "tourism": "gallery",
+      "website": "https://openeye.org.uk/",
+      "wheelchair": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1651734297",
+    "name": "OSQA Sports Bar",
+    "lat": 53.4028358,
+    "lon": -2.9749475,
+    "osm": {
+      "type": "node",
+      "id": 1651734297
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "OSQA Sports Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_31294107",
+    "name": "Our Lady & Saint Nicholas",
+    "lat": 53.4071018,
+    "lon": -2.994887,
+    "osm": {
+      "type": "way",
+      "id": 31294107
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:street": "Chapel Street",
+      "amenity": "place_of_worship",
+      "architect": "Edward C. Butler, Thomas Harrison",
+      "architect:wikidata": "Q2424548",
+      "building": "church",
+      "building:part": "no",
+      "deanery": "North Liverpool",
+      "denomination": "anglican",
+      "diocese": "Diocese of Liverpool",
+      "heritage": "2",
+      "heritage:operator": "Historic England",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1205993",
+      "listed_status": "Grade II",
+      "name": "Our Lady & Saint Nicholas",
+      "ref:GB:nhle": "1205993",
+      "religion": "christian",
+      "website": "https://livpc.co.uk/",
+      "wikidata": "Q5116963",
+      "wikipedia": "en:Church of Our Lady and Saint Nicholas, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_4508657143",
+    "name": "Peter Kavanagh's",
+    "lat": 53.3965763,
+    "lon": -2.9674681,
+    "osm": {
+      "type": "node",
+      "id": 4508657143
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:street": "Egerton Street",
+      "amenity": "pub",
+      "name": "Peter Kavanagh's",
+      "smoking": "outside"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_214818625",
+    "name": "Philharmonic Dining Rooms",
+    "lat": 53.4017828,
+    "lon": -2.9705461,
+    "osm": {
+      "type": "way",
+      "id": 214818625
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "36",
+      "addr:postcode": "L1 9BX",
+      "addr:street": "Hope Street",
+      "amenity": "pub",
+      "brand": "Nicholson's",
+      "brand:wikidata": "Q113130666",
+      "building": "yes",
+      "cask_marque": "yes",
+      "food": "yes",
+      "listed_status": "Grade I",
+      "name": "Philharmonic Dining Rooms",
+      "name:ko": "필하모닉 다이닝 룸",
+      "operator": "Mitchells & Butlers",
+      "real_ale": "yes",
+      "website": "https://www.nicholsonspubs.co.uk/restaurants/northwest/thephilharmonicdiningroomsliverpool",
+      "wikidata": "Q15266134",
+      "wikipedia": "en:Philharmonic Dining Rooms"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1175774674",
+    "name": "Pogue Mahone",
+    "lat": 53.401262,
+    "lon": -2.976636,
+    "osm": {
+      "type": "way",
+      "id": 1175774674
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:housenumber": "77",
+      "addr:street": "Seel Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Pogue Mahone"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10757671566",
+    "name": "Polish Navy and Merchant Fleet Memorial",
+    "lat": 53.4038028,
+    "lon": -2.9967489,
+    "osm": {
+      "type": "node",
+      "id": 10757671566
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Polish Navy and Merchant Fleet Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_node_1990934810",
+    "name": "Prayer Room",
+    "lat": 53.4025917,
+    "lon": -2.9638314,
+    "osm": {
+      "type": "node",
+      "id": 1990934810
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "name": "Prayer Room",
+      "religion": "muslim"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271727775",
+    "name": "Princes Road Synagogue",
+    "lat": 53.3951379,
+    "lon": -2.9650539,
+    "osm": {
+      "type": "way",
+      "id": 271727775
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "name": "Princes Road Synagogue",
+      "religion": "jewish",
+      "wikidata": "Q7244477",
+      "wikipedia": "en:Princes Road Synagogue"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_3639057966",
+    "name": "Quaker Meeting House",
+    "lat": 53.4042954,
+    "lon": -2.9830808,
+    "osm": {
+      "type": "node",
+      "id": 3639057966
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:housenumber": "22",
+      "addr:street": "School Lane",
+      "amenity": "place_of_worship",
+      "check_date": "2025-05-23",
+      "denomination": "quaker",
+      "level": "0",
+      "name": "Quaker Meeting House",
+      "religion": "christian",
+      "wheelchair": "yes"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_316610851",
+    "name": "Ranelagh's Tavern",
+    "lat": 53.4050526,
+    "lon": -2.9807615,
+    "osm": {
+      "type": "way",
+      "id": 316610851
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "15-17",
+      "addr:postcode": "L1 1JW",
+      "addr:street": "Ranelagh Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Ranelagh's Tavern"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10695634970",
+    "name": "Repatriation Memorial",
+    "lat": 53.403782,
+    "lon": -2.996816,
+    "osm": {
+      "type": "node",
+      "id": 10695634970
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "plaque",
+      "name": "Repatriation Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_node_12496037808",
+    "name": "RIBA North",
+    "lat": 53.4035074,
+    "lon": -2.993654,
+    "osm": {
+      "type": "node",
+      "id": 12496037808
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "name": "RIBA North",
+      "tourism": "gallery",
+      "website": "https://www.architecture.com/contact-and-visit/riba-north"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_221893857",
+    "name": "Richmond Pub",
+    "lat": 53.4064254,
+    "lon": -2.9844091,
+    "osm": {
+      "type": "way",
+      "id": 221893857
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "32",
+      "addr:postcode": "L1 1EB",
+      "addr:street": "Williamson Street",
+      "amenity": "pub",
+      "building": "yes",
+      "fhrs:id": "497522",
+      "name": "Richmond Pub",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1222283338",
+    "name": "Riley's",
+    "lat": 53.4046911,
+    "lon": -2.9770317,
+    "osm": {
+      "type": "way",
+      "id": 1222283338
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Riley's"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_82883581",
+    "name": "Roscoe Gardens",
+    "lat": 53.4043355,
+    "lon": -2.9762665,
+    "osm": {
+      "type": "way",
+      "id": 82883581
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Roscoe Gardens"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_420087204",
+    "name": "Roscoe Head",
+    "lat": 53.4022377,
+    "lon": -2.9741689,
+    "osm": {
+      "type": "way",
+      "id": 420087204
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "24",
+      "addr:postcode": "L1 2SX",
+      "addr:street": "Roscoe Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Roscoe Head",
+      "opening_hours": "11:30-24:00",
+      "phone": "+44 151 709 4365",
+      "real_ale": "yes",
+      "website": "https://www.roscoehead.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_667520499",
+    "name": "Rose & Crown",
+    "lat": 53.4089088,
+    "lon": -2.9870776,
+    "osm": {
+      "type": "way",
+      "id": 667520499
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7",
+      "addr:postcode": "L2 2DY",
+      "addr:street": "Cheapside",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Rose & Crown",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1651726822",
+    "name": "Ruby Sky",
+    "lat": 53.4033352,
+    "lon": -2.9798527,
+    "osm": {
+      "type": "node",
+      "id": 1651726822
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Ruby Sky",
+      "phone": "+44 151 707 6470",
+      "postal_code": "L1 4AQ",
+      "source": "Survey 27 feb 12",
+      "website": "http://www.ruby-sky.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_8109211140",
+    "name": "Rupert Lane Recreation Ground, Everton Park",
+    "lat": 53.420121,
+    "lon": -2.9702369,
+    "osm": {
+      "type": "node",
+      "id": 8109211140
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Rupert Lane Recreation Ground, Everton Park"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_10695634974",
+    "name": "S.S. Arandora Star Memorial",
+    "lat": 53.4037664,
+    "lon": -2.9967459,
+    "osm": {
+      "type": "node",
+      "id": 10695634974
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "material": "metal",
+      "memorial": "plaque",
+      "name": "S.S. Arandora Star Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_272759773",
+    "name": "Saddle Inn",
+    "lat": 53.407659,
+    "lon": -2.9899982,
+    "osm": {
+      "type": "way",
+      "id": 272759773
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13",
+      "addr:postcode": "L2 2EZ",
+      "addr:street": "Dale Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Saddle Inn",
+      "wikidata": "Q26638983"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_8281349362",
+    "name": "Saint Patrick's Cross",
+    "lat": 53.4115694,
+    "lon": -2.9859161,
+    "osm": {
+      "type": "node",
+      "id": 8281349362
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "Near this spot stood the mediaeval SAINT PATRICK'S CROSS which traditionally was believed to mark the place where Saint Patrick preached before sailing to Ireland in AD 432\nThis plaque was unveiled on St Patrick's Day AS 1985\nMerseyside County Council",
+      "material": "metal",
+      "memorial": "plaque",
+      "name": "Saint Patrick's Cross"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_1126354153",
+    "name": "Scruffy Murphy's",
+    "lat": 53.4058847,
+    "lon": -2.9887752,
+    "osm": {
+      "type": "way",
+      "id": 1126354153
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "25",
+      "addr:postcode": "L2 9QA",
+      "addr:street": "Harrington Street",
+      "amenity": "pub",
+      "building:part": "yes",
+      "level": "-1",
+      "name": "Scruffy Murphy's",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12544315721",
+    "name": "Seized! The Border and Customs uncovered",
+    "lat": 53.4014985,
+    "lon": -2.9924521,
+    "osm": {
+      "type": "node",
+      "id": 12544315721
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "level": "-1",
+      "name": "Seized! The Border and Customs uncovered",
+      "note": "Temporarily closed for refurbishment. Expected to reopen 2028",
+      "opening_hours": "closed",
+      "operational_status": "closed",
+      "tourism": "museum",
+      "wikidata": "Q7447045"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_272759735",
+    "name": "Shenanigans",
+    "lat": 53.4104168,
+    "lon": -2.9890565,
+    "osm": {
+      "type": "way",
+      "id": 272759735
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "77",
+      "addr:postcode": "L2 2EN",
+      "addr:street": "Tithebarn Street",
+      "amenity": "pub",
+      "brewery": "various",
+      "building": "yes",
+      "contact:email": "bar@shenanigansliverpool.co.uk",
+      "contact:phone": "+44 151 255 0000",
+      "contact:website": "https://www.shenanigansliverpool.co.uk",
+      "fhrs:id": "497318",
+      "name": "Shenanigans",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_453394545",
+    "name": "Ship & Mitre",
+    "lat": 53.4096869,
+    "lon": -2.9845746,
+    "osm": {
+      "type": "way",
+      "id": 453394545
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "133",
+      "addr:postcode": "L2 2JH",
+      "addr:street": "Dale Street",
+      "amenity": "pub",
+      "building": "retail",
+      "fhrs:id": "1098333",
+      "food": "yes",
+      "name": "Ship & Mitre",
+      "real_ale": "13 or so beers",
+      "real_cider": "yes",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_349467826",
+    "name": "Sir Alfred Lewis Jones",
+    "lat": 53.405484,
+    "lon": -2.9968447,
+    "osm": {
+      "type": "node",
+      "id": 349467826
+    },
+    "categories": [
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "memorial": "statue",
+      "name": "Sir Alfred Lewis Jones"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271759731",
+    "name": "Sketch",
+    "lat": 53.4094656,
+    "lon": -2.9774432,
+    "osm": {
+      "type": "way",
+      "id": 271759731
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "21",
+      "addr:postcode": "L3 8HR",
+      "addr:street": "London Road",
+      "amenity": "pub",
+      "building": "retail",
+      "fhrs:id": "1709197",
+      "name": "Sketch",
+      "source": "survey",
+      "source:addr": "FHRS Open Data",
+      "source:geometry": "Bing"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_279397260",
+    "name": "Slaters Bar",
+    "lat": 53.4025103,
+    "lon": -2.9799989,
+    "osm": {
+      "type": "way",
+      "id": 279397260
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "26",
+      "addr:postcode": "L1 4BS",
+      "addr:street": "Slater Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Slaters Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1651734306",
+    "name": "Soul Cafe and Bar",
+    "lat": 53.4021757,
+    "lon": -2.9767447,
+    "osm": {
+      "type": "node",
+      "id": 1651734306
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Soul Cafe and Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_511920523",
+    "name": "St Anthony's Church",
+    "lat": 53.4222844,
+    "lon": -2.9810555,
+    "osm": {
+      "type": "way",
+      "id": 511920523
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L5 5BD",
+      "addr:street": "Scotland Road",
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "roman_catholic",
+      "name": "St Anthony's Church",
+      "religion": "christian",
+      "wikidata": "Q7592499"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_269190957",
+    "name": "St James",
+    "lat": 53.3943072,
+    "lon": -2.9747769,
+    "osm": {
+      "type": "way",
+      "id": 269190957
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "check_date": "2024-12-29",
+      "denomination": "anglican",
+      "name": "St James",
+      "religion": "christian",
+      "wikidata": "Q5117430",
+      "wikipedia": "en:Church of St James, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_835797559",
+    "name": "St John Chrysostom",
+    "lat": 53.4193821,
+    "lon": -2.9610968,
+    "osm": {
+      "type": "way",
+      "id": 835797559
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St John Chrysostom",
+      "religion": "christian",
+      "wikidata": "Q105098774"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_5099085",
+    "name": "St John's Gardens",
+    "lat": 53.4086819,
+    "lon": -2.9812851,
+    "osm": {
+      "type": "way",
+      "id": 5099085
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "St John's Gardens",
+      "name:ko": "세인트 존스 가든",
+      "wikidata": "Q7593590",
+      "wikipedia": "en:St John's Gardens"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271727805",
+    "name": "St Margaret of Antioch",
+    "lat": 53.3954877,
+    "lon": -2.9657377,
+    "osm": {
+      "type": "way",
+      "id": 271727805
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St Margaret of Antioch",
+      "religion": "christian",
+      "wikidata": "Q5117276",
+      "wikipedia": "en:Church of St Margaret of Antioch, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_268977343",
+    "name": "St Michael in the City",
+    "lat": 53.3990656,
+    "lon": -2.9804294,
+    "osm": {
+      "type": "way",
+      "id": 268977343
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St Michael in the City",
+      "religion": "christian",
+      "wikidata": "Q105099129"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_271120688",
+    "name": "St Patrick's Church",
+    "lat": 53.3921797,
+    "lon": -2.9716126,
+    "osm": {
+      "type": "way",
+      "id": 271120688
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "check_date": "2025-02-22",
+      "denomination": "catholic",
+      "name": "St Patrick's Church",
+      "religion": "christian",
+      "wikidata": "Q15979467",
+      "wikipedia": "en:St Patrick's Church, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1293477001",
+    "name": "St Patrick's Cross Memorial Garden",
+    "lat": 53.4115765,
+    "lon": -2.9858565,
+    "osm": {
+      "type": "way",
+      "id": 1293477001
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "description": "Small memorial garden dedicated to the Holy Cross Church destroyed during WWII, featuring a Pieta and the old sandstone Cross from Holy Cross church",
+      "leisure": "park",
+      "name": "St Patrick's Cross Memorial Garden"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_835795817",
+    "name": "St Peter",
+    "lat": 53.4206078,
+    "lon": -2.9742982,
+    "osm": {
+      "type": "way",
+      "id": 835795817
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St Peter",
+      "religion": "christian",
+      "wikidata": "Q105098696"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_1175740067",
+    "name": "St Peters Tavern",
+    "lat": 53.401792,
+    "lon": -2.9789892,
+    "osm": {
+      "type": "way",
+      "id": 1175740067
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "St Peters Church",
+      "addr:postcode": "L1 4BH",
+      "addr:street": "Seel Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "St Peters Tavern",
+      "wheelchair": "limited",
+      "wikidata": "Q7591419",
+      "wikipedia": "en:St Peter's Roman Catholic Church, Liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_849540941",
+    "name": "St Philip Neri",
+    "lat": 53.39924,
+    "lon": -2.9688413,
+    "osm": {
+      "type": "way",
+      "id": 849540941
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "check_date": "2025-01-08",
+      "denomination": "roman_catholic",
+      "name": "St Philip Neri",
+      "religion": "christian",
+      "website": "https://www.cathchap.org.uk/",
+      "wikidata": "Q7402098",
+      "wikipedia": "en:Saint Philip Neri Church"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_268974301",
+    "name": "St Vincent de Paul",
+    "lat": 53.3969765,
+    "lon": -2.9789856,
+    "osm": {
+      "type": "way",
+      "id": 268974301
+    },
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "name": "St Vincent de Paul",
+      "religion": "christian",
+      "wikidata": "Q15210304",
+      "wikipedia": "en:Church of St Vincent de Paul, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_80876422",
+    "name": "St. Bride's Church",
+    "lat": 53.3973027,
+    "lon": -2.9690249,
+    "osm": {
+      "type": "way",
+      "id": 80876422
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:street": "Percy Street",
+      "amenity": "place_of_worship",
+      "architect": "Samuel Rowland",
+      "building": "yes",
+      "denomination": "anglican",
+      "diocese": "Diocese of Liverpool",
+      "heritage": "2",
+      "heritage:operator": "he",
+      "heritage:website": "https://historicengland.org.uk/listing/the-list/list-entry/1365835",
+      "listed_status": "Grade II*",
+      "name": "St. Bride's Church",
+      "ref:GB:nhle": "1365835",
+      "religion": "christian",
+      "wikidata": "Q7592709",
+      "wikipedia": "en:St Bride's Church, Liverpool",
+      "year_of_construction": "1829–1831"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_511924168",
+    "name": "St. Francis Xavier Church",
+    "lat": 53.4132226,
+    "lon": -2.9697454,
+    "osm": {
+      "type": "way",
+      "id": 511924168
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L3 8DR",
+      "addr:street": "Salisbury Street",
+      "amenity": "place_of_worship",
+      "basilica": "minor",
+      "building": "yes",
+      "denomination": "roman_catholic",
+      "name": "St. Francis Xavier Church",
+      "ref:dove": "11694",
+      "religion": "christian",
+      "wikidata": "Q5117037",
+      "wikipedia": "en:St Francis Xavier Church, Liverpool"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_212010840",
+    "name": "St. Luke's Gardens",
+    "lat": 53.401675,
+    "lon": -2.9748756,
+    "osm": {
+      "type": "way",
+      "id": 212010840
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "St. Luke's Gardens",
+      "name:ko": "세인트 루크 가든"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_269345281",
+    "name": "static",
+    "lat": 53.4011111,
+    "lon": -2.9750887,
+    "osm": {
+      "type": "way",
+      "id": 269345281
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "building": "yes",
+      "name": "static",
+      "postal_code": "L1 9LD",
+      "tourism": "gallery"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1175774671",
+    "name": "Swan Inn",
+    "lat": 53.4023866,
+    "lon": -2.9779833,
+    "osm": {
+      "type": "way",
+      "id": 1175774671
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "86",
+      "addr:postcode": "L1 4DQ",
+      "addr:street": "Wood Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Swan Inn"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12496037807",
+    "name": "Tate Liverpool",
+    "lat": 53.4034781,
+    "lon": -2.9936548,
+    "osm": {
+      "type": "node",
+      "id": 12496037807
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "name": "Tate Liverpool",
+      "note": "Temporary gallery, located in RIBA North",
+      "tourism": "gallery",
+      "website": "https://www.tate.org.uk/visit/tate-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1091833102",
+    "name": "Tess Riley's",
+    "lat": 53.4057745,
+    "lon": -2.9793987,
+    "osm": {
+      "type": "way",
+      "id": 1091833102
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:street": "Great Charlotte Street",
+      "amenity": "pub",
+      "name": "Tess Riley's",
+      "room": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1065915470",
+    "name": "The Angus Tap & Grind",
+    "lat": 53.4087826,
+    "lon": -2.9869134,
+    "osm": {
+      "type": "way",
+      "id": 1065915470
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "83-85",
+      "addr:postcode": "L2 2HT",
+      "addr:street": "Dale Street",
+      "amenity": "pub",
+      "name": "The Angus Tap & Grind"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_136943415",
+    "name": "The Augustus John",
+    "lat": 53.4058122,
+    "lon": -2.9648465,
+    "osm": {
+      "type": "node",
+      "id": 136943415
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Augustus John"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1126354149",
+    "name": "The Baby Croc",
+    "lat": 53.4059705,
+    "lon": -2.9889664,
+    "osm": {
+      "type": "way",
+      "id": 1126354149
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "23A",
+      "addr:postcode": "L2 9QA",
+      "addr:street": "Harrington Street",
+      "amenity": "pub",
+      "building:part": "yes",
+      "name": "The Baby Croc"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_107682851",
+    "name": "The Beatles Story",
+    "lat": 53.3992749,
+    "lon": -2.9920667,
+    "osm": {
+      "type": "node",
+      "id": 107682851
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Royal Albert Dock",
+      "addr:parentstreet": "Gower Street",
+      "addr:postcode": "L3 4AD",
+      "addr:street": "Britannia Pavilion",
+      "check_date": "2025-05-23",
+      "fee": "yes",
+      "fhrs:id": "1243931",
+      "name": "The Beatles Story",
+      "name:ko": "비틀즈 스토리",
+      "opening_hours:url": "https://www.beatlesstory.com/opening-times",
+      "phone": "+44 151 709 1963",
+      "reservation": "required",
+      "tourism": "museum",
+      "website": "https://www.beatlesstory.com/",
+      "wheelchair": "yes",
+      "wikidata": "Q4306068",
+      "wikipedia": "en:The Beatles Story"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1222283337",
+    "name": "The Beehive",
+    "lat": 53.4047261,
+    "lon": -2.9771227,
+    "osm": {
+      "type": "way",
+      "id": 1222283337
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Beehive"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_2612342643",
+    "name": "The Belvedere Arms",
+    "lat": 53.400205,
+    "lon": -2.9696387,
+    "osm": {
+      "type": "node",
+      "id": 2612342643
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "6",
+      "addr:postcode": "L7 7EB",
+      "addr:street": "Sugnall Street",
+      "amenity": "pub",
+      "cask_marque": "yes",
+      "fhrs:id": "497328",
+      "name": "The Belvedere Arms",
+      "phone": "+44 151 709 0303",
+      "real_ale": "yes",
+      "source:addr:postcode": "code-point_open",
+      "website": "https://www.belvedereliverpool.com/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_2612341183",
+    "name": "The Blackburne Arms",
+    "lat": 53.3995569,
+    "lon": -2.9684712,
+    "osm": {
+      "type": "node",
+      "id": 2612341183
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "24",
+      "addr:postcode": "L8 7NL",
+      "addr:street": "Catharine Street",
+      "amenity": "pub",
+      "fhrs:id": "1273361",
+      "name": "The Blackburne Arms",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1222283327",
+    "name": "The Blarney Stone",
+    "lat": 53.4042984,
+    "lon": -2.9771224,
+    "osm": {
+      "type": "way",
+      "id": 1222283327
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "33",
+      "addr:postcode": "L1 2SF",
+      "addr:street": "Renshaw Street",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date:opening_hours": "2026-02-08",
+      "name": "The Blarney Stone",
+      "opening_hours:signed": "no",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1119040249",
+    "name": "The Blob Shop",
+    "lat": 53.405404,
+    "lon": -2.9796709,
+    "osm": {
+      "type": "way",
+      "id": 1119040249
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "46",
+      "addr:postcode": "L1 1HU",
+      "addr:street": "Great Charlotte Street",
+      "amenity": "pub",
+      "building:part": "yes",
+      "name": "The Blob Shop",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176",
+      "website": "https://www.greatukpubs.co.uk/blob-shop-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_348160621",
+    "name": "The Bluecoat",
+    "lat": 53.4041366,
+    "lon": -2.9838803,
+    "osm": {
+      "type": "node",
+      "id": 348160621
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "fee": "no",
+      "name": "The Bluecoat",
+      "tourism": "gallery",
+      "wheelchair": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_299317177",
+    "name": "The Brewery Tap",
+    "lat": 53.3932721,
+    "lon": -2.9789685,
+    "osm": {
+      "type": "node",
+      "id": 299317177
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L8 5XJ",
+      "addr:street": "Stanhope Street",
+      "amenity": "pub",
+      "name": "The Brewery Tap"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_269150488",
+    "name": "The Bridewell",
+    "lat": 53.4020357,
+    "lon": -2.9847195,
+    "osm": {
+      "type": "way",
+      "id": 269150488
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1",
+      "addr:postcode": "L1 5FB",
+      "addr:street": "Campbell Square",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Bridewell",
+      "name:en": "The Bridewell"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1314177807",
+    "name": "The Britannia",
+    "lat": 53.4229117,
+    "lon": -2.9859702,
+    "osm": {
+      "type": "way",
+      "id": 1314177807
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Britannia"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_111793905",
+    "name": "The Brunel",
+    "lat": 53.4213076,
+    "lon": -2.9633705,
+    "osm": {
+      "type": "node",
+      "id": 111793905
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "created_by": "JOSM",
+      "name": "The Brunel"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1178122533",
+    "name": "The Bullring Bar",
+    "lat": 53.4087016,
+    "lon": -2.9708718,
+    "osm": {
+      "type": "way",
+      "id": 1178122533
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "12",
+      "addr:postcode": "L3 5PX",
+      "addr:street": "Pembroke Place",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Bullring Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1950696755",
+    "name": "The Cambridge",
+    "lat": 53.4023932,
+    "lon": -2.9667775,
+    "osm": {
+      "type": "node",
+      "id": 1950696755
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "5-7",
+      "addr:street": "Mulberry Street",
+      "amenity": "pub",
+      "brand": "Marston's",
+      "brand:wikidata": "Q6773982",
+      "fhrs:id": "496868",
+      "name": "The Cambridge",
+      "website": "https://www.cambridgehotelliverpool.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1125737285",
+    "name": "The Captain Alexander",
+    "lat": 53.4046553,
+    "lon": -2.9912995,
+    "osm": {
+      "type": "way",
+      "id": 1125737285
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "15",
+      "addr:postcode": "L2 7NX",
+      "addr:street": "James Street",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "building:part": "retail",
+      "check_date": "2025-05-23",
+      "dog": "no",
+      "fhrs:id": "1244423",
+      "level": "0",
+      "name": "The Captain Alexander",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-captain-alexander-liverpool",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/6826/menus"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_444339971",
+    "name": "The Castle",
+    "lat": 53.4201808,
+    "lon": -2.9892885,
+    "osm": {
+      "type": "way",
+      "id": 444339971
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:street": "Vauxhall Road",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Castle"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1119040246",
+    "name": "The Celtic Corner",
+    "lat": 53.4055168,
+    "lon": -2.9786692,
+    "osm": {
+      "type": "way",
+      "id": 1119040246
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "43",
+      "addr:postcode": "L1 1JR",
+      "addr:street": "Ranelagh Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "check_date": "2025-05-24",
+      "fhrs:id": "1319509",
+      "name": "The Celtic Corner",
+      "source:addr": "FHRS Open Data",
+      "theme": "irish"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_316610852",
+    "name": "The Central",
+    "lat": 53.4051844,
+    "lon": -2.9799781,
+    "osm": {
+      "type": "way",
+      "id": 316610852
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "31",
+      "addr:postcode": "L1 1JP",
+      "addr:street": "Ranelagh Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Central",
+      "wikidata": "Q26504564"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_196782636",
+    "name": "The Coburg",
+    "lat": 53.3927562,
+    "lon": -2.9820909,
+    "osm": {
+      "type": "way",
+      "id": 196782636
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-08-04",
+      "indoor_seating": "yes",
+      "name": "The Coburg",
+      "outdoor_seating": "yes",
+      "source": "bing"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1250607976",
+    "name": "The Cornmarket",
+    "lat": 53.4053883,
+    "lon": -2.9914539,
+    "osm": {
+      "type": "way",
+      "id": 1250607976
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L2 7NT",
+      "addr:street": "Old Ropery",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Cornmarket"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1126354148",
+    "name": "The Crocodile",
+    "lat": 53.4059484,
+    "lon": -2.9891194,
+    "osm": {
+      "type": "way",
+      "id": 1126354148
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "19",
+      "addr:postcode": "L2 9QA",
+      "addr:street": "Harrington Street",
+      "amenity": "pub",
+      "building:part": "yes",
+      "name": "The Crocodile"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1176713699",
+    "name": "The Denbigh Castle",
+    "lat": 53.4079156,
+    "lon": -2.9903116,
+    "osm": {
+      "type": "way",
+      "id": 1176713699
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "10",
+      "addr:postcode": "L2 2AW",
+      "addr:street": "Hackins Hey",
+      "amenity": "pub",
+      "building:part": "yes",
+      "name": "The Denbigh Castle"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_152458657",
+    "name": "The Dispensary",
+    "lat": 53.4026026,
+    "lon": -2.9756257,
+    "osm": {
+      "type": "way",
+      "id": 152458657
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Dispensary",
+      "real_ale": "yes",
+      "source": "Bing"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_301106106",
+    "name": "The Eagle",
+    "lat": 53.4153513,
+    "lon": -2.9895969,
+    "osm": {
+      "type": "way",
+      "id": 301106106
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1-3",
+      "addr:postcode": "L3 6EP",
+      "addr:street": "Blackstock Street",
+      "amenity": "pub",
+      "building": "yes",
+      "building:levels": "2",
+      "name": "The Eagle"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_279397314",
+    "name": "The Empire",
+    "lat": 53.4043221,
+    "lon": -2.9816312,
+    "osm": {
+      "type": "way",
+      "id": 279397314
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Empire"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_667527543",
+    "name": "The Excelsior",
+    "lat": 53.4095018,
+    "lon": -2.9849962,
+    "osm": {
+      "type": "way",
+      "id": 667527543
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "121 - 125",
+      "addr:postcode": "L2 2JH",
+      "addr:street": "Dale Street",
+      "amenity": "pub",
+      "building": "retail",
+      "fhrs:id": "1536276",
+      "name": "The Excelsior",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4771046861",
+    "name": "The Fall Well",
+    "lat": 53.4069614,
+    "lon": -2.9824032,
+    "osm": {
+      "type": "node",
+      "id": 4771046861
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:county": "Merseyside",
+      "addr:postcode": "L1 1LS",
+      "addr:street": "St John's Way",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "brand:wikipedia": "en:Wetherspoons",
+      "changing_table": "yes",
+      "check_date": "2025-05-23",
+      "contact:phone": "+44 151 705 2050",
+      "contact:website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-fall-well-liverpool",
+      "diet:vegan": "yes",
+      "diet:vegetarian": "yes",
+      "dog": "no",
+      "food": "yes",
+      "name": "The Fall Well",
+      "note": "Has TV screens",
+      "outdoor_seating": "yes",
+      "payment:debit_cards": "yes",
+      "payment:mastercard": "yes",
+      "payment:visa": "yes",
+      "real_ale": "yes",
+      "toilets": "yes",
+      "toilets:access": "customers",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/2517/menus",
+      "wheelchair": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_673979741",
+    "name": "The Flute",
+    "lat": 53.4018091,
+    "lon": -2.9714674,
+    "osm": {
+      "type": "node",
+      "id": 673979741
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "35",
+      "addr:postcode": "L1 9AS",
+      "addr:street": "Hardman Street",
+      "amenity": "pub",
+      "cask_marque": "yes",
+      "check_date:opening_hours": "2023-03-07",
+      "fhrs:id": "497704",
+      "name": "The Flute",
+      "opening_hours:signed": "no",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176",
+      "real_ale": "yes",
+      "source:addr:postcode": "code-point_open",
+      "website": "https://www.greatukpubs.co.uk/flute-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_567421344",
+    "name": "The Font",
+    "lat": 53.4031595,
+    "lon": -2.9683283,
+    "osm": {
+      "type": "node",
+      "id": 567421344
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Font"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_316610844",
+    "name": "The Globe",
+    "lat": 53.4052231,
+    "lon": -2.9802983,
+    "osm": {
+      "type": "way",
+      "id": 316610844
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Globe"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_296234617",
+    "name": "The Goat",
+    "lat": 53.4180584,
+    "lon": -2.9967434,
+    "osm": {
+      "type": "node",
+      "id": 296234617
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Goat"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_269391427",
+    "name": "The Grapes",
+    "lat": 53.4004113,
+    "lon": -2.9747395,
+    "osm": {
+      "type": "way",
+      "id": 269391427
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "60",
+      "addr:street": "Roscoe Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Grapes",
+      "smoking": "outside"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1085218461",
+    "name": "The Grapes",
+    "lat": 53.4064927,
+    "lon": -2.987051,
+    "osm": {
+      "type": "way",
+      "id": 1085218461
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "25",
+      "addr:postcode": "L2 6RE",
+      "addr:street": "Mathew Street",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-08-05",
+      "name": "The Grapes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_5871728885",
+    "name": "The Hardmans' House",
+    "lat": 53.3997802,
+    "lon": -2.9736539,
+    "osm": {
+      "type": "node",
+      "id": 5871728885
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:housenumber": "59",
+      "addr:street": "Rodney Street",
+      "fee": "yes",
+      "name": "The Hardmans' House",
+      "operator": "The National Trust",
+      "tourism": "museum",
+      "website": "https://www.nationaltrust.org.uk/visit/liverpool-lancashire/the-hardmans-house",
+      "wikidata": "Q4640979",
+      "wikipedia": "en:The Hardmans' House"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_316610845",
+    "name": "The Irish House",
+    "lat": 53.405285,
+    "lon": -2.9797652,
+    "osm": {
+      "type": "way",
+      "id": 316610845
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Irish House"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_27418989",
+    "name": "The Liffey",
+    "lat": 53.4037958,
+    "lon": -2.9768012,
+    "osm": {
+      "type": "node",
+      "id": 27418989
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Liffey"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1161803017",
+    "name": "The Lime Kiln",
+    "lat": 53.4028749,
+    "lon": -2.9801879,
+    "osm": {
+      "type": "way",
+      "id": 1161803017
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L1 4BN",
+      "addr:street": "Concert Street",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "building:part": "retail",
+      "dog": "no",
+      "fhrs:id": "496311",
+      "level": "0",
+      "name": "The Lime Kiln",
+      "phone": "+44 151 702 6810",
+      "source:addr:postcode": "code-point_open",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-lime-kiln-liverpool",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/2011/menus"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_153019329",
+    "name": "The Lion Tavern",
+    "lat": 53.4090149,
+    "lon": -2.9904138,
+    "osm": {
+      "type": "way",
+      "id": 153019329
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "67",
+      "addr:postcode": "L2 2BP",
+      "addr:street": "Moorfields",
+      "amenity": "pub",
+      "building": "yes",
+      "cask_marque": "yes",
+      "fhrs:id": "496922",
+      "name": "The Lion Tavern",
+      "real_ale": "yes",
+      "source:addr": "FHRS Open Data",
+      "wikidata": "Q26644922"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10565786343",
+    "name": "The Lisbon",
+    "lat": 53.4073249,
+    "lon": -2.9869004,
+    "osm": {
+      "type": "node",
+      "id": 10565786343
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "35",
+      "addr:postcode": "L1 6BG",
+      "addr:street": "Victoria Street",
+      "amenity": "pub",
+      "check_date": "2025-08-05",
+      "fhrs:id": "497393",
+      "lgbtq": "primary",
+      "name": "The Lisbon",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_101433399",
+    "name": "The Liverpool",
+    "lat": 53.4049673,
+    "lon": -2.9916084,
+    "osm": {
+      "type": "node",
+      "id": 101433399
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "check_date": "2025-05-23",
+      "name": "The Liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_279397319",
+    "name": "The Monro",
+    "lat": 53.4012611,
+    "lon": -2.9806582,
+    "osm": {
+      "type": "way",
+      "id": 279397319
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "listed_status": "Grade II",
+      "name": "The Monro",
+      "opening_hours": "Mo-Fr 12:00-02:30, Sa,Su 11:00-02:30",
+      "wikidata": "Q26321010"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_308766622",
+    "name": "The Navy Bar",
+    "lat": 53.4084577,
+    "lon": -2.9887186,
+    "osm": {
+      "type": "node",
+      "id": 308766622
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "27-29",
+      "addr:postcode": "L1 6AA",
+      "addr:street": "Stanley Street",
+      "amenity": "pub",
+      "contact:facebook": "https://www.facebook.com/The-Navy-Bar-1380034665654224/",
+      "contact:twitter": "https://twitter.com/The_Navy_Bar",
+      "email": "info@navybarliverpool.co.uk",
+      "fhrs:id": "1787966",
+      "lgbtq": "primary",
+      "name": "The Navy Bar",
+      "phone": "+44 151 231 1456",
+      "postal_code": "L1 6AA",
+      "source:addr": "FHRS Open Data",
+      "website": "http://www.navybarliverpool.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_348176545",
+    "name": "The North Western",
+    "lat": 53.4084255,
+    "lon": -2.9786084,
+    "osm": {
+      "type": "node",
+      "id": 348176545
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7",
+      "addr:postcode": "L1 1RJ",
+      "addr:street": "Lime Street",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "brand:wikipedia": "en:Wetherspoons",
+      "cask_marque": "yes",
+      "check_date": "2025-03-04",
+      "dog": "no",
+      "fhrs:id": "779717",
+      "food": "yes",
+      "name": "The North Western",
+      "opening_hours": "Mo-Sa 06:00-00:00; Su 08:00-00:00",
+      "phone": "+44 1517 096825",
+      "real_ale": "yes",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-north-western-liverpool",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/6486/menus"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_282418661",
+    "name": "The Old Bank",
+    "lat": 53.4051528,
+    "lon": -2.9911031,
+    "osm": {
+      "type": "node",
+      "id": 282418661
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "check_date": "2025-05-23",
+      "indoor_seating": "yes",
+      "name": "The Old Bank",
+      "outdoor_seating": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4112993328",
+    "name": "The Pen Factory",
+    "lat": 53.4027741,
+    "lon": -2.9695211,
+    "osm": {
+      "type": "node",
+      "id": 4112993328
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13 - 15",
+      "addr:postcode": "L1 9BQ",
+      "addr:street": "Hope Street",
+      "amenity": "pub",
+      "fhrs:id": "1766207",
+      "food": "yes",
+      "name": "The Pen Factory",
+      "real_ale": "yes",
+      "source:addr": "FHRS Open Data",
+      "toilets": "yes",
+      "toilets:wheelchair": "yes",
+      "wheelchair": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_444319145",
+    "name": "The People's Church",
+    "lat": 53.417084,
+    "lon": -2.9695225,
+    "osm": {
+      "type": "way",
+      "id": 444319145
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "name": "The People's Church"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_101437338",
+    "name": "The Pig and Whistle",
+    "lat": 53.4074149,
+    "lon": -2.9939407,
+    "osm": {
+      "type": "node",
+      "id": 101437338
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "indoor_seating": "yes",
+      "name": "The Pig and Whistle",
+      "outdoor_seating": "no"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_107125563",
+    "name": "The Pilgrim",
+    "lat": 53.400352,
+    "lon": -2.9729389,
+    "osm": {
+      "type": "node",
+      "id": 107125563
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Pilgrim"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1175446626",
+    "name": "The Poste House",
+    "lat": 53.4078209,
+    "lon": -2.9867417,
+    "osm": {
+      "type": "way",
+      "id": 1175446626
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:housenumber": "23",
+      "addr:street": "Cumberland Street",
+      "amenity": "pub",
+      "building": "yes",
+      "lgbtq": "primary",
+      "name": "The Poste House",
+      "phone": "+44 151 236 4130",
+      "postal_code": "L1 6BU"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_85413004",
+    "name": "The Pump House",
+    "lat": 53.4018085,
+    "lon": -2.9920746,
+    "osm": {
+      "type": "way",
+      "id": 85413004
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L3 4AN",
+      "addr:street": "Hartley's Quay",
+      "amenity": "pub",
+      "brand": "Greene King",
+      "brand:wikidata": "Q5564162",
+      "brand:wikipedia": "en:Greene King",
+      "building": "yes",
+      "fhrs:id": "498826",
+      "food": "yes",
+      "indoor_seating": "yes",
+      "name": "The Pump House",
+      "name:ko": "더 펌프 하우스",
+      "operator": "Greene King",
+      "outdoor_seating": "yes",
+      "smoking": "outside",
+      "source": "Bing+established alignment;local_knowledge",
+      "takeaway": "no",
+      "website": "https://www.greeneking.co.uk/pubs/merseyside/pump-house",
+      "wheelchair": "yes",
+      "wikidata": "Q26569939"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_12992920833",
+    "name": "The Punch Tarmeys",
+    "lat": 53.3935438,
+    "lon": -2.9791298,
+    "osm": {
+      "type": "node",
+      "id": 12992920833
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Punch Tarmeys"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4314101471",
+    "name": "The Queen of Hope Street",
+    "lat": 53.4016053,
+    "lon": -2.9699956,
+    "osm": {
+      "type": "node",
+      "id": 4314101471
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Queen of Hope Street",
+      "opening_hours": "Mo-Su 12:00-00:30",
+      "website": "https://www.queenofhopestreet.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1115561672",
+    "name": "The Railway",
+    "lat": 53.4088777,
+    "lon": -2.9905197,
+    "osm": {
+      "type": "way",
+      "id": 1115561672
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "18",
+      "addr:postcode": "L2 2DT",
+      "addr:street": "Tithebarn Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "fhrs:id": "497317",
+      "level": "0",
+      "name": "The Railway",
+      "opening_hours": "Mo-Su 11:00-23:00",
+      "phone": "+44 151 236 9799",
+      "source:postcode": "FHRS Open Data",
+      "website": "https://www.therailwayliverpool.com/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_887649230",
+    "name": "The Red Lion",
+    "lat": 53.4020627,
+    "lon": -2.9804063,
+    "osm": {
+      "type": "way",
+      "id": 887649230
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "36",
+      "addr:postcode": "L1 4BX",
+      "addr:street": "Slater Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Red Lion"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1091833099",
+    "name": "The Richard John Blackler",
+    "lat": 53.4060729,
+    "lon": -2.9797224,
+    "osm": {
+      "type": "way",
+      "id": 1091833099
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1-2",
+      "addr:postcode": "L1 1HU",
+      "addr:street": "Great Charlotte Street",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "dog": "no",
+      "name": "The Richard John Blackler",
+      "real_ale": "yes",
+      "room": "yes",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-richard-john-blackler-liverpool",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/198/menus"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1116018471",
+    "name": "The Royal",
+    "lat": 53.4222278,
+    "lon": -2.9600444,
+    "osm": {
+      "type": "way",
+      "id": 1116018471
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Royal"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1651734288",
+    "name": "The Scholar",
+    "lat": 53.4028098,
+    "lon": -2.9739924,
+    "osm": {
+      "type": "node",
+      "id": 1651734288
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Scholar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1174024627",
+    "name": "The Shakespeare",
+    "lat": 53.406752,
+    "lon": -2.9838198,
+    "osm": {
+      "type": "way",
+      "id": 1174024627
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7-8",
+      "addr:postcode": "L1 1EQ",
+      "addr:street": "Williamson Square",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-05-23",
+      "fhrs:id": "497520",
+      "name": "The Shakespeare",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_152364833",
+    "name": "The Shipping Forecast",
+    "lat": 53.4025381,
+    "lon": -2.9793721,
+    "osm": {
+      "type": "way",
+      "id": 152364833
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "15",
+      "addr:postcode": "L1 4BW",
+      "addr:street": "Slater Street",
+      "amenity": "pub",
+      "building": "yes",
+      "food": "yes",
+      "name": "The Shipping Forecast",
+      "real_ale": "2 beers (may vary)"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1125717778",
+    "name": "The Slaughter House",
+    "lat": 53.4056207,
+    "lon": -2.9911386,
+    "osm": {
+      "type": "way",
+      "id": 1125717778
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13-15",
+      "addr:postcode": "L2 7LS",
+      "addr:street": "Fenwick Street",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "The Slaughter House",
+      "source": "local_knowledge"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_4112993329",
+    "name": "The Sphinx",
+    "lat": 53.4050279,
+    "lon": -2.9664342,
+    "osm": {
+      "type": "node",
+      "id": 4112993329
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "The Sphinx",
+      "real_ale": "yes"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1117631264",
+    "name": "The Vines",
+    "lat": 53.4057451,
+    "lon": -2.9781754,
+    "osm": {
+      "type": "way",
+      "id": 1117631264
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "81",
+      "addr:postcode": "L1 1JQ",
+      "addr:street": "Lime Street",
+      "amenity": "pub",
+      "building": "retail",
+      "check_date": "2025-05-24",
+      "diet:vegan": "limited",
+      "fhrs:id": "1243546",
+      "name": "The Vines",
+      "wikidata": "Q17551102"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1060162573",
+    "name": "The Welkin",
+    "lat": 53.4058709,
+    "lon": -2.9860422,
+    "osm": {
+      "type": "way",
+      "id": 1060162573
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "7",
+      "addr:postcode": "L1 6DS",
+      "addr:street": "Whitechapel",
+      "amenity": "pub",
+      "brand": "Wetherspoon",
+      "brand:wikidata": "Q6109362",
+      "building": "yes",
+      "dog": "no",
+      "indoor_seating": "yes",
+      "name": "The Welkin",
+      "outdoor_seating": "yes",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/merseyside/the-welkin-liverpool",
+      "website:menu": "https://order.jdwetherspoon.com/venue/jdw/2572/menus"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_11750001229",
+    "name": "The Welsh Patagonia Mimosa Ship Memorial",
+    "lat": 53.4088702,
+    "lon": -2.9999147,
+    "osm": {
+      "type": "node",
+      "id": 11750001229
+    },
+    "categories": [
+      "historic_plaque",
+      "monument_memorial"
+    ],
+    "osm_tags": {
+      "historic": "memorial",
+      "inscription": "1865 Mimosa 2015 This plaque records the departure from Liverpool of the sailing ship 'Mimosa' on 28 May 1865, with 162 Welsh people (remembering also the three who went out before them).",
+      "inscription2": "They landed at Port Madryn, Patadonia, on 28 July 1865 where they established a Welsh speaking settlement which survives to this day.",
+      "material": "stone",
+      "memorial": "plaque",
+      "name": "The Welsh Patagonia Mimosa Ship Memorial"
+    },
+    "tags": [
+      "text_present"
+    ]
+  },
+  {
+    "id": "osm_way_272759722",
+    "name": "Thomas Rigby's",
+    "lat": 53.407776,
+    "lon": -2.989805,
+    "osm": {
+      "type": "way",
+      "id": 272759722
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "23",
+      "addr:postcode": "L2 2EZ",
+      "addr:street": "Dale Street",
+      "amenity": "pub",
+      "brand": "Okell's",
+      "building": "yes",
+      "cask_marque": "yes",
+      "fhrs:id": "496294",
+      "food": "yes",
+      "name": "Thomas Rigby's",
+      "operator": "Heron and Brearley",
+      "real_ale": "yes",
+      "source:addr": "FHRS Open Data"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_10995298824",
+    "name": "Three Graces",
+    "lat": 53.4054562,
+    "lon": -2.993465,
+    "osm": {
+      "type": "node",
+      "id": 10995298824
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "50",
+      "addr:postcode": "L2 0PL",
+      "addr:street": "Brunswick Street",
+      "amenity": "pub",
+      "food": "no",
+      "name": "Three Graces"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_254831413",
+    "name": "U-Boat Story",
+    "lat": 53.3951193,
+    "lon": -3.0093933,
+    "osm": {
+      "type": "way",
+      "id": 254831413
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "layer": "1",
+      "man_made": "bridge",
+      "name": "U-Boat Story",
+      "opening_hours": "closed",
+      "tourism": "museum",
+      "wikidata": "Q689369"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1002147616",
+    "name": "U-boat Story",
+    "lat": 53.3952987,
+    "lon": -3.0090142,
+    "osm": {
+      "type": "way",
+      "id": 1002147616
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "building": "yes",
+      "fee": "yes",
+      "name": "U-boat Story",
+      "opening_hours": "closed",
+      "ref:GB:uprn": "42190165",
+      "tourism": "museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_878244036",
+    "name": "Ukrainian Meadow",
+    "lat": 53.4106166,
+    "lon": -2.982234,
+    "osm": {
+      "type": "way",
+      "id": 878244036
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "description": "Wildflower habitat type park opened in 2024 following the 2023 Eurovision song contest",
+      "leisure": "park",
+      "name": "Ukrainian Meadow",
+      "operator": "Liverpool City Council",
+      "operator:type": "government"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_453394548",
+    "name": "Vauxhall Vaults",
+    "lat": 53.4115373,
+    "lon": -2.9884489,
+    "osm": {
+      "type": "way",
+      "id": 453394548
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "31",
+      "addr:postcode": "L3 6BL",
+      "addr:street": "Vauxhall Road",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Vauxhall Vaults"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_272760322",
+    "name": "Vernon Arms",
+    "lat": 53.408567,
+    "lon": -2.9876985,
+    "osm": {
+      "type": "way",
+      "id": 272760322
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "building": "pub",
+      "name": "Vernon Arms"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1126780910",
+    "name": "Victoria Cross",
+    "lat": 53.4075267,
+    "lon": -2.9855852,
+    "osm": {
+      "type": "way",
+      "id": 1126780910
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1-3",
+      "addr:postcode": "L1 6BW",
+      "addr:street": "Sir Thomas Street",
+      "amenity": "pub",
+      "building:part": "retail",
+      "fhrs:id": "498441",
+      "level": "0",
+      "name": "Victoria Cross",
+      "old_name": "Ned Kelly's",
+      "source:addr": "FHRS Open Data",
+      "source:name": "Mapillary"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_1000473126",
+    "name": "Victoria Gallery & Museum",
+    "lat": 53.4062024,
+    "lon": -2.9662969,
+    "osm": {
+      "type": "node",
+      "id": 1000473126
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L69 3DR",
+      "addr:street": "Ashton Street",
+      "email": "vgm@liverpool.ac.uk",
+      "fee": "no",
+      "name": "Victoria Gallery & Museum",
+      "phone": "+44 151 794 2348",
+      "tourism": "museum",
+      "website": "http://www.liv.ac.uk/vgm/",
+      "wikidata": "Q7926720",
+      "wikipedia": "en:Victoria Gallery & Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_111793487",
+    "name": "Waterside Church",
+    "lat": 53.4208162,
+    "lon": -2.9637504,
+    "osm": {
+      "type": "node",
+      "id": 111793487
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "name": "Waterside Church",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_1652773979",
+    "name": "Wave Bar",
+    "lat": 53.4058364,
+    "lon": -2.9772,
+    "osm": {
+      "type": "node",
+      "id": 1652773979
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "amenity": "pub",
+      "name": "Wave Bar"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_6621463385",
+    "name": "Western Approaches",
+    "lat": 53.4075021,
+    "lon": -2.9932392,
+    "osm": {
+      "type": "node",
+      "id": 6621463385
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "1-3",
+      "addr:postcode": "L2 8SZ",
+      "addr:street": "Rumford Street",
+      "fee": "yes",
+      "name": "Western Approaches",
+      "opening_hours": "Mo-Su 10:00-17:00",
+      "phone": "+44151 227 2008",
+      "tourism": "museum",
+      "website": "http://www.westernapproaches.org.uk/",
+      "wikidata": "Q52076796",
+      "wikipedia": "en:Western Approaches Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_218535078",
+    "name": "White Hart",
+    "lat": 53.4025026,
+    "lon": -2.9696058,
+    "osm": {
+      "type": "way",
+      "id": 218535078
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "23",
+      "addr:postcode": "L1 9BQ",
+      "addr:street": "Hope Street",
+      "amenity": "pub",
+      "building": "retail",
+      "fhrs:id": "1692143",
+      "name": "White Hart",
+      "old_name": "The Clove Hitch",
+      "source:addr:postcode": "FHRS opendata"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1085218468",
+    "name": "White Star",
+    "lat": 53.4062023,
+    "lon": -2.9863319,
+    "osm": {
+      "type": "way",
+      "id": 1085218468
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "2-4",
+      "addr:postcode": "L2 6PT",
+      "addr:street": "Rainford Gardens",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "White Star"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_8143662438",
+    "name": "Whitley Gardens, Everton Park",
+    "lat": 53.4158512,
+    "lon": -2.9681258,
+    "osm": {
+      "type": "node",
+      "id": 8143662438
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Whitley Gardens, Everton Park"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_31291251",
+    "name": "William Ralf Dean Playing Fields",
+    "lat": 53.4241978,
+    "lon": -2.9658876,
+    "osm": {
+      "type": "way",
+      "id": 31291251
+    },
+    "categories": [
+      "park_public_space"
+    ],
+    "osm_tags": {
+      "leisure": "park",
+      "name": "William Ralf Dean Playing Fields"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_way_270872422",
+    "name": "Winners Chapel International",
+    "lat": 53.3939104,
+    "lon": -2.9728754,
+    "osm": {
+      "type": "way",
+      "id": 270872422
+    },
+    "categories": [
+      "religious"
+    ],
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "name": "Winners Chapel International",
+      "religion": "christian"
+    },
+    "tags": []
+  },
+  {
+    "id": "osm_node_34848694",
+    "name": "World Museum Liverpool",
+    "lat": 53.4098342,
+    "lon": -2.9818017,
+    "osm": {
+      "type": "node",
+      "id": 34848694
+    },
+    "categories": [
+      "museum_gallery"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L3 8EN",
+      "addr:street": "William Brown Street",
+      "changing_table": "yes",
+      "changing_table:fee": "no",
+      "fee": "no",
+      "name": "World Museum Liverpool",
+      "name:de": "World Museum Liverpool",
+      "name:ga": "World Museum",
+      "name:ja": "リバプール世界博物館",
+      "name:ka": "მსოფლიო მუზეუმი",
+      "name:lt": "Pasaulio muziejus",
+      "name:pt": "World Museum",
+      "name:zh": "利物浦世界博物館",
+      "opening_hours": "Tu-Su 10:00-18:00",
+      "operator": "National Museums Liverpool",
+      "toilets": "yes",
+      "toilets:access": "yes",
+      "toilets:wheelchair": "designated",
+      "tourism": "museum",
+      "website": "https://www.liverpoolmuseums.org.uk/wml/",
+      "wheelchair": "yes",
+      "wikidata": "Q980795",
+      "wikipedia": "en:World Museum"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_216752288",
+    "name": "Yates",
+    "lat": 53.4073202,
+    "lon": -2.983868,
+    "osm": {
+      "type": "way",
+      "id": 216752288
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L1 1RH",
+      "addr:street": "Queen Square",
+      "amenity": "pub",
+      "building": "yes",
+      "check_date": "2025-05-23",
+      "fhrs:id": "497618",
+      "name": "Yates",
+      "operator": "Stonegate",
+      "operator:wikidata": "Q7619176",
+      "website": "https://www.greatukpubs.co.uk/yates-liverpool"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_node_673970192",
+    "name": "Ye Cracke",
+    "lat": 53.4004442,
+    "lon": -2.9719906,
+    "osm": {
+      "type": "node",
+      "id": 673970192
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13",
+      "addr:postcode": "L1 9BB",
+      "addr:street": "Rice Street",
+      "amenity": "pub",
+      "fhrs:id": "497141",
+      "name": "Ye Cracke",
+      "wikidata": "Q8050740"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  },
+  {
+    "id": "osm_way_1176713696",
+    "name": "Ye Hole In Ye Wall",
+    "lat": 53.4077463,
+    "lon": -2.9900956,
+    "osm": {
+      "type": "way",
+      "id": 1176713696
+    },
+    "categories": [
+      "pub"
+    ],
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "4",
+      "addr:postcode": "L2 2AW",
+      "addr:street": "Hackins Hey",
+      "amenity": "pub",
+      "building": "yes",
+      "cask_marque": "yes",
+      "fhrs:id": "496490",
+      "name": "Ye Hole In Ye Wall",
+      "real_ale": "yes",
+      "website": "http://www.yeholeinyewall.co.uk/"
+    },
+    "tags": [
+      "high_visibility"
+    ]
+  }
+]

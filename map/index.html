@@ -2,28 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Map + Questions 1–5</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Map Game (mobile)</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-<div class="wrap">
-    <div class="card mapCard">
-      <canvas id="view" width="960" height="720"></canvas>
-      <div class="muted" style="padding:10px 4px 2px 4px;">
-        Click the map to set your location (fast testing). Geolocation works on HTTPS or <b>localhost</b>.
-      </div>
-    </div>
+  <div id="mapShell">
+    <canvas id="view"></canvas>
 
-    <div class="card sideCard">
-      <h1>Questions 1–5 + Radar Ring</h1>
-      <div class="muted">
-        Map is always fully visible. Each question adds a visual clue overlay.
+    <button id="btnPanel" class="fab" aria-label="Show/hide controls" title="Show/hide controls">☰</button>
+
+    <div id="panel" class="panel">
+      <div class="panelHeader">
+        <div>
+          <div class="panelTitle">Questions 1–5 + Radar</div>
+          <div class="muted">Overlay controls • Map stays interactive underneath</div>
+        </div>
+        <button id="btnPanelClose" class="iconBtn" aria-label="Close">✕</button>
       </div>
 
       <div class="row">
-        <button class="primary" id="btnGeo">Use my location</button>
-        <button id="btnClear">Clear clues</button>
+        <button class="primary" id="btnGeo">Enable location</button>
+        <button id="btnCenter">Center</button>
+        <button id="btnClear">Clear</button>
         <button class="warn" id="btnNewTarget">New target</button>
       </div>
 
@@ -34,17 +35,17 @@
       </div>
 
       <div class="row">
-        <label style="margin:0; display:flex; align-items:center; gap:8px;">
+        <label class="check">
           <input type="checkbox" id="dbgReveal">
           Reveal target (debug)
         </label>
-        <label style="margin:0; display:flex; align-items:center; gap:8px;">
+        <label class="check">
           <input type="checkbox" id="dbgBBox" checked>
-          Draw bbox outline
+          Draw map bounds
         </label>
       </div>
 
-      <h2>Radar (already working)</h2>
+      <h2>Radar</h2>
       <div class="two">
         <div>
           <label>Radius</label>
@@ -67,15 +68,14 @@
         <span id="lastAnswer" class="pill mid">No question asked yet</span>
       </div>
 
-      <h2>Fog of war (wrong answers)</h2>
+      <h2>Fog of war</h2>
       <div>
         <label>Fog opacity</label>
         <input id="fogOpacity" type="range" min="0" max="0.90" step="0.01" value="0.55" style="width:100%;">
         <div class="muted">Current: <span id="fogOpacityOut">55%</span></div>
       </div>
 
-
-      <h2>1) N / S / E / W of me</h2>
+      <h2>1) N / S / E / W</h2>
       <div class="row">
         <button id="btnNorth">North?</button>
         <button id="btnSouth">South?</button>
@@ -93,8 +93,8 @@
         <div>
           <label>Buckets</label>
           <select id="bearingBuckets" style="width:100%;">
-            <option value="4">4-way (N/E/S/W)</option>
-            <option value="8" selected>8-way (N/NE/E/...)</option>
+            <option value="4">4-way</option>
+            <option value="8" selected>8-way</option>
           </select>
         </div>
         <div>
@@ -122,17 +122,14 @@
         </div>
       </div>
 
-      <h2>5) Thermometer (hotter/colder)</h2>
+      <h2>5) Thermometer</h2>
       <div class="row">
         <button id="btnThermo">Thermometer</button>
-        <span class="muted">First click sets baseline; then move and click again.</span>
+        <span class="muted">Press once to set baseline; move; press again.</span>
       </div>
 
       <div class="log" id="log"></div>
-
-      <div class="muted">
-        Needs <code>map.png</code> next to <code>index.html</code>.
-      </div>
+      <div class="muted">Tip: drag/pinch the map. The controls panel can be hidden.</div>
     </div>
   </div>
 

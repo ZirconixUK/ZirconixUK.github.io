@@ -1,61 +1,111 @@
-/** Your bbox corners */
+/**
+ * Mobile-ready map pane (pan + pinch zoom) + simple clue fog
+ * - No "tap to set location" (tap/drag is only for panning)
+ * - Uses Geolocation (watchPosition) when permission granted
+ * - Static map.png as world; overlays are computed in map pixel coords and
+ *   transformed along with the map.
+ */
+
 const BBOX = {
   nw: { lat: 53.410529518470405, lon: -2.9982161521911626 },
   se: { lat: 53.40140896291161,  lon: -2.971136569976807  },
 };
 
-// POIs loaded from ./pois.json (with a built-in fallback so file:// still works).
+// ---- POIs ----
 const DEFAULT_POIS = [
   { name: "Liverpool Lime Street Station", lat: 53.4073, lon: -2.9777 },
   { name: "St George's Hall",             lat: 53.4084, lon: -2.9801 },
   { name: "Royal Albert Dock",            lat: 53.4009, lon: -2.9943 },
 ];
+
 let POIS = DEFAULT_POIS;
 
 async function loadPois() {
-  try {
-    const res = await fetch("./pois.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (Array.isArray(data) && data.length) {
-      POIS = data;
-      // Don’t spam; one line is enough.
-      log(`📌 Loaded ${POIS.length} POIs from pois.json`);
-    } else {
-      log("📌 pois.json was empty; using built-in defaults.");
-    }
-  } catch (err) {
-    // If you open index.html directly (file://) Safari/Chrome will block fetch() — fallback keeps it working.
-    log(`📌 Could not load pois.json; using built-in defaults. (${err?.message || err})`);
+  const candidates = ["./POI.json", "./pois.json"];
+  for (const url of candidates) {
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length) {
+        POIS = data;
+        log(`📌 Loaded ${POIS.length} POIs from ${url}`);
+        return;
+      }
+    } catch {}
   }
+  log(`📌 Using built-in POIs (couldn't load POI.json/pois.json)`);
 }
 
+// ---- DOM ----
 const canvas = document.getElementById("view");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", { alpha: true });
 
-// Offscreen fog layer so overlaps don't double-dark.
-const fogLayer = document.createElement("canvas");
-const fogCtx = fogLayer.getContext("2d");
+const elLog = document.getElementById("log");
+const elPlayer = document.getElementById("playerOut");
+const elTarget = document.getElementById("targetOut");
+const elClues = document.getElementById("cluesOut");
+const elReveal = document.getElementById("dbgReveal");
+const elBBox = document.getElementById("dbgBBox");
+const elLast = document.getElementById("lastAnswer");
 
-// Offscreen allowed-region mask (intersection of TRUE radar rings).
-const allowedLayer = document.createElement("canvas");
-const allowedCtx = allowedLayer.getContext("2d");
+const elRadarPreset = document.getElementById("radarPreset");
+const elThickness = document.getElementById("thickness");
+const elBearingBuckets = document.getElementById("bearingBuckets");
+const elDistBucket = document.getElementById("distBucket");
+const elFogOpacity = document.getElementById("fogOpacity");
+const elFogOpacityOut = document.getElementById("fogOpacityOut");
 
+document.getElementById("btnGeo").addEventListener("click", enableGeolocation);
+document.getElementById("btnCenter").addEventListener("click", centerOnPlayer);
+document.getElementById("btnClear").addEventListener("click", clearClues);
+document.getElementById("btnNewTarget").addEventListener("click", pickNewTarget);
+
+document.getElementById("btnRadar").addEventListener("click", askRadar);
+document.getElementById("btnNorth").addEventListener("click", () => askDirection("N"));
+document.getElementById("btnSouth").addEventListener("click", () => askDirection("S"));
+document.getElementById("btnEast").addEventListener("click", () => askDirection("E"));
+document.getElementById("btnWest").addEventListener("click", () => askDirection("W"));
+document.getElementById("btnQuadrant").addEventListener("click", askQuadrant);
+document.getElementById("btnBearing").addEventListener("click", askBearing);
+document.getElementById("btnDistance").addEventListener("click", askDistanceBucket);
+document.getElementById("btnThermo").addEventListener("click", askThermometer);
+
+elReveal.addEventListener("change", draw);
+elBBox.addEventListener("change", draw);
+elFogOpacity.addEventListener("input", () => { updateFogUI(); draw(); });
+
+// ---- Map image ----
 const mapImg = new Image();
 mapImg.src = "./map.png";
 let mapReady = false;
 
-let player = null;
-let target = null;
+// World-size mask used to cut the fog (opaque pixels = allowed region)
+const allowedWorld = document.createElement("canvas");
+const allowedCtx = allowedWorld.getContext("2d", { alpha: true });
 
-/**
- * Visual clue overlays.
- * type: 'ring'|'half'|'quadrant'|'wedge'|'donut'|'thermo'
- */
-const clues = [];
+// Screen-sized fog layer so we can punch holes without erasing the map
+const fogScreen = document.createElement("canvas");
+const fogScreenCtx = fogScreen.getContext("2d", { alpha: true });
 
-// Thermometer baseline
-let thermoBaseline = null; // {lat,lon,distToTarget}
+// ---- State ----
+let player = null;  // {lat, lon}
+let target = null;  // {name, lat, lon}
+const clues = [];   // constraints to intersect
+let thermoBaseline = null;
+
+function fogAlpha() {
+  const v = parseFloat(elFogOpacity?.value ?? "0.55");
+  return Math.max(0, Math.min(0.95, isNaN(v) ? 0.55 : v));
+}
+function updateFogUI() {
+  if (elFogOpacityOut) elFogOpacityOut.textContent = `${Math.round(fogAlpha() * 100)}%`;
+}
+
+// ---- View transform ----
+const view = { scale: 1, tx: 0, ty: 0 };
+const LIMITS = { min: 0.4, max: 4.0 }; // sensible defaults for 2313x1548 on mobile
+let viewInited = false;
 
 function resizeCanvasToDisplaySize() {
   const rect = canvas.getBoundingClientRect();
@@ -64,62 +114,696 @@ function resizeCanvasToDisplaySize() {
   const w = Math.round(rect.width * dpr);
   const h = Math.round(rect.height * dpr);
   if (canvas.width !== w || canvas.height !== h) {
-    canvas.width = w;
-    canvas.height = h;
-    fogLayer.width = w;
-    fogLayer.height = h;
-    allowedLayer.width = w;
-    allowedLayer.height = h;
+    canvas.width = w; canvas.height = h;
+    fogScreen.width = w; fogScreen.height = h;
   }
 }
 
+function fitViewToMap() {
+  if (!mapReady) return;
+  resizeCanvasToDisplaySize();
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  if (!MW || !MH || !canvas.width || !canvas.height) return;
 
-// UI
-const elRadarPreset = document.getElementById("radarPreset");
-const elThickness = document.getElementById("thickness");
-const elLast = document.getElementById("lastAnswer");
-const elLog = document.getElementById("log");
-const elPlayer = document.getElementById("playerOut");
-const elTarget = document.getElementById("targetOut");
-const elClues = document.getElementById("cluesOut");
-const elReveal = document.getElementById("dbgReveal");
-const elBBox = document.getElementById("dbgBBox");
-const elBearingBuckets = document.getElementById("bearingBuckets");
-const elDistBucket = document.getElementById("distBucket");
+  const sx = canvas.width / MW;
+  const sy = canvas.height / MH;
 
-const elFogOpacity = document.getElementById("fogOpacity");
-const elFogOpacityOut = document.getElementById("fogOpacityOut");
+  // Mobile-first default: fit to HEIGHT (so the map fills vertically in portrait),
+  // leaving horizontal overflow to pan.
+  const isPortrait = canvas.height >= canvas.width;
+  view.scale = isPortrait ? sy : Math.min(sx, sy);
+  view.scale = clamp(view.scale, LIMITS.min, LIMITS.max);
 
-function fogAlpha() {
-  const v = parseFloat(elFogOpacity?.value ?? "0.55");
-  return Math.max(0, Math.min(0.95, isNaN(v) ? 0.55 : v));
-}
-function fogFill() {
-  // slightly blue-black looks nicer over maps than pure #000
-  return `rgba(2, 6, 23, ${fogAlpha()})`;
-}
-function badStroke() {
-  return "rgba(148,163,184,.95)"; // slate-ish outline
-}
-function updateFogUI() {
-  if (elFogOpacityOut) elFogOpacityOut.textContent = `${Math.round(fogAlpha() * 100)}%`;
+  view.tx = (canvas.width - MW * view.scale) / 2;
+  view.ty = (canvas.height - MH * view.scale) / 2;
+
+  clampView();
+  viewInited = true;
+  draw();
 }
 
-// ===== GEO HELPERS =====
+function clampView() {
+  if (!mapReady) return;
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const sw = MW * view.scale;
+  const sh = MH * view.scale;
+
+  if (sw <= canvas.width) view.tx = (canvas.width - sw) / 2;
+  else view.tx = clamp(view.tx, canvas.width - sw, 0);
+
+  if (sh <= canvas.height) view.ty = (canvas.height - sh) / 2;
+  else view.ty = clamp(view.ty, canvas.height - sh, 0);
+}
+
+function screenPxFromClient(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  const x = (clientX - rect.left) * (canvas.width / rect.width);
+  const y = (clientY - rect.top)  * (canvas.height / rect.height);
+  return { x, y };
+}
+
+function screenToWorld(sx, sy) {
+  return { x: (sx - view.tx) / view.scale, y: (sy - view.ty) / view.scale };
+}
+
+// ---- Mobile gestures (Pointer Events) ----
+const pointers = new Map(); // pointerId -> {sx, sy}
+let mode = "none"; // "pan" | "pinch"
+let panStart = { sx:0, sy:0, tx:0, ty:0 };
+let pinchStart = { dist:1, scale:1, worldX:0, worldY:0 };
+
+canvas.addEventListener("pointerdown", (e) => {
+  canvas.setPointerCapture(e.pointerId);
+  const p = screenPxFromClient(e.clientX, e.clientY);
+  pointers.set(e.pointerId, p);
+
+  if (pointers.size === 1) {
+    mode = "pan";
+    panStart = { sx: p.x, sy: p.y, tx: view.tx, ty: view.ty };
+  } else if (pointers.size === 2) {
+    mode = "pinch";
+    const [p1, p2] = [...pointers.values()];
+    const mid = midpoint(p1, p2);
+    pinchStart.dist = distance(p1, p2);
+    pinchStart.scale = view.scale;
+    const wpt = screenToWorld(mid.x, mid.y);
+    pinchStart.worldX = wpt.x;
+    pinchStart.worldY = wpt.y;
+  }
+});
+
+canvas.addEventListener("pointermove", (e) => {
+  if (!pointers.has(e.pointerId)) return;
+  const p = screenPxFromClient(e.clientX, e.clientY);
+  pointers.set(e.pointerId, p);
+
+  if (!viewInited) return;
+
+  if (mode === "pan" && pointers.size === 1) {
+    const dx = p.x - panStart.sx;
+    const dy = p.y - panStart.sy;
+    view.tx = panStart.tx + dx;
+    view.ty = panStart.ty + dy;
+    clampView();
+    drawThrottled();
+  }
+
+  if (mode === "pinch" && pointers.size === 2) {
+    const [p1, p2] = [...pointers.values()];
+    const mid = midpoint(p1, p2);
+    const dist = distance(p1, p2);
+
+    let nextScale = pinchStart.scale * (dist / pinchStart.dist);
+    nextScale = clamp(nextScale, LIMITS.min, LIMITS.max);
+
+    // Zoom around pinch midpoint: keep pinchStart.worldX/Y under the midpoint
+    view.tx = mid.x - pinchStart.worldX * nextScale;
+    view.ty = mid.y - pinchStart.worldY * nextScale;
+    view.scale = nextScale;
+
+    clampView();
+    drawThrottled();
+  }
+});
+
+function endPointer(e) {
+  pointers.delete(e.pointerId);
+  if (pointers.size === 0) mode = "none";
+  if (pointers.size === 1) {
+    // smooth pinch->pan transition
+    const remaining = [...pointers.values()][0];
+    mode = "pan";
+    panStart = { sx: remaining.x, sy: remaining.y, tx: view.tx, ty: view.ty };
+  }
+}
+canvas.addEventListener("pointerup", endPointer);
+canvas.addEventListener("pointercancel", endPointer);
+
+// Prevent iOS double-tap zoom / scrolling on the canvas
+canvas.addEventListener("touchstart", (e) => e.preventDefault(), { passive: false });
+canvas.addEventListener("touchmove",  (e) => e.preventDefault(), { passive: false });
+
+// ---- Geolocation ----
+let watchId = null;
+let hasCenteredOnce = false;
+
+function enableGeolocation() {
+  if (!("geolocation" in navigator)) {
+    log("❌ Geolocation not available in this browser.");
+    return;
+  }
+  if (watchId != null) {
+    log("📡 Location already enabled.");
+    return;
+  }
+
+  // watchPosition updates while moving (best UX for mobile)
+  watchId = navigator.geolocation.watchPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      setPlayer(latitude, longitude, true);
+    },
+    (err) => {
+      log(`❌ Geolocation error: ${err.message}`);
+      watchId = null;
+    },
+    { enableHighAccuracy: true, maximumAge: 10000, timeout: 15000 }
+  );
+
+  log("✅ Location enabled. (We only use it locally to place you on the map.)");
+}
+
+function setPlayer(lat, lon, silent = false) {
+  player = { lat, lon };
+  elPlayer.textContent = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+  if (!silent) log(`📍 Player: ${lat.toFixed(6)}, ${lon.toFixed(6)}`);
+
+  if (!hasCenteredOnce && mapReady && viewInited) {
+    centerOnPlayer();
+    hasCenteredOnce = true;
+  } else {
+    drawThrottled();
+  }
+}
+
+function centerOnPlayer() {
+  if (!player || !mapReady || !viewInited) return;
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const p = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+  // Center player's pixel on canvas
+  view.tx = canvas.width / 2 - p.x * view.scale;
+  view.ty = canvas.height / 2 - p.y * view.scale;
+  clampView();
+  draw();
+  log("🎯 Centered on player.");
+}
+
+// ---- Clues / Questions ----
+function ensureReady() {
+  if (!player) { log("⚠️ Tap “Enable location” first."); return false; }
+  if (!target) pickNewTarget(false);
+  return true;
+}
+
+function pickNewTarget(verbose = true) {
+  target = POIS[Math.floor(Math.random() * POIS.length)];
+  if (verbose) log(`🎯 New target chosen (hidden).`);
+  updateUI();
+  draw();
+}
+
+function clearClues() {
+  clues.length = 0;
+  thermoBaseline = null;
+  if (elLast) { elLast.className = "pill mid"; elLast.textContent = "Cleared"; }
+  updateUI();
+  draw();
+  log("🧽 Cleared clues.");
+}
+
+function addClue(clue) {
+  clues.push({ ...clue, ts: Date.now() });
+  updateUI();
+  draw();
+}
+
+function askRadar() {
+  if (!ensureReady()) return;
+  const meters = parseFloat(elRadarPreset.value);
+  const dist = haversineMeters(player.lat, player.lon, target.lat, target.lon);
+  const ok = dist <= meters;
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const pp = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+  const rPx = radiusMetersToPixels(meters, player.lat, BBOX, MW, MH);
+
+  addClue({ type: "ring", x: pp.x, y: pp.y, r: rPx, ok });
+  setLast(ok ? `TRUE (≤${meters}m)` : `FALSE (>${meters}m)`, ok);
+  log(`📡 Radar ${meters}m → ${ok ? "TRUE" : "FALSE"} (actual ${dist.toFixed(0)}m)`);
+}
+
+function askDirection(dir) {
+  if (!ensureReady()) return;
+  let ok = false;
+  if (dir === "N") ok = target.lat > player.lat;
+  if (dir === "S") ok = target.lat < player.lat;
+  if (dir === "E") ok = target.lon > player.lon;
+  if (dir === "W") ok = target.lon < player.lon;
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const pp = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+
+  addClue({ type: "half", x: pp.x, y: pp.y, dir, ok });
+  setLast(ok ? "TRUE" : "FALSE", ok);
+  log(`🧭 ${dir} of me? → ${ok ? "TRUE" : "FALSE"}`);
+}
+
+function askQuadrant() {
+  if (!ensureReady()) return;
+  const north = target.lat > player.lat;
+  const east = target.lon > player.lon;
+  const quad = (north && east) ? "NE" : (north && !east) ? "NW" : (!north && east) ? "SE" : "SW";
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const pp = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+
+  addClue({ type: "quadrant", x: pp.x, y: pp.y, quad, ok: true });
+  setLast(quad, true);
+  log(`🧩 Quadrant → ${quad}`);
+}
+
+function askBearing() {
+  if (!ensureReady()) return;
+  const buckets = parseInt(elBearingBuckets.value, 10);
+  const deg = bearingDeg(player.lat, player.lon, target.lat, target.lon);
+
+  const labels4 = ["N","E","S","W"];
+  const labels8 = ["N","NE","E","SE","S","SW","W","NW"];
+  const labels = (buckets === 4) ? labels4 : labels8;
+  const bucketSize = 360 / buckets;
+  const idx = Math.floor((deg + bucketSize / 2) / bucketSize) % buckets;
+  const label = labels[idx];
+
+  const centerDeg = idx * bucketSize;
+  const startDeg = centerDeg - bucketSize / 2;
+  const endDeg = centerDeg + bucketSize / 2;
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const pp = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+
+  // Store angles in radians in WORLD coords, but we draw with a big radius
+  addClue({
+    type: "wedge",
+    x: pp.x, y: pp.y,
+    a0: toRad(startDeg - 90),
+    a1: toRad(endDeg - 90),
+    ok: true,
+    label
+  });
+
+  setLast(label, true);
+  log(`🧭 Bearing (${buckets}) → ${label} (${deg.toFixed(0)}°)`);
+}
+
+function parseBucket(s) {
+  if (s.endsWith("+")) return { min: parseFloat(s.slice(0,-1)), max: Infinity, text: `${s}` };
+  const [a,b] = s.split("-").map(Number);
+  return { min:a, max:b, text:`${a}–${b}m` };
+}
+
+function askDistanceBucket() {
+  if (!ensureReady()) return;
+  const bucket = parseBucket(elDistBucket.value);
+  const dist = haversineMeters(player.lat, player.lon, target.lat, target.lon);
+  const ok = dist >= bucket.min && dist < bucket.max;
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const pp = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+
+  const rIn = bucket.min <= 0 ? 0 : radiusMetersToPixels(bucket.min, player.lat, BBOX, MW, MH);
+  const rOut = bucket.max === Infinity ? Math.max(MW, MH) * 1.6 : radiusMetersToPixels(bucket.max, player.lat, BBOX, MW, MH);
+
+  addClue({ type: "donut", x: pp.x, y: pp.y, rIn, rOut, ok, text: bucket.text });
+  setLast(ok ? `TRUE (${bucket.text})` : `FALSE (${bucket.text})`, ok);
+  log(`📏 Distance bucket ${bucket.text} → ${ok ? "TRUE" : "FALSE"} (actual ${dist.toFixed(0)}m)`);
+}
+
+function askThermometer() {
+  if (!ensureReady()) return;
+  if (!thermoBaseline) {
+    thermoBaseline = { ...player };
+    log("🌡️ Thermometer baseline set. Walk somewhere else, then press again.");
+    setLast("Baseline set", true);
+    return;
+  }
+  const d0 = haversineMeters(thermoBaseline.lat, thermoBaseline.lon, target.lat, target.lon);
+  const d1 = haversineMeters(player.lat, player.lon, target.lat, target.lon);
+  const hotter = d1 < d0;
+
+  // Constrain: closer to current point than baseline? That's a half-plane in Voronoi sense.
+  // We'll approximate as a perpendicular bisector: allowed region is closer to current than baseline.
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const p0 = latLonToPixel(thermoBaseline.lat, thermoBaseline.lon, BBOX, MW, MH);
+  const p1 = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+
+  addClue({ type: "thermo", a: p0, b: p1, ok: hotter });
+  setLast(hotter ? "HOTTER" : "COLDER", hotter);
+  log(`🌡️ ${hotter ? "HOTTER" : "COLDER"} (baseline ${d0.toFixed(0)}m → now ${d1.toFixed(0)}m)`);
+}
+
+// ---- UI helpers ----
+function setLast(text, ok) {
+  if (!elLast) return;
+  elLast.className = "pill " + (ok ? "ok" : "no");
+  elLast.textContent = text;
+}
+function updateUI() {
+  elClues.textContent = String(clues.length);
+  elPlayer.textContent = player ? `${player.lat.toFixed(6)}, ${player.lon.toFixed(6)}` : "not set";
+  elTarget.textContent = (elReveal.checked && target) ? target.name : "hidden";
+  updateFogUI();
+}
+
+function log(msg) {
+  const t = new Date().toLocaleTimeString();
+  elLog.innerHTML = `<div style="margin-bottom:8px;"><span class="muted">[${t}]</span> ${msg}</div>` + elLog.innerHTML;
+}
+
+// ---- Drawing ----
+let rafPending = false;
+function drawThrottled() {
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => {
+    rafPending = false;
+    draw();
+  });
+}
+
+function draw() {
+  resizeCanvasToDisplaySize();
+  if (!mapReady) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,.08)";
+    ctx.font = `${Math.max(12, Math.round(12*(window.devicePixelRatio||1)))}px system-ui`;
+    ctx.fillText("Loading map...", 20, 30);
+    return;
+  }
+
+  // base clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // draw map
+  ctx.save();
+  ctx.translate(view.tx, view.ty);
+  ctx.scale(view.scale, view.scale);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(mapImg, 0, 0);
+  ctx.restore();
+
+  if (elBBox.checked) drawMapBounds();
+
+  // recompute allowed region mask
+  buildAllowedWorld();
+
+  // apply fog (darken outside allowed)
+  drawFog();
+
+  // markers + outline rings
+  drawMarkers();
+  drawClueOutlines();
+}
+
+function drawMapBounds() {
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  ctx.save();
+  ctx.translate(view.tx, view.ty);
+  ctx.scale(view.scale, view.scale);
+  ctx.strokeStyle = "rgba(148,163,184,.55)";
+  ctx.lineWidth = 2 / view.scale;
+  ctx.strokeRect(0, 0, MW, MH);
+  ctx.restore();
+}
+
+function buildAllowedWorld() {
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  if (allowedWorld.width !== MW || allowedWorld.height !== MH) {
+    allowedWorld.width = MW;
+    allowedWorld.height = MH;
+  }
+
+  // Start allowed = whole map (opaque)
+  allowedCtx.clearRect(0,0,MW,MH);
+  allowedCtx.fillStyle = "rgba(255,255,255,1)";
+  allowedCtx.fillRect(0,0,MW,MH);
+
+  // Intersect sequential constraints by masking in-place using destination-in
+  for (const c of clues) {
+    allowedCtx.save();
+    allowedCtx.globalCompositeOperation = "destination-in";
+
+    // Draw region for which the clue is satisfied ("allowed region")
+    allowedCtx.clearRect(0,0,0,0); // no-op; just for readability
+    allowedCtx.fillStyle = "rgba(255,255,255,1)";
+    allowedCtx.beginPath();
+
+    if (c.type === "ring") {
+      // ok=true: inside circle; ok=false: outside circle
+      if (c.ok) {
+        allowedCtx.arc(c.x, c.y, c.r, 0, Math.PI*2);
+        allowedCtx.closePath();
+        allowedCtx.fill();
+      } else {
+        allowedCtx.rect(0,0,MW,MH);
+        allowedCtx.arc(c.x, c.y, c.r, 0, Math.PI*2, true);
+        allowedCtx.closePath();
+        allowedCtx.fill("evenodd");
+      }
+    } else if (c.type === "half") {
+      const okDir = c.ok ? c.dir : oppositeDir(c.dir);
+      drawHalfPlanePath(allowedCtx, okDir, c.x, c.y, MW, MH);
+      allowedCtx.fill();
+    } else if (c.type === "quadrant") {
+      drawQuadrantPath(allowedCtx, c.quad, c.x, c.y, MW, MH);
+      allowedCtx.fill();
+    } else if (c.type === "wedge") {
+      // wedge from point to edge (use large radius)
+      const R = Math.max(MW, MH) * 2;
+      allowedCtx.moveTo(c.x, c.y);
+      allowedCtx.arc(c.x, c.y, R, c.a0, c.a1);
+      allowedCtx.closePath();
+      allowedCtx.fill();
+    } else if (c.type === "donut") {
+      // ok=true: annulus; ok=false: outside annulus (inside inner OR outside outer)
+      if (c.ok) {
+        allowedCtx.arc(c.x, c.y, c.rOut, 0, Math.PI*2);
+        allowedCtx.arc(c.x, c.y, c.rIn,  0, Math.PI*2, true);
+        allowedCtx.closePath();
+        allowedCtx.fill("evenodd");
+      } else {
+        // outside annulus = (outside outer) OR (inside inner)
+        // easiest: whole map, cut out annulus
+        allowedCtx.rect(0,0,MW,MH);
+        allowedCtx.arc(c.x, c.y, c.rOut, 0, Math.PI*2, true);
+        allowedCtx.arc(c.x, c.y, c.rIn,  0, Math.PI*2);
+        allowedCtx.closePath();
+        allowedCtx.fill("evenodd");
+      }
+    } else if (c.type === "thermo") {
+      // ok=true means "hotter": closer to b than a (Voronoi half-plane).
+      // Build a line perpendicular bisector between a and b; choose side.
+      const A = c.a, B = c.b;
+      const mx = (A.x + B.x)/2, my = (A.y + B.y)/2;
+      const vx = B.x - A.x, vy = B.y - A.y;
+      // Perp direction:
+      const px = -vy, py = vx;
+      // Two far points along the bisector:
+      const L = Math.max(MW, MH) * 4;
+      const x1 = mx - px*L, y1 = my - py*L;
+      const x2 = mx + px*L, y2 = my + py*L;
+
+      // To decide which side is "closer to B than A", test one point:
+      // point B itself should be in the "closer to B" side.
+      // Determine which side of line (x1,y1)-(x2,y2) B lies on; fill that half-plane.
+      const sideB = lineSide(x1,y1,x2,y2,B.x,B.y);
+      const wantSide = c.ok ? sideB : -sideB;
+
+      drawHalfPlaneFromLine(allowedCtx, x1,y1,x2,y2, wantSide, MW, MH);
+      allowedCtx.fill();
+    }
+
+    allowedCtx.restore();
+  }
+}
+
+function drawFog() {
+  const a = fogAlpha();
+  if (clues.length === 0 || a <= 0) return;
+
+  // Build fog on an offscreen screen-sized canvas so we don't "erase" the map.
+  if (fogScreen.width !== canvas.width || fogScreen.height !== canvas.height) {
+    fogScreen.width = canvas.width;
+    fogScreen.height = canvas.height;
+  }
+  fogScreenCtx.clearRect(0, 0, fogScreen.width, fogScreen.height);
+
+  // 1) Fill fog everywhere
+  fogScreenCtx.globalCompositeOperation = "source-over";
+  fogScreenCtx.fillStyle = `rgba(0,0,0,${a})`;
+  fogScreenCtx.fillRect(0, 0, fogScreen.width, fogScreen.height);
+
+  // 2) Punch out the allowed region (transparent hole) using destination-out
+  fogScreenCtx.globalCompositeOperation = "destination-out";
+  fogScreenCtx.imageSmoothingEnabled = false;
+  fogScreenCtx.save();
+  fogScreenCtx.translate(view.tx, view.ty);
+  fogScreenCtx.scale(view.scale, view.scale);
+  fogScreenCtx.drawImage(allowedWorld, 0, 0);
+  fogScreenCtx.restore();
+
+  // 3) Composite fog over the already-drawn map
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.drawImage(fogScreen, 0, 0);
+  ctx.restore();
+}
+
+function drawMarkers() {
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+
+  // player marker
+  if (player) {
+    const p = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
+    ctx.save();
+    ctx.translate(view.tx, view.ty);
+    ctx.scale(view.scale, view.scale);
+
+    ctx.fillStyle = "rgba(56,189,248,.95)";
+    ctx.strokeStyle = "rgba(2,6,23,.9)";
+    ctx.lineWidth = 3 / view.scale;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 7 / view.scale, 0, Math.PI*2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // target marker if reveal on
+  if (elReveal.checked && target) {
+    const t = latLonToPixel(target.lat, target.lon, BBOX, MW, MH);
+    ctx.save();
+    ctx.translate(view.tx, view.ty);
+    ctx.scale(view.scale, view.scale);
+
+    ctx.fillStyle = "rgba(244,63,94,.95)";
+    ctx.strokeStyle = "rgba(2,6,23,.9)";
+    ctx.lineWidth = 3 / view.scale;
+    ctx.beginPath();
+    ctx.arc(t.x, t.y, 7 / view.scale, 0, Math.PI*2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.restore();
+  }
+}
+
+function drawClueOutlines() {
+  if (clues.length === 0) return;
+
+  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const thick = clamp(parseFloat(elThickness.value || "3"), 1, 12);
+
+  ctx.save();
+  ctx.translate(view.tx, view.ty);
+  ctx.scale(view.scale, view.scale);
+
+  for (const c of clues) {
+    ctx.lineWidth = (thick / view.scale);
+    ctx.strokeStyle = c.ok ? "rgba(148,163,184,.85)" : "rgba(148,163,184,.55)";
+
+    if (c.type === "ring") {
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
+      ctx.stroke();
+    } else if (c.type === "donut") {
+      ctx.beginPath(); ctx.arc(c.x, c.y, c.rIn, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(c.x, c.y, c.rOut, 0, Math.PI*2); ctx.stroke();
+    } else if (c.type === "half") {
+      ctx.beginPath();
+      drawHalfPlanePath(ctx, c.ok ? c.dir : oppositeDir(c.dir), c.x, c.y, MW, MH);
+      ctx.closePath();
+      ctx.stroke();
+    } else if (c.type === "quadrant") {
+      ctx.beginPath();
+      drawQuadrantPath(ctx, c.quad, c.x, c.y, MW, MH);
+      ctx.closePath();
+      ctx.stroke();
+    } else if (c.type === "wedge") {
+      const R = Math.max(MW, MH) * 2;
+      ctx.beginPath();
+      ctx.moveTo(c.x, c.y);
+      ctx.arc(c.x, c.y, R, c.a0, c.a1);
+      ctx.closePath();
+      ctx.stroke();
+    } else if (c.type === "thermo") {
+      // show baseline/current points + bisector
+      ctx.fillStyle = "rgba(148,163,184,.85)";
+      ctx.beginPath(); ctx.arc(c.a.x, c.a.y, 5 / view.scale, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(c.b.x, c.b.y, 5 / view.scale, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  ctx.restore();
+}
+
+// ---- Geometry drawing helpers ----
+function drawHalfPlanePath(g, dir, x, y, MW, MH) {
+  // Build a polygon covering the half of the map relative to point (x,y)
+  // N: y <= py, S: y >= py, E: x >= px, W: x <= px
+  if (dir === "N") { g.rect(0, 0, MW, y); }
+  if (dir === "S") { g.rect(0, y, MW, MH - y); }
+  if (dir === "W") { g.rect(0, 0, x, MH); }
+  if (dir === "E") { g.rect(x, 0, MW - x, MH); }
+}
+
+function drawQuadrantPath(g, quad, x, y, MW, MH) {
+  if (quad === "NE") g.rect(x, 0, MW - x, y);
+  if (quad === "NW") g.rect(0, 0, x, y);
+  if (quad === "SE") g.rect(x, y, MW - x, MH - y);
+  if (quad === "SW") g.rect(0, y, x, MH - y);
+}
+
+function oppositeDir(d) {
+  return d === "N" ? "S" : d === "S" ? "N" : d === "E" ? "W" : "E";
+}
+
+function drawHalfPlaneFromLine(g, x1,y1,x2,y2, wantSide, MW, MH) {
+  // Create a big polygon that represents one half-plane.
+  // We'll clip by drawing an enormous quad; choose points based on which side is desired.
+  // We approximate by taking the line and extending normal direction.
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.hypot(dx, dy) || 1;
+  const nx = -dy / len, ny = dx / len; // unit normal
+
+  const L = Math.max(MW, MH) * 8;
+  const sx = nx * L * Math.sign(wantSide);
+  const sy = ny * L * Math.sign(wantSide);
+
+  // two points on the line, shifted to the desired side
+  const a1 = { x: x1 + sx, y: y1 + sy };
+  const a2 = { x: x2 + sx, y: y2 + sy };
+  // and far points further out (same direction)
+  const b1 = { x: x2 + sx + dx * 1000, y: y2 + sy + dy * 1000 };
+  const b2 = { x: x1 + sx - dx * 1000, y: y1 + sy - dy * 1000 };
+
+  g.moveTo(a1.x, a1.y);
+  g.lineTo(a2.x, a2.y);
+  g.lineTo(b1.x, b1.y);
+  g.lineTo(b2.x, b2.y);
+  g.closePath();
+
+  // Clip to map bounds by intersecting with bounds via evenodd on fill later (good enough)
+  // We'll rely on destination-in with map-sized canvas, so anything outside is irrelevant.
+}
+
+function lineSide(x1,y1,x2,y2, px,py) {
+  // returns sign of cross product (line -> point)
+  const v = (x2-x1)*(py-y1) - (y2-y1)*(px-x1);
+  return v === 0 ? 0 : (v > 0 ? 1 : -1);
+}
+
+// ---- Geo helpers ----
 const Rm = 6378137;
-const toRad = d => d * Math.PI / 180;
-const toDeg = r => r * 180 / Math.PI;
+const toRad = (d) => d * Math.PI / 180;
+const toDeg = (r) => r * 180 / Math.PI;
 
 function mercatorXY(lat, lon) {
   const x = Rm * toRad(lon);
-  const y = Rm * Math.log(Math.tan(Math.PI/4 + toRad(lat)/2));
+  const y = Rm * Math.log(Math.tan(Math.PI / 4 + toRad(lat) / 2));
   return { x, y };
 }
-function invMercator(x, y) {
-  const lon = toDeg(x / Rm);
-  const lat = toDeg(2 * Math.atan(Math.exp(y / Rm)) - Math.PI/2);
-  return { lat, lon };
-}
+
 function latLonToPixel(lat, lon, bbox, w, h) {
   const nw = mercatorXY(bbox.nw.lat, bbox.nw.lon);
   const se = mercatorXY(bbox.se.lat, bbox.se.lon);
@@ -129,601 +813,74 @@ function latLonToPixel(lat, lon, bbox, w, h) {
     y: ((p.y - nw.y) / (se.y - nw.y)) * h
   };
 }
-function pixelToLatLon(px, py, bbox, w, h) {
-  const nw = mercatorXY(bbox.nw.lat, bbox.nw.lon);
-  const se = mercatorXY(bbox.se.lat, bbox.se.lon);
-  const x = nw.x + (px / w) * (se.x - nw.x);
-  const y = nw.y + (py / h) * (se.y - nw.y);
-  return invMercator(x, y);
-}
+
 function haversineMeters(lat1, lon1, lat2, lon2) {
   const R = 6371000;
   const φ1 = toRad(lat1), φ2 = toRad(lat2);
   const Δφ = toRad(lat2 - lat1);
   const Δλ = toRad(lon2 - lon1);
-  const a = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
-  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const a = Math.sin(Δφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
-// meters -> px at player latitude (good enough for small area)
+
 function radiusMetersToPixels(radiusM, atLat, bbox, w, h) {
   const nw = mercatorXY(bbox.nw.lat, bbox.nw.lon);
   const se = mercatorXY(bbox.se.lat, bbox.se.lon);
   const mppX = (se.x - nw.x) / w;
   const mppY = (se.y - nw.y) / h;
-  const mpp  = (Math.abs(mppX) + Math.abs(mppY)) / 2;
+  const mpp = (Math.abs(mppX) + Math.abs(mppY)) / 2;
   const scale = 1 / Math.cos(toRad(atLat));
   return (radiusM * scale) / mpp;
 }
+
 function bearingDeg(lat1, lon1, lat2, lon2) {
   const φ1 = toRad(lat1), φ2 = toRad(lat2);
   const Δλ = toRad(lon2 - lon1);
   const y = Math.sin(Δλ) * Math.cos(φ2);
-  const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
-  let θ = Math.atan2(y, x); // radians
-  let deg = (toDeg(θ) + 360) % 360; // 0..360 from north clockwise
-  return deg;
+  const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+  const θ = Math.atan2(y, x);
+  return (toDeg(θ) + 360) % 360;
 }
 
-// ===== GAME/UI =====
-function pickNewTarget() {
-  target = POIS[Math.floor(Math.random() * POIS.length)];
-  log(`🎯 New target (hidden): <b>${escapeHtml(target.name)}</b>`);
-  updateUI(); draw();
-}
-function setPlayer(lat, lon, source="manual") {
-  player = { lat, lon };
-  log(`📍 Player set (${source}): ${lat.toFixed(6)}, ${lon.toFixed(6)}`);
-  updateUI(); draw();
-}
-function ensureReady() {
-  if (!player) { log("⚠️ Set your location first."); return false; }
-  if (!target) pickNewTarget();
-  return true;
-}
-function addClue(clue) {
-  clues.push({ ...clue, ts: Date.now() });
-  elClues.textContent = String(clues.length);
-  draw();
-}
-
-// ===== Q0 Radar (existing) =====
-function askRadar() {
-  if (!ensureReady()) return;
-
-  const meters = parseFloat(elRadarPreset.value);
-  const dist = haversineMeters(player.lat, player.lon, target.lat, target.lon);
-  const ok = dist <= meters;
-
-  const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-  const rPx = radiusMetersToPixels(meters, player.lat, BBOX, canvas.width, canvas.height);
-
-  addClue({ type:"ring", x:p.x, y:p.y, rPx, ok, meters });
-
-  elLast.className = "pill " + (ok ? "ok" : "no");
-  elLast.textContent = ok ? `TRUE (≤ ${meters}m)` : `FALSE (> ${meters}m)`;
-
-  log(`📡 Radar ${meters}m → <span class="pill ${ok ? "ok":"no"}">${ok ? "TRUE" : "FALSE"}</span> (actual: ${dist.toFixed(1)}m)`);
-}
-
-// ===== Q1 N/S/E/W =====
-function askDirection(dir) {
-  if (!ensureReady()) return;
-  const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-
-  let actualSide = dir;
-  if (dir === "N") actualSide = (target.lat > player.lat) ? "N" : "S";
-  if (dir === "S") actualSide = (target.lat < player.lat) ? "S" : "N";
-  if (dir === "E") actualSide = (target.lon > player.lon) ? "E" : "W";
-  if (dir === "W") actualSide = (target.lon < player.lon) ? "W" : "E";
-
-  // Answer is whether the asked direction matches the actual side
-  const ok = (actualSide === dir);
-
-  addClue({
-    type:"half",
-    px: p.x, py: p.y,
-    asked: dir,
-    actual: actualSide,
-    ok
-  });
-
-  log(`🧭 ${dir} of me? → <span class="pill ${ok ? "ok":"no"}">${ok ? "TRUE" : "FALSE"}</span> (so it’s <b>${actualSide}</b>)`);
-}
-
-// ===== Q2 Quadrant =====
-function askQuadrant() {
-  if (!ensureReady()) return;
-  const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-
-  const north = target.lat > player.lat; // higher lat = north
-  const east  = target.lon > player.lon;
-  const quad =
-    (north && east) ? "NE" :
-    (north && !east) ? "NW" :
-    (!north && east) ? "SE" : "SW";
-
-  addClue({ type:"quadrant", px:p.x, py:p.y, quad, ok:true });
-  log(`🧩 Quadrant → <span class="pill ok">${quad}</span>`);
-}
-
-// ===== Q3 Bearing bucket =====
-function askBearing() {
-  if (!ensureReady()) return;
-
-  const buckets = parseInt(elBearingBuckets.value, 10);
-  const deg = bearingDeg(player.lat, player.lon, target.lat, target.lon);
-
-  const labels4 = ["N","E","S","W"];
-  const labels8 = ["N","NE","E","SE","S","SW","W","NW"];
-  const labels = (buckets === 4) ? labels4 : labels8;
-
-  const bucketSize = 360 / buckets;
-  const idx = Math.floor((deg + bucketSize/2) / bucketSize) % buckets;
-  const label = labels[idx];
-
-  // Convert (north=0°) to canvas arc angles (east=0°), radians
-  const centerDeg = idx * bucketSize;
-  const startDeg = centerDeg - bucketSize/2;
-  const endDeg   = centerDeg + bucketSize/2;
-
-  const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-
-  addClue({ type:"wedge",
-    px:p.x, py:p.y,
-    startRad: (toRad(startDeg - 90)),
-    endRad:   (toRad(endDeg   - 90)),
-    label,
-    bearing: deg.toFixed(1) + "°",
-    ok:true
-  });
-
-  log(`🧭 Bearing bucket (${buckets}) → <span class="pill ok">${label}</span> (bearing ${deg.toFixed(1)}°)`);
-}
-
-// ===== Q4 Distance bucket =====
-function parseBucket(s) {
-  if (s.endsWith("+")) {
-    const min = parseFloat(s.slice(0, -1));
-    return { min, max: Infinity, text: `${min}m+` };
-  }
-  const [a,b] = s.split("-").map(x => parseFloat(x));
-  return { min: a, max: b, text: `${a}–${b}m` };
-}
-function askDistanceBucket() {
-  if (!ensureReady()) return;
-
-  const bucket = parseBucket(elDistBucket.value);
-  const dist = haversineMeters(player.lat, player.lon, target.lat, target.lon);
-
-  const ok = (dist >= bucket.min) && (dist < bucket.max);
-
-  const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-  const rIn  = (bucket.min <= 0) ? 0 : radiusMetersToPixels(bucket.min, player.lat, BBOX, canvas.width, canvas.height);
-  const rOut = (bucket.max === Infinity)
-    ? Math.max(canvas.width, canvas.height) * 1.2
-    : radiusMetersToPixels(bucket.max, player.lat, BBOX, canvas.width, canvas.height);
-
-  addClue({
-    type:"donut",
-    px:p.x, py:p.y,
-    rIn, rOut,
-    ok,
-    text: bucket.text,
-    actual: dist.toFixed(1) + "m"
-  });
-
-  log(`📏 Distance in ${bucket.text}? → <span class="pill ${ok ? "ok":"no"}">${ok ? "TRUE" : "FALSE"}</span> (actual ${dist.toFixed(1)}m)`);
-}
-
-// ===== Q5 Thermometer =====
-function askThermo() {
-  if (!ensureReady()) return;
-
-  // We compare your distance-to-target before and after you moved.
-  // The constraint is the perpendicular bisector of segment AB:
-  // - If you got WARMER, the target is in the half-plane closer to B.
-  // - If you got COLDER, the target is in the half-plane closer to A.
-  // First click sets A (baseline). Second click uses current player location as B.
-  if (!thermoBaseline) {
-    thermoBaseline = { lat: player.lat, lon: player.lon };
-    elLast.className = "pill mid";
-    elLast.textContent = "Thermo baseline set";
-    log("🌡️ Thermometer baseline set. Move somewhere else, then ask again.");
-    return;
-  }
-
-  const aLL = { lat: thermoBaseline.lat, lon: thermoBaseline.lon };
-  const bLL = { lat: player.lat, lon: player.lon };
-
-  const moved = haversineMeters(aLL.lat, aLL.lon, bLL.lat, bLL.lon);
-  if (moved < 10) {
-    elLast.className = "pill mid";
-    elLast.textContent = "Move more";
-    log(`🌡️ You barely moved (${moved.toFixed(1)}m). Move at least ~10m for a useful thermometer.`);
-    return;
-  }
-
-  const dA = haversineMeters(aLL.lat, aLL.lon, target.lat, target.lon);
-  const dB = haversineMeters(bLL.lat, bLL.lon, target.lat, target.lon);
-
-  let result = "same";
-  if (dB < dA - 0.5) result = "warmer";
-  else if (dB > dA + 0.5) result = "colder";
-
-  const a = latLonToPixel(aLL.lat, aLL.lon, BBOX, canvas.width, canvas.height);
-  const b = latLonToPixel(bLL.lat, bLL.lon, BBOX, canvas.width, canvas.height);
-
-  if (result !== "same") {
-    addClue({ type:"thermo", ax:a.x, ay:a.y, bx:b.x, by:b.y, result });
-  }
-
-  elLast.className = "pill mid";
-  elLast.textContent = `Thermo: ${result.toUpperCase()}`;
-  log(`🌡️ Thermometer → <span class="pill mid">${result.toUpperCase()}</span> (A: ${dA.toFixed(1)}m → B: ${dB.toFixed(1)}m, moved ${moved.toFixed(1)}m)`);
-
-  // Update baseline so the next thermometer compares from here.
-  thermoBaseline = { lat: bLL.lat, lon: bLL.lon };
-}
-
-// ===== DRAW =====
-function drawBBoxOutline() {
-  ctx.save();
-  ctx.setLineDash([10, 7]);
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgba(147,197,253,.95)";
-  ctx.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
-  ctx.restore();
-}
-
-function isRegionClue(c) {
-  return c && (c.type === "ring" || c.type === "donut" || c.type === "half" || c.type === "quadrant" || c.type === "wedge" || c.type === "thermo");
-}
-
-
-function clipRectToHalfPlane(W, H, mx, my, nx, ny, keepPositive) {
-  // Clip the canvas rectangle to a half-plane defined by:
-  //   (P - M) · N >= 0   (if keepPositive=true)
-  //   (P - M) · N <= 0   (if keepPositive=false)
-  let poly = [
-    {x:0, y:0},
-    {x:W, y:0},
-    {x:W, y:H},
-    {x:0, y:H},
-  ];
-  const sign = keepPositive ? 1 : -1;
-  const EPS = 1e-9;
-
-  function sd(p) { // signed distance * sign
-    return ((p.x - mx) * nx + (p.y - my) * ny) * sign;
-  }
-
-  const out = [];
-  for (let i = 0; i < poly.length; i++) {
-    const S = poly[i];
-    const E = poly[(i + 1) % poly.length];
-    const dS = sd(S);
-    const dE = sd(E);
-    const S_in = dS >= -EPS;
-    const E_in = dE >= -EPS;
-
-    if (S_in && E_in) {
-      out.push(E);
-    } else if (S_in && !E_in) {
-      // leaving: add intersection
-      const t = dS / (dS - dE);
-      out.push({ x: S.x + t * (E.x - S.x), y: S.y + t * (E.y - S.y) });
-    } else if (!S_in && E_in) {
-      // entering: add intersection then E
-      const t = dS / (dS - dE);
-      out.push({ x: S.x + t * (E.x - S.x), y: S.y + t * (E.y - S.y) });
-      out.push(E);
-    }
-  }
-  return out;
-}
-
-function fillPolygon(g, poly) {
-  if (!poly || poly.length < 3) return;
-  g.beginPath();
-  g.moveTo(poly[0].x, poly[0].y);
-  for (let i = 1; i < poly.length; i++) g.lineTo(poly[i].x, poly[i].y);
-  g.closePath();
-  g.fill();
-}
-function paintRegion(g, c, W, H) {
-  switch (c.type) {
-    case "ring": {
-      g.beginPath();
-      g.arc(c.x, c.y, c.rPx, 0, Math.PI * 2);
-      g.fill();
-      return;
-    }
-    case "donut": {
-      g.beginPath();
-      g.arc(c.px, c.py, c.rOut, 0, Math.PI * 2);
-      if (c.rIn > 0.5) g.arc(c.px, c.py, c.rIn, 0, Math.PI * 2, true);
-      g.closePath();
-      g.fill("evenodd");
-      return;
-    }
-    case "half": {
-      // The "questioned area" is the asked half-plane
-      if (c.asked === "N") g.fillRect(0, 0, W, c.py);
-      if (c.asked === "S") g.fillRect(0, c.py, W, H - c.py);
-      if (c.asked === "W") g.fillRect(0, 0, c.px, H);
-      if (c.asked === "E") g.fillRect(c.px, 0, W - c.px, H);
-      return;
-    }
-    case "quadrant": {
-      const northY0 = 0, northH = c.py;
-      const southY0 = c.py, southH = H - c.py;
-      const westX0 = 0, westW = c.px;
-      const eastX0 = c.px, eastW = W - c.px;
-
-      if (c.quad === "NE") g.fillRect(eastX0, northY0, eastW, northH);
-      if (c.quad === "NW") g.fillRect(westX0, northY0, westW, northH);
-      if (c.quad === "SE") g.fillRect(eastX0, southY0, eastW, southH);
-      if (c.quad === "SW") g.fillRect(westX0, southY0, westW, southH);
-      return;
-    }
-    case "wedge": {
-      const R = Math.max(W, H) * 1.35;
-      g.beginPath();
-      g.moveTo(c.px, c.py);
-      g.arc(c.px, c.py, R, c.startRad, c.endRad);
-      g.closePath();
-      g.fill();
-      return;
-    }
-
-    case "thermo": {
-      // Thermometer: after moving from A->B, "warmer" means target is closer to B than A.
-      // That defines a half-plane split by the perpendicular bisector of segment AB.
-      if (!c || (c.result !== "warmer" && c.result !== "colder")) return;
-      const ax = c.ax, ay = c.ay, bx = c.bx, by = c.by;
-      const vx = bx - ax, vy = by - ay;
-      const len2 = vx*vx + vy*vy;
-      if (len2 < 1e-6) return;
-
-      const mx = (ax + bx) / 2;
-      const my = (ay + by) / 2;
-
-      // Using N = (B-A). Points closer to B satisfy (P-M)·N > 0.
-      const keepPositive = (c.result === "warmer"); // keep B-side if warmer; keep A-side if colder
-      const poly = clipRectToHalfPlane(W, H, mx, my, vx, vy, keepPositive);
-      fillPolygon(g, poly);
-      return;
-    }
-  }
-}
-
-function drawClues() {
-  const W = canvas.width, H = canvas.height;
-
-  // Build a single fog layer (no double-dark overlap):
-  // - If a clue is TRUE (or it directly returns a region like quadrant/wedge), we fog EVERYTHING OUTSIDE that region.
-  //   Multiple TRUE clues intersect (only the overlap stays clear).
-  // - If a clue is FALSE, we fog the questioned region itself.
-  const regionClues = clues.filter(isRegionClue);
-
-  const positives = regionClues.filter(c => c.ok !== false); // ok=true or undefined (quadrant/wedge)
-  const negatives = regionClues.filter(c => c.ok === false);
-
-  // Allowed region = intersection of all positives (if any)
-  allowedCtx.clearRect(0, 0, W, H);
-  if (positives.length > 0) {
-    allowedCtx.save();
-    allowedCtx.globalCompositeOperation = "source-over";
-    allowedCtx.fillStyle = "rgba(2, 6, 23, 1)";
-    allowedCtx.fillRect(0, 0, W, H);
-
-    allowedCtx.globalCompositeOperation = "destination-in";
-    for (const c of positives) paintRegion(allowedCtx, c, W, H);
-    allowedCtx.restore();
-  }
-
-  // Fog mask
-  fogCtx.clearRect(0, 0, W, H);
-  fogCtx.save();
-  fogCtx.globalCompositeOperation = "source-over";
-  fogCtx.fillStyle = "rgba(2, 6, 23, 1)";
-
-  if (positives.length > 0) {
-    // Start fogged everywhere, then punch out the allowed intersection
-    fogCtx.fillRect(0, 0, W, H);
-    fogCtx.globalCompositeOperation = "destination-out";
-    fogCtx.drawImage(allowedLayer, 0, 0);
-    fogCtx.globalCompositeOperation = "source-over";
-  }
-
-  // Add all FALSE regions (union)
-  for (const c of negatives) paintRegion(fogCtx, c, W, H);
-
-  fogCtx.restore();
-
-  // Composite fog once (slider controls opacity)
-  const a = fogAlpha();
-  if (a > 0) {
-    ctx.save();
-    ctx.globalAlpha = a;
-    ctx.drawImage(fogLayer, 0, 0);
-    ctx.restore();
-  }
-
-  
-
-  // Optional but useful: draw the thermometer move segment (neutral colour, no dashes).
-  const thermos = clues.filter(c => c && c.type === "thermo");
-  if (thermos.length) {
-    ctx.save();
-    ctx.globalAlpha = 0.55;
-    ctx.strokeStyle = "rgba(148,163,184,.9)";
-    ctx.lineWidth = 2;
-    ctx.fillStyle = "rgba(148,163,184,.9)";
-    for (const t of thermos) {
-      ctx.beginPath();
-      ctx.moveTo(t.ax, t.ay);
-      ctx.lineTo(t.bx, t.by);
-      ctx.stroke();
-
-      const mx = (t.ax + t.bx) / 2;
-      const my = (t.ay + t.by) / 2;
-      ctx.beginPath();
-      ctx.arc(mx, my, 2.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-  }
-
-// NOTE: We intentionally draw NO outlines, dashed lines, or coloured fills.
-  // The fog mask is the whole UI.
-}
-
-
-
-
-function draw() {
-  resizeCanvasToDisplaySize();
-  ctx.save();
-  ctx.globalAlpha = 1;
-  ctx.globalCompositeOperation = "source-over";
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (mapReady) ctx.drawImage(mapImg, 0, 0, canvas.width, canvas.height);
-  else {
-    ctx.fillStyle = "#0b1220";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "#93c5fd";
-    ctx.font = "14px system-ui, sans-serif";
-    ctx.fillText("map.png not loaded", 14, 26);
-  }
-
-  drawClues();
-
-  // player marker
-  if (player) {
-    const p = latLonToPixel(player.lat, player.lon, BBOX, canvas.width, canvas.height);
-    ctx.save();
-    ctx.fillStyle = "rgba(59,130,246,.95)";
-    ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI*2); ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,.85)";
-    ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.arc(p.x, p.y, 9, 0, Math.PI*2); ctx.stroke();
-    ctx.restore();
-  }
-
-  // target (debug)
-  if (target && elReveal.checked) {
-    const t = latLonToPixel(target.lat, target.lon, BBOX, canvas.width, canvas.height);
-    ctx.save();
-    ctx.fillStyle = "rgba(245,158,11,.95)";
-    ctx.beginPath(); ctx.arc(t.x, t.y, 6, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
-  }
-
-  if (elBBox.checked) drawBBoxOutline();
-  ctx.restore();
-}
-
-function updateUI() {
-  elPlayer.textContent = player ? `${player.lat.toFixed(6)}, ${player.lon.toFixed(6)}` : "not set";
-  elTarget.textContent = (target && elReveal.checked)
-    ? `${target.name} — ${target.lat.toFixed(6)}, ${target.lon.toFixed(6)}`
-    : "hidden";
-  elClues.textContent = String(clues.length);
-}
-
-function clearClues() {
-  clues.length = 0;
-  thermoBaseline = null;
-  elLast.className = "pill mid";
-  elLast.textContent = "Cleared";
-  log("🧽 Cleared all clues (including thermometer baseline).");
-  updateUI(); draw();
-}
-
-function log(html) {
-  const time = new Date().toLocaleTimeString();
-  elLog.innerHTML = `<div style="margin-bottom:8px;"><span class="muted">[${time}]</span> ${html}</div>` + elLog.innerHTML;
-}
-function escapeHtml(s) {
-  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-// ===== EVENTS =====
-document.getElementById("btnGeo").addEventListener("click", () => {
-  if (!navigator.geolocation) { log("❌ Geolocation not available."); return; }
-  navigator.geolocation.getCurrentPosition(
-    (pos) => setPlayer(pos.coords.latitude, pos.coords.longitude, "geolocation"),
-    (err) => log(`❌ Geolocation error: ${escapeHtml(err.message || String(err))}`),
-    { enableHighAccuracy: true, timeout: 12000 }
-  );
-});
-
-document.getElementById("btnClear").addEventListener("click", clearClues);
-document.getElementById("btnNewTarget").addEventListener("click", () => { pickNewTarget(); clearClues(); });
-
-document.getElementById("btnRadar").addEventListener("click", askRadar);
-
-document.getElementById("btnNorth").addEventListener("click", () => askDirection("N"));
-document.getElementById("btnSouth").addEventListener("click", () => askDirection("S"));
-document.getElementById("btnEast").addEventListener("click", () => askDirection("E"));
-document.getElementById("btnWest").addEventListener("click", () => askDirection("W"));
-
-document.getElementById("btnQuadrant").addEventListener("click", askQuadrant);
-document.getElementById("btnBearing").addEventListener("click", askBearing);
-document.getElementById("btnDistance").addEventListener("click", askDistanceBucket);
-document.getElementById("btnThermo").addEventListener("click", askThermo);
-
-elReveal.addEventListener("change", () => { updateUI(); draw(); });
-elBBox.addEventListener("change", draw);
-elThickness.addEventListener("input", draw);
-
-if (elFogOpacity) {
-  elFogOpacity.addEventListener("input", () => { updateFogUI(); draw(); });
-}
-
-canvas.addEventListener("click", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-  const y = (e.clientY - rect.top)  * (canvas.height / rect.height);
-  const ll = pixelToLatLon(x, y, BBOX, canvas.width, canvas.height);
-  setPlayer(ll.lat, ll.lon, "map click");
-});
-
-// ===== INIT =====
-
-// Keep the canvas bitmap synced to its displayed size (fixes Safari stretching).
-try {
-  const mapCard = document.querySelector(".mapCard");
-  if (window.ResizeObserver && mapCard) {
-    const ro = new ResizeObserver(() => { resizeCanvasToDisplaySize(); draw(); });
-    ro.observe(mapCard);
-  }
-} catch (e) {}
-window.addEventListener("resize", () => { resizeCanvasToDisplaySize(); draw(); });
-
-mapImg.onload = () => {
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function distance(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+function midpoint(a, b) { return { x: (a.x + b.x)/2, y: (a.y + b.y)/2 }; }
+
+// ---- Boot ----
+mapImg.addEventListener("load", () => {
   mapReady = true;
-  const iw = mapImg.naturalWidth || 960;
-  const ih = mapImg.naturalHeight || 720;
-  // Lock the displayed aspect ratio to the image so Safari can't "stretch" the map on redraws.
-  canvas.style.aspectRatio = `${iw} / ${ih}`;
-
-  log("🗺️ Loaded map.png");
-  resizeCanvasToDisplaySize();
-  updateUI(); draw();
-};
-mapImg.onerror = () => {
-  mapReady = false;
-  log("🗺️ map.png failed to load — check it’s next to index.html and being served by npm dev server.");
-  updateUI(); draw();
-};
+  fitViewToMap();
+  updateUI();
+  draw();
+});
+window.addEventListener("resize", () => {
+  if (!mapReady) return;
+  fitViewToMap();
+});
 
 (async function init() {
   updateFogUI();
-  updateUI();
-  draw();
   await loadPois();
-  pickNewTarget();
+  pickNewTarget(false);
+  updateUI();
+  log("Ready. Tip: on mobile, use HTTPS or localhost for geolocation.");
+})();
+
+
+// ---- Panel toggle (mobile overlay UI) ----
+(() => {
+  const panel = document.getElementById("panel");
+  const btn = document.getElementById("btnPanel");
+  const btnClose = document.getElementById("btnPanelClose");
+
+  if (!panel || !btn) return;
+
+  function setOpen(open) {
+    panel.classList.toggle("open", open);
+  }
+  btn.addEventListener("click", () => setOpen(!panel.classList.contains("open")));
+  if (btnClose) btnClose.addEventListener("click", () => setOpen(false));
+
+  // Start hidden (map-first)
+  setOpen(false);
 })();
