@@ -79,6 +79,10 @@ let mapReady = false;
 const allowedWorld = document.createElement("canvas");
 const allowedCtx = allowedWorld.getContext("2d", { alpha: true });
 
+// Screen-sized fog layer so we can punch holes without erasing the map
+const fogScreen = document.createElement("canvas");
+const fogScreenCtx = fogScreen.getContext("2d", { alpha: true });
+
 // ---- State ----
 let player = null;  // {lat, lon}
 let target = null;  // {name, lat, lon}
@@ -106,6 +110,7 @@ function resizeCanvasToDisplaySize() {
   const h = Math.round(rect.height * dpr);
   if (canvas.width !== w || canvas.height !== h) {
     canvas.width = w; canvas.height = h;
+    fogScreen.width = w; fogScreen.height = h;
   }
 }
 
@@ -606,18 +611,31 @@ function drawFog() {
   const a = fogAlpha();
   if (clues.length === 0 || a <= 0) return;
 
-  ctx.save();
-  // 1) lay fog everywhere
-  ctx.globalCompositeOperation = "source-over";
-  ctx.fillStyle = `rgba(0,0,0,${a})`;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  // Build fog on an offscreen screen-sized canvas so we don't "erase" the map.
+  if (fogScreen.width !== canvas.width || fogScreen.height !== canvas.height) {
+    fogScreen.width = canvas.width;
+    fogScreen.height = canvas.height;
+  }
+  fogScreenCtx.clearRect(0, 0, fogScreen.width, fogScreen.height);
 
-  // 2) cut out allowed region using destination-out
-  ctx.globalCompositeOperation = "destination-out";
-  ctx.imageSmoothingEnabled = false;
-  ctx.translate(view.tx, view.ty);
-  ctx.scale(view.scale, view.scale);
-  ctx.drawImage(allowedWorld, 0, 0);
+  // 1) Fill fog everywhere
+  fogScreenCtx.globalCompositeOperation = "source-over";
+  fogScreenCtx.fillStyle = `rgba(0,0,0,${a})`;
+  fogScreenCtx.fillRect(0, 0, fogScreen.width, fogScreen.height);
+
+  // 2) Punch out the allowed region (transparent hole) using destination-out
+  fogScreenCtx.globalCompositeOperation = "destination-out";
+  fogScreenCtx.imageSmoothingEnabled = false;
+  fogScreenCtx.save();
+  fogScreenCtx.translate(view.tx, view.ty);
+  fogScreenCtx.scale(view.scale, view.scale);
+  fogScreenCtx.drawImage(allowedWorld, 0, 0);
+  fogScreenCtx.restore();
+
+  // 3) Composite fog over the already-drawn map
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.drawImage(fogScreen, 0, 0);
   ctx.restore();
 }
 
