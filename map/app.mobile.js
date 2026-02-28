@@ -520,7 +520,7 @@ function buildAllowedWorld() {
 
   // Start allowed = whole map (opaque)
   allowedCtx.clearRect(0,0,MW,MH);
-  allowedCtx.fillStyle = "rgba(0,0,0,1)";
+  allowedCtx.fillStyle = "rgba(255,255,255,1)";
   allowedCtx.fillRect(0,0,MW,MH);
 
   // Intersect sequential constraints by masking in-place using destination-in
@@ -530,7 +530,7 @@ function buildAllowedWorld() {
 
     // Draw region for which the clue is satisfied ("allowed region")
     allowedCtx.clearRect(0,0,0,0); // no-op; just for readability
-    allowedCtx.fillStyle = "rgba(0,0,0,1)";
+    allowedCtx.fillStyle = "rgba(255,255,255,1)";
     allowedCtx.beginPath();
 
     if (c.type === "ring") {
@@ -614,6 +614,7 @@ function drawFog() {
 
   // 2) cut out allowed region using destination-out
   ctx.globalCompositeOperation = "destination-out";
+  ctx.imageSmoothingEnabled = false;
   ctx.translate(view.tx, view.ty);
   ctx.scale(view.scale, view.scale);
   ctx.drawImage(allowedWorld, 0, 0);
