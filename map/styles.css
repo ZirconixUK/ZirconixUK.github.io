@@ -41,7 +41,7 @@ body{
 .fab{
   position:absolute;
   top:12px;
-  right:12px;
+  z-index:30;
   z-index:30;
   width:46px;
   height:46px;
@@ -60,9 +60,9 @@ body{
 .panel{
   position:absolute;
   top:12px;
-  left:12px;
-  right:12px;
   z-index:25;
+
+  width:min(420px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
 
   max-height:min(78dvh, 720px);
   overflow:auto;
@@ -157,4 +157,18 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   background:rgba(2,6,23,.45);
   font-size:12px;
   line-height:1.35;
+}
+
+
+.fab--right{ right:calc(12px + env(safe-area-inset-right)); }
+.fab--left{ left:calc(12px + env(safe-area-inset-left)); }
+
+.panel--right{ right:calc(12px + env(safe-area-inset-right)); }
+.panel--left{ left:calc(12px + env(safe-area-inset-left)); }
+
+@media (max-width: 420px){
+  .panel{
+    width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    max-height:calc(100dvh - 24px);
+  }
 }

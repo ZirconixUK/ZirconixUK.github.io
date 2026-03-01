@@ -900,3 +900,14 @@ window.addEventListener("resize", () => {
   setOpen(panelGameplay, false);
   setOpen(panelDebug, false);
 })();
+
+
+// ---- Back-compat (if older single panel ids exist) ----
+(() => {
+  const btn = document.getElementById("btnPanel");
+  const panel = document.getElementById("panel");
+  if (!btn || !panel) return;
+  btn.addEventListener("click", () => panel.classList.toggle("open"));
+  const x = document.getElementById("btnPanelClose");
+  if (x) x.addEventListener("click", () => panel.classList.remove("open"));
+})();
