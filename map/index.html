@@ -3,21 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Map Game (mobile)</title>
-  <link rel="stylesheet" href="./styles.css" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+<title>Map Game (mobile)</title>
+  <script>
+    // Dev cache-buster for HTML-linked assets (map.png can still be cached)
+    (function () {
+      var cb = Date.now();
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = './styles.css?cb=' + cb;
+      document.head.appendChild(css);
+
+      var js = document.createElement('script');
+      js.src = './app.js?cb=' + cb;
+      js.defer = true;
+      document.head.appendChild(js);
+    })();
+  </script>
+
 </head>
 <body>
   <div id="mapShell">
     <canvas id="view"></canvas>
 
-    <!-- Gameplay overlay (top-right) -->
-    <button id="btnGameplay" class="fab fab--right" aria-label="Show/hide gameplay" title="Show/hide gameplay">☰</button>
-    <div id="panelGameplay" class="panel panel--right" aria-label="Gameplay controls">
+    <button id="btnPanel" class="fab" aria-label="Show/hide controls" title="Show/hide controls">☰</button>
+
+    <div id="panel" class="panel">
       <div class="panelHeader">
         <div>
-          <div class="panelTitle">Gameplay</div>
-          <div class="muted">Questions + Radar • Map stays interactive underneath</div>
+          <div class="panelTitle">Questions 1–5 + Radar</div>
+          <div class="muted">Overlay controls • Map stays interactive underneath</div>
         </div>
+        <button id="btnPanelClose" class="iconBtn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="row">
+        <button class="primary" id="btnGeo">Enable location</button>
+        <button id="btnCenter">Center</button>
+        <button id="btnClear">Clear</button>
+        <button class="warn" id="btnNewTarget">New target</button>
+      </div>
+
+      <div class="kv">
+        <div class="k">Player</div><div id="playerOut">not set</div>
+        <div class="k">Target</div><div id="targetOut">hidden</div>
+        <div class="k">Clues</div><div id="cluesOut">0</div>
+      </div>
+
+      <div class="row">
+        <label class="check">
+          <input type="checkbox" id="dbgReveal">
+          Reveal target (debug)
+        </label>
+        <label class="check">
+          <input type="checkbox" id="dbgBBox" checked>
+          Draw map bounds
+        </label>
       </div>
 
       <h2>Radar</h2>
@@ -103,48 +146,9 @@
         <span class="muted">Press once to set baseline; move; press again.</span>
       </div>
 
-      <div class="muted">Tip: use the top-left button for debug + logs.</div>
-    </div>
-
-    <!-- Debug overlay (top-left) -->
-    <button id="btnDebug" class="fab fab--left" aria-label="Show/hide debug" title="Show/hide debug">⚙︎</button>
-    <div id="panelDebug" class="panel panel--left" aria-label="Debug controls">
-      <div class="panelHeader">
-        <div>
-          <div class="panelTitle">Debug</div>
-          <div class="muted">Location, target controls, and logs</div>
-        </div>
-      </div>
-
-      <div class="row">
-        <button class="primary" id="btnGeo">Enable location</button>
-        <button id="btnCenter">Center</button>
-        <button id="btnClear">Clear</button>
-        <button class="warn" id="btnNewTarget">New target</button>
-      </div>
-
-      <div class="kv">
-        <div class="k">Player</div><div id="playerOut">not set</div>
-        <div class="k">Target</div><div id="targetOut">hidden</div>
-        <div class="k">Clues</div><div id="cluesOut">0</div>
-      </div>
-
-      <div class="row">
-        <label class="check">
-          <input type="checkbox" id="dbgReveal">
-          Reveal target
-        </label>
-        <label class="check">
-          <input type="checkbox" id="dbgBBox" checked>
-          Draw map bounds
-        </label>
-      </div>
-
-      <h2>Logs</h2>
       <div class="log" id="log"></div>
+      <div class="muted">Tip: drag/pinch the map. The controls panel can be hidden.</div>
     </div>
   </div>
-
-  <script src="./app.js" defer></script>
 </body>
 </html>
