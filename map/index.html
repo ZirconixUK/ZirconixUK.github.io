@@ -8,18 +8,55 @@
   <meta http-equiv="Expires" content="0" />
 <title>Map Game (mobile)</title>
   <script>
-    // Dev cache-buster for HTML-linked assets (map.png can still be cached)
+    // Dev cache-buster for HTML/CSS/JS (map.png can still be cached)
     (function () {
       var cb = Date.now();
+
+      // CSS (no-cache via querystring)
       var css = document.createElement('link');
       css.rel = 'stylesheet';
       css.href = './styles.css?cb=' + cb;
       document.head.appendChild(css);
 
-      var js = document.createElement('script');
-      js.src = './app.js?cb=' + cb;
-      js.defer = true;
-      document.head.appendChild(js);
+      // Load scripts sequentially to preserve globals/order.
+      function load(src) {
+        return new Promise(function (resolve, reject) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.defer = true;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      }
+
+      function start() {
+        (async function () {
+        await load('./js/00_config.js?cb=' + cb);
+        await load('./js/01_pois.js?cb=' + cb);
+        await load('./js/02_dom.js?cb=' + cb);
+        await load('./js/03_map_image.js?cb=' + cb);
+        await load('./js/04_state.js?cb=' + cb);
+        await load('./js/05_view_transform.js?cb=' + cb);
+        await load('./js/06_mobile_gestures_pointer_events.js?cb=' + cb);
+        await load('./js/07_geolocation.js?cb=' + cb);
+        await load('./js/08_clues_questions.js?cb=' + cb);
+        await load('./js/09_ui_helpers.js?cb=' + cb);
+        await load('./js/10_drawing.js?cb=' + cb);
+        await load('./js/11_geometry_drawing_helpers.js?cb=' + cb);
+        await load('./js/12_geo_helpers.js?cb=' + cb);
+        await load('./js/13_boot.js?cb=' + cb);
+        await load('./js/14_panels_misc.js?cb=' + cb);
+        })().catch(function (e) {
+          console.error('Script load failed', e);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
+      }
     })();
   </script>
 
