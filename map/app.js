@@ -867,20 +867,36 @@ window.addEventListener("resize", () => {
 })();
 
 
-// ---- Panel toggle (mobile overlay UI) ----
+// ---- Panels toggle (gameplay + debug overlays) ----
 (() => {
-  const panel = document.getElementById("panel");
-  const btn = document.getElementById("btnPanel");
-  const btnClose = document.getElementById("btnPanelClose");
+  const panelGameplay = document.getElementById("panelGameplay");
+  const panelDebug = document.getElementById("panelDebug");
+  const btnGameplay = document.getElementById("btnGameplay");
+  const btnDebug = document.getElementById("btnDebug");
 
-  if (!panel || !btn) return;
-
-  function setOpen(open) {
+  function setOpen(panel, open) {
+    if (!panel) return;
     panel.classList.toggle("open", open);
   }
-  btn.addEventListener("click", () => setOpen(!panel.classList.contains("open")));
-  if (btnClose) btnClose.addEventListener("click", () => setOpen(false));
+
+  if (btnGameplay && panelGameplay) {
+    btnGameplay.addEventListener("click", () => {
+      const willOpen = !panelGameplay.classList.contains("open");
+      setOpen(panelGameplay, willOpen);
+      // Optional: don't stack overlays unless you want them
+      if (willOpen) setOpen(panelDebug, false);
+    });
+  }
+
+  if (btnDebug && panelDebug) {
+    btnDebug.addEventListener("click", () => {
+      const willOpen = !panelDebug.classList.contains("open");
+      setOpen(panelDebug, willOpen);
+      if (willOpen) setOpen(panelGameplay, false);
+    });
+  }
 
   // Start hidden (map-first)
-  setOpen(false);
+  setOpen(panelGameplay, false);
+  setOpen(panelDebug, false);
 })();
