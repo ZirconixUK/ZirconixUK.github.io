@@ -7,7 +7,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126354152
@@ -31,7 +34,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 464339045
@@ -55,7 +61,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 24728022
@@ -76,7 +85,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271731109
@@ -98,7 +110,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "node",
       "id": 8086587571
@@ -131,7 +146,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12376575101
@@ -149,7 +167,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "war_memorial"
+    ],
     "osm": {
       "type": "way",
       "id": 1337824505
@@ -170,7 +192,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "node",
       "id": 7931934986
@@ -200,7 +225,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 567422269
@@ -218,7 +246,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 244449045
@@ -251,7 +282,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 101422414
@@ -270,7 +304,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 31292618
@@ -289,7 +326,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126354138
@@ -317,6 +357,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -337,7 +381,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 5698869621
@@ -359,7 +406,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 204484137
@@ -380,7 +430,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "statue"
+    ],
     "osm": {
       "type": "node",
       "id": 348173736
@@ -399,7 +453,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 157502482
@@ -417,7 +474,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4402678489
@@ -451,7 +511,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12385366401
@@ -469,7 +532,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 5540412621
@@ -496,7 +562,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 12376566801
@@ -514,7 +583,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1222283335
@@ -533,7 +605,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 1174416056
@@ -559,6 +634,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -579,7 +658,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 221893886
@@ -605,7 +687,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271116151
@@ -628,7 +714,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 5612243075
@@ -647,7 +736,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 371206704
@@ -667,6 +759,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -690,7 +786,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 24626860
@@ -713,7 +812,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "way",
       "id": 906629001
@@ -736,6 +838,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -756,7 +862,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 5914005227
@@ -775,7 +884,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271118169
@@ -798,7 +911,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610847
@@ -821,7 +937,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759720
@@ -846,7 +965,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1117631272
@@ -875,7 +997,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 24611026
@@ -905,7 +1030,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 269335812
@@ -929,7 +1057,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 5864978247
@@ -947,7 +1078,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 12384575101
@@ -965,7 +1099,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1175740073
@@ -989,7 +1126,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1241183502
@@ -1015,7 +1155,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 11592441736
@@ -1033,7 +1176,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 1149948151
@@ -1055,7 +1201,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 279397321
@@ -1079,7 +1228,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "relation",
       "id": 6028297
@@ -1103,7 +1255,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 101421581
@@ -1127,7 +1282,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 24728485
@@ -1147,7 +1305,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1161156439
@@ -1171,7 +1332,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1065915477
@@ -1196,7 +1360,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 218535090
@@ -1224,7 +1391,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 619521920
@@ -1242,7 +1412,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 464346007
@@ -1265,7 +1438,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 221893884
@@ -1291,7 +1467,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 999636326
@@ -1313,7 +1492,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 4518821402
@@ -1335,7 +1517,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 5871727882
@@ -1355,7 +1540,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 31291516
@@ -1375,7 +1563,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 268979223
@@ -1404,7 +1596,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "way",
       "id": 42733274
@@ -1427,7 +1622,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 13671373
@@ -1445,7 +1643,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 12376582901
@@ -1463,7 +1664,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 7257536686
@@ -1486,7 +1690,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12397997501
@@ -1506,6 +1713,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -1526,7 +1737,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 8281349361
@@ -1545,7 +1759,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1621838264
@@ -1566,7 +1783,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "way",
       "id": 756558746
@@ -1592,7 +1812,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 1309027201
@@ -1623,7 +1846,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 12376575001
@@ -1641,7 +1867,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "way",
       "id": 1114999625
@@ -1663,7 +1892,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1161156440
@@ -1687,7 +1919,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 2482985463
@@ -1707,7 +1942,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "statue"
+    ],
     "osm": {
       "type": "node",
       "id": 348097790
@@ -1731,7 +1970,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 10234611882
@@ -1749,7 +1991,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759777
@@ -1770,7 +2015,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759778
@@ -1789,7 +2037,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610850
@@ -1813,7 +2064,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "way",
       "id": 1085218462
@@ -1842,7 +2096,13 @@
       "landmark",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:architecture",
+      "cat:landmark",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 263988289
@@ -1891,7 +2151,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "war_memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 4112993324
@@ -1911,7 +2175,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 7154329895
@@ -1939,7 +2206,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "node",
       "id": 34848697
@@ -1962,7 +2232,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "cat:landmark",
+      "viewpoint"
+    ],
     "osm": {
       "type": "node",
       "id": 4618230203
@@ -1982,7 +2255,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 268974288
@@ -2002,7 +2279,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "courthouse"
+    ],
     "osm": {
       "type": "node",
       "id": 11627475417
@@ -2025,7 +2305,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "way",
       "id": 667061582
@@ -2047,7 +2330,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 934850111
@@ -2067,7 +2353,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "war_memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 5008334489
@@ -2087,7 +2377,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 7147294467
@@ -2119,7 +2412,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 6960405293
@@ -2154,7 +2450,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "war_memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 681276980
@@ -2177,7 +2477,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "way",
       "id": 1273088123
@@ -2202,7 +2505,12 @@
       "civic",
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:civic",
+      "cat:landmark",
+      "townhall"
+    ],
     "osm": {
       "type": "way",
       "id": 60261716
@@ -2242,7 +2550,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 656966990
@@ -2272,7 +2583,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 101437407
@@ -2298,7 +2612,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 213185600
@@ -2327,7 +2644,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4513693596
@@ -2347,7 +2667,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 1311059305
@@ -2367,7 +2690,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 1293475852
@@ -2389,7 +2715,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 11599884321
@@ -2414,7 +2743,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1133250985
@@ -2437,7 +2769,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1174024625
@@ -2462,7 +2797,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1119040240
@@ -2488,7 +2826,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 4513844971
@@ -2506,7 +2847,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "way",
       "id": 1078727110
@@ -2530,7 +2874,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "war_memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 681276915
@@ -2549,7 +2897,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 269230043
@@ -2569,7 +2920,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 12213604080
@@ -2589,7 +2943,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 1309027202
@@ -2619,7 +2976,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 269332134
@@ -2646,7 +3006,13 @@
       "landmark",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:architecture",
+      "cat:landmark",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 44722328
@@ -2688,7 +3054,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610855
@@ -2713,7 +3082,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1106026676
@@ -2739,7 +3111,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial"
+    ],
     "osm": {
       "type": "node",
       "id": 12376582801
@@ -2757,7 +3132,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "node",
       "id": 7153736019
@@ -2789,7 +3167,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "way",
       "id": 84758669
@@ -2818,7 +3199,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1091833105
@@ -2843,7 +3227,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 880178527
@@ -2866,6 +3253,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -2886,7 +3277,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 279397183
@@ -2916,6 +3310,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -2936,7 +3334,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1085218465
@@ -2959,7 +3360,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1247828042
@@ -2982,7 +3386,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1119040250
@@ -3004,7 +3411,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "gallery"
+    ],
     "osm": {
       "type": "node",
       "id": 4541388783
@@ -3025,7 +3435,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1651734297
@@ -3044,7 +3457,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 31294107
@@ -3080,7 +3497,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4508657143
@@ -3100,7 +3520,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 214818625
@@ -3134,7 +3557,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 4596826195
@@ -3154,7 +3580,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 269230042
@@ -3174,7 +3603,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1175774674
@@ -3199,6 +3631,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -3219,7 +3655,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "node",
       "id": 1990934810
@@ -3238,7 +3677,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271731095
@@ -3261,7 +3703,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271727775
@@ -3283,7 +3729,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "node",
       "id": 3639057966
@@ -3308,7 +3757,10 @@
     "categories": [
       "transport_hub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:transport_hub",
+      "station"
+    ],
     "osm": {
       "type": "way",
       "id": 1273087350
@@ -3330,7 +3782,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 12398404901
@@ -3348,7 +3803,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610851
@@ -3373,6 +3831,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -3393,7 +3855,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "gallery"
+    ],
     "osm": {
       "type": "node",
       "id": 12496037808
@@ -3412,7 +3877,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 221893857
@@ -3437,7 +3905,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1222283338
@@ -3456,7 +3927,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 82883581
@@ -3474,7 +3948,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 420087204
@@ -3501,7 +3978,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 667520499
@@ -3526,7 +4006,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 24611033
@@ -3560,7 +4043,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1651726822
@@ -3584,6 +4070,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -3605,7 +4095,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759773
@@ -3629,7 +4122,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 5099086
@@ -3666,6 +4162,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -3688,7 +4188,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126354153
@@ -3713,7 +4216,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 12544315721
@@ -3736,7 +4242,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759735
@@ -3765,7 +4274,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 453394545
@@ -3793,7 +4305,11 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "memorial",
+      "statue"
+    ],
     "osm": {
       "type": "node",
       "id": 349467826
@@ -3812,7 +4328,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12376564101
@@ -3830,7 +4349,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12377118506
@@ -3848,7 +4370,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 271759731
@@ -3875,7 +4400,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 279397260
@@ -3898,7 +4426,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1651734306
@@ -3917,7 +4448,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 269190957
@@ -3941,7 +4476,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 5099085
@@ -3963,7 +4501,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271727805
@@ -3987,7 +4529,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 268977343
@@ -4010,7 +4556,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 271120688
@@ -4034,7 +4584,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 1293477001
@@ -4053,7 +4606,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1175740067
@@ -4080,7 +4636,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 849540941
@@ -4106,7 +4666,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 268974301
@@ -4128,7 +4692,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 80876422
@@ -4161,7 +4728,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 511924168
@@ -4189,7 +4759,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 212010840
@@ -4208,7 +4781,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "gallery"
+    ],
     "osm": {
       "type": "way",
       "id": 269345281
@@ -4228,7 +4804,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1175774671
@@ -4251,7 +4830,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "way",
       "id": 44724259
@@ -4280,7 +4862,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12376575002
@@ -4298,7 +4883,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "gallery"
+    ],
     "osm": {
       "type": "node",
       "id": 12496037807
@@ -4318,7 +4906,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1091833102
@@ -4339,7 +4930,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1065915470
@@ -4361,7 +4955,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 136943415
@@ -4379,7 +4976,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126354149
@@ -4402,7 +5002,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 107682851
@@ -4436,7 +5039,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1222283337
@@ -4455,7 +5061,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 2612342643
@@ -4483,7 +5092,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 2612341183
@@ -4507,7 +5119,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1222283327
@@ -4533,7 +5148,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1119040249
@@ -4559,7 +5177,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "gallery"
+    ],
     "osm": {
       "type": "node",
       "id": 348160621
@@ -4579,7 +5200,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 299317177
@@ -4600,7 +5224,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 269150488
@@ -4624,7 +5251,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1178122533
@@ -4647,7 +5277,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1950696755
@@ -4672,7 +5305,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1125737285
@@ -4703,7 +5339,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1119040246
@@ -4730,7 +5369,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610852
@@ -4754,7 +5396,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 196782636
@@ -4777,7 +5422,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1250607976
@@ -4799,7 +5447,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126354148
@@ -4822,7 +5473,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1176713699
@@ -4845,7 +5499,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 152458657
@@ -4866,7 +5523,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12400276701
@@ -4884,7 +5544,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 279397314
@@ -4903,7 +5566,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 667527543
@@ -4928,7 +5594,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4771046861
@@ -4971,7 +5640,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 673979741
@@ -5002,7 +5674,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 567421344
@@ -5020,7 +5695,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610844
@@ -5039,7 +5717,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 269391427
@@ -5062,7 +5743,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1085218461
@@ -5086,7 +5770,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 5871728885
@@ -5111,7 +5798,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 316610845
@@ -5130,7 +5820,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 4518821401
@@ -5151,7 +5844,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 27418989
@@ -5169,7 +5865,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1161803017
@@ -5200,7 +5899,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 153019329
@@ -5228,7 +5930,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 10565786343
@@ -5254,7 +5959,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 101433399
@@ -5273,7 +5981,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 279397319
@@ -5295,7 +6006,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 308766622
@@ -5326,7 +6040,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 348176545
@@ -5361,7 +6078,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 282418661
@@ -5383,7 +6103,11 @@
       "architecture",
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:architecture",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 244449050
@@ -5414,7 +6138,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4112993328
@@ -5443,7 +6170,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 101437338
@@ -5463,7 +6193,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 107125563
@@ -5481,7 +6214,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1175446626
@@ -5505,7 +6241,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 85413004
@@ -5542,7 +6281,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 12992920833
@@ -5560,7 +6302,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "courthouse"
+    ],
     "osm": {
       "type": "way",
       "id": 60925835
@@ -5579,7 +6324,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4314101471
@@ -5599,7 +6347,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1115561672
@@ -5628,7 +6379,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 887649230
@@ -5651,7 +6405,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1091833099
@@ -5680,7 +6437,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1651734288
@@ -5698,7 +6458,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1174024627
@@ -5724,7 +6487,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 152364833
@@ -5749,7 +6515,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1125717778
@@ -5773,7 +6542,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 4112993329
@@ -5792,7 +6564,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1117631264
@@ -5819,7 +6594,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1060162573
@@ -5851,6 +6629,10 @@
       "monument_memorial"
     ],
     "tags": [
+      "cat:historic_plaque",
+      "cat:monument_memorial",
+      "memorial",
+      "plaque",
       "text_present"
     ],
     "osm": {
@@ -5874,7 +6656,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272759722
@@ -5904,7 +6689,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 10995298824
@@ -5927,7 +6715,10 @@
     "categories": [
       "civic"
     ],
-    "tags": [],
+    "tags": [
+      "cat:civic",
+      "library"
+    ],
     "osm": {
       "type": "way",
       "id": 271116230
@@ -5954,7 +6745,11 @@
       "architecture",
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 290071149
@@ -5978,7 +6773,10 @@
     "categories": [
       "park_public_space"
     ],
-    "tags": [],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
     "osm": {
       "type": "way",
       "id": 878244036
@@ -5999,7 +6797,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 476276980
@@ -6017,7 +6818,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 453394548
@@ -6040,7 +6844,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 272760322
@@ -6059,7 +6866,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1126780910
@@ -6087,7 +6897,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 1000473126
@@ -6114,7 +6927,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 618545413
@@ -6146,7 +6962,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 1652773979
@@ -6164,7 +6983,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "way",
       "id": 666532970
@@ -6192,7 +7014,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 6621463385
@@ -6220,7 +7045,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "way",
       "id": 180729952
@@ -6249,7 +7077,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 218535078
@@ -6275,7 +7106,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1085218468
@@ -6298,7 +7132,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12400126701
@@ -6316,7 +7153,10 @@
     "categories": [
       "monument_memorial"
     ],
-    "tags": [],
+    "tags": [
+      "cat:monument_memorial",
+      "monument"
+    ],
     "osm": {
       "type": "node",
       "id": 12376556701
@@ -6334,7 +7174,10 @@
     "categories": [
       "landmark"
     ],
-    "tags": [],
+    "tags": [
+      "attraction",
+      "cat:landmark"
+    ],
     "osm": {
       "type": "node",
       "id": 268768055
@@ -6352,7 +7195,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "way",
       "id": 446528910
@@ -6379,7 +7225,10 @@
     "categories": [
       "religious"
     ],
-    "tags": [],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
     "osm": {
       "type": "way",
       "id": 270872422
@@ -6399,7 +7248,10 @@
     "categories": [
       "museum_gallery"
     ],
-    "tags": [],
+    "tags": [
+      "cat:museum_gallery",
+      "museum"
+    ],
     "osm": {
       "type": "node",
       "id": 34848694
@@ -6439,7 +7291,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 216752288
@@ -6466,7 +7321,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "node",
       "id": 673970192
@@ -6490,7 +7348,10 @@
     "categories": [
       "pub"
     ],
-    "tags": [],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
     "osm": {
       "type": "way",
       "id": 1176713696

@@ -15,7 +15,23 @@
       const willOpen = !panelGameplay.classList.contains("open");
       setOpen(panelGameplay, willOpen);
       // Optional: don't stack overlays unless you want them
-      if (willOpen) setOpen(panelDebug, false);
+      if (willOpen) {
+        setOpen(panelDebug, false);
+
+        // Reset gameplay menus when opening so we never land on an empty submenu state
+        const gameMenu = document.getElementById("gameMenu");
+        const radarMenu = document.getElementById("radarMenu");
+        const thermoMenu = document.getElementById("thermoMenu");
+      const dirMenu = document.getElementById("dirMenu");
+      const landmarkMenu = document.getElementById("landmarkMenu");
+        try {
+          if (gameMenu) gameMenu.classList.remove("hidden");
+          if (radarMenu) radarMenu.classList.add("hidden");
+          if (thermoMenu) thermoMenu.classList.add("hidden");
+          if (dirMenu) dirMenu.classList.add("hidden");
+          if (landmarkMenu) landmarkMenu.classList.add("hidden");
+        } catch (e) {}
+      }
     });
   }
 

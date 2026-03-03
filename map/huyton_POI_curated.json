@@ -1,0 +1,459 @@
+[
+  {
+    "id": "osm_way_472904236",
+    "name": "Bowring Park",
+    "lat": 53.4078972,
+    "lon": -2.8630039,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 472904236
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Bowring Park",
+      "wikidata": "Q4951400"
+    }
+  },
+  {
+    "id": "osm_way_1292435025",
+    "name": "Bowring Park",
+    "lat": 53.4068739,
+    "lon": -2.8722581,
+    "categories": [
+      "pub"
+    ],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435025
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "2",
+      "addr:postcode": "L16 2NE",
+      "addr:street": "Rimmer Avenue",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Bowring Park",
+      "ref:GB:uprn": "40035800"
+    }
+  },
+  {
+    "id": "osm_way_41601112",
+    "name": "Brewers Fayre",
+    "lat": 53.3995466,
+    "lon": -2.8146386,
+    "categories": [
+      "pub"
+    ],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 41601112
+    },
+    "osm_tags": {
+      "amenity": "pub",
+      "brand": "Brewers Fayre",
+      "brand:wikidata": "Q4962678",
+      "building": "yes",
+      "cuisine": "british",
+      "name": "Brewers Fayre"
+    }
+  },
+  {
+    "id": "osm_node_1604808950",
+    "name": "Court Hey Methodist Church",
+    "lat": 53.407626,
+    "lon": -2.8747164,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 1604808950
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "methodist",
+      "name": "Court Hey Methodist Church",
+      "religion": "christian"
+    }
+  },
+  {
+    "id": "osm_way_147257241",
+    "name": "Court Hey Park",
+    "lat": 53.4041729,
+    "lon": -2.8761345,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 147257241
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Court Hey Park",
+      "wikidata": "Q5178230"
+    }
+  },
+  {
+    "id": "osm_way_472902064",
+    "name": "Cyril Cook Park",
+    "lat": 53.406662,
+    "lon": -2.8505605,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 472902064
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Cyril Cook Park"
+    }
+  },
+  {
+    "id": "osm_way_1328124816",
+    "name": "Kingdom Hall of Jehovah's Witnesses",
+    "lat": 53.3898355,
+    "lon": -2.8630762,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1328124816
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "building:levels": "1",
+      "denomination": "jehovahs_witness",
+      "name": "Kingdom Hall of Jehovah's Witnesses",
+      "religion": "christian",
+      "source": "microsoft/BuildingFootprints"
+    }
+  },
+  {
+    "id": "osm_way_1090717849",
+    "name": "Liverpool Valley Church & Community Centre",
+    "lat": 53.3948951,
+    "lon": -2.8668408,
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1090717849
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:postcode": "L25 2SN",
+      "addr:street": "Mildenhall Road",
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "salvation_army",
+      "name": "Liverpool Valley Church & Community Centre",
+      "phone": "+44 151 252 6100",
+      "ref:GB:uprn": "38103486",
+      "religion": "christian",
+      "website": "https://www.salvationarmy.org.uk/liverpool-valley"
+    }
+  },
+  {
+    "id": "osm_way_1469448209",
+    "name": "Lyndene Park",
+    "lat": 53.3936686,
+    "lon": -2.8703358,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1469448209
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Lyndene Park"
+    }
+  },
+  {
+    "id": "osm_way_539849493",
+    "name": "McGoldrick Park",
+    "lat": 53.4076444,
+    "lon": -2.8364014,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 539849493
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "McGoldrick Park"
+    }
+  },
+  {
+    "id": "osm_node_26407981",
+    "name": "Our Lady of the Assumption",
+    "lat": 53.3902061,
+    "lon": -2.8624308,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 26407981
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "catholic",
+      "name": "Our Lady of the Assumption",
+      "religion": "christian"
+    }
+  },
+  {
+    "id": "osm_way_507339958",
+    "name": "Our Lady Of The Assumption Roman Catholic Church",
+    "lat": 53.3901685,
+    "lon": -2.8620999,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507339958
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "Our Lady Of The Assumption Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_way_507339960",
+    "name": "Our Lady Of The Assumption Roman Catholic Church",
+    "lat": 53.3903775,
+    "lon": -2.8625261,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507339960
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "Our Lady Of The Assumption Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_node_473491528",
+    "name": "St Cyril's Roman Catholic Church",
+    "lat": 53.3940672,
+    "lon": -2.8534687,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 473491528
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "roman_catholic",
+      "name": "St Cyril's Roman Catholic Church",
+      "note": "I think",
+      "religion": "christian",
+      "source:name": "OS Open Local Important Buildings Layer"
+    }
+  },
+  {
+    "id": "osm_way_507336649",
+    "name": "St Cyril's Roman Catholic Church",
+    "lat": 53.3940521,
+    "lon": -2.8534076,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507336649
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "St Cyril's Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_way_375974601",
+    "name": "St. Johns (Millennium Green)",
+    "lat": 53.4055041,
+    "lon": -2.8304821,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 375974601
+    },
+    "osm_tags": {
+      "designation": "millennium_green",
+      "leisure": "park",
+      "name": "St. Johns (Millennium Green)",
+      "note": "V1 as per the Natural England dataset.",
+      "source": "Natural England"
+    }
+  },
+  {
+    "id": "osm_way_421289726",
+    "name": "St. Mark's Church",
+    "lat": 53.3951549,
+    "lon": -2.8685782,
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 421289726
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St. Mark's Church",
+      "religion": "christian",
+      "wikidata": "Q105098893"
+    }
+  },
+  {
+    "id": "osm_way_30800475",
+    "name": "Stadt Moers Park: Tushingham",
+    "lat": 53.4090463,
+    "lon": -2.8082947,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 30800475
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Stadt Moers Park: Tushingham"
+    }
+  },
+  {
+    "id": "osm_way_323024174",
+    "name": "Stadt Moers Park: West View",
+    "lat": 53.4091485,
+    "lon": -2.816887,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 323024174
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Stadt Moers Park: West View"
+    }
+  }
+]

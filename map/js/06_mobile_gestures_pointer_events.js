@@ -1,76 +1,50 @@
-// ---- Mobile gestures (Pointer Events) ----
-const pointers = new Map(); // pointerId -> {sx, sy}
-let mode = "none"; // "pan" | "pinch"
-let panStart = { sx:0, sy:0, tx:0, ty:0 };
-let pinchStart = { dist:1, scale:1, worldX:0, worldY:0 };
+// ---- Gestures ----
+// Leaflet handles all pan/zoom gestures now.
+// We keep ONLY the debug click-to-set-player behaviour.
+//
+// Bug fix: previously we attempted to attach the Leaflet click handler too early (before leafletMap existed),
+// so clicks did nothing. We now wait until the map is ready and then attach exactly once.
 
-canvas.addEventListener("pointerdown", (e) => {
-  canvas.setPointerCapture(e.pointerId);
-  const p = screenPxFromClient(e.clientX, e.clientY);
-  pointers.set(e.pointerId, p);
+let __debugClickAttached = false;
 
-  if (pointers.size === 1) {
-    mode = "pan";
-    panStart = { sx: p.x, sy: p.y, tx: view.tx, ty: view.ty };
-  } else if (pointers.size === 2) {
-    mode = "pinch";
-    const [p1, p2] = [...pointers.values()];
-    const mid = midpoint(p1, p2);
-    pinchStart.dist = distance(p1, p2);
-    pinchStart.scale = view.scale;
-    const wpt = screenToWorld(mid.x, mid.y);
-    pinchStart.worldX = wpt.x;
-    pinchStart.worldY = wpt.y;
-  }
-});
+function __attachDebugClickHandler() {
+  if (__debugClickAttached) return true;
+  if (!window.leafletMap || typeof window.leafletMap.on !== "function") return false;
 
-canvas.addEventListener("pointermove", (e) => {
-  if (!pointers.has(e.pointerId)) return;
-  const p = screenPxFromClient(e.clientX, e.clientY);
-  pointers.set(e.pointerId, p);
+  window.leafletMap.on("click", (e) => {
+    // Only in debug mode
+    if (!debugMode) return;
 
-  if (!viewInited) return;
+    // Manual override: stop GPS watch so it doesn't overwrite.
+    try { if (typeof stopGeolocationWatch === "function") stopGeolocationWatch(); } catch (_) {}
 
-  if (mode === "pan" && pointers.size === 1) {
-    const dx = p.x - panStart.sx;
-    const dy = p.y - panStart.sy;
-    view.tx = panStart.tx + dx;
-    view.ty = panStart.ty + dy;
-    clampView();
+    // Set player location from click
+    if (typeof setPlayerLatLng === "function") {
+      setPlayerLatLng(e.latlng.lat, e.latlng.lng, { source: "manual-click", manual: true });
+      log(`🧪 Debug: set player to ${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)} (manual override)`);
+    } else {
+      log("❌ Debug click: setPlayerLatLng() not found.");
+    }
+
+    try { if (typeof syncLeafletPlayerMarker === "function") syncLeafletPlayerMarker(); } catch (_) {}
     drawThrottled();
-  }
+  });
 
-  if (mode === "pinch" && pointers.size === 2) {
-    const [p1, p2] = [...pointers.values()];
-    const mid = midpoint(p1, p2);
-    const dist = distance(p1, p2);
-
-    let nextScale = pinchStart.scale * (dist / pinchStart.dist);
-    nextScale = clamp(nextScale, LIMITS.min, LIMITS.max);
-
-    // Zoom around pinch midpoint: keep pinchStart.worldX/Y under the midpoint
-    view.tx = mid.x - pinchStart.worldX * nextScale;
-    view.ty = mid.y - pinchStart.worldY * nextScale;
-    view.scale = nextScale;
-
-    clampView();
-    drawThrottled();
-  }
-});
-
-function endPointer(e) {
-  pointers.delete(e.pointerId);
-  if (pointers.size === 0) mode = "none";
-  if (pointers.size === 1) {
-    // smooth pinch->pan transition
-    const remaining = [...pointers.values()][0];
-    mode = "pan";
-    panStart = { sx: remaining.x, sy: remaining.y, tx: view.tx, ty: view.ty };
-  }
+  __debugClickAttached = true;
+  try { console.info('[MapGame] Debug click handler attached to Leaflet map'); } catch(e) {}
+  return true;
 }
-canvas.addEventListener("pointerup", endPointer);
-canvas.addEventListener("pointercancel", endPointer);
 
-// Prevent iOS double-tap zoom / scrolling on the canvas
-canvas.addEventListener("touchstart", (e) => e.preventDefault(), { passive: false });
-canvas.addEventListener("touchmove",  (e) => e.preventDefault(), { passive: false });
+function setupMobileGestures() {
+  // Keep trying briefly until Leaflet is initialised.
+  let tries = 0;
+  const maxTries = 200; // ~10s at 50ms
+  const timer = setInterval(() => {
+    tries++;
+    if (__attachDebugClickHandler() || tries >= maxTries) clearInterval(timer);
+  }, 50);
+}
+
+
+// AUTO-INIT: ensure the debug click handler is actually wired up.
+try { setupMobileGestures(); } catch(e) { /* ignore */ }

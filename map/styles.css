@@ -4,6 +4,12 @@
 :root{
   --bg:#0b0f14; --panel:rgba(17,24,39,.86);
   --border:rgba(148,163,184,.18); --text:#e5e7eb; --muted:#94a3b8;
+
+  /* HUD sizing/alignment */
+  --hud-pad:12px;
+  --hud-btn:46px;
+  --hud-gap:10px;
+  --hud-row:calc(var(--hud-pad) + (2 * var(--hud-btn)) + (2 * var(--hud-gap)));
 }
 html, body{ height:100%; }
 body{
@@ -40,11 +46,11 @@ body{
 /* Floating action button to show/hide panel */
 .fab{
   position:absolute;
-  top:12px;
+  top:var(--hud-pad);
   z-index:30;
   z-index:30;
-  width:46px;
-  height:46px;
+  width:var(--hud-btn);
+  height:var(--hud-btn);
   border-radius:14px;
   border:1px solid rgba(148,163,184,.22);
   background:rgba(2,6,23,.72);
@@ -59,13 +65,15 @@ body{
 /* Overlay panels */
 .panel{
   position:absolute;
-  top:12px;
+  /* push panels below the HUD row so they never overlap the top buttons/widgets */
+  top:var(--hud-row);
   z-index:25;
 
   width:min(420px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
 
   max-height:min(78dvh, 720px);
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
 
   background:var(--panel);
   border:1px solid var(--border);
@@ -127,7 +135,7 @@ button, select, input{
 }
 button{ cursor:pointer; }
 button.primary{ background:rgba(148,163,184,.14); border-color:rgba(148,163,184,.35); }
-button.warn{ background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35); }
+button.warn{ background:rgba(245,158,11,.12); border-color:rgba(250,204,21,.40); }
 
 label{ font-size:12px; color:var(--muted); display:block; margin-bottom:6px; }
 label.check{ display:flex; align-items:center; gap:8px; margin:0; }
@@ -161,7 +169,142 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
 
 
 .fab--right{ right:calc(12px + env(safe-area-inset-right)); }
+.fab--stack2{ top:calc(var(--hud-pad) + var(--hud-btn) + var(--hud-gap)); }
 .fab--left{ left:calc(12px + env(safe-area-inset-left)); }
+
+/* HUD: timer + heat (top row, sits next to the FABs) */
+.timerWidget{
+  position:absolute;
+  top:var(--hud-pad);
+  left:calc(var(--hud-pad) + env(safe-area-inset-left) + var(--hud-btn) + var(--hud-gap));
+  z-index:31;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  height:var(--hud-btn);
+  padding:0 12px;
+  border-radius:14px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.55);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  font-variant-numeric: tabular-nums;
+  user-select:none;
+}
+.timerMain{ font-weight:750; color:#22c55e; letter-spacing:.2px; }
+.timerPenalty{ font-weight:700; color:#ef4444; letter-spacing:.2px; }
+
+.heatWidget{
+  position:absolute;
+  top:var(--hud-pad);
+  right:calc(var(--hud-pad) + env(safe-area-inset-right) + var(--hud-btn) + var(--hud-gap));
+  z-index:31;
+  height:var(--hud-btn);
+  padding:0 12px;
+  border-radius:14px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.55);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.heatBoxes{ display:flex; gap:6px; }
+.heatBox{
+  width:20px;
+  height:14px;
+  border-radius:4px;
+  border:1px solid rgba(148,163,184,.28);
+  background:rgba(148,163,184,.08);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.heatBox.lit{
+  /* Brighter "hot" yellow (less dull orange) */
+  border-color: rgba(250,204,21,.92);
+  background: rgba(250,204,21,.14);
+  box-shadow:
+    0 0 0 1px rgba(250,204,21,.62),
+    0 0 18px rgba(250,204,21,.48),
+    0 0 34px rgba(250,204,21,.28);
+}
+
+/* Stronger glow (tier-locked boxes) */
+.heatBox.lit::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:8px;
+  background: radial-gradient(circle at 50% 50%, rgba(250,204,21,.55) 0%, rgba(250,204,21,.00) 70%);
+  filter: blur(7px);
+  opacity: .95;
+  pointer-events:none;
+}
+.heatBoxInner{
+  width: calc(100% - 4px);
+  height: 6px;
+  border-radius:3px;
+  background: rgba(148,163,184,.14);
+  overflow:hidden;
+}
+.heatBoxFill{
+  height:100%;
+  width:0%;
+  border-radius:3px;
+}
+.heatBox.is-full .heatBoxFill{ background: rgba(250,204,21,.95); }
+.heatBox.is-partial .heatBoxFill{
+  background:
+    linear-gradient(45deg,
+      rgba(250,204,21,.40) 0%,
+      rgba(250,204,21,.40) 45%,
+      rgba(250,204,21,.85) 45%,
+      rgba(250,204,21,.85) 55%,
+      rgba(250,204,21,.40) 55%,
+      rgba(250,204,21,.40) 100%);
+  background-size:10px 10px;
+}
+
+/* Heat level crossing animations */
+@keyframes heatWidgetPulseUp {
+  /* Quick pop, slower settle */
+  0%   { transform: scale(1); filter: brightness(1); }
+  18%  { transform: scale(1.12); filter: brightness(1.45); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+@keyframes heatWidgetPulseDown {
+  /* Quick dip, slower settle */
+  0%   { transform: scale(1); filter: brightness(1); opacity: 1; }
+  18%  { transform: scale(0.955); filter: brightness(1.18); opacity: .95; }
+  100% { transform: scale(1); filter: brightness(1); opacity: 1; }
+}
+
+.hudBtn#heatWidget.heatPulseUp{
+  animation: heatWidgetPulseUp 1.7s cubic-bezier(.12,.9,.18,1);
+  box-shadow: 0 0 0 1px rgba(250,204,21,.28), 0 14px 38px rgba(0,0,0,.32);
+}
+.hudBtn#heatWidget.heatPulseDown{
+  animation: heatWidgetPulseDown 1.7s cubic-bezier(.12,.9,.18,1);
+}
+
+@keyframes heatBoxPop {
+  /* Quick pop, slower settle */
+  0%   { transform: scale(1); filter: brightness(1); }
+  20%  { transform: scale(1.18); filter: brightness(1.65); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+.heatBox.heatBoxPop{
+  animation: heatBoxPop 1.5s cubic-bezier(.12,.9,.18,1);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hudBtn#heatWidget.heatPulseUp,
+  .hudBtn#heatWidget.heatPulseDown,
+  .heatBox.heatBoxPop{ animation: none !important; }
+}
+
 
 .panel--right{ right:calc(12px + env(safe-area-inset-right)); }
 .panel--left{ left:calc(12px + env(safe-area-inset-left)); }
@@ -171,4 +314,233 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
     width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));
     max-height:calc(100dvh - 24px);
   }
+}
+
+/* Gameplay question menus */
+.hidden{ display:none !important; }
+
+/* Modal (Photo Glimpse) */
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; padding:16px; z-index:9999;}
+.modalCard{width:min(520px, 96vw); max-height:90vh; overflow:hidden; background:#121212; color:#f2f2f2; border:1px solid rgba(255,255,255,.12); border-radius:16px; box-shadow:0 14px 50px rgba(0,0,0,.35);}
+.modalHeader{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 14px 10px; border-bottom:1px solid rgba(255,255,255,.08);}
+.modalTitle{font-weight:700; font-size:16px;}
+.modalClose{appearance:none; border:0; background:rgba(255,255,255,.08); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer;}
+.modalClose:active{transform:translateY(1px)}
+.modalBody{padding:12px 14px; overflow:auto; max-height:70vh;}
+.modalBody img{width:100%; height:auto; border-radius:12px; display:block;}
+.modalFooter{padding:10px 14px 14px; border-top:1px solid rgba(255,255,255,.08); line-height:1.3;}
+.modalFooter a{color:inherit; text-decoration:underline;}
+
+.menuGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+
+/* Landmark submenu: single column */
+.menuGrid.landmarkGrid{
+  grid-template-columns: 1fr;
+}
+
+
+.menuBtn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 12px;
+  text-align:left;
+  min-width:0;
+}
+
+.iconBox{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(148,163,184,.12);
+  border:1px solid rgba(148,163,184,.18);
+  font-size:16px;
+  flex:0 0 auto;
+}
+
+/* Toast notification */
+.toast{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:60;
+  max-width:min(520px, calc(100vw - 32px));
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.90);
+  color:var(--text);
+  box-shadow:0 14px 38px rgba(0,0,0,.45);
+  font-size:14px;
+  line-height:1.35;
+  text-align:center;
+  cursor:pointer;
+}
+.toast.good{ border-color:rgba(34,197,94,.45); }
+.toast.bad{ border-color:rgba(239,68,68,.45); }
+
+.toastIcon{
+  font-size:28px;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+
+/* small inline button (debug panel) */
+.btnSmall{
+  height:30px;
+  padding:0 10px;
+  border-radius:10px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.45);
+  color:var(--text);
+  font:600 12px/1 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  cursor:pointer;
+}
+.btnSmall:hover{ background:rgba(2,6,23,.60); }
+.btnSmall:active{ transform:translateY(1px); }
+
+
+/* Debug heat row layout: flex + wrap so it never overflows the debug panel */
+.dbgHeatRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+.dbgHeatRow .pill{ padding:6px 10px; }
+#dbgHeatNew{
+  height:30px;
+  padding:0 8px;
+  border-radius:10px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.35);
+  color:var(--text);
+}
+#dbgHeatNew:focus{ outline:2px solid rgba(56,189,248,.45); outline-offset:2px; }
+
+#dbgHeatApply.btnSmall{
+  width:34px;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+/* Keep controls usable when narrow */
+@media (max-width: 520px){
+  .dbgHeatRow .muted{ min-width:auto !important; }
+  #dbgHeatNew{ width:110px; }
+}
+
+
+/* Thermometer progress (shows under gameplay button while a thermo is running) */
+.thermoProgress{
+  position:absolute;
+  top:calc(var(--hud-pad) + var(--hud-btn) + 6px);
+  right:calc(var(--hud-pad) + env(safe-area-inset-right));
+  z-index:31;
+  width:190px;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.55);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.thermoProgressBar{
+  width:100%;
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(148,163,184,.10);
+  overflow:hidden;
+}
+.thermoProgressFill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:rgba(56,189,248,.75);
+}
+.thermoProgressText{
+  font:600 12px/1 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--text);
+  opacity:.9;
+}
+
+
+/* Cost labels under submenu buttons */
+.costRow{
+  margin-top:8px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.costItem{
+  font:600 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:rgba(226,232,240,.90);
+  background:rgba(15,23,42,.35);
+  border:1px solid rgba(148,163,184,.20);
+  padding:4px 8px;
+  border-radius:999px;
+}
+.menuBtn .costRow{ pointer-events:none; } /* keep whole button clickable */
+
+/* Nearest landmark preview under submenu buttons */
+.nearestRow{
+  margin-top:6px;
+  text-align:center;
+  font:500 11px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  opacity:.85;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+
+
+/* Leaflet map lives under the overlay canvas */
+#mapShell {
+  position: relative;
+}
+
+#leafletMap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Our existing canvas becomes an overlay (fog + debug drawings). Let Leaflet receive gestures. */
+#view {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --- Photo Glimpse modal helpers --- */
+.photo-glimpse-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.08);
+}
+
+.photo-glimpse-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.18);
+  filter: blur(7px);
 }

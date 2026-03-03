@@ -1,0 +1,1353 @@
+[
+  {
+    "id": "osm_way_729739681",
+    "name": "Aldi",
+    "lat": 53.3912691,
+    "lon": -2.8721372,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 729739681
+    },
+    "osm_tags": {
+      "addr:street": "Gateacre Park Drive",
+      "brand": "Aldi",
+      "brand:wikidata": "Q41171672",
+      "building": "yes",
+      "name": "Aldi",
+      "shop": "supermarket",
+      "website": "https://www.aldi.co.uk/store-finder/l/liverpool/gateacre-park-drive/c803"
+    }
+  },
+  {
+    "id": "osm_way_916578808",
+    "name": "Aldi",
+    "lat": 53.3984759,
+    "lon": -2.8141192,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 916578808
+    },
+    "osm_tags": {
+      "addr:postcode": "L35 1QT",
+      "addr:street": "Coppice Lane",
+      "brand": "Aldi",
+      "brand:wikidata": "Q41171672",
+      "building": "yes",
+      "fhrs:id": "1425040",
+      "name": "Aldi",
+      "shop": "supermarket",
+      "source:addr:postcode": "code-point_open",
+      "website": "https://www.aldi.co.uk/store-finder/l/huyton/cronton-road/c827"
+    }
+  },
+  {
+    "id": "osm_way_1292435039",
+    "name": "Ann Marie's",
+    "lat": 53.4065232,
+    "lon": -2.8730233,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435039
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "18",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building:part": "retail",
+      "level": "0",
+      "name": "Ann Marie's",
+      "shop": "hairdresser"
+    }
+  },
+  {
+    "id": "osm_way_1292435040",
+    "name": "APD Heating & Energy Ltd",
+    "lat": 53.4064493,
+    "lon": -2.8730513,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435040
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "20",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building:part": "retail",
+      "level": "0",
+      "name": "APD Heating & Energy Ltd",
+      "shop": "bathroom_furnishing"
+    }
+  },
+  {
+    "id": "osm_node_6841770974",
+    "name": "Barnardo's",
+    "lat": 53.3916564,
+    "lon": -2.8722445,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6841770974
+    },
+    "osm_tags": {
+      "brand": "Barnardo's",
+      "brand:wikidata": "Q2884670",
+      "brand:wikipedia": "en:Barnardo's",
+      "name": "Barnardo's",
+      "shop": "charity"
+    }
+  },
+  {
+    "id": "osm_way_36947164",
+    "name": "Belle Vale Shopping Center",
+    "lat": 53.3907945,
+    "lon": -2.858921,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 36947164
+    },
+    "osm_tags": {
+      "building": "yes",
+      "layer": "+1",
+      "name": "Belle Vale Shopping Center",
+      "shop": "mall"
+    }
+  },
+  {
+    "id": "osm_way_472904236",
+    "name": "Bowring Park",
+    "lat": 53.4078972,
+    "lon": -2.8630039,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 472904236
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Bowring Park",
+      "wikidata": "Q4951400"
+    }
+  },
+  {
+    "id": "osm_way_1292435025",
+    "name": "Bowring Park",
+    "lat": 53.4068739,
+    "lon": -2.8722581,
+    "categories": [
+      "pub"
+    ],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435025
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "2",
+      "addr:postcode": "L16 2NE",
+      "addr:street": "Rimmer Avenue",
+      "amenity": "pub",
+      "building": "yes",
+      "name": "Bowring Park",
+      "ref:GB:uprn": "40035800"
+    }
+  },
+  {
+    "id": "osm_way_41601112",
+    "name": "Brewers Fayre",
+    "lat": 53.3995466,
+    "lon": -2.8146386,
+    "categories": [
+      "pub"
+    ],
+    "tags": [
+      "cat:pub",
+      "pub"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 41601112
+    },
+    "osm_tags": {
+      "amenity": "pub",
+      "brand": "Brewers Fayre",
+      "brand:wikidata": "Q4962678",
+      "building": "yes",
+      "cuisine": "british",
+      "name": "Brewers Fayre"
+    }
+  },
+  {
+    "id": "osm_node_9219095343",
+    "name": "casa nostra",
+    "lat": 53.3888013,
+    "lon": -2.8414778,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cat:food_drink",
+      "restaurant"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 9219095343
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "87A",
+      "addr:postcode": "L27 7AR",
+      "addr:street": "Middlemass Hey",
+      "amenity": "restaurant",
+      "cuisine": "italian;pizza;coffee_shop;seafood;burger;ice_cream",
+      "name": "casa nostra",
+      "opening_hours": "14; 00-21; 00",
+      "phone": "+44 1513456676",
+      "takeaway": "yes",
+      "website": "https://casanostra.practi.menu/",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": "osm_way_1041273137",
+    "name": "City Tyres",
+    "lat": 53.3901101,
+    "lon": -2.8501556,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1041273137
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Childwall Valley Service Station",
+      "addr:postcode": "L25 2RJ",
+      "addr:street": "Childwall Valley Road",
+      "building": "yes",
+      "name": "City Tyres",
+      "opening_hours": "Mo-Sa 08:00-17:00; Su 09:00-14:00",
+      "phone": "+44 151 487 8811",
+      "shop": "car_repair",
+      "website": "https://city-tyres-liverpool.edan.io/"
+    }
+  },
+  {
+    "id": "osm_way_1292435036",
+    "name": "Coco Boutique",
+    "lat": 53.4067889,
+    "lon": -2.8730246,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435036
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "12",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building:part": "retail",
+      "level": "0",
+      "name": "Coco Boutique",
+      "shop": "clothes"
+    }
+  },
+  {
+    "id": "osm_node_6841770972",
+    "name": "Costa",
+    "lat": 53.3915498,
+    "lon": -2.8722274,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cafe",
+      "cat:food_drink"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6841770972
+    },
+    "osm_tags": {
+      "addr:housenumber": "39",
+      "addr:postcode": "L25 1PD",
+      "addr:street": "Gateacre Park Drive",
+      "amenity": "cafe",
+      "brand": "Costa",
+      "brand:wikidata": "Q608845",
+      "brand:wikipedia": "en:Costa Coffee",
+      "cuisine": "coffee_shop",
+      "fhrs:id": "730698",
+      "name": "Costa",
+      "takeaway": "yes"
+    }
+  },
+  {
+    "id": "osm_node_1604808950",
+    "name": "Court Hey Methodist Church",
+    "lat": 53.407626,
+    "lon": -2.8747164,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 1604808950
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "methodist",
+      "name": "Court Hey Methodist Church",
+      "religion": "christian"
+    }
+  },
+  {
+    "id": "osm_way_147257241",
+    "name": "Court Hey Park",
+    "lat": 53.4041729,
+    "lon": -2.8761345,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 147257241
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Court Hey Park",
+      "wikidata": "Q5178230"
+    }
+  },
+  {
+    "id": "osm_way_1292435047",
+    "name": "Court Hey Service Station",
+    "lat": 53.4073687,
+    "lon": -2.8730012,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435047
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building": "yes",
+      "name": "Court Hey Service Station",
+      "ref:GB:uprn": "40035801",
+      "shop": "car_repair"
+    }
+  },
+  {
+    "id": "osm_way_472902064",
+    "name": "Cyril Cook Park",
+    "lat": 53.406662,
+    "lon": -2.8505605,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 472902064
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Cyril Cook Park"
+    }
+  },
+  {
+    "id": "osm_node_4415007680",
+    "name": "Dunster House LTD",
+    "lat": 53.4038444,
+    "lon": -2.8138055,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 4415007680
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Dunster House",
+      "addr:housenumber": "9",
+      "addr:postcode": "L36 6JF",
+      "addr:street": "Stretton Way",
+      "name": "Dunster House LTD",
+      "opening_hours": "Mo 08:30-20:00; Tu-Fr 08:30-17:00; Sa 09:00-17:00; Su 10:00-17:00",
+      "phone": "+44 1234 272445",
+      "shop": "garden_centre",
+      "website": "https://www.dunsterhouse.co.uk/",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": "osm_node_6383918354",
+    "name": "Famous Gold Star",
+    "lat": 53.4081137,
+    "lon": -2.8470334,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cat:food_drink",
+      "restaurant"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918354
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "13a",
+      "addr:postcode": "L36 5XN",
+      "addr:street": "Tarbock Road",
+      "amenity": "restaurant",
+      "cuisine": "chinese",
+      "name": "Famous Gold Star"
+    }
+  },
+  {
+    "id": "osm_node_9438233816",
+    "name": "Farmfoods",
+    "lat": 53.3901295,
+    "lon": -2.859554,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 9438233816
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:housename": "Belle Vale Shopping Centre",
+      "addr:postcode": "L25 2RQ",
+      "addr:street": "Childwall Valley Road",
+      "addr:unit": "50,51",
+      "brand": "Farmfoods",
+      "brand:wikidata": "Q5435841",
+      "brand:wikipedia": "en:Farmfoods",
+      "fhrs:id": "497571",
+      "name": "Farmfoods",
+      "operator": "Farmfoods Ltd",
+      "shop": "frozen_food"
+    }
+  },
+  {
+    "id": "osm_way_684256561",
+    "name": "Flavio's",
+    "lat": 53.4070528,
+    "lon": -2.8472077,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cat:food_drink",
+      "restaurant"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 684256561
+    },
+    "osm_tags": {
+      "addr:housenumber": "34",
+      "addr:postcode": "L36 5XW",
+      "addr:street": "Tarbock Road",
+      "amenity": "restaurant",
+      "building": "retail",
+      "cuisine": "italian",
+      "email": "info@flaviosliverpool.co.uk",
+      "name": "Flavio's",
+      "phone": "+44 151 482 0660",
+      "website": "http://flaviosliverpool.co.uk/"
+    }
+  },
+  {
+    "id": "osm_node_6383918358",
+    "name": "Flowers of Distinction",
+    "lat": 53.4079042,
+    "lon": -2.8469986,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918358
+    },
+    "osm_tags": {
+      "name": "Flowers of Distinction",
+      "phone": "+44 151 480 2412",
+      "shop": "florist"
+    }
+  },
+  {
+    "id": "osm_way_1470026099",
+    "name": "Home Bargains",
+    "lat": 53.3894306,
+    "lon": -2.8500992,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1470026099
+    },
+    "osm_tags": {
+      "brand": "Home Bargains",
+      "brand:wikidata": "Q5888229",
+      "building": "yes",
+      "name": "Home Bargains",
+      "shop": "variety_store"
+    }
+  },
+  {
+    "id": "osm_node_11119162992",
+    "name": "Iceland",
+    "lat": 53.3902982,
+    "lon": -2.8595004,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 11119162992
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Belle Vale Shopping Centre",
+      "addr:postcode": "L25 2RQ",
+      "addr:street": "Childwall Valley Road",
+      "brand": "Iceland",
+      "brand:wikidata": "Q721810",
+      "name": "Iceland",
+      "shop": "frozen_food",
+      "website": "https://www.iceland.co.uk/store-finder/store?StoreID=320&StoreName=BELLE%20VALE"
+    }
+  },
+  {
+    "id": "osm_way_1328124816",
+    "name": "Kingdom Hall of Jehovah's Witnesses",
+    "lat": 53.3898355,
+    "lon": -2.8630762,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1328124816
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "building:levels": "1",
+      "denomination": "jehovahs_witness",
+      "name": "Kingdom Hall of Jehovah's Witnesses",
+      "religion": "christian",
+      "source": "microsoft/BuildingFootprints"
+    }
+  },
+  {
+    "id": "osm_node_6383918351",
+    "name": "Laundreze",
+    "lat": 53.4082208,
+    "lon": -2.8470522,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918351
+    },
+    "osm_tags": {
+      "addr:housenumber": "7",
+      "addr:postcode": "L36 5XN",
+      "addr:street": "Tarbock Road",
+      "email": "LAUNDREZE@OUTLOOK.COM",
+      "name": "Laundreze",
+      "phone": "+44 151 480 8647",
+      "shop": "laundry",
+      "website": "https://www.laundreze.co.uk/"
+    }
+  },
+  {
+    "id": "osm_way_1249867396",
+    "name": "Lidl",
+    "lat": 53.4000116,
+    "lon": -2.8725601,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1249867396
+    },
+    "osm_tags": {
+      "brand": "Lidl",
+      "brand:wikidata": "Q151954",
+      "building": "yes",
+      "name": "Lidl",
+      "shop": "supermarket",
+      "website": "https://www.lidl.co.uk/s/en-GB/store-finder/liverpool/childwall-valley-road/"
+    }
+  },
+  {
+    "id": "osm_way_1090717849",
+    "name": "Liverpool Valley Church & Community Centre",
+    "lat": 53.3948951,
+    "lon": -2.8668408,
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1090717849
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:country": "GB",
+      "addr:postcode": "L25 2SN",
+      "addr:street": "Mildenhall Road",
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "salvation_army",
+      "name": "Liverpool Valley Church & Community Centre",
+      "phone": "+44 151 252 6100",
+      "ref:GB:uprn": "38103486",
+      "religion": "christian",
+      "website": "https://www.salvationarmy.org.uk/liverpool-valley"
+    }
+  },
+  {
+    "id": "osm_way_1469448209",
+    "name": "Lyndene Park",
+    "lat": 53.3936686,
+    "lon": -2.8703358,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1469448209
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Lyndene Park"
+    }
+  },
+  {
+    "id": "osm_node_6491444236",
+    "name": "Mazzanna Tiles",
+    "lat": 53.4057759,
+    "lon": -2.8228988,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6491444236
+    },
+    "osm_tags": {
+      "addr:city": "Huyton",
+      "addr:housename": "Unit 1 Chapel Brook Trade Park",
+      "addr:postcode": "L36 6FH",
+      "addr:street": "Wilson Road",
+      "email": "sales@mazzannatiles.com",
+      "name": "Mazzanna Tiles",
+      "opening_hours": "Mo-Fr 07:30-18:00, Sa 08:00-17:00, Su 10:00-16:00",
+      "operator": "Mazzanna Tiles",
+      "payment:cash": "yes",
+      "payment:credit_cards": "yes",
+      "payment:debit_cards": "yes",
+      "payment:maestro": "yes",
+      "payment:mastercard": "yes",
+      "payment:visa": "yes",
+      "phone": "+44 151 449 1188",
+      "shop": "tiles",
+      "website": "https://www.mazzannatiles.com"
+    }
+  },
+  {
+    "id": "osm_way_539849493",
+    "name": "McGoldrick Park",
+    "lat": 53.4076444,
+    "lon": -2.8364014,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 539849493
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "McGoldrick Park"
+    }
+  },
+  {
+    "id": "osm_way_36947163",
+    "name": "Morrisons",
+    "lat": 53.3893423,
+    "lon": -2.8589721,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 36947163
+    },
+    "osm_tags": {
+      "alt_name": "Morrisons Belle Vale",
+      "brand": "Morrisons",
+      "brand:wikidata": "Q922344",
+      "brand:wikipedia": "en:Morrisons",
+      "building": "yes",
+      "name": "Morrisons",
+      "shop": "supermarket",
+      "website": "https://my.morrisons.com/storefinder/97/liverpool-belle-vale",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": "osm_way_1292435032",
+    "name": "One Stop",
+    "lat": 53.4071225,
+    "lon": -2.8729968,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435032
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "2-4",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "brand": "One Stop",
+      "brand:wikidata": "Q65954217",
+      "building:part": "retail",
+      "level": "0",
+      "name": "One Stop",
+      "shop": "convenience"
+    }
+  },
+  {
+    "id": "osm_way_729740231",
+    "name": "Othello's Greek Restaurant",
+    "lat": 53.3904978,
+    "lon": -2.8726478,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cat:food_drink",
+      "restaurant"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 729740231
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "105",
+      "addr:postcode": "L25 1PD",
+      "addr:street": "Gateacre Park Drive",
+      "amenity": "restaurant",
+      "building": "yes",
+      "cuisine": "greek",
+      "name": "Othello's Greek Restaurant",
+      "phone": "+44151 280 7700"
+    }
+  },
+  {
+    "id": "osm_node_26407981",
+    "name": "Our Lady of the Assumption",
+    "lat": 53.3902061,
+    "lon": -2.8624308,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 26407981
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "catholic",
+      "name": "Our Lady of the Assumption",
+      "religion": "christian"
+    }
+  },
+  {
+    "id": "osm_way_507339958",
+    "name": "Our Lady Of The Assumption Roman Catholic Church",
+    "lat": 53.3901685,
+    "lon": -2.8620999,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507339958
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "Our Lady Of The Assumption Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_way_507339960",
+    "name": "Our Lady Of The Assumption Roman Catholic Church",
+    "lat": 53.3903775,
+    "lon": -2.8625261,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507339960
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "Our Lady Of The Assumption Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_way_1292435037",
+    "name": "Patient Care Ostomy Supplies Ltd",
+    "lat": 53.4066708,
+    "lon": -2.8730315,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435037
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "14",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building:part": "retail",
+      "level": "0",
+      "name": "Patient Care Ostomy Supplies Ltd",
+      "shop": "medical_supply"
+    }
+  },
+  {
+    "id": "osm_way_41600974",
+    "name": "Premier Inn",
+    "lat": 53.3995108,
+    "lon": -2.8139606,
+    "categories": [
+      "accommodation"
+    ],
+    "tags": [
+      "accommodation",
+      "cat:accommodation"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 41600974
+    },
+    "osm_tags": {
+      "brand": "Premier Inn",
+      "brand:wikidata": "Q2108626",
+      "building": "yes",
+      "internet_access": "wlan",
+      "internet_access:fee": "customers",
+      "internet_access:operator": "Virgin Media",
+      "internet_access:ssid": "Premier Inn Free Wi-Fi",
+      "name": "Premier Inn",
+      "tourism": "hotel",
+      "website": "https://www.premierinn.com/gb/en/hotels/england/merseyside/liverpool/liverpool-tarbock.html"
+    }
+  },
+  {
+    "id": "osm_node_6383918356",
+    "name": "Prep Fresh",
+    "lat": 53.4080305,
+    "lon": -2.8470174,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cafe",
+      "cat:food_drink"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918356
+    },
+    "osm_tags": {
+      "amenity": "cafe",
+      "name": "Prep Fresh",
+      "phone": "+44 151 489 4199"
+    }
+  },
+  {
+    "id": "osm_way_1292435035",
+    "name": "Rimmer News",
+    "lat": 53.406865,
+    "lon": -2.8730167,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1292435035
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housenumber": "10",
+      "addr:postcode": "L16 2NG",
+      "addr:street": "Rimmer Avenue",
+      "building:part": "retail",
+      "level": "0",
+      "name": "Rimmer News",
+      "shop": "newsagent"
+    }
+  },
+  {
+    "id": "osm_node_6383918352",
+    "name": "Simply Food & Drink",
+    "lat": 53.4081792,
+    "lon": -2.8470469,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918352
+    },
+    "osm_tags": {
+      "name": "Simply Food & Drink",
+      "shop": "convenience"
+    }
+  },
+  {
+    "id": "osm_node_12456180166",
+    "name": "Spar",
+    "lat": 53.3987063,
+    "lon": -2.8116846,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 12456180166
+    },
+    "osm_tags": {
+      "brand": "Spar",
+      "brand:wikidata": "Q610492",
+      "name": "Spar",
+      "shop": "convenience"
+    }
+  },
+  {
+    "id": "osm_way_1041273136",
+    "name": "Spar",
+    "lat": 53.3902652,
+    "lon": -2.8504799,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1041273136
+    },
+    "osm_tags": {
+      "addr:city": "Liverpool",
+      "addr:housename": "Childwall Valley Service Station",
+      "addr:postcode": "L25 2RJ",
+      "addr:street": "Childwall Valley Road",
+      "brand": "Spar",
+      "brand:wikidata": "Q610492",
+      "brand:wikipedia": "en:SPAR (retailer)",
+      "building": "yes",
+      "name": "Spar",
+      "shop": "convenience",
+      "website": "https://www.spar.co.uk/store-locator/hal26101-spar-childwall"
+    }
+  },
+  {
+    "id": "osm_node_473491528",
+    "name": "St Cyril's Roman Catholic Church",
+    "lat": 53.3940672,
+    "lon": -2.8534687,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 473491528
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "denomination": "roman_catholic",
+      "name": "St Cyril's Roman Catholic Church",
+      "note": "I think",
+      "religion": "christian",
+      "source:name": "OS Open Local Important Buildings Layer"
+    }
+  },
+  {
+    "id": "osm_way_507336649",
+    "name": "St Cyril's Roman Catholic Church",
+    "lat": 53.3940521,
+    "lon": -2.8534076,
+    "categories": [
+      "religious"
+    ],
+    "tags": [
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 507336649
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "denomination": "catholic",
+      "name": "St Cyril's Roman Catholic Church",
+      "religion": "christian",
+      "source": "OS OpenMap Local"
+    }
+  },
+  {
+    "id": "osm_way_375974601",
+    "name": "St. Johns (Millennium Green)",
+    "lat": 53.4055041,
+    "lon": -2.8304821,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 375974601
+    },
+    "osm_tags": {
+      "designation": "millennium_green",
+      "leisure": "park",
+      "name": "St. Johns (Millennium Green)",
+      "note": "V1 as per the Natural England dataset.",
+      "source": "Natural England"
+    }
+  },
+  {
+    "id": "osm_way_421289726",
+    "name": "St. Mark's Church",
+    "lat": 53.3951549,
+    "lon": -2.8685782,
+    "categories": [
+      "architecture",
+      "religious"
+    ],
+    "tags": [
+      "cat:architecture",
+      "cat:religious",
+      "place_of_worship"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 421289726
+    },
+    "osm_tags": {
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "anglican",
+      "name": "St. Mark's Church",
+      "religion": "christian",
+      "wikidata": "Q105098893"
+    }
+  },
+  {
+    "id": "osm_way_30800475",
+    "name": "Stadt Moers Park: Tushingham",
+    "lat": 53.4090463,
+    "lon": -2.8082947,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 30800475
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Stadt Moers Park: Tushingham"
+    }
+  },
+  {
+    "id": "osm_way_323024174",
+    "name": "Stadt Moers Park: West View",
+    "lat": 53.4091485,
+    "lon": -2.816887,
+    "categories": [
+      "park_public_space"
+    ],
+    "tags": [
+      "cat:park_public_space",
+      "park"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 323024174
+    },
+    "osm_tags": {
+      "leisure": "park",
+      "name": "Stadt Moers Park: West View"
+    }
+  },
+  {
+    "id": "osm_way_1026260488",
+    "name": "Tesco Express",
+    "lat": 53.398144,
+    "lon": -2.8180644,
+    "categories": [
+      "shop"
+    ],
+    "tags": [
+      "cat:shop",
+      "shop"
+    ],
+    "osm": {
+      "type": "way",
+      "id": 1026260488
+    },
+    "osm_tags": {
+      "addr:city": "Knowsley",
+      "addr:postcode": "L35 1QY",
+      "addr:street": "Cronton Road",
+      "addr:suburb": "Tarbock",
+      "brand": "Tesco Express",
+      "brand:wikidata": "Q98456772",
+      "building": "yes",
+      "fhrs:id": "220731",
+      "name": "Tesco Express",
+      "shop": "convenience",
+      "website": "https://www.tesco.com/store-locator/tarbock/cronton-rd"
+    }
+  },
+  {
+    "id": "osm_node_6383918359",
+    "name": "The Copper Kettle",
+    "lat": 53.407857,
+    "lon": -2.8469852,
+    "categories": [
+      "food_drink"
+    ],
+    "tags": [
+      "cafe",
+      "cat:food_drink"
+    ],
+    "osm": {
+      "type": "node",
+      "id": 6383918359
+    },
+    "osm_tags": {
+      "amenity": "cafe",
+      "name": "The Copper Kettle",
+      "phone": "+44 151 489 7805"
+    }
+  }
+]

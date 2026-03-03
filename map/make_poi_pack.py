@@ -1,5 +1,24 @@
+#!/usr/bin/env python3
+"""
+make_poi_pack.py
+
+POI-only area pack builder for Map Game (Leaflet basemap).
+- Builds POI.json and POI_curated.json from OpenStreetMap via Overpass API.
+- Keeps bounding box generation (center + radius) or accepts explicit bbox.
+- Adds a "game tags" taxonomy derived from OSM tags, so the game can ask things like:
+  "nearest museum", "nearest plaque", "nearest transport hub", etc.
+
+Usage examples:
+  python make_poi_pack.py --name liverpool_cc --lat 53.4075 --lon -2.9919 --radius-km 2.0
+  python make_poi_pack.py --name my_area --bbox "west,south,east,north"
+
+Outputs:
+  <name>_POI.json
+  <name>_POI_curated.json
+  <name>_config.json   (bbox + files)
+"""
+
 import argparse
-import io
 import json
 import math
 import time
@@ -8,18 +27,8 @@ import urllib.request
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
-from PIL import Image
-
-# ----------------------------
-# Config
-# ----------------------------
-TILE_SIZE = 256
-TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
-
-USER_AGENT = "MapGameAreaPack/1.0 (personal use)"
-
-# Earth radius for spherical approximations
+USER_AGENT = "MapGamePOIPack/1.0 (personal use)"
 EARTH_RADIUS_M = 6371000.0
 
 
@@ -31,142 +40,19 @@ class BBox:
     north: float
 
 
-# ----------------------------
-# Geo helpers
-# ----------------------------
 def clamp_lat(lat: float) -> float:
-    # Web Mercator usable range (OSM tiles)
+    # Web Mercator usable range
     return max(min(lat, 85.05112878), -85.05112878)
 
 
 def bbox_from_center_radius(lat: float, lon: float, radius_m: float) -> BBox:
-    """
-    Approximate bbox around (lat, lon) with radius_m.
-    Good enough for ~few km gameplay areas.
-    """
+    """Approximate bbox around (lat, lon) with radius_m (good for few km)."""
     lat = clamp_lat(lat)
     dlat = (radius_m / EARTH_RADIUS_M) * (180.0 / math.pi)
-    # Longitude degrees shrink by cos(latitude)
     dlon = (radius_m / (EARTH_RADIUS_M * math.cos(math.radians(lat)))) * (180.0 / math.pi)
-
-    return BBox(
-        west=lon - dlon,
-        south=lat - dlat,
-        east=lon + dlon,
-        north=lat + dlat,
-    )
+    return BBox(west=lon - dlon, south=lat - dlat, east=lon + dlon, north=lat + dlat)
 
 
-# ----------------------------
-# Slippy map / Web Mercator math
-# ----------------------------
-def lon_to_xtile(lon: float, z: int) -> int:
-    return int((lon + 180.0) / 360.0 * (1 << z))
-
-
-def lat_to_ytile(lat: float, z: int) -> int:
-    lat = clamp_lat(lat)
-    lat_rad = math.radians(lat)
-    n = math.pi - math.log(math.tan(math.pi / 4.0 + lat_rad / 2.0))
-    return int(n / math.pi / 2.0 * (1 << z))
-
-
-def lonlat_to_global_px(lon: float, lat: float, z: int) -> Tuple[float, float]:
-    """
-    Convert lon/lat to *global pixel coordinates* at zoom z in Web Mercator.
-    """
-    lat = clamp_lat(lat)
-    siny = math.sin(math.radians(lat))
-    siny = min(max(siny, -0.9999), 0.9999)
-
-    world = TILE_SIZE * (1 << z)
-    x = (lon + 180.0) / 360.0 * world
-    y = (0.5 - math.log((1 + siny) / (1 - siny)) / (4 * math.pi)) * world
-    return x, y
-
-
-def fetch_tile(z: int, x: int, y: int, retries: int = 3) -> Image.Image:
-    url = TILE_URL.format(z=z, x=x, y=y)
-    for attempt in range(retries):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                data = resp.read()
-            return Image.open(io.BytesIO(data)).convert("RGBA")
-        except Exception:
-            if attempt == retries - 1:
-                raise
-            time.sleep(1.0)
-    raise RuntimeError("Unreachable")
-
-
-# ----------------------------
-# Map builder (stitch + crop to exact bbox)
-# ----------------------------
-def build_map_png(name: str, bbox: BBox, zoom: int) -> Tuple[str, BBox, Tuple[int, int]]:
-    """
-    Produces a PNG that corresponds EXACTLY to bbox by:
-      - stitching the covering tile rectangle
-      - cropping to the exact bbox pixel bounds
-    Returns (filepath, exact_bbox_used, (width,height)).
-    """
-    # tile rectangle that covers bbox
-    x_min = lon_to_xtile(bbox.west, zoom)
-    x_max = lon_to_xtile(bbox.east, zoom)
-    y_min = lat_to_ytile(bbox.north, zoom)  # north = smaller y
-    y_max = lat_to_ytile(bbox.south, zoom)
-
-    cols = x_max - x_min + 1
-    rows = y_max - y_min + 1
-
-    print(f"[map] Zoom {zoom}: {cols} x {rows} tiles ({cols*rows} total)")
-
-    stitched = Image.new("RGBA", (cols * TILE_SIZE, rows * TILE_SIZE))
-
-    for ty in range(y_min, y_max + 1):
-        for tx in range(x_min, x_max + 1):
-            tile = fetch_tile(zoom, tx, ty)
-            px = (tx - x_min) * TILE_SIZE
-            py = (ty - y_min) * TILE_SIZE
-            stitched.paste(tile, (px, py))
-            time.sleep(0.05)  # polite-ish
-
-    # crop stitched image to exact bbox
-    # global px of bbox edges
-    gx_w, gy_n = lonlat_to_global_px(bbox.west, bbox.north, zoom)
-    gx_e, gy_s = lonlat_to_global_px(bbox.east, bbox.south, zoom)
-
-    # global px of stitched top-left
-    gx0 = x_min * TILE_SIZE
-    gy0 = y_min * TILE_SIZE
-
-    left = int(round(gx_w - gx0))
-    top = int(round(gy_n - gy0))
-    right = int(round(gx_e - gx0))
-    bottom = int(round(gy_s - gy0))
-
-    # clamp crop bounds
-    left = max(0, min(left, stitched.width))
-    right = max(0, min(right, stitched.width))
-    top = max(0, min(top, stitched.height))
-    bottom = max(0, min(bottom, stitched.height))
-
-    if right <= left or bottom <= top:
-        raise RuntimeError("Crop bounds invalid; check bbox/zoom.")
-
-    cropped = stitched.crop((left, top, right, bottom))
-
-    out_path = f"{name}_map.png"
-    cropped.save(out_path)
-    print(f"[map] Wrote {out_path} ({cropped.width}x{cropped.height})")
-
-    # bbox is the exact bbox we requested (because we cropped to it)
-    return out_path, bbox, (cropped.width, cropped.height)
-
-
-# ----------------------------
-# Overpass POI builder
-# ----------------------------
 def fetch_overpass(query: str) -> Dict[str, Any]:
     data = urllib.parse.urlencode({"data": query}).encode("utf-8")
     req = urllib.request.Request(
@@ -190,6 +76,9 @@ def element_to_point(el: Dict[str, Any]) -> Tuple[Optional[float], Optional[floa
     return None, None
 
 
+# ----------------------------
+# Categories (coarse buckets)
+# ----------------------------
 def categorise(tags: Dict[str, str]) -> List[str]:
     cats = set()
 
@@ -228,7 +117,7 @@ def categorise(tags: Dict[str, str]) -> List[str]:
     if building in {"cathedral", "church", "chapel", "civic", "public", "historic"}:
         cats.add("architecture")
 
-    # include-all buckets (filtered out of curated)
+    # include-all buckets (kept in full, filtered out of curated)
     if shop:
         cats.add("shop")
     if tourism in {"hotel", "hostel", "motel", "guest_house"}:
@@ -240,7 +129,6 @@ def categorise(tags: Dict[str, str]) -> List[str]:
 
 
 def is_curated(categories: List[str]) -> bool:
-    # Exclude these categories from curated (but keep pubs even if food_drink gets tagged)
     excluded = {"shop", "accommodation", "food_drink"}
     if any(c in excluded for c in categories) and "pub" not in categories:
         return False
@@ -261,6 +149,72 @@ def is_curated(categories: List[str]) -> bool:
     return any(c in keepers for c in categories)
 
 
+# ----------------------------
+# Game tags taxonomy (fine tags)
+# ----------------------------
+def game_tags(tags: Dict[str, str], categories: List[str]) -> List[str]:
+    """
+    Return normalized game-facing tags derived from OSM tags.
+    Keep these stable; the idea is your game UI can filter / query by these.
+    """
+    t = set()
+
+    amenity = tags.get("amenity")
+    tourism = tags.get("tourism")
+    historic = tags.get("historic")
+    memorial = tags.get("memorial")
+    shop = tags.get("shop")
+    leisure = tags.get("leisure")
+    railway = tags.get("railway")
+    public_transport = tags.get("public_transport")
+    building = tags.get("building")
+    man_made = tags.get("man_made")
+
+    # Direct "type" tags
+    if amenity == "pub": t.add("pub")
+    if amenity == "bar": t.add("bar")
+    if amenity == "cafe": t.add("cafe")
+    if amenity == "restaurant": t.add("restaurant")
+    if amenity == "library": t.add("library")
+    if amenity == "courthouse": t.add("courthouse")
+    if amenity == "townhall": t.add("townhall")
+    if amenity == "place_of_worship": t.add("place_of_worship")
+
+    if tourism == "museum": t.add("museum")
+    if tourism == "gallery": t.add("gallery")
+    if tourism == "attraction": t.add("attraction")
+    if tourism == "viewpoint": t.add("viewpoint")
+    if tourism in {"hotel","hostel","guest_house","motel"}: t.add("accommodation")
+
+    if leisure in {"park","garden","common"}: t.add("park")
+
+    if historic in {"monument"}: t.add("monument")
+    if historic in {"memorial"}: t.add("memorial")
+    if memorial in {"plaque"}: t.add("plaque")
+    if memorial in {"war_memorial"}: t.add("war_memorial")
+    if memorial in {"statue"}: t.add("statue")
+
+    if railway == "station" or public_transport == "station": t.add("station")
+
+    if man_made == "pier": t.add("pier")
+
+    # Derived convenience tags
+    if "historic_plaque" in categories:
+        t.add("text_present")
+
+    if shop:
+        t.add("shop")  # broad; you can later add finer shop tags if you want
+
+    # Category mirrors (helps when you want coarse filtering)
+    for c in categories:
+        t.add(f"cat:{c}")
+
+    return sorted(t)
+
+
+# ----------------------------
+# Overpass query
+# ----------------------------
 def build_overpass_query(bbox: BBox) -> str:
     s, w, n, e = bbox.south, bbox.west, bbox.north, bbox.east
 
@@ -386,6 +340,7 @@ def build_pois(name: str, bbox: BBox) -> Tuple[str, str, int, int]:
         seen.add(osm_key)
 
         categories = categorise(tags)
+        tags_game = game_tags(tags, categories)
 
         poi = {
             "id": f"osm_{el['type']}_{el['id']}",
@@ -393,7 +348,7 @@ def build_pois(name: str, bbox: BBox) -> Tuple[str, str, int, int]:
             "lat": lat,
             "lon": lon,
             "categories": categories,
-            "tags": ["text_present"] if "historic_plaque" in categories else [],
+            "tags": tags_game,
             "osm": {"type": el["type"], "id": el["id"]},
             "osm_tags": tags,
         }
@@ -418,27 +373,26 @@ def build_pois(name: str, bbox: BBox) -> Tuple[str, str, int, int]:
     return full_path, curated_path, len(full), len(curated)
 
 
-def write_config(name: str, bbox: BBox, zoom: int, map_path: str, poi_path: str, curated_path: str):
+def write_config(name: str, bbox: BBox, poi_path: str, curated_path: str):
     cfg = {
         "name": name,
-        "zoom": zoom,
         "bbox": {
             "west": bbox.west,
             "south": bbox.south,
             "east": bbox.east,
             "north": bbox.north,
         },
-        # Convenient copy/paste shape for app.js
+        # Convenient copy/paste shape for the game config
         "app_js_BBOX": {
             "nw": {"lat": bbox.north, "lon": bbox.west},
             "se": {"lat": bbox.south, "lon": bbox.east},
         },
         "files": {
-            "map": map_path,
             "poi_full": poi_path,
             "poi_curated": curated_path,
         },
         "attribution": "© OpenStreetMap contributors",
+        "notes": "Leaflet basemap; no map.png is generated by this script.",
     }
 
     out = f"{name}_config.json"
@@ -447,31 +401,36 @@ def write_config(name: str, bbox: BBox, zoom: int, map_path: str, poi_path: str,
     print(f"[cfg] Wrote {out}")
 
 
+def parse_bbox_string(s: str) -> BBox:
+    parts = [p.strip() for p in s.split(",")]
+    if len(parts) != 4:
+        raise ValueError('bbox must be "west,south,east,north"')
+    west, south, east, north = map(float, parts)
+    return BBox(west=west, south=south, east=east, north=north)
+
+
 def main():
-    ap = argparse.ArgumentParser(description="Generate a map.png and POI JSONs for a radius around a point.")
-    ap.add_argument("--name", required=True, help="Output name prefix (e.g., liverpool_centre, manchester_cc)")
-    ap.add_argument("--lat", type=float, required=True, help="Centre latitude")
-    ap.add_argument("--lon", type=float, required=True, help="Centre longitude")
+    ap = argparse.ArgumentParser(description="Generate POI JSONs for a bbox (Leaflet basemap; no map.png).")
+    ap.add_argument("--name", required=True, help="Output name prefix (e.g., liverpool_centre)")
+    ap.add_argument("--lat", type=float, help="Centre latitude (used with --lon + --radius-km)")
+    ap.add_argument("--lon", type=float, help="Centre longitude (used with --lat + --radius-km)")
     ap.add_argument("--radius-km", type=float, default=2.0, help="Radius in km (default: 2.0)")
-    ap.add_argument("--zoom", type=int, default=17, help="Tile zoom (16 or 17 recommended)")
+    ap.add_argument("--bbox", type=str, help='Explicit bbox "west,south,east,north" (overrides lat/lon/radius)')
     args = ap.parse_args()
 
-    bbox = bbox_from_center_radius(args.lat, args.lon, args.radius_km * 1000.0)
+    if args.bbox:
+        bbox = parse_bbox_string(args.bbox)
+    else:
+        if args.lat is None or args.lon is None:
+            raise SystemExit("Either provide --bbox or provide --lat and --lon (and optional --radius-km).")
+        bbox = bbox_from_center_radius(args.lat, args.lon, args.radius_km * 1000.0)
 
-    # Build map first (so you can visually sanity-check bbox if needed)
-    map_path, exact_bbox, size = build_map_png(args.name, bbox, args.zoom)
-
-    # Build POIs within exact bbox
-    poi_path, curated_path, full_n, curated_n = build_pois(args.name, exact_bbox)
-
-    # Write config to paste into app.js
-    write_config(args.name, exact_bbox, args.zoom, map_path, poi_path, curated_path)
+    poi_path, curated_path, full_n, curated_n = build_pois(args.name, bbox)
+    write_config(args.name, bbox, poi_path, curated_path)
 
     print("\nDone.")
-    print(f"  Map: {map_path}  ({size[0]}x{size[1]})")
     print(f"  POIs: {poi_path} ({full_n})")
     print(f"  Curated: {curated_path} ({curated_n})")
-    print(f"  BBOX for app.js is in {args.name}_config.json")
 
 
 if __name__ == "__main__":

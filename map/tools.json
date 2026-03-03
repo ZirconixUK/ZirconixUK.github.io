@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "tools": {
+    "radar": {
+      "label": "Radar",
+      "default": {
+        "heat_cost": 0.6
+      },
+      "options": [
+        {
+          "id": "50",
+          "value_m": 50,
+          "cost": { "heat_cost": 0.2 }
+        },
+        {
+          "id": "100",
+          "value_m": 100,
+          "cost": { "heat_cost": 0.3 }
+        },
+        {
+          "id": "250",
+          "value_m": 250,
+          "cost": { "heat_cost": 0.4 }
+        },
+        {
+          "id": "500",
+          "value_m": 500,
+          "cost": { "heat_cost": 0.6 }
+        },
+        {
+          "id": "1000",
+          "value_m": 1000,
+          "cost": { "heat_cost": 0.8 }
+        },
+        {
+          "id": "2000",
+          "value_m": 2000,
+          "cost": { "heat_cost": 1.0 }
+        }
+      ]
+    },
+    "thermometer": {
+      "label": "Thermometer",
+      "default": {
+        "heat_cost": 0.3
+      },
+      "options": [
+        {
+          "id": "10",
+          "value_s": 10,
+          "cost": { "heat_cost": 0.2 }
+        },
+        {
+          "id": "20",
+          "value_s": 20,
+          "cost": { "heat_cost": 0.3 }
+        },
+        {
+          "id": "30",
+          "value_s": 30,
+          "cost": { "heat_cost": 0.4 }
+        }
+      ]
+    },
+    "nsew": {
+      "label": "N/S/E/W",
+      "default": {
+        "heat_cost": 0.4
+      },
+      "options": [
+        {
+          "id": "NS",
+          "axis": "NS"
+        },
+        {
+          "id": "EW",
+          "axis": "EW"
+        }
+      ]
+    },
+    "landmark": {
+      "label": "Landmark",
+      "default": {
+        "heat_cost": 0.5
+      },
+      "options": [
+        {
+          "id": "train_station"
+        },
+        {
+          "id": "cathedral"
+        },
+        {
+          "id": "bus_station"
+        },
+        {
+          "id": "library"
+        },
+        {
+          "id": "museum"
+        }
+      ]
+    },
+    "photo": {
+      "label": "Photo",
+      "default": {
+        "heat_cost": 0.9
+      },
+      "options": [
+        {
+          "id": "glimpse"
+        }
+      ]
+    }
+  }
+}

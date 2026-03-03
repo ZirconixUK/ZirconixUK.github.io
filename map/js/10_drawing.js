@@ -9,8 +9,42 @@ function drawThrottled() {
   });
 }
 
+
+function getLeafletFogTransform() {
+  if (!window.leafletMap || !window.FOG_TL || typeof window.FOG_ZF !== "number") return null;
+
+  const map = window.leafletMap;
+  const z = map.getZoom();
+
+  // Scale from our fixed fog zoom (FOG_ZF) into current zoom space
+  const scaleCss = Math.pow(2, z - window.FOG_ZF);
+
+  // Leaflet pans by translating its internal map pane; getPixelOrigin() can stay stable while panning.
+  // getPixelBounds().min gives the projected pixel coord of the current viewport top-left and DOES move with pan.
+  const topLeft = map.getPixelBounds().min;
+
+  // Where the fog-world top-left lands in container CSS pixels
+  const dxCss = window.FOG_TL.x * scaleCss - topLeft.x;
+  const dyCss = window.FOG_TL.y * scaleCss - topLeft.y;
+
+  // Our overlay canvas is in device pixels, Leaflet math is in CSS pixels => convert using DPR.
+  const dpr = window.devicePixelRatio || 1;
+
+  return {
+    scale: scaleCss,
+    scaleDpr: scaleCss * dpr,
+    dx: dxCss,
+    dy: dyCss,
+    dxDpr: dxCss * dpr,
+    dyDpr: dyCss * dpr,
+    dpr
+  };
+}
+
 function draw() {
   resizeCanvasToDisplaySize();
+  const __t = getLeafletFogTransform();
+  if (__t) { view.scale = __t.scale; view.tx = __t.dxDpr; view.ty = __t.dyDpr; }
   if (!mapReady) {
     resizeCanvasToDisplaySize();
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -19,28 +53,17 @@ function draw() {
     const msg = (typeof mapError === "string" && mapError) ? mapError : "Loading map...";
     ctx.fillText(msg, 20, 30);
     ctx.fillStyle = "rgba(255,255,255,.55)";
-    ctx.fillText("Tip: ensure map.png sits next to index.html", 20, 52);
+    ctx.fillText("Tip: Leaflet tiles require internet (or swap in an ImageOverlay basemap).", 20, 52);
     return;
   }
 
   // base clear
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // draw map
-  ctx.save();
-  ctx.translate(view.tx, view.ty);
-  ctx.scale(view.scale, view.scale);
-  ctx.imageSmoothingEnabled = true;
-  ctx.drawImage(mapImg, 0, 0);
-  ctx.restore();
 
-  if (elBBox.checked) drawMapBounds();
+  if ((elBBox ? elBBox.checked : false)) drawMapBounds();
 
-  // recompute allowed region mask
-  buildAllowedWorld();
-
-  // apply fog (darken outside allowed)
-  drawFog();
+  // Fog is now handled by Leaflet geometry (js/17_leaflet_fog.js)
 
   // markers + outline rings
   drawMarkers();
@@ -48,7 +71,8 @@ function draw() {
 }
 
 function drawMapBounds() {
-  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const MW = (window.FOG_W||0), MH = (window.FOG_H||0);
+  if (!MW || !MH) return;
   ctx.save();
   ctx.translate(view.tx, view.ty);
   ctx.scale(view.scale, view.scale);
@@ -58,174 +82,30 @@ function drawMapBounds() {
   ctx.restore();
 }
 
-function buildAllowedWorld() {
-  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
-  if (allowedWorld.width !== MW || allowedWorld.height !== MH) {
-    allowedWorld.width = MW;
-    allowedWorld.height = MH;
-  }
+function buildAllowedWorld() { /* Leaflet geometry fog now */ }
 
-  // Start allowed = whole map (opaque)
-  allowedCtx.clearRect(0,0,MW,MH);
-  allowedCtx.fillStyle = "rgba(255,255,255,1)";
-  allowedCtx.fillRect(0,0,MW,MH);
 
-  // Intersect sequential constraints by masking in-place using destination-in
-  for (const c of clues) {
-    allowedCtx.save();
-    allowedCtx.globalCompositeOperation = "destination-in";
+function drawFog() { /* Leaflet geometry fog now */ }
 
-    // Draw region for which the clue is satisfied ("allowed region")
-    allowedCtx.clearRect(0,0,0,0); // no-op; just for readability
-    allowedCtx.fillStyle = "rgba(255,255,255,1)";
-    allowedCtx.beginPath();
-
-    if (c.type === "ring") {
-      // ok=true: inside circle; ok=false: outside circle
-      if (c.ok) {
-        allowedCtx.arc(c.x, c.y, c.r, 0, Math.PI*2);
-        allowedCtx.closePath();
-        allowedCtx.fill();
-      } else {
-        allowedCtx.rect(0,0,MW,MH);
-        allowedCtx.arc(c.x, c.y, c.r, 0, Math.PI*2, true);
-        allowedCtx.closePath();
-        allowedCtx.fill("evenodd");
-      }
-    } else if (c.type === "half") {
-      const okDir = c.ok ? c.dir : oppositeDir(c.dir);
-      drawHalfPlanePath(allowedCtx, okDir, c.x, c.y, MW, MH);
-      allowedCtx.fill();
-    } else if (c.type === "quadrant") {
-      drawQuadrantPath(allowedCtx, c.quad, c.x, c.y, MW, MH);
-      allowedCtx.fill();
-    } else if (c.type === "wedge") {
-      // wedge from point to edge (use large radius)
-      const R = Math.max(MW, MH) * 2;
-      allowedCtx.moveTo(c.x, c.y);
-      allowedCtx.arc(c.x, c.y, R, c.a0, c.a1);
-      allowedCtx.closePath();
-      allowedCtx.fill();
-    } else if (c.type === "donut") {
-      // ok=true: annulus; ok=false: outside annulus (inside inner OR outside outer)
-      if (c.ok) {
-        allowedCtx.arc(c.x, c.y, c.rOut, 0, Math.PI*2);
-        allowedCtx.arc(c.x, c.y, c.rIn,  0, Math.PI*2, true);
-        allowedCtx.closePath();
-        allowedCtx.fill("evenodd");
-      } else {
-        // outside annulus = (outside outer) OR (inside inner)
-        // easiest: whole map, cut out annulus
-        allowedCtx.rect(0,0,MW,MH);
-        allowedCtx.arc(c.x, c.y, c.rOut, 0, Math.PI*2, true);
-        allowedCtx.arc(c.x, c.y, c.rIn,  0, Math.PI*2);
-        allowedCtx.closePath();
-        allowedCtx.fill("evenodd");
-      }
-    } else if (c.type === "thermo") {
-      // ok=true means "hotter": closer to b than a (Voronoi half-plane).
-      // Build a line perpendicular bisector between a and b; choose side.
-      const A = c.a, B = c.b;
-      const mx = (A.x + B.x)/2, my = (A.y + B.y)/2;
-      const vx = B.x - A.x, vy = B.y - A.y;
-      // Perp direction:
-      const px = -vy, py = vx;
-      // Two far points along the bisector:
-      const L = Math.max(MW, MH) * 4;
-      const x1 = mx - px*L, y1 = my - py*L;
-      const x2 = mx + px*L, y2 = my + py*L;
-
-      // To decide which side is "closer to B than A", test one point:
-      // point B itself should be in the "closer to B" side.
-      // Determine which side of line (x1,y1)-(x2,y2) B lies on; fill that half-plane.
-      const sideB = lineSide(x1,y1,x2,y2,B.x,B.y);
-      const wantSide = c.ok ? sideB : -sideB;
-
-      drawHalfPlaneFromLine(allowedCtx, x1,y1,x2,y2, wantSide, MW, MH);
-      allowedCtx.fill();
-    }
-
-    allowedCtx.restore();
-  }
-}
-
-function drawFog() {
-  const a = fogAlpha();
-  if (clues.length === 0 || a <= 0) return;
-
-  // Build fog on an offscreen screen-sized canvas so we don't "erase" the map.
-  if (fogScreen.width !== canvas.width || fogScreen.height !== canvas.height) {
-    fogScreen.width = canvas.width;
-    fogScreen.height = canvas.height;
-  }
-  fogScreenCtx.clearRect(0, 0, fogScreen.width, fogScreen.height);
-
-  // 1) Fill fog everywhere
-  fogScreenCtx.globalCompositeOperation = "source-over";
-  fogScreenCtx.fillStyle = `rgba(0,0,0,${a})`;
-  fogScreenCtx.fillRect(0, 0, fogScreen.width, fogScreen.height);
-
-  // 2) Punch out the allowed region (transparent hole) using destination-out
-  fogScreenCtx.globalCompositeOperation = "destination-out";
-  fogScreenCtx.imageSmoothingEnabled = false;
-  fogScreenCtx.save();
-  fogScreenCtx.translate(view.tx, view.ty);
-  fogScreenCtx.scale(view.scale, view.scale);
-  fogScreenCtx.drawImage(allowedWorld, 0, 0);
-  fogScreenCtx.restore();
-
-  // 3) Composite fog over the already-drawn map
-  ctx.save();
-  ctx.globalCompositeOperation = "source-over";
-  ctx.drawImage(fogScreen, 0, 0);
-  ctx.restore();
-}
 
 function drawMarkers() {
-  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
+  const MW = (window.FOG_W||0), MH = (window.FOG_H||0);
+  if (!MW || !MH) return;
 
-  // player marker
-  if (player) {
-    const p = latLonToPixel(player.lat, player.lon, BBOX, MW, MH);
-    ctx.save();
-    ctx.translate(view.tx, view.ty);
-    ctx.scale(view.scale, view.scale);
+  // player/target markers are now Leaflet layers (so they stay anchored when panning/zooming)
+  // (We keep the fog on canvas overlay.)
+  // Legacy canvas markers removed in Leaflet mode.
 
-    ctx.fillStyle = "rgba(56,189,248,.95)";
-    ctx.strokeStyle = "rgba(2,6,23,.9)";
-    ctx.lineWidth = 3 / view.scale;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 7 / view.scale, 0, Math.PI*2);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.restore();
-  }
-
-  // target marker if reveal on
-  if (elReveal.checked && target) {
-    const t = latLonToPixel(target.lat, target.lon, BBOX, MW, MH);
-    ctx.save();
-    ctx.translate(view.tx, view.ty);
-    ctx.scale(view.scale, view.scale);
-
-    ctx.fillStyle = "rgba(244,63,94,.95)";
-    ctx.strokeStyle = "rgba(2,6,23,.9)";
-    ctx.lineWidth = 3 / view.scale;
-    ctx.beginPath();
-    ctx.arc(t.x, t.y, 7 / view.scale, 0, Math.PI*2);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.restore();
-  }
+  // target marker is handled by Leaflet markers layer (only visible in debug mode)
 }
 
 function drawClueOutlines() {
-  if (clues.length === 0) return;
+  // Outlines disabled (no stroke around radar/fog shapes)
+  return;
 
-  const MW = mapImg.naturalWidth, MH = mapImg.naturalHeight;
-  const thick = clamp(parseFloat(elThickness.value || "3"), 1, 12);
+  const MW = (window.FOG_W||0), MH = (window.FOG_H||0);
+  if (!MW || !MH) return;
+  const thick = clamp(parseFloat((elThickness ? elThickness.value : "3") || "3"), 1, 12);
 
   ctx.save();
   ctx.translate(view.tx, view.ty);
