@@ -11,6 +11,7 @@
     // Dev cache-buster for HTML/CSS/JS (map.png can still be cached)
     (function () {
       var cb = Date.now();
+      window.__cb = cb;
 
       // CSS (no-cache via querystring)
       var css = document.createElement('link');
@@ -39,12 +40,15 @@
       await load('./js/02_dom.js?cb=' + cb);
         await load('./js/03_map_image.js?cb=' + cb);
         await load('./js/04_state.js?cb=' + cb);
+        await load('./js/21_coins.js?cb=' + cb);
+        await load('./js/19_curses.js?cb=' + cb);
         await load('./js/16_leaflet_markers.js?cb=' + cb);
         await load('./js/17_leaflet_fog.js?cb=' + cb);
         await load('./js/05_view_transform.js?cb=' + cb);
         await load('./js/06_mobile_gestures_pointer_events.js?cb=' + cb);
         await load('./js/07_geolocation.js?cb=' + cb);
         await load('./js/08_clues_questions.js?cb=' + cb);
+        await load('./js/20_guess.js?cb=' + cb);
         await load('./js/09_ui_helpers.js?cb=' + cb);
         await load('./js/10_drawing.js?cb=' + cb);
         await load('./js/11_geometry_drawing_helpers.js?cb=' + cb);
@@ -80,13 +84,27 @@
 
     <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-    <!-- HUD (timer + heat) -->
-    <div id="timerWidget" class="timerWidget" aria-label="Round timer">
-      <span id="timerMain" class="timerMain">00:00</span>
-      <span id="timerPenalty" class="timerPenalty">+ 00:00</span>
+    <!-- HUD (timer) centered -->
+    <div id="hudTopCenter" class="hudTopCenter" aria-label="HUD">
+      <div id="timerWidget" class="timerWidget" aria-label="Round timer">
+        <span id="timerMain" class="timerMain">00:00</span>
+        <span id="timerPenalty" class="timerPenalty">+ 00:00</span>
+      </div>
+      <div id="coinsWidget" class="coinsWidget" aria-label="Coins">
+        <span class="coinsIcon" aria-hidden="true">🟡</span>
+        <span id="coinsMain" class="coinsMain">0</span>
+      </div>
     </div>
 
-    <button id="heatWidget" class="heatWidget" aria-label="Heat" title="Heat">
+    <!-- Gameplay overlay (top-right) -->
+    <button id="btnRecenter" class="fab fab--right" aria-label="Center on me" title="Center on me">⌖</button>
+    <button id="btnGameplay" class="fab fab--right fab--stack2" aria-label="Show/hide gameplay" title="Show/hide gameplay">☰</button>
+
+    <!-- Curses overlay (top-right, under gameplay button) -->
+    <button id="btnCurses" class="fab fab--right fab--stack3 fab--curse" aria-label="Curses" title="Curses">☠</button>
+
+    <!-- Heat widget (top-right, under gameplay button) -->
+    <button id="heatWidget" class="heatWidget heatWidget--vertical fab--right fab--stack4" aria-label="Heat" title="Heat">
       <div class="heatBoxes" aria-hidden="true">
         <div class="heatBox"><div class="heatBoxInner"><div class="heatBoxFill"></div></div></div>
         <div class="heatBox"><div class="heatBoxInner"><div class="heatBoxFill"></div></div></div>
@@ -95,10 +113,6 @@
         <div class="heatBox"><div class="heatBoxInner"><div class="heatBoxFill"></div></div></div>
       </div>
     </button>
-
-    <!-- Gameplay overlay (top-right) -->
-    <button id="btnRecenter" class="fab fab--right" aria-label="Center on me" title="Center on me">⌖</button>
-    <button id="btnGameplay" class="fab fab--right fab--stack2" aria-label="Show/hide gameplay" title="Show/hide gameplay">☰</button>
     <div id="thermoProgress" class="thermoProgress hidden" aria-label="Thermometer in progress">
       <div class="thermoProgressBar" aria-hidden="true"><div id="thermoProgressFill" class="thermoProgressFill"></div></div>
       <div id="thermoProgressText" class="thermoProgressText">Thermometer</div>
@@ -113,33 +127,51 @@
 
       <!-- Main question menu -->
       <div id="gameMenu">
-        <div class="menuGrid">
-          <button id="qRadar" class="menuBtn"><span class="iconBox">📡</span><span>Radar</span></button>
-          <button id="qThermo" class="menuBtn"><span class="iconBox">🌡️</span><span>Thermometer</span></button>
-          <button id="qDir" class="menuBtn"><span class="iconBox">⬆️</span><span>N/S/E/W</span></button>
-          <button id="qLandmark" class="menuBtn"><span class="iconBox">🏷️</span><span>Landmark</span></button>
-          <button id="qPhoto" class="menuBtn"><span class="iconBox">📷</span><span>Photo</span></button>
+        <div class="menuGrid menuGrid--icon">
+          <button id="qRadar" class="menuBtn menuBtn--iconOnly" aria-label="Radar" title="Radar"><span class="iconBox">📡</span></button>
+          <button id="qThermo" class="menuBtn menuBtn--iconOnly" aria-label="Thermometer" title="Thermometer"><span class="iconBox">🌡️</span></button>
+          <button id="qDir" class="menuBtn menuBtn--iconOnly" aria-label="N/S/E/W" title="N/S/E/W"><span class="iconBox">🧭</span></button>
+          <button id="qLandmark" class="menuBtn menuBtn--iconOnly" aria-label="Landmark" title="Landmark"><span class="iconBox">🏛️</span></button>
+          <button id="qPhoto" class="menuBtn menuBtn--iconOnly" aria-label="Photo" title="Photo"><span class="iconBox">📷</span></button>
 
         </div>
 
         <div class="muted" style="margin-top:10px;">Nearest-landmark match test (adds fog based on the result).</div>
+
+        <div id="roundActions" class="roundActions" style="margin-top:14px;">
+          <button id="btnLockGuess" class="primary" style="width:100%;">Lock In Guess</button>
+          <button id="btnNewRound" style="width:100%; margin-top:8px;" class="hidden">Start New Round</button>
+        </div>
       </div>
 
       <!-- Photo menu -->
       <div id="photoMenu" class="hidden">
-        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+        <div class="row" style="justify-content:space-between; margin-bottom:10px; align-items:center;">
           <button id="photoBack">← Back</button>
+          <div class="muted" style="font-weight:600;">Coins: <span id="photoCoins" style="color:#caa53a;">0</span></div>
           <button id="photoClose">Close ✕</button>
         </div>
 
         <h2>Photo</h2>
         <div class="menuGrid">
-          <button class="menuBtn" data-photo="glimpse"><span class="iconBox">🕵️‍♂️</span><span>Glimpse</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+          <button class="menuBtn" data-photo="starter"><span class="iconBox">🕵️‍♂️</span><span>Starter photo</span>
+            <div class="costRow"><span class="costItem">🔥 0.0</span><span class="costItem">🟡 0</span></div>
+          </button>
+
+          <button class="menuBtn" data-photo="near100"><span class="iconBox">📸</span><span>Extra photo (≤100m)</span>
+            <div class="costRow"><span class="costItem">🔥 0.0</span><span class="costItem">🟡 3</span></div>
+          </button>
+
+          <button class="menuBtn" data-photo="near200"><span class="iconBox">📷</span><span>Extra photo (≤200m)</span>
+            <div class="costRow"><span class="costItem">🔥 0.0</span><span class="costItem">🟡 4</span></div>
+          </button>
+
+          <button class="menuBtn" data-photo="uncorrupt"><span class="iconBox">✨</span><span>Uncorrupt all photos</span>
+            <div class="costRow"><span class="costItem">🔥 0.0</span><span class="costItem">🟡 2</span></div>
           </button>
         </div>
 
-        <div class="muted" style="margin-top:10px;">Shows a nearby KartaView street-level photo close to the target (if available).</div>
+        <div class="muted" style="margin-top:10px;">Starter photo is always free. Extra photos are cached per round and can be re-opened any time after purchase.</div>
       </div>
 
       <!-- Radar menu -->
@@ -152,22 +184,22 @@
         <h2>Radar radius</h2>
         <div class="menuGrid">
           <button class="menuBtn" data-radar="50"><span class="iconBox">⭕</span><span>50m</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-radar="100"><span class="iconBox">⭕</span><span>100m</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-radar="250"><span class="iconBox">⭕</span><span>250m</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-radar="500"><span class="iconBox">⭕</span><span>500m</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-radar="1000"><span class="iconBox">⭕</span><span>1km</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-radar="2000"><span class="iconBox">⭕</span><span>2km</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
         </div>
 
@@ -184,13 +216,13 @@
         <h2>Thermometer window (dev)</h2>
         <div class="menuGrid">
           <button class="menuBtn" data-thermo="10"><span class="iconBox">⏱️</span><span>10s</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-thermo="20"><span class="iconBox">⏱️</span><span>20s</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-thermo="30"><span class="iconBox">⏱️</span><span>30s</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
 
         </div>
@@ -208,10 +240,10 @@
         <h2>N/S/E/W</h2>
         <div class="menuGrid">
           <button class="menuBtn" data-dir="NS"><span class="iconBox">↕️</span><span>North or South?</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
           <button class="menuBtn" data-dir="EW"><span class="iconBox">↔️</span><span>East or West?</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
           </button>
         </div>
 
@@ -229,23 +261,23 @@
         <h2>Landmark type</h2>
         <div class="menuGrid landmarkGrid">
           <button class="menuBtn" data-landmark="train_station"><span class="iconBox">🚉</span><span>Train Station</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
             <div class="nearestRow muted"><span data-nearest-label="train_station">Nearest: —</span></div>
           </button>
           <button class="menuBtn" data-landmark="cathedral"><span class="iconBox">⛪</span><span>Cathedral</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
             <div class="nearestRow muted"><span data-nearest-label="cathedral">Nearest: —</span></div>
           </button>
           <button class="menuBtn" data-landmark="bus_station"><span class="iconBox">🚌</span><span>Bus Station</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
             <div class="nearestRow muted"><span data-nearest-label="bus_station">Nearest: —</span></div>
           </button>
           <button class="menuBtn" data-landmark="library"><span class="iconBox">📚</span><span>Library</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
             <div class="nearestRow muted"><span data-nearest-label="library">Nearest: —</span></div>
           </button>
           <button class="menuBtn" data-landmark="museum"><span class="iconBox">🏛️</span><span>Museum</span>
-            <div class="costRow"><span class="costItem">🔥 0.5</span></div>
+            <div class="costRow"><span class="costItem">🔥 0.5</span><span class="costItem">🟡 0</span></div>
             <div class="nearestRow muted"><span data-nearest-label="museum">Nearest: —</span></div>
           </button>
 </div>
@@ -256,17 +288,43 @@
 </div>
     </div>
 
+    <!-- Curses panel -->
+    <div id="panelCurses" class="panel panel--right panel--curses" aria-label="Curses">
+      <div class="panelHeader">
+        <div>
+          <div class="panelTitle">Curses</div>
+          <div class="muted">Status effects currently active</div>
+        </div>
+      </div>
+      <div id="cursesBody" class="panelBody">
+        <div id="cursesEmpty" class="muted">No curses currently active.</div>
+        <ul id="cursesList" class="cursesList hidden"></ul>
+      </div>
+    </div>
+
     <!-- Photo modal -->
-    <div id="photoModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Photo glimpse">
+    <div id="photoModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Circle snapshot">
       <div class="modalCard">
         <div class="modalHeader">
-          <div class="modalTitle">Photo Glimpse</div>
+          <div id="photoModalTitle" class="modalTitle">Circle Snapshot</div>
           <button id="photoModalClose" class="modalClose" aria-label="Close">✕</button>
         </div>
         <div id="photoModalBody" class="modalBody">
           <div class="muted">Loading…</div>
         </div>
         <div id="photoModalFooter" class="modalFooter muted"></div>
+      </div>
+    </div>
+
+    <!-- Result modal (Phase 2) -->
+    <div id="resultModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Round result">
+      <div class="modalCard">
+        <div class="modalHeader">
+          <div class="modalTitle">Round Result</div>
+          <button id="resultModalClose" class="modalClose" aria-label="Close">✕</button>
+        </div>
+        <div id="resultModalBody" class="modalBody"></div>
+        <div class="modalFooter muted">Lock in your guess to reveal distance and score.</div>
       </div>
     </div>
 
@@ -306,6 +364,18 @@
         <button id="dbgHeatApply" class="btnSmall" type="button" aria-label="Apply heat level">✓</button>
       </div>
 
+      <div class="row dbgHeatRow">
+        <div class="muted" style="min-width:60px;">Coins</div>
+
+        <div class="muted" style="min-width:96px;">Current</div>
+        <div class="pill" id="dbgCoinsCurrent" style="min-width:70px; text-align:center;">0</div>
+
+        <div class="muted" style="min-width:72px;">New</div>
+        <input id="dbgCoinsNew" type="number" min="0" step="1" placeholder="0"
+               style="width:90px;" inputmode="numeric" aria-label="New coin count (0+)">
+        <button id="dbgCoinsApply" class="btnSmall" type="button" aria-label="Apply coin count">✓</button>
+      </div>
+
       <div class="row">
         <label class="check">
           <input type="checkbox" id="dbgMode">
@@ -314,6 +384,10 @@
         <label class="check">
           <input type="checkbox" id="dbgBBox" checked>
           Draw map bounds
+        </label>
+        <label class="check">
+          <input type="checkbox" id="dbgSimCurse">
+          Simulate active curse
         </label>
       </div>
 

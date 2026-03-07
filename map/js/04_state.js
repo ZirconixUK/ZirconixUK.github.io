@@ -26,6 +26,131 @@ let heatLevel = 0;           // 0..5 (integer with hysteresis)
 let heatLastMs = Date.now();  // for heat decay timing
 let __lastHeatSaveMs = 0;     // throttle saves from decay
 let targetIdx = null;        // index into POIS
+// Non-POI targets (e.g. Street View pano targets)
+let targetCustom = null;      // { kind, lat, lon, pano_id?, name?, id? }
+
+// ---- Phase 1: RoundState v1 (photo-first hunt) ----
+// This is a slim, game-design-facing state model used by the roadmap.
+// We keep it alongside the existing state fields for now.
+function __defaultRoundStateV1(){
+  return {
+    startLatLng: null,          // {lat, lon} captured when the round starts
+    targetPanoLatLng: null,     // {lat, lon} for pano targets (null for POI targets)
+    panoId: null,               // Street View pano_id when available
+    starterPhotoUrl: null,      // data: URL (preferred) or Street View URL fallback
+    photos: [],                 // [{ kind:'starter'|'near100'|'near200', context, url, sourceUrl, panoId, lat, lon, heading, pitch, fov, ts }]
+    photosUncorrupted: false,  // When true, all photos display without blur/glitch
+    // Phase 2 (win condition)
+    hasGuessed: false,
+    guessLatLng: null,          // {lat, lon}
+    guessGpsAccuracyM: null,    // meters
+    guessTimestamp: null,
+    distanceToTargetM: null,    // raw
+    adjustedDistanceM: null,    // max(0, d - accuracy)
+    scorePoints: null,
+    gradeLabel: null,
+  };
+}
+
+let roundStateV1 = __defaultRoundStateV1();
+
+// Short anti-repeat memory for pano targets
+let recentPanoKeys = []; // array of strings
+const RECENT_PANO_MAX = 8;
+
+function __panoKey(panoId, lat, lon){
+  if (panoId) return `panoid:${String(panoId)}`;
+  const la = (typeof lat === 'number' && isFinite(lat)) ? lat.toFixed(6) : '';
+  const lo = (typeof lon === 'number' && isFinite(lon)) ? lon.toFixed(6) : '';
+  return `latlon:${la},${lo}`;
+}
+
+window.getRoundStateV1 = () => roundStateV1;
+window.__defaultRoundStateV1 = __defaultRoundStateV1;
+
+window.__arePhotosUncorrupted = () => {
+  try { return !!(roundStateV1 && roundStateV1.photosUncorrupted); } catch(e) { return false; }
+};
+
+window.__setPhotosUncorrupted = (v) => {
+  try {
+    roundStateV1.photosUncorrupted = !!v;
+    saveRoundState();
+  } catch(e) {}
+};
+
+
+window.__isPanoRecentlyUsed = (panoId, lat, lon) => {
+  const k = __panoKey(panoId, lat, lon);
+  return !!(k && recentPanoKeys && recentPanoKeys.indexOf(k) !== -1);
+};
+
+window.__rememberPanoUsed = (panoId, lat, lon) => {
+  const k = __panoKey(panoId, lat, lon);
+  if (!k) return;
+  // Move-to-front de-dupe
+  recentPanoKeys = (recentPanoKeys || []).filter(x => x !== k);
+  recentPanoKeys.unshift(k);
+  if (recentPanoKeys.length > RECENT_PANO_MAX) recentPanoKeys.length = RECENT_PANO_MAX;
+  try { saveRoundState(); } catch(e) {}
+};
+
+window.__initRoundStateV1ForNewTarget = (startLatLng, tgt) => {
+  const s = (startLatLng && typeof startLatLng.lat === 'number' && typeof startLatLng.lon === 'number') ? { lat: startLatLng.lat, lon: startLatLng.lon } : null;
+  const isPano = !!(tgt && tgt.kind === 'pano');
+  roundStateV1 = {
+    ...__defaultRoundStateV1(),
+    startLatLng: s,
+    targetPanoLatLng: isPano ? { lat: tgt.lat, lon: tgt.lon } : null,
+    panoId: isPano ? (tgt.pano_id || null) : null,
+  };
+  // Phase 3: start stipend + reset movement coin progress for the new round.
+  try {
+    if (window.__coins && typeof window.__coins.initCoinsForNewRound === 'function') {
+      window.__coins.initCoinsForNewRound(s);
+    }
+  } catch(e) {}
+  try { saveRoundState(); } catch(e) {}
+};
+
+window.__onStreetViewPhotoCaptured = (info) => {
+  try {
+    const o = (info && typeof info === 'object') ? info : {};
+    const ctx = (o.context || o.kind || 'glimpse');
+    const url = o.url || null;
+    if (!url) return;
+
+    const entry = {
+      kind: (ctx === 'snapshot') ? 'starter' : (o.kind || (ctx === 'near100' ? 'near100' : (ctx === 'near200' ? 'near200' : 'near100'))),
+      context: ctx,
+      url,
+      sourceUrl: o.sourceUrl || null,
+      panoId: o.panoId || null,
+      lat: (typeof o.lat === 'number' && isFinite(o.lat)) ? o.lat : null,
+      lon: (typeof o.lon === 'number' && isFinite(o.lon)) ? o.lon : null,
+      heading: (typeof o.heading === 'number' && isFinite(o.heading)) ? o.heading : null,
+      pitch: (typeof o.pitch === 'number' && isFinite(o.pitch)) ? o.pitch : null,
+      fov: (typeof o.fov === 'number' && isFinite(o.fov)) ? o.fov : null,
+      ts: Date.now(),
+    };
+
+    // Snapshot is the starter photo and should be stable per round.
+    if (ctx === 'snapshot') {
+      roundStateV1.starterPhotoUrl = url;
+      // Ensure snapshot is the first item in photos[] (replace any existing starter).
+      roundStateV1.photos = (roundStateV1.photos || []).filter(p => p && p.kind !== 'starter');
+      roundStateV1.photos.unshift(entry);
+    } else {
+      roundStateV1.photos = (roundStateV1.photos || []);
+      roundStateV1.photos.push(entry);
+    }
+
+    // Keep panoId in sync when available
+    if (!roundStateV1.panoId && entry.panoId) roundStateV1.panoId = entry.panoId;
+
+    saveRoundState();
+  } catch(e) {}
+};
 
 const STORAGE_KEY = "mapgame_round_v1";
 
@@ -35,16 +160,34 @@ function safeParseJSON(s) {
 
 function saveRoundState() {
   try {
+    // Persist non-POI targets explicitly so refresh keeps the same hunt.
+    const custom = (target && target.kind === 'pano') ? {
+      kind: 'pano',
+      id: target.id || null,
+      name: target.name || null,
+      lat: target.lat,
+      lon: target.lon,
+      pano_id: target.pano_id || null,
+      debug_label: target.debug_label || null,
+      snapshot_heading: (target.snapshot_heading !== undefined) ? target.snapshot_heading : null,
+      snapshot_params: (target.snapshot_params !== undefined) ? target.snapshot_params : null,
+    } : (targetCustom && targetCustom.kind ? { ...targetCustom } : null);
+
     const payload = {
       debugMode,
       playerSaved: (player && player.manualOverride) ? { lat: player.lat, lon: player.lon } : null,
       targetIdx,
+      targetCustom: custom,
       roundStartMs,
       penaltyMs,
       heatValue,
       heatLevel,
       heatLastMs,
+      coinsState: (window.__coins && typeof window.__coins.__getState === 'function') ? window.__coins.__getState() : null,
+      activeCurses: (typeof window.__getCursesStateForSave === 'function') ? window.__getCursesStateForSave() : null,
       thermoRun,
+      roundStateV1,
+      recentPanoKeys,
       fogActions: (typeof getFogActions === 'function') ? getFogActions() : null,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -71,7 +214,10 @@ function resetRound({ keepTarget = false } = {}) {
   heatLastMs = Date.now();
   __lastHeatSaveMs = 0;
   thermoRun = null;
-  if (!keepTarget) targetIdx = null;
+  if (!keepTarget) {
+    targetIdx = null;
+    targetCustom = null;
+  }
   saveRoundState();
   try { if (typeof updateHUD === "function") updateHUD(); } catch (e) {}
 }
@@ -98,14 +244,15 @@ function __recomputeHeatLevelFromValue() {
   while (heatLevel > 0 && heatValue - EPS <= (heatLevel - 1)) heatLevel--;
 }
 
-function setHeatValue(v) {
+function setHeatValue(v, reason = 'set') {
   const next = parseFloat(v);
   const prevLevel = heatLevel | 0;
   heatValue = Math.max(0, Math.min(5, isFinite(next) ? next : 0));
   __recomputeHeatLevelFromValue();
   const newLevel = heatLevel | 0;
   if (newLevel !== prevLevel) {
-    try { if (typeof onHeatLevelChanged === 'function') onHeatLevelChanged(prevLevel, newLevel, 'set'); } catch (e) {}
+    // Important: call via window.* so it works even if the handler was assigned as a property.
+    try { if (typeof window.onHeatLevelChanged === 'function') window.onHeatLevelChanged(prevLevel, newLevel, reason); } catch (e) {}
   }
   heatLastMs = Date.now();
   saveRoundState();
@@ -115,7 +262,7 @@ function setHeatValue(v) {
 function addHeat(delta) {
   const d = parseFloat(delta);
   const hv = (typeof heatValue === "number" && isFinite(heatValue)) ? heatValue : 0;
-  setHeatValue(hv + (isFinite(d) ? d : 0));
+  setHeatValue(hv + (isFinite(d) ? d : 0), 'add');
 }
 
 function applyHeatDecay(nowMs = Date.now()) {
@@ -148,7 +295,7 @@ function applyHeatDecay(nowMs = Date.now()) {
     __recomputeHeatLevelFromValue();
     const newLevel = heatLevel | 0;
     if (newLevel !== prevLevel) {
-      try { if (typeof onHeatLevelChanged === 'function') onHeatLevelChanged(prevLevel, newLevel, 'decay'); } catch (e) {}
+      try { if (typeof window.onHeatLevelChanged === 'function') window.onHeatLevelChanged(prevLevel, newLevel, 'decay'); } catch (e) {}
     }
 
     // Throttle saves so we don't spam localStorage every tick
@@ -158,6 +305,10 @@ function applyHeatDecay(nowMs = Date.now()) {
     }
   }
 }
+
+// Read-only accessors for other modules
+window.getHeatValue = () => heatValue;
+window.getHeatLevel = () => heatLevel;
 
 function setThermoRun(run) {
   thermoRun = run;
@@ -171,9 +322,11 @@ function clearThermoRun() {
 }
 
 function fogAlpha() {
-  const v = parseFloat(elFogOpacity?.value ?? "0.55");
+  const slider = (window.elFogOpacity || document.getElementById('fogOpacity'));
+  const v = parseFloat(slider?.value ?? "0.55");
   return Math.max(0, Math.min(0.95, isNaN(v) ? 0.55 : v));
 }
 function updateFogUI() {
-  if (elFogOpacityOut) elFogOpacityOut.textContent = `${Math.round(fogAlpha() * 100)}%`;
+  const out = (window.elFogOpacityOut || document.getElementById('fogOpacityOut'));
+  if (out) out.textContent = `${Math.round(fogAlpha() * 100)}%`;
 }

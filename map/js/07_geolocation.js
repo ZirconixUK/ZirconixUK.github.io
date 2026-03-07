@@ -5,6 +5,10 @@ function setPlayerLatLng(lat, lon, opts) {
     return;
   }
 
+  const prev = (player && typeof player.lat === 'number' && typeof player.lon === 'number')
+    ? { lat: player.lat, lon: player.lon }
+    : null;
+
   player.lat = lat;
   player.lon = lon;
 
@@ -15,12 +19,46 @@ function setPlayerLatLng(lat, lon, opts) {
   try { player.__source = opts && opts.source ? opts.source : player.__source; } catch(e) {}
 
   try { if (typeof syncLeafletPlayerMarker === "function") syncLeafletPlayerMarker(); } catch(e) {}
+
+  // Phase 3: coin earnings from movement (works with debug click-to-move as well)
+  try {
+    if (prev && window.__coins && typeof window.__coins.onPlayerMovedForCoins === 'function') {
+      // Only count if it actually changed
+      if (prev.lat !== lat || prev.lon !== lon) window.__coins.onPlayerMovedForCoins(prev.lat, prev.lon, lat, lon);
+    }
+  } catch(e) {}
   drawThrottled();
 }
 
 // ---- Geolocation ----
 let hasCenteredOnce = false;
 let lastGeoFix = null; // { lat, lon, accuracy, ts }
+
+// Expose last fix + a one-shot sampler for other modules (e.g., Phase 2 lock-in guess)
+window.__getLastGeoFix = () => lastGeoFix;
+window.__requestGeoSample = function __requestGeoSample(opts = {}) {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) return reject(new Error('no_geolocation'));
+    if (!window.isSecureContext) return reject(new Error('insecure_context'));
+    const hi = (opts && typeof opts.highAccuracy === 'boolean') ? opts.highAccuracy : true;
+    const timeout = (opts && typeof opts.timeoutMs === 'number') ? opts.timeoutMs : 2500;
+    const maximumAge = (opts && typeof opts.maximumAgeMs === 'number') ? opts.maximumAgeMs : 0;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const s = {
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+          accuracy: pos.coords.accuracy,
+          ts: Date.now(),
+        };
+        try { lastGeoFix = s; } catch(e) {}
+        resolve(s);
+      },
+      (err) => reject(err || new Error('geo_error')),
+      { enableHighAccuracy: hi, maximumAge, timeout }
+    );
+  });
+};
 
 function setPlayer(lat, lon, silent = false) {
   player = { lat, lon };

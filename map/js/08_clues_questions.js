@@ -1,31 +1,308 @@
 // ---- Clues / Questions ----
+let __isPickingTarget = false;
+
+function __randBetween(a, b) {
+  return a + Math.random() * (b - a);
+}
+
+function __randomPointInBbox() {
+  const nw = (typeof BBOX !== 'undefined' && BBOX && BBOX.nw) ? BBOX.nw : null;
+  const se = (typeof BBOX !== 'undefined' && BBOX && BBOX.se) ? BBOX.se : null;
+  if (!nw || !se) return null;
+  const lat = __randBetween(se.lat, nw.lat);
+  const lon = __randBetween(nw.lon, se.lon);
+  return { lat, lon };
+}
+
+function __insideBbox(lat, lon) {
+  const nw = (typeof BBOX !== 'undefined' && BBOX && BBOX.nw) ? BBOX.nw : null;
+  const se = (typeof BBOX !== 'undefined' && BBOX && BBOX.se) ? BBOX.se : null;
+  if (!nw || !se) return true;
+  return lat <= nw.lat && lat >= se.lat && lon >= nw.lon && lon <= se.lon;
+}
+
+async function __streetViewMetadata(lat, lon, radiusM) {
+  const key = (typeof GOOGLE_STREETVIEW_API_KEY !== 'undefined') ? GOOGLE_STREETVIEW_API_KEY : '';
+  if (!key) return { ok: false, status: 'NO_KEY' };
+  const params = new URLSearchParams();
+  params.set('location', `${lat},${lon}`);
+  if (typeof radiusM === 'number' && isFinite(radiusM) && radiusM > 0) params.set('radius', String(Math.round(radiusM)));
+  // Prefer outdoor panoramas (avoids indoor/venue collections when possible).
+  // If no outdoor pano exists nearby, metadata may return ZERO_RESULTS and we'll re-roll.
+  try { params.set('source', 'outdoor'); } catch(e) {}
+  params.set('key', String(key));
+  const url = `https://maps.googleapis.com/maps/api/streetview/metadata?${params.toString()}`;
+  const res = await fetch(url, { cache: 'no-store' });
+  const data = await res.json();
+  if (!data || data.status !== 'OK' || !data.location) {
+    return { ok: false, status: (data && data.status) ? data.status : 'ERR' };
+  }
+  return {
+    ok: true,
+    pano_id: data.pano_id || null,
+    location: { lat: data.location.lat, lon: data.location.lng },
+    date: data.date || null,
+    status: data.status,
+  };
+}
+
+function __nearestPoiTo(lat, lon) {
+  // Pick the nearest POI for debugging / landmark tools.
+  // Linear scan is fine at "new target" time.
+  if (!Array.isArray(POIS) || POIS.length === 0) return null;
+
+  // This file loads before js/12_geo_helpers.js in index.html, so we cannot
+  // assume haversineMeters() exists yet. Provide a tiny local fallback.
+  const hav = (typeof haversineMeters === 'function')
+    ? haversineMeters
+    : function(a, b) {
+        const R = 6371000;
+        const toRad = (deg) => deg * Math.PI / 180;
+        const dLat = toRad(b.lat - a.lat);
+        const dLon = toRad(b.lon - a.lon);
+        const lat1 = toRad(a.lat);
+        const lat2 = toRad(b.lat);
+        const s1 = Math.sin(dLat/2);
+        const s2 = Math.sin(dLon/2);
+        const h = s1*s1 + Math.cos(lat1)*Math.cos(lat2)*s2*s2;
+        return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+      };
+  let best = null;
+  let bestD = Infinity;
+  for (let i = 0; i < POIS.length; i++) {
+    const p = POIS[i];
+    if (!p || typeof p.lat !== 'number' || typeof p.lon !== 'number') continue;
+    const d = hav({ lat, lon }, { lat: p.lat, lon: p.lon });
+    if (d < bestD) { bestD = d; best = p; }
+  }
+  if (!best) return null;
+  return { poi: best, dist_m: bestD };
+}
+
+function __rollTargetDistanceBand() {
+  // Defaults if config is missing.
+  const pFar = (typeof TARGET_BAND_PROB_FAR_GT_2KM !== 'undefined') ? TARGET_BAND_PROB_FAR_GT_2KM : 0.10;
+  const pClose = (typeof TARGET_BAND_PROB_CLOSE_LE_1KM !== 'undefined') ? TARGET_BAND_PROB_CLOSE_LE_1KM : 0.60;
+  const pMid = (typeof TARGET_BAND_PROB_MID_1_TO_2KM !== 'undefined') ? TARGET_BAND_PROB_MID_1_TO_2KM : 0.30;
+
+  const closeMax = (typeof TARGET_BAND_CLOSE_MAX_M !== 'undefined') ? TARGET_BAND_CLOSE_MAX_M : 1000;
+  const midMin = (typeof TARGET_BAND_MID_MIN_M !== 'undefined') ? TARGET_BAND_MID_MIN_M : 1000;
+  const midMax = (typeof TARGET_BAND_MID_MAX_M !== 'undefined') ? TARGET_BAND_MID_MAX_M : 2000;
+  const farMin = (typeof TARGET_BAND_FAR_MIN_M !== 'undefined') ? TARGET_BAND_FAR_MIN_M : 2000;
+
+  const r = Math.random();
+  // Normalize in case probabilities don't sum to 1.
+  const sum = (pFar + pClose + pMid) || 1;
+  const rf = r * sum;
+
+  if (rf < pFar) return { label: `> ${Math.round(farMin/1000)}km`, min: farMin, max: Infinity };
+  if (rf < pFar + pClose) return { label: `≤ ${Math.round(closeMax/1000)}km`, min: 0, max: closeMax };
+  return { label: `${Math.round(midMin/1000)}–${Math.round(midMax/1000)}km`, min: midMin, max: midMax };
+}
+
+async function __pickStreetViewPanoTarget(startLatLng) {
+  const maxAttempts = (typeof STREETVIEW_TARGET_MAX_ATTEMPTS !== 'undefined') ? STREETVIEW_TARGET_MAX_ATTEMPTS : 25;
+  const radiusM = (typeof STREETVIEW_METADATA_RADIUS_M !== 'undefined') ? STREETVIEW_METADATA_RADIUS_M : 200;
+
+  // Phase 6: pick a hidden distance band from the round start (if we have one).
+  const hasStart = !!(startLatLng && typeof startLatLng.lat === 'number' && typeof startLatLng.lon === 'number');
+  const band = hasStart ? __rollTargetDistanceBand() : null;
+  if (debugMode && band) {
+    try { log(`🧭 Target band rolled: ${band.label}`); } catch(e) {}
+  }
+
+  for (let i = 0; i < maxAttempts; i++) {
+    const p = __randomPointInBbox();
+    if (!p) break;
+    let meta = null;
+    try {
+      meta = await __streetViewMetadata(p.lat, p.lon, radiusM);
+    } catch (e) {
+      continue;
+    }
+    if (!meta || !meta.ok || !meta.location) continue;
+    if (!__insideBbox(meta.location.lat, meta.location.lon)) continue;
+
+    // Phase 6: enforce band distance from start (if present).
+    let distFromStartM = null;
+    if (band && hasStart && typeof haversineMeters === 'function') {
+      try {
+        distFromStartM = haversineMeters(startLatLng.lat, startLatLng.lon, meta.location.lat, meta.location.lon);
+      } catch (e) {
+        distFromStartM = null;
+      }
+      if (!(typeof distFromStartM === 'number' && isFinite(distFromStartM))) distFromStartM = null;
+      if (distFromStartM !== null) {
+        if (distFromStartM < band.min || distFromStartM > band.max) continue;
+      }
+    }
+
+    const panoId = meta.pano_id || null;
+    // Avoid repeats (Phase 1 optional, but recommended)
+    try {
+      if (typeof window.__isPanoRecentlyUsed === 'function' && window.__isPanoRecentlyUsed(panoId, meta.location.lat, meta.location.lon)) continue;
+    } catch(e) {}
+    try {
+      if (typeof window.__rememberPanoUsed === 'function') window.__rememberPanoUsed(panoId, meta.location.lat, meta.location.lon);
+    } catch(e) {}
+
+    // Phase 6: log the exact start→target distance (debug)
+    try {
+      if (debugMode && typeof distFromStartM === 'number' && isFinite(distFromStartM)) {
+        log(`📏 Target distance: ${distFromStartM.toFixed(0)}m from start`);
+      }
+    } catch (e) {}
+
+    return {
+      ok: true,
+      target: {
+        kind: 'pano',
+        id: panoId ? `pano:${panoId}` : `pano:${meta.location.lat.toFixed(6)},${meta.location.lon.toFixed(6)}`,
+        name: 'Hidden Node',
+        lat: meta.location.lat,
+        lon: meta.location.lon,
+        pano_id: panoId,
+        debug_dist_from_start_m: (typeof distFromStartM === 'number' && isFinite(distFromStartM)) ? distFromStartM : null,
+        meta: { date: meta.date || null },
+        debug_dist_from_start_m: (distFromStartM !== null) ? distFromStartM : null,
+      }
+    };
+  }
+  return { ok: false, reason: 'no_pano_found' };
+}
 function ensureReady() {
   if (!player) { log("⚠️ Tap “Enable location” first."); return false; }
+  if (__isPickingTarget) { log("⏳ Choosing a target…"); return false; }
   if (!target) pickNewTarget(false);
   return true;
 }
 
 function pickNewTarget(verbose = true) {
-  targetIdx = Math.floor(Math.random() * POIS.length);
-  target = POIS[targetIdx];
-  // New target => clear overlay history
+  if (__isPickingTarget) return;
+  __isPickingTarget = true;
+
+  // Debug/dev convenience: when starting a new round, spawn the player just outside
+  // Lime Street Station (so the loop is repeatable when testing).
+  // In normal play, GPS will overwrite this unless debug mode is on.
+  try {
+    const dbg = (typeof debugMode !== 'undefined') ? !!debugMode : false;
+    const hasPlayer = !!(player && typeof player.lat === 'number' && typeof player.lon === 'number');
+    if ((dbg || !hasPlayer) && typeof DEFAULT_START_LATLNG !== 'undefined' && DEFAULT_START_LATLNG) {
+      setPlayerLatLng(DEFAULT_START_LATLNG.lat, DEFAULT_START_LATLNG.lon, { manual: true, source: 'debug:spawn' });
+      if (dbg) log(`🧪 Debug: spawn player to ${DEFAULT_START_LATLNG.lat.toFixed(6)}, ${DEFAULT_START_LATLNG.lon.toFixed(6)} (Lime Street)`);
+    }
+  } catch (e) {}
+
+  // Clear overlays/caches immediately so the UI feels like a fresh round.
   try { if (typeof clearClues === 'function') clearClues(); } catch(e) {}
   try { if (typeof clearFog === 'function') clearFog(); } catch(e) {}
   try { if (typeof clearStreetViewGlimpseCache === 'function') clearStreetViewGlimpseCache(); } catch(e) {}
-  // New round starts whenever a new target is chosen.
-  try { resetRound({ keepTarget: true }); } catch(e) {}
-  try { saveRoundState(); } catch(e) {}
+  try { if (typeof clearRevealOverlay === 'function') clearRevealOverlay(); } catch(e) {}
+
+  // Clear any existing target marker while we pick.
+  targetIdx = null;
+  target = null;
   try { if (typeof syncLeafletTargetMarker === 'function') syncLeafletTargetMarker(); } catch(e) {}
-  if (verbose) {
-    if (debugMode && target) {
-      log(`🎯 New target: ${target.name ?? "Unnamed"} (${target.lat.toFixed(6)}, ${target.lon.toFixed(6)})`);
-    } else {
-      log(`🎯 New target chosen (hidden).`);
-    }
-  }
+
+  if (verbose) log('🎯 Choosing a new target…');
   updateUI();
   try { if (typeof updateHUD === "function") updateHUD(); } catch(e) {}
-  draw();
+  try { if (typeof draw === 'function') draw(); } catch(e) {}
+
+  (async () => {
+    const usePano = (typeof USE_STREETVIEW_PANO_TARGETS !== 'undefined') ? !!USE_STREETVIEW_PANO_TARGETS : false;
+
+    // Prefer pano targets when enabled.
+    // Capture round start reference for Phase 6 distance banding.
+    const startRef = (player && typeof player.lat === 'number' && typeof player.lon === 'number')
+      ? { lat: player.lat, lon: player.lon }
+      : null;
+
+    if (usePano) {
+      try {
+        const chosen = await __pickStreetViewPanoTarget(startRef);
+        if (chosen && chosen.ok && chosen.target) {
+          target = chosen.target;
+          targetIdx = null;
+
+          // For debug + future tools: keep track of the nearest known POI to this pano target.
+          try {
+            const near = __nearestPoiTo(target.lat, target.lon);
+            if (near && near.poi) {
+              target.debug_poi = { name: near.poi.name || 'Unnamed', lat: near.poi.lat, lon: near.poi.lon, dist_m: near.dist_m };
+              // A simple string label that the debug UI can always display, even
+              // if other restore paths fail to re-compute debug_poi.
+              target.debug_label = target.debug_poi.name;
+            } else {
+              target.debug_poi = null;
+              target.debug_label = null;
+            }
+          } catch (e) {
+            target.debug_poi = null;
+            target.debug_label = null;
+          }
+        }
+      } catch (e) {
+        // ignore; fallback below
+      }
+    }
+
+    // Fallback: old POI target selection (keeps game playable even if Street View metadata fails).
+    if (!target) {
+      targetIdx = Math.floor(Math.random() * POIS.length);
+      target = POIS[targetIdx];
+    }
+
+    // New round starts whenever a new target is chosen.
+    try { resetRound({ keepTarget: true }); } catch(e) {}
+    try {
+      if (typeof window.__initRoundStateV1ForNewTarget === 'function' && player && target) {
+        window.__initRoundStateV1ForNewTarget({ lat: player.lat, lon: player.lon }, target);
+      }
+    } catch(e) {}
+    try { saveRoundState(); } catch(e) {}
+    try { if (typeof syncLeafletTargetMarker === 'function') syncLeafletTargetMarker(); } catch(e) {}
+
+    if (verbose) {
+      if (debugMode && target) {
+        // For pano targets, show nearest POI as the human-readable label.
+        let label = (target.name ?? 'Unnamed');
+        let extra = '';
+        if (target.kind === 'pano' && target.debug_poi && target.debug_poi.name) {
+          const dm = (typeof target.debug_poi.dist_m === 'number' && isFinite(target.debug_poi.dist_m)) ? target.debug_poi.dist_m : null;
+          label = target.debug_poi.name;
+          extra = dm !== null ? ` (${dm.toFixed(0)}m from pano)` : '';
+        }
+        let distBit = '';
+        try {
+          const dms = (typeof target.debug_dist_from_start_m === 'number' && isFinite(target.debug_dist_from_start_m))
+            ? target.debug_dist_from_start_m
+            : (startRef && typeof haversineMeters === 'function')
+              ? haversineMeters(startRef.lat, startRef.lon, target.lat, target.lon)
+              : null;
+          if (typeof dms === 'number' && isFinite(dms)) distBit = ` | start→target ${dms.toFixed(0)}m`;
+        } catch(e) {}
+        log(`🎯 New target: ${label}${extra} | pano @ ${target.lat.toFixed(6)}, ${target.lon.toFixed(6)}${distBit}`);
+      } else {
+        log(`🎯 New target chosen (hidden).`);
+      }
+    }
+
+    updateUI();
+    try { if (typeof updateHUD === "function") updateHUD(); } catch(e) {}
+    try { if (typeof draw === 'function') draw(); } catch(e) {}
+
+    // Phase 1: always show the initial "Circle Snapshot" for the new target.
+    try {
+      if (typeof showStreetViewGlimpseForTarget === 'function') {
+        await showStreetViewGlimpseForTarget({ context: 'snapshot' });
+      }
+    } catch (e) {
+      // If Street View fails, don't block the round; player can still use other tools.
+    }
+  })().finally(() => {
+    __isPickingTarget = false;
+  });
 }
 
 function clearClues() {
@@ -350,6 +627,6 @@ const pp = latLonToPixel(player.lat, player.lon);
   addClue({ type: "half", x: pp.x, y: pp.y, dir, ok: true });
 
   setLast(label.toUpperCase(), true);
-  log(`⬆️ ${axis === "NS" ? "North/South" : "East/West"} → ${label} (dir=${dir})`);
+  log(`🧭 ${axis === "NS" ? "North/South" : "East/West"} → ${label} (dir=${dir})`);
   return { dir, label, axis };
 }

@@ -9,6 +9,7 @@
   --hud-pad:12px;
   --hud-btn:46px;
   --hud-gap:10px;
+  /* Default space reserved at top for HUD controls (top-right buttons). */
   --hud-row:calc(var(--hud-pad) + (2 * var(--hud-btn)) + (2 * var(--hud-gap)));
 }
 html, body{ height:100%; }
@@ -69,7 +70,10 @@ body{
   top:var(--hud-row);
   z-index:25;
 
-  width:min(420px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  /* Let the panel shrink-to-fit its current contents, but cap it for submenus */
+  width:auto;
+  max-width:min(420px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  min-width:200px;
 
   max-height:min(78dvh, 720px);
   overflow-y:auto;
@@ -136,6 +140,25 @@ button, select, input{
 button{ cursor:pointer; }
 button.primary{ background:rgba(148,163,184,.14); border-color:rgba(148,163,184,.35); }
 button.warn{ background:rgba(245,158,11,.12); border-color:rgba(250,204,21,.40); }
+button:disabled,
+.disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.menuBtn.disabled{ pointer-events:none; }
+
+/* Phase 3: visually mark unaffordable tool options */
+.menuBtn.unaffordable{
+  opacity: .40;
+  filter: grayscale(0.25);
+}
+
+/* Phase 2 result modal helpers */
+.resultStack{ display:flex; flex-direction:column; gap:10px; }
+.resultRow{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+.resultLabel{ color:var(--muted); font-size:12px; }
+.resultValue{ font-size:14px; }
 
 label{ font-size:12px; color:var(--muted); display:block; margin-bottom:6px; }
 label.check{ display:flex; align-items:center; gap:8px; margin:0; }
@@ -170,14 +193,65 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
 
 .fab--right{ right:calc(12px + env(safe-area-inset-right)); }
 .fab--stack2{ top:calc(var(--hud-pad) + var(--hud-btn) + var(--hud-gap)); }
+.fab--stack3{ top:calc(var(--hud-pad) + (var(--hud-btn) + var(--hud-gap)) * 2); }
+.fab--stack4{ top:calc(var(--hud-pad) + (var(--hud-btn) + var(--hud-gap)) * 3); }
+
+/* Curses button */
+.fab--curse{ font-size:22px; }
+.fab--curse.isInactive{ color:rgba(255,255,255,.35); }
+.fab--curse.isActive{
+  color:rgba(216,180,254,1);
+  text-shadow: 0 0 16px rgba(168,85,247,.85);
+  box-shadow:
+    0 0 0 1px rgba(168,85,247,.35),
+    0 0 24px rgba(168,85,247,.45),
+    0 0 48px rgba(168,85,247,.22),
+    0 12px 30px rgba(0,0,0,.32);
+  animation: cursePulse 1.35s ease-in-out infinite;
+}
+
+@keyframes cursePulse{
+  0%, 100%{
+    filter: brightness(1);
+    transform: translateZ(0);
+    box-shadow:
+      0 0 0 1px rgba(168,85,247,.35),
+      0 0 22px rgba(168,85,247,.40),
+      0 0 44px rgba(168,85,247,.20),
+      0 12px 30px rgba(0,0,0,.32);
+  }
+  50%{
+    filter: brightness(1.18);
+    box-shadow:
+      0 0 0 1px rgba(216,180,254,.45),
+      0 0 30px rgba(168,85,247,.60),
+      0 0 70px rgba(168,85,247,.26),
+      0 14px 34px rgba(0,0,0,.34);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .fab--curse.isActive{ animation: none; }
+}
 .fab--left{ left:calc(12px + env(safe-area-inset-left)); }
 
-/* HUD: timer + heat (top row, sits next to the FABs) */
-.timerWidget{
+/* HUD: timer (centered) */
+.hudTopCenter{
   position:absolute;
-  top:var(--hud-pad);
-  left:calc(var(--hud-pad) + env(safe-area-inset-left) + var(--hud-btn) + var(--hud-gap));
+  top:calc(var(--hud-pad) + env(safe-area-inset-top));
+  left:50%;
+  transform:translateX(-50%);
   z-index:31;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  pointer-events:none; /* allow map interactions except on widgets */
+}
+
+.hudTopCenter .timerWidget{ pointer-events:auto; }
+
+.timerWidget{
   display:flex;
   align-items:center;
   gap:10px;
@@ -190,29 +264,66 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   font-variant-numeric: tabular-nums;
   user-select:none;
 }
+
+.coinsWidget{
+  pointer-events:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  height:calc(var(--hud-btn) - 6px);
+  padding:0 12px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.22);
+  background:rgba(2,6,23,.55);
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  font-variant-numeric: tabular-nums;
+  user-select:none;
+}
+.coinsIcon{
+  font-size:16px;
+  line-height:1;
+  /* Nudge the emoji toward a more "gold coin" feel in most fonts */
+  filter: saturate(1.4) brightness(1.1);
+}
+.coinsMain{ min-width:18px; text-align:right; color:#d4af37; }
 .timerMain{ font-weight:750; color:#22c55e; letter-spacing:.2px; }
 .timerPenalty{ font-weight:700; color:#ef4444; letter-spacing:.2px; }
 
 .heatWidget{
   position:absolute;
-  top:var(--hud-pad);
-  right:calc(var(--hud-pad) + env(safe-area-inset-right) + var(--hud-btn) + var(--hud-gap));
   z-index:31;
-  height:var(--hud-btn);
-  padding:0 12px;
   border-radius:14px;
   border:1px solid rgba(148,163,184,.22);
   background:rgba(2,6,23,.55);
   box-shadow:0 10px 28px rgba(0,0,0,.28);
   display:flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
+  pointer-events:auto;
 }
-.heatBoxes{ display:flex; gap:6px; }
-.heatBox{
-  width:20px;
-  height:14px;
-  border-radius:4px;
+
+/* Vertical, thermometer-like heat widget (grows upwards) */
+.heatWidget--vertical{
+  /* Make it feel like a rotated horizontal widget: slimmer + taller */
+  width:42px;
+  height:156px;
+  padding:10px 8px;
+}
+
+.heatWidget--vertical .heatBoxes{
+  display:flex;
+  flex-direction:column-reverse; /* bottom segment is first in DOM */
+  gap:6px;
+}
+.heatWidget--vertical .heatBox{
+  /* Swap dimensions so it reads like the old horizontal segment rotated 90° */
+  width:18px;
+  height:24px;
+  border-radius:5px;
   border:1px solid rgba(148,163,184,.28);
   background:rgba(148,163,184,.08);
   position:relative;
@@ -242,16 +353,20 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   opacity: .95;
   pointer-events:none;
 }
-.heatBoxInner{
-  width: calc(100% - 4px);
-  height: 6px;
+.heatWidget--vertical .heatBoxInner{
+  width: 8px;
+  height: calc(100% - 4px);
   border-radius:3px;
   background: rgba(148,163,184,.14);
   overflow:hidden;
+  /* Make the inner fill grow upwards */
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
 }
-.heatBoxFill{
-  height:100%;
-  width:0%;
+.heatWidget--vertical .heatBoxFill{
+  width:100%;
+  height:0%;
   border-radius:3px;
 }
 .heatBox.is-full .heatBoxFill{ background: rgba(250,204,21,.95); }
@@ -281,11 +396,11 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   100% { transform: scale(1); filter: brightness(1); opacity: 1; }
 }
 
-.hudBtn#heatWidget.heatPulseUp{
+#heatWidget.heatPulseUp{
   animation: heatWidgetPulseUp 1.7s cubic-bezier(.12,.9,.18,1);
   box-shadow: 0 0 0 1px rgba(250,204,21,.28), 0 14px 38px rgba(0,0,0,.32);
 }
-.hudBtn#heatWidget.heatPulseDown{
+#heatWidget.heatPulseDown{
   animation: heatWidgetPulseDown 1.7s cubic-bezier(.12,.9,.18,1);
 }
 
@@ -300,8 +415,8 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .hudBtn#heatWidget.heatPulseUp,
-  .hudBtn#heatWidget.heatPulseDown,
+  #heatWidget.heatPulseUp,
+  #heatWidget.heatPulseDown,
   .heatBox.heatBoxPop{ animation: none !important; }
 }
 
@@ -309,12 +424,33 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
 .panel--right{ right:calc(12px + env(safe-area-inset-right)); }
 .panel--left{ left:calc(12px + env(safe-area-inset-left)); }
 
+/*
+  On wider screens, shift the Gameplay panel left so it doesn't sit underneath
+  the top-right HUD stack (recenter + gameplay buttons + vertical heat widget).
+  On small screens the panel is near full width, so keep the default right inset.
+*/
+@media (min-width: 520px){
+  .panel--right{
+    right:calc(12px + env(safe-area-inset-right) + var(--hud-btn) + var(--hud-gap) + 8px);
+  }
+}
+
 @media (max-width: 420px){
+  :root{
+    /* On small screens, the vertical heat widget sits under recenter+gameplay+curses. Push panels below it. */
+    --hud-row:calc(var(--hud-pad) + (3 * (var(--hud-btn) + var(--hud-gap))) + 132px + 10px);
+  }
   .panel{
     width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));
     max-height:calc(100dvh - 24px);
   }
 }
+
+/* Curses panel */
+.panel--curses{ width:min(320px, calc(100vw - 24px)); }
+.panel--curses .panelBody{ padding:12px 14px 14px; }
+.cursesList{ margin:10px 0 0; padding-left:18px; }
+.cursesList li{ margin:6px 0; }
 
 /* Gameplay question menus */
 .hidden{ display:none !important; }
@@ -337,6 +473,22 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   gap:10px;
 }
 
+/* Main gameplay menu: icon-only grid should be tight (no 1fr stretching) */
+.menuGrid--icon{
+  grid-template-columns: repeat(2, 54px);
+  justify-content:center;
+}
+
+/* Compact gameplay panel: center header + wrap subtitle nicely */
+.panel--compact .panelHeader{ justify-content:center; }
+.panel--compact .panelHeader > div{ text-align:center; }
+.panel--compact #gameMenu .muted{
+  max-width: calc(54px * 2 + 10px);
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
 /* Landmark submenu: single column */
 .menuGrid.landmarkGrid{
   grid-template-columns: 1fr;
@@ -350,6 +502,27 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   padding:12px 12px;
   text-align:left;
   min-width:0;
+}
+
+/* Icon-only square tool buttons (main menu) */
+.menuBtn--iconOnly{
+  /* Keep existing height feel, but make width match so it's a square */
+  width:54px;
+  height:54px;
+  padding:0;
+  gap:0;
+  justify-content:center;
+  text-align:center;
+}
+.menuBtn--iconOnly > :not(.iconBox){
+  display:none !important;
+}
+.menuBtn--iconOnly .iconBox{
+  width:100%;
+  height:100%;
+  border-radius:14px;
+  font-size:28px;
+  line-height:1;
 }
 
 .iconBox{
@@ -385,6 +558,10 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
 }
 .toast.good{ border-color:rgba(34,197,94,.45); }
 .toast.bad{ border-color:rgba(239,68,68,.45); }
+.toast.curse{
+  border-color:rgba(168,85,247,.60);
+  box-shadow:0 14px 38px rgba(0,0,0,.45), 0 0 0 2px rgba(168,85,247,.15), 0 0 24px rgba(168,85,247,.18);
+}
 
 .toastIcon{
   font-size:28px;
@@ -535,12 +712,211 @@ label.check{ display:flex; align-items:center; gap:8px; margin:0; }
   overflow: hidden;
   border-radius: 14px;
   background: rgba(0,0,0,0.08);
+  position: relative;
+  /* Tuneable look knobs */
+  --blur: 3.6px;
+  /* Zoom/crop level for the snapshot image (higher = more cropped/less obvious). */
+  --zoom: 1.28;
+  --sat: 1.12;
+  --con: 1.06;
+}
+
+.photo-glimpse-frame.is-snapshot {
+  /* Less blur, more "readable" — corruption does the heavy lifting */
+  --blur: 3.8px;
+  --zoom: 1.36;
+}
+
+
+/* Uncorrupt: show photos clean (no blur/glitch) */
+.photo-glimpse-frame.is-uncorrupted {
+  --blur: 0px;
+  --sat: 1.00;
+  --con: 1.00;
+}
+.photo-glimpse-frame.is-uncorrupted .photo-glimpse-img {
+  filter: none !important;
+  animation: none !important;
+}
+.photo-glimpse-frame.is-uncorrupted .photo-glimpse-img.rgb {
+  display: none !important;
+}
+.photo-glimpse-frame.is-uncorrupted .photo-glitch-slices,
+.photo-glimpse-frame.is-uncorrupted .photo-corrupt-overlay,
+.photo-glimpse-frame.is-uncorrupted .photo-corrupt-blocks {
+  display: none !important;
 }
 
 .photo-glimpse-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.18);
-  filter: blur(7px);
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--zoom));
+  filter: blur(var(--blur)) saturate(var(--sat)) contrast(var(--con));
+  will-change: transform, filter, clip-path, opacity;
+}
+
+.photo-glimpse-img.base {
+  z-index: 1;
+  animation: mgBaseJitter 5.2s steps(2,end) infinite;
+}
+
+@keyframes mgBaseJitter {
+  0%,100% { transform: scale(var(--zoom)) translate(0px,0px); }
+  20% { transform: scale(var(--zoom)) translate(-1px,1px) skewX(-0.18deg); }
+  40% { transform: scale(var(--zoom)) translate(1px,-1px) skewX(0.14deg); }
+  60% { transform: scale(var(--zoom)) translate(-1.2px,0px) skewX(-0.10deg); }
+  80% { transform: scale(var(--zoom)) translate(1px,1px) skewX(0.18deg); }
+}
+
+/* RGB split (subtle chromatic aberration + jitter) */
+.photo-glimpse-img.rgb {
+  z-index: 2;
+  opacity: 0.30;
+  mix-blend-mode: screen;
+  filter: blur(calc(var(--blur) * 0.55)) saturate(1.45) contrast(1.18);
+}
+
+.photo-glimpse-img.rgb-a {
+  transform: scale(var(--zoom)) translateX(-2px);
+  filter: blur(calc(var(--blur) * 0.55)) saturate(1.55) contrast(1.15) hue-rotate(25deg);
+  animation: mgRgbJitterA 3.4s steps(2, end) infinite;
+}
+
+.photo-glimpse-img.rgb-b {
+  transform: scale(var(--zoom)) translateX(2px);
+  filter: blur(calc(var(--blur) * 0.55)) saturate(1.55) contrast(1.15) hue-rotate(-25deg);
+  animation: mgRgbJitterB 3.9s steps(2, end) infinite;
+}
+
+@keyframes mgRgbJitterA {
+  0%, 100% { transform: scale(var(--zoom)) translateX(-2px) translateY(0px); opacity: 0.22; }
+  20% { transform: scale(var(--zoom)) translateX(-6px) translateY(-1px); opacity: 0.25; }
+  40% { transform: scale(var(--zoom)) translateX(1px) translateY(1px); opacity: 0.18; }
+  60% { transform: scale(var(--zoom)) translateX(-8px) translateY(0px); opacity: 0.27; }
+  80% { transform: scale(var(--zoom)) translateX(-3px) translateY(1px); opacity: 0.20; }
+}
+
+@keyframes mgRgbJitterB {
+  0%, 100% { transform: scale(var(--zoom)) translateX(2px) translateY(0px); opacity: 0.22; }
+  15% { transform: scale(var(--zoom)) translateX(8px) translateY(1px); opacity: 0.26; }
+  35% { transform: scale(var(--zoom)) translateX(-2px) translateY(-1px); opacity: 0.18; }
+  55% { transform: scale(var(--zoom)) translateX(10px) translateY(0px); opacity: 0.29; }
+  75% { transform: scale(var(--zoom)) translateX(4px) translateY(-1px); opacity: 0.20; }
+}
+
+/* Horizontal tear slices (JS-seeded bands) */
+.photo-glitch-slices {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.photo-glitch-slice {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--zoom)) translateX(var(--dx, 0px)) translateY(var(--dy, 0px));
+  clip-path: inset(var(--top, 0%) 0 var(--bottom, 0%) 0);
+  opacity: var(--o, 0.22);
+  mix-blend-mode: screen;
+  filter: saturate(1.65) contrast(1.25) hue-rotate(var(--h, 0deg));
+  animation: mgSlice var(--dur, 2.2s) steps(2, end) infinite;
+}
+
+@keyframes mgSlice {
+  0%, 100% { transform: scale(var(--zoom)) translateX(var(--dx, 0px)) translateY(var(--dy, 0px)); opacity: var(--o, 0.22); }
+  35% { transform: scale(var(--zoom)) translateX(calc(var(--dx, 0px) * -0.35)) translateY(calc(var(--dy, 0px) * -1)); opacity: calc(var(--o, 0.14) * 1.25); }
+  70% { transform: scale(var(--zoom)) translateX(calc(var(--dx, 0px) * 0.6)) translateY(calc(var(--dy, 0px) * 0.5)); opacity: calc(var(--o, 0.14) * 0.90); }
+}
+
+/* --- "Corruption" overlay (CSS-only glitch vibe) --- */
+.photo-corrupt-overlay,
+.photo-corrupt-blocks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.photo-corrupt-overlay { z-index: 4; }
+.photo-corrupt-blocks { z-index: 5; }
+
+.photo-corrupt-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -20% 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.00) 0px,
+    rgba(255,255,255,0.00) 5px,
+    rgba(255,255,255,0.015) 6px,
+    rgba(255,255,255,0.00) 10px
+  );
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  animation: mgScan 2.8s linear infinite;
+}
+
+.photo-corrupt-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,0,255,0.10), rgba(0,255,255,0.08)),
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.10), rgba(0,0,0,0.00) 60%);
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  animation: mgFlicker 2.6s steps(2, end) infinite;
+}
+
+/* A bit of noisy "digital snow" (cheap gradient noise) */
+.photo-corrupt-overlay {
+  background: repeating-radial-gradient(
+    circle at 10% 20%,
+    rgba(255,255,255,0.035) 0px,
+    rgba(255,255,255,0.00) 2px,
+    rgba(0,0,0,0.00) 6px
+  );
+  opacity: 0.40;
+  mix-blend-mode: overlay;
+  animation: mgNoise 1.1s steps(2,end) infinite;
+}
+
+@keyframes mgNoise {
+  0%, 100% { transform: translate(0px, 0px); }
+  25% { transform: translate(1.5px, -1px); }
+  50% { transform: translate(-1px, 1.5px); }
+  75% { transform: translate(1px, 1px); }
+}
+
+.photo-corrupt-block {
+  position: absolute;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,0,255,0.30), rgba(0,255,255,0.22));
+  mix-blend-mode: screen;
+  filter: blur(0.3px);
+  animation: mgBlock 2.2s ease-in-out infinite;
+}
+
+@keyframes mgScan {
+  0% { transform: translateY(-12%); }
+  100% { transform: translateY(12%); }
+}
+
+@keyframes mgFlicker {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes mgBlock {
+  0%, 100% { transform: translateX(0px); opacity: var(--o, 0.22); }
+  50% { transform: translateX(var(--dx, 10px)); opacity: calc(var(--o, 0.14) * 1.25); }
 }

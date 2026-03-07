@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "defaultDurationMs": 300000,
+  "triggerChanceByHeatLevel": {
+    "1": 0.20,
+    "2": 0.40,
+    "3": 0.65,
+    "4": 0.90,
+    "5": 1.00
+  },
+  "tiers": {
+    "1": {
+      "id": "heat1",
+      "name": "Heat I \u2014 The First Chill",
+      "description": "A faint unease settles in. (Test curse; no effects yet.)",
+      "durationMs": 300000
+    },
+    "2": {
+      "id": "heat2",
+      "name": "Heat II \u2014 Lingering Doubt",
+      "description": "The map feels less trustworthy. (Test curse; no effects yet.)",
+      "durationMs": 300000
+    },
+    "3": {
+      "id": "heat3",
+      "name": "Heat III \u2014 Static in the Veins",
+      "description": "Noise at the edge of perception. (Test curse; no effects yet.)",
+      "durationMs": 300000
+    },
+    "4": {
+      "id": "heat4",
+      "name": "Heat IV \u2014 The Violet Pressure",
+      "description": "A heavy presence presses in. (Test curse; no effects yet.)",
+      "durationMs": 300000
+    },
+    "5": {
+      "id": "heat5",
+      "name": "Heat V \u2014 Full Hex",
+      "description": "You are fully marked. (Test curse; no effects yet.)",
+      "durationMs": 300000
+    }
+  }
+}

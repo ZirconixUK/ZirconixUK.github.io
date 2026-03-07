@@ -18,7 +18,8 @@ function fitViewToMap() {
 }
 
 function resizeCanvasToDisplaySize() {
-  const c = canvas;
+  const c = (window.canvas || document.getElementById('view'));
+  if (!c) return;
   const dpr = window.devicePixelRatio || 1;
   const rect = c.getBoundingClientRect();
   const w = Math.max(1, Math.round(rect.width * dpr));
@@ -30,9 +31,9 @@ function resizeCanvasToDisplaySize() {
 
   // Keep fogScreen in sync
   if (window.fogScreen) {
-    if (fogScreen.width !== w || fogScreen.height !== h) {
-      fogScreen.width = w;
-      fogScreen.height = h;
+    if (window.fogScreen.width !== w || window.fogScreen.height !== h) {
+      window.fogScreen.width = w;
+      window.fogScreen.height = h;
     }
   }
 }

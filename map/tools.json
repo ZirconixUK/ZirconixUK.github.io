@@ -4,68 +4,98 @@
     "radar": {
       "label": "Radar",
       "default": {
-        "heat_cost": 0.6
+        "heat_cost": 0.6,
+        "coin_cost": 2
       },
       "options": [
         {
           "id": "50",
           "value_m": 50,
-          "cost": { "heat_cost": 0.2 }
+          "cost": {
+            "heat_cost": 0.2,
+            "coin_cost": 1
+          }
         },
         {
           "id": "100",
           "value_m": 100,
-          "cost": { "heat_cost": 0.3 }
+          "cost": {
+            "heat_cost": 0.3,
+            "coin_cost": 1
+          }
         },
         {
           "id": "250",
           "value_m": 250,
-          "cost": { "heat_cost": 0.4 }
+          "cost": {
+            "heat_cost": 0.4,
+            "coin_cost": 2
+          }
         },
         {
           "id": "500",
           "value_m": 500,
-          "cost": { "heat_cost": 0.6 }
+          "cost": {
+            "heat_cost": 0.6,
+            "coin_cost": 2
+          }
         },
         {
           "id": "1000",
           "value_m": 1000,
-          "cost": { "heat_cost": 0.8 }
+          "cost": {
+            "heat_cost": 0.8,
+            "coin_cost": 3
+          }
         },
         {
           "id": "2000",
           "value_m": 2000,
-          "cost": { "heat_cost": 1.0 }
+          "cost": {
+            "heat_cost": 1.0,
+            "coin_cost": 4
+          }
         }
       ]
     },
     "thermometer": {
       "label": "Thermometer",
       "default": {
-        "heat_cost": 0.3
+        "heat_cost": 0.3,
+        "coin_cost": 1
       },
       "options": [
         {
           "id": "10",
           "value_s": 10,
-          "cost": { "heat_cost": 0.2 }
+          "cost": {
+            "heat_cost": 0.2,
+            "coin_cost": 1
+          }
         },
         {
           "id": "20",
           "value_s": 20,
-          "cost": { "heat_cost": 0.3 }
+          "cost": {
+            "heat_cost": 0.3,
+            "coin_cost": 1
+          }
         },
         {
           "id": "30",
           "value_s": 30,
-          "cost": { "heat_cost": 0.4 }
+          "cost": {
+            "heat_cost": 0.4,
+            "coin_cost": 2
+          }
         }
       ]
     },
     "nsew": {
       "label": "N/S/E/W",
       "default": {
-        "heat_cost": 0.4
+        "heat_cost": 0.4,
+        "coin_cost": 1
       },
       "options": [
         {
@@ -81,7 +111,8 @@
     "landmark": {
       "label": "Landmark",
       "default": {
-        "heat_cost": 0.5
+        "heat_cost": 0.5,
+        "coin_cost": 2
       },
       "options": [
         {
@@ -104,11 +135,41 @@
     "photo": {
       "label": "Photo",
       "default": {
-        "heat_cost": 0.9
+        "heat_cost": 0.0,
+        "coin_cost": 0
       },
       "options": [
         {
-          "id": "glimpse"
+          "id": "starter",
+          "label": "Starter photo",
+          "cost": {
+            "heat_cost": 0.0,
+            "coin_cost": 0
+          }
+        },
+        {
+          "id": "near100",
+          "label": "Extra photo (\u2264100m)",
+          "cost": {
+            "heat_cost": 0.0,
+            "coin_cost": 3
+          }
+        },
+        {
+          "id": "near200",
+          "label": "Extra photo (\u2264200m)",
+          "cost": {
+            "heat_cost": 0.0,
+            "coin_cost": 4
+          }
+        },
+        {
+          "id": "uncorrupt",
+          "label": "Uncorrupt all photos",
+          "cost": {
+            "heat_cost": 0.0,
+            "coin_cost": 2
+          }
         }
       ]
     }

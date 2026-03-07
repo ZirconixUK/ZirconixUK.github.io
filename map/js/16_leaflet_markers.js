@@ -149,6 +149,34 @@ function refreshLeafletMarkersVisibility() {
 
 // Expose functions globally so other modules can call them
 window.syncLeafletTargetMarker = syncLeafletTargetMarker;
+
+// ---- Phase 2: reveal overlay (guess → target) ----
+let __revealLayer = null;
+
+function clearRevealOverlay(){
+  try {
+    if (__revealLayer && window.leafletMap) window.leafletMap.removeLayer(__revealLayer);
+  } catch(e) {}
+  __revealLayer = null;
+}
+
+function showRevealOverlay({ guess, target }){
+  try {
+    if (!window.leafletMap || !guess || !target) return;
+    clearRevealOverlay();
+    const g = L.latLng(+guess.lat, +guess.lon);
+    const t = L.latLng(+target.lat, +target.lon);
+    const grp = L.layerGroup();
+    L.polyline([g, t], { weight: 4, opacity: 0.85 }).addTo(grp);
+    L.circleMarker(g, { radius: 7, weight: 2, opacity: 0.9, fillOpacity: 0.5 }).addTo(grp);
+    L.circleMarker(t, { radius: 7, weight: 2, opacity: 0.9, fillOpacity: 0.5 }).addTo(grp);
+    grp.addTo(window.leafletMap);
+    __revealLayer = grp;
+  } catch(e) {}
+}
+
+window.showRevealOverlay = showRevealOverlay;
+window.clearRevealOverlay = clearRevealOverlay;
 window.syncLeafletPlayerMarker = syncLeafletPlayerMarker;
 window.refreshLeafletMarkersVisibility = refreshLeafletMarkersVisibility;
 

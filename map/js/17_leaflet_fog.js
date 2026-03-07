@@ -18,6 +18,9 @@ let fogGeom = null;          // Martinez multipolygon geometry (in EPSG3857 mete
 let fogActions = [];        // replayable fog operations for persistence
 let fogLayer = null;         // Leaflet layer (L.Polygon or L.LayerGroup)
 
+// Performance: force Canvas renderer for heavy fog polygons (SVG can get very laggy when unioned shapes grow)
+let __fogRenderer = null;
+
 // Web Mercator world extents in meters
 const WM_MAX = 20037508.342789244;
 const WORLD_RING = [
@@ -62,7 +65,7 @@ function destinationLatLon(lat, lon, bearingDeg, distanceM) {
 }
 
 // Build a circle polygon ring (closed) around a center in EPSG:3857 meters.
-function circleRingMeters(lat, lon, radiusM, points = 96) {
+function circleRingMeters(lat, lon, radiusM, points = 48) {
   const ring = [];
   for (let i = 0; i <= points; i++) {
     const bearing = (i / points) * 360;
@@ -110,6 +113,8 @@ function ensureFogLayer() {
   if (fogLayer) return true;
 
   // Use a LayerGroup so we can replace polygons cleanly
+  try { __fogRenderer = __fogRenderer || L.canvas({ padding: 0.5 }); } catch(e) { __fogRenderer = null; }
+
   fogLayer = L.layerGroup().addTo(window.leafletMap);
   return true;
 }
@@ -135,6 +140,7 @@ function renderFog() {
     fillColor: "#2f343a",
     fillOpacity: a,
     interactive: false,
+    renderer: (__fogRenderer || undefined),
   };
 
   for (const poly of fogGeom) {
@@ -156,7 +162,7 @@ function addFogRadar(lat, lon, radiusM, ok, opts) {
     return;
   }
 
-  const circle = circleRingMeters(lat, lon, radiusM, 96);
+  const circle = circleRingMeters(lat, lon, radiusM, 48);
 
   // Record for persistence (unless replay)
   if (!(opts && opts._replay)) recordAction({ type: 'radar', lat, lon, radiusM, ok });
@@ -342,17 +348,17 @@ function addFogDistanceBucket(lat, lon, minM, maxM, ok, opts) {
   if (!(opts && opts._replay)) recordAction({ type:'dist', lat, lon, minM, maxM, ok });
 
   const outerM = (maxM === Infinity) ? 150000 : maxM;
-  const outer = circleRingMeters(lat, lon, outerM, 128);
+  const outer = circleRingMeters(lat, lon, outerM, 64);
 
   if (ok) {
     if (minM > 0) {
-      const inner = circleRingMeters(lat, lon, minM, 128);
+      const inner = circleRingMeters(lat, lon, minM, 64);
       unionIntoFog([[ inner ]]);
     }
     unionIntoFog([[ WORLD_RING, outer ]]);
   } else {
     if (minM > 0) {
-      const inner = circleRingMeters(lat, lon, minM, 128);
+      const inner = circleRingMeters(lat, lon, minM, 64);
       unionIntoFog([[ outer, inner ]]);
     } else {
       unionIntoFog([[ outer ]]);

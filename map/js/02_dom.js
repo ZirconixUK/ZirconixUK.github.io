@@ -9,6 +9,7 @@ const elClues = document.getElementById("cluesOut");
 const elReveal = null; // dbgReveal removed (use debugMode)
 const elDbgMode = document.getElementById("dbgMode");
 const elBBox = document.getElementById("dbgBBox");
+const elDbgSimCurse = document.getElementById("dbgSimCurse");
 const elDbgShowAllPois = document.getElementById("dbgShowAllPois");
 const elViewBboxOut = document.getElementById("viewBboxOut");
 const elLast = document.getElementById("lastAnswer");
@@ -25,6 +26,11 @@ const elDbgHeatNew = document.getElementById("dbgHeatNew");
 const elDbgHeatApply = document.getElementById("dbgHeatApply");
 const elDbgHeatCurrent = document.getElementById("dbgHeatCurrent");
 
+// Debug: coin override
+const elDbgCoinsNew = document.getElementById("dbgCoinsNew");
+const elDbgCoinsApply = document.getElementById("dbgCoinsApply");
+const elDbgCoinsCurrent = document.getElementById("dbgCoinsCurrent");
+
 // HUD
 const elTimerMain = document.getElementById("timerMain");
 const elTimerPenalty = document.getElementById("timerPenalty");
@@ -34,23 +40,54 @@ const elHeatWidget = document.getElementById("heatWidget");
 
 
 // Bind UI event listeners (called from boot after all functions are defined).
-function showToast(msg, ok){
+// Toasts are queued so we can show "answer" first, then (optionally) a "cursed" popup after dismissal.
+const __toastQueue = [];
+let __toastShowing = false;
+
+function __showNextToast(){
   const toast = document.getElementById("toast");
-  if (!toast) return;
-  const icon = ok ? "✅" : "❌";
+  if (!toast) { __toastQueue.length = 0; __toastShowing = false; return; }
+  const item = __toastQueue.shift();
+  if (!item) { __toastShowing = false; return; }
+
+  __toastShowing = true;
+
+  const { msg, ok, kind, resolve } = item;
+  const icon = (kind === "curse") ? "🟣" : (ok ? "✅" : "❌");
   toast.innerHTML = `<div class="toastIcon">${icon}</div><div>${msg}</div>`;
-  toast.classList.remove("hidden","good","bad");
-  toast.classList.add(ok ? "good" : "bad");
-  // click anywhere dismiss
+  toast.classList.remove("hidden","good","bad","curse");
+  if (kind === "curse") toast.classList.add("curse");
+  else toast.classList.add(ok ? "good" : "bad");
+
   const dismiss = () => {
     toast.classList.add("hidden");
-    toast.classList.remove("good","bad");
+    toast.classList.remove("good","bad","curse");
     window.removeEventListener("pointerdown", dismiss, true);
     window.removeEventListener("keydown", dismiss, true);
+    try { resolve && resolve(); } catch(e) {}
+    // next
+    __showNextToast();
   };
+
   window.addEventListener("pointerdown", dismiss, true);
   window.addEventListener("keydown", dismiss, true);
 }
+
+function enqueueToast(msg, ok, opts = null){
+  return new Promise((resolve) => {
+    const kind = (opts && opts.kind) ? String(opts.kind) : "";
+    __toastQueue.push({ msg, ok: !!ok, kind, resolve });
+    if (!__toastShowing) __showNextToast();
+  });
+}
+
+function showToast(msg, ok, opts = null){
+  // Back-compat: most callers ignore the promise.
+  try { enqueueToast(msg, ok, opts); } catch(e) {}
+}
+
+// Expose for modules that want to chain popups.
+window.enqueueToast = enqueueToast;
 
 function on(id, ev, fn){ const el=document.getElementById(id); if(el) el.addEventListener(ev, fn); return el; }
 
@@ -188,6 +225,19 @@ function bindUI() {
 // elReveal.addEventListener("change", draw);
   if (elBBox) elBBox.addEventListener("change", draw);
 
+  // ---- Debug: simulate active curse (lights the curses button) ----
+  if (elDbgSimCurse) {
+    elDbgSimCurse.addEventListener("change", () => {
+      const on = !!elDbgSimCurse.checked;
+      try {
+        if (typeof window.debugSimulateCurse === "function") {
+          window.debugSimulateCurse(on);
+        }
+      } catch (e) {}
+      try { log(on ? "🟣 Simulated curse ON." : "⚪ Simulated curse OFF."); } catch (e) {}
+    });
+  }
+
   // ---- Debug: view bbox (copy/paste into python script) ----
   let lastViewBboxCsv = "";
   on("btnGetViewBbox", "click", () => {
@@ -278,6 +328,38 @@ if (debugMode) {
     elDbgHeatNew.addEventListener("blur", () => {
       if ((elDbgHeatNew.value ?? "").toString().trim() === "") return;
       applyHeatFromInput();
+    });
+  }
+
+  // Debug: coins override (typed value + Apply)
+  const applyCoinsFromInput = () => {
+    if (!elDbgCoinsNew) return;
+    const raw = (elDbgCoinsNew.value ?? "").toString().trim();
+    let v = parseInt(raw, 10);
+    if (!isFinite(v)) v = 0;
+    v = Math.max(0, v | 0);
+    // normalize input
+    elDbgCoinsNew.value = String(v);
+    try {
+      if (window.__coins && typeof window.__coins.setCoins === "function") {
+        window.__coins.setCoins(v);
+      }
+    } catch (e) {}
+    try {
+      if (elDbgCoinsCurrent) elDbgCoinsCurrent.textContent = String(v);
+    } catch (e) {}
+  };
+
+  if (elDbgCoinsApply) {
+    elDbgCoinsApply.addEventListener("click", applyCoinsFromInput);
+  }
+  if (elDbgCoinsNew) {
+    elDbgCoinsNew.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") applyCoinsFromInput();
+    });
+    elDbgCoinsNew.addEventListener("blur", () => {
+      if ((elDbgCoinsNew.value ?? "").toString().trim() === "") return;
+      applyCoinsFromInput();
     });
   }
 
@@ -448,6 +530,9 @@ if (debugMode) {
     landmarkMenu.classList.toggle("hidden", !showLandmark);
     photoMenu.classList.toggle("hidden", !showPhoto);
     if (showLandmark) refreshLandmarkNearestLabels();
+
+    // Resize Gameplay panel to fit the active menu (main menu is compact).
+    try { if (typeof updateGameplayPanelWidth === "function") updateGameplayPanelWidth(); } catch (e) {}
   }
 
   on("qRadar", "click", () => showMenu("radar"));
@@ -472,7 +557,32 @@ if (debugMode) {
     const h = (cost && typeof cost.heat_cost === "number" && isFinite(cost.heat_cost))
       ? cost.heat_cost
       : (typeof QUESTION_HEAT_COST === "number" ? QUESTION_HEAT_COST : 0.5);
+
+    // Phase 3: coins. If unaffordable, block the action entirely.
+    const coinCost = (cost && typeof cost.coin_cost === 'number' && isFinite(cost.coin_cost)) ? (cost.coin_cost|0) : 0;
+    try {
+      if (coinCost > 0 && window.__coins && typeof window.__coins.spendCoins === 'function') {
+        const ok = window.__coins.spendCoins(coinCost, { reason: `${toolId}${optionId ? ' ' + optionId : ''}` });
+        if (!ok || !ok.ok) {
+          const need = (window.__coins && typeof window.__coins.coinsNeeded === 'function') ? window.__coins.coinsNeeded(coinCost) : Math.max(0, coinCost);
+          const step = (typeof COIN_EARN_METERS === 'number' && isFinite(COIN_EARN_METERS) && COIN_EARN_METERS > 0) ? COIN_EARN_METERS : 100;
+          const msg = `Not enough coins. Need ${need} more (walk about ${(need*step)|0}m).`;
+          try { if (typeof showToast === 'function') showToast(msg, false); } catch(e) {}
+          return { blocked: true };
+        }
+      }
+    } catch(e) {}
+
     try { if (typeof addHeat === "function") addHeat(h); else if (typeof setHeatLevel === "function") setHeatLevel((heatLevel||0)+h); } catch(e) {}
+
+    // Curse roll (v2): each question can trigger a curse based on current heat level.
+    // Return the roll so the caller can show a follow-up popup AFTER the answer toast.
+    try {
+      if (typeof window.maybeTriggerCurseFromQuestion === 'function') {
+        return window.maybeTriggerCurseFromQuestion({ toolId, optionId });
+      }
+    } catch (e) {}
+    return null;
   }
 
   if (radarMenu) {
@@ -480,7 +590,8 @@ if (debugMode) {
       btn.addEventListener("click", () => {
         const meters = parseFloat(btn.getAttribute("data-radar") || "0");
         // Apply costs
-        applyQuestionCosts("radar", String(meters));
+        const curseRoll = applyQuestionCosts("radar", String(meters));
+        if (curseRoll && curseRoll.blocked) return;
         // Close overlay immediately
         if (panelGameplay) panelGameplay.classList.remove("open");
         showMenu("main");
@@ -495,6 +606,14 @@ if (debugMode) {
               ? `Yes — the target is within ${pretty}.`
               : `No — the target is not within ${pretty}.`;
             showToast(msg, res.ok);
+
+            // If a curse triggered, queue a follow-up popup AFTER the answer toast is dismissed.
+            try {
+              if (curseRoll && curseRoll.triggered && curseRoll.applied && curseRoll.applied.curse) {
+                const c = curseRoll.applied.curse;
+                showToast(`You’ve been cursed: <b>${c.name}</b>.<br>(5 minutes)`, false, { kind: 'curse' });
+              }
+            } catch (e) {}
           }
         } catch (e) {
           console.error(e);
@@ -519,8 +638,16 @@ if (debugMode) {
           }
         } catch(e) { console.error(e); }
         if (started) {
-          applyQuestionCosts("thermometer", String(mins));
+          const curseRoll = applyQuestionCosts("thermometer", String(mins));
+          if (curseRoll && curseRoll.blocked) return;
           showToast(`Thermometer running: ${mins}s.`, true);
+
+          try {
+            if (curseRoll && curseRoll.triggered && curseRoll.applied && curseRoll.applied.curse) {
+              const c = curseRoll.applied.curse;
+              showToast(`You’ve been cursed: <b>${c.name}</b>.<br>(5 minutes)`, false, { kind: 'curse' });
+            }
+          } catch (e) {}
         } else {
           showToast("Set your location first (geolocation) before using the thermometer.", false);
         }
@@ -539,7 +666,8 @@ if (debugMode) {
           if (typeof showToast === "function") showToast("Set your location first (geolocation) before using N/S/E/W.", false);
           return;
         }
-        applyQuestionCosts("nsew", String(mode));
+        const curseRoll = applyQuestionCosts("nsew", String(mode));
+        if (curseRoll && curseRoll.blocked) return;
         if (panelGameplay) panelGameplay.classList.remove("open");
         showMenu("main");
         try {
@@ -549,6 +677,13 @@ if (debugMode) {
               ? `The target is ${res.label} of you.`
               : `The target is ${res.label} of you.`;
             showToast(msg, true);
+
+            try {
+              if (curseRoll && curseRoll.triggered && curseRoll.applied && curseRoll.applied.curse) {
+                const c = curseRoll.applied.curse;
+                showToast(`You’ve been cursed: <b>${c.name}</b>.<br>(5 minutes)`, false, { kind: 'curse' });
+              }
+            } catch (e) {}
           }
         } catch (e) {
           console.error(e);
@@ -565,7 +700,8 @@ if (debugMode) {
       btn.addEventListener("click", () => {
         const kind = (btn.getAttribute("data-landmark") || "").toLowerCase();
         // Apply costs
-        applyQuestionCosts("landmark", String(kind));
+        const curseRoll = applyQuestionCosts("landmark", String(kind));
+        if (curseRoll && curseRoll.blocked) return;
         // Close overlay immediately
         if (panelGameplay) panelGameplay.classList.remove("open");
         showMenu("main");
@@ -631,6 +767,13 @@ if (debugMode) {
               log("❌ Train Station result: NO (no match)");
               showToast("NO — your nearest train station is not the target’s nearest.", false);
             }
+
+            try {
+              if (curseRoll && curseRoll.triggered && curseRoll.applied && curseRoll.applied.curse) {
+                const c = curseRoll.applied.curse;
+                showToast(`You’ve been cursed: <b>${c.name}</b>.<br>(5 minutes)`, false, { kind: 'curse' });
+              }
+            } catch (e) {}
           } catch (e) {
             console.error(e);
             log("🚉 Train Station check: error (see console).");
@@ -709,6 +852,13 @@ if (debugMode) {
             log(`❌ ${label} result: NO (no match)`);
             showToast(`NO — your nearest ${label.toLowerCase()} is not the target’s nearest.`, false);
           }
+
+          try {
+            if (curseRoll && curseRoll.triggered && curseRoll.applied && curseRoll.applied.curse) {
+              const c = curseRoll.applied.curse;
+              showToast(`You’ve been cursed: <b>${c.name}</b>.<br>(5 minutes)`, false, { kind: 'curse' });
+            }
+          } catch (e) {}
         } catch (e) {
           console.error(e);
           log(`🧭 ${kind}: error (see console).`);
@@ -726,30 +876,139 @@ if (debugMode) {
         if (panelGameplay) panelGameplay.classList.remove('open');
         showMenu('main');
 
-        if (mode !== 'glimpse') return;
-
-        try {
-          if (typeof showStreetViewGlimpseForTarget === 'function') {
-            const res = await showStreetViewGlimpseForTarget();
-            // Only charge costs the first time per target; re-opening is free.
-            if (!(res && res.cached)) {
-              applyQuestionCosts('photo', mode);
+        if (mode === 'starter') {
+          try {
+            if (typeof showStreetViewGlimpseForTarget === 'function') {
+              const res = await showStreetViewGlimpseForTarget({ context: 'snapshot' });
+              // Re-viewing the starter snapshot is always free.
+              if (res && res.ok) {
+                if (typeof window.setLast === 'function') window.setLast('REVIEW', true);
+              }
             } else {
-              if (typeof window.setLast === 'function') window.setLast('REVIEW', true);
+              showToast('Photo glimpse module not loaded.', false);
             }
-          } else {
-            showToast('Photo glimpse module not loaded.', false);
+          } catch (e) {
+            console.error(e);
+            showToast('Could not load the starter photo right now.', false);
           }
-        } catch (e) {
-          console.error(e);
-          showToast('Could not load a photo glimpse right now.', false);
+          return;
         }
+
+        if (mode === 'near100' || mode === 'near200') {
+          try {
+            if (typeof window.showStreetViewExtraPhotoForTarget === 'function') {
+              const toolId = 'photo';
+              const optionId = mode;
+              // If this tier has already been purchased this round, re-opening must be free
+              // and must not be blocked by coin affordability checks.
+              let alreadyPurchased = false;
+              try {
+                const rs = (typeof window.getRoundStateV1 === 'function') ? window.getRoundStateV1() : null;
+                const photos = rs && Array.isArray(rs.photos) ? rs.photos : [];
+                alreadyPurchased = !!photos.find(p => p && String(p.kind) === String(optionId) && p.url);
+              } catch(e) { alreadyPurchased = false; }
+              let cost = null;
+              try { if (typeof getToolCosts === 'function') cost = getToolCosts(toolId, optionId); } catch(e) { cost = null; }
+              const coinCost = alreadyPurchased ? 0 : ((cost && typeof cost.coin_cost === 'number' && isFinite(cost.coin_cost)) ? (cost.coin_cost|0) : 0);
+
+              if (coinCost > 0 && window.__coins && typeof window.__coins.canAffordCoins === 'function' && !window.__coins.canAffordCoins(coinCost)) {
+                const need = (window.__coins && typeof window.__coins.coinsNeeded === 'function') ? window.__coins.coinsNeeded(coinCost) : coinCost;
+                const step = (typeof COIN_EARN_METERS === 'number' && isFinite(COIN_EARN_METERS) && COIN_EARN_METERS > 0) ? COIN_EARN_METERS : 200;
+                showToast(`Not enough coins. Need ${need} more (walk about ${(need*step)|0}m).`, false);
+                return;
+              }
+
+              const res = await window.showStreetViewExtraPhotoForTarget({ tier: mode, coinCost });
+              if (!res || !res.ok) {
+                showToast('No further photos available for this target.', false);
+              }
+              try { if (typeof window.updateCostBadgesFromConfig === 'function') window.updateCostBadgesFromConfig(); } catch(e) {}
+              try { if (typeof window.updateHUD === 'function') window.updateHUD(); } catch(e) {}
+            } else {
+              showToast('Extra photo module not loaded.', false);
+            }
+          } catch(e) { console.error(e); showToast('Could not fetch an extra photo right now.', false); }
+          return;
+        }
+
+        if (mode === 'uncorrupt') {
+          try {
+            const already = (typeof window.__arePhotosUncorrupted === 'function') ? !!window.__arePhotosUncorrupted() : false;
+            if (already) {
+              showToast('Photos are already uncorrupted for this round.', true);
+              return;
+            }
+
+            const toolId = 'photo';
+            const optionId = 'uncorrupt';
+            let cost = null;
+            try { if (typeof getToolCosts === 'function') cost = getToolCosts(toolId, optionId); } catch(e) { cost = null; }
+            const coinCost = (cost && typeof cost.coin_cost === 'number' && isFinite(cost.coin_cost)) ? (cost.coin_cost|0) : 0;
+
+            if (coinCost > 0 && window.__coins && typeof window.__coins.canAffordCoins === 'function' && !window.__coins.canAffordCoins(coinCost)) {
+              const need = (window.__coins && typeof window.__coins.coinsNeeded === 'function') ? window.__coins.coinsNeeded(coinCost) : coinCost;
+              const step = (typeof COIN_EARN_METERS === 'number' && isFinite(COIN_EARN_METERS) && COIN_EARN_METERS > 0) ? COIN_EARN_METERS : 200;
+              showToast(`Not enough coins. Need ${need} more (walk about ${(need*step)|0}m).`, false);
+              return;
+            }
+
+            if (coinCost > 0 && window.__coins && typeof window.__coins.spendCoins === 'function') {
+              const ok = window.__coins.spendCoins(coinCost, { reason: 'uncorrupt_photos' });
+              if (!ok || !ok.ok) {
+                showToast('Not enough coins.', false);
+                return;
+              }
+            }
+
+            if (typeof window.__setPhotosUncorrupted === 'function') window.__setPhotosUncorrupted(true);
+
+            // If a photo is currently open, update its frame instantly.
+            try {
+              document.querySelectorAll('.photo-glimpse-frame').forEach(el => el.classList.add('is-uncorrupted'));
+              const s = document.getElementById('photoGlitchSlices');
+              if (s) s.innerHTML = '';
+              const b = document.getElementById('photoCorruptBlocks');
+              if (b) b.innerHTML = '';
+            } catch(e) {}
+
+            try { if (typeof window.updateHUD === 'function') window.updateHUD(); } catch(e) {}
+            showToast('All photos uncorrupted for this round.', true);
+          } catch(e) { console.error(e); showToast('Could not uncorrupt photos right now.', false); }
+          return;
+        }
+
+        // Unknown mode
+        return;
+
       });
     });
   }
 
   // Ensure modal handlers are wired (safe to call multiple times)
   try { if (typeof bindPhotoModal === 'function') bindPhotoModal(); } catch(e) {}
+
+  // Phase 2: Lock In Guess + Start New Round
+  try {
+    const btnLock = document.getElementById('btnLockGuess');
+    if (btnLock) {
+      btnLock.addEventListener('click', async () => {
+        try {
+          if (typeof window.lockInGuess === 'function') await window.lockInGuess();
+        } catch(e) { console.error(e); }
+      });
+    }
+    const btnNR = document.getElementById('btnNewRound');
+    if (btnNR) {
+      btnNR.addEventListener('click', () => {
+        try { if (typeof window.closeResultModal === 'function') window.closeResultModal(); } catch(e) {}
+        try { if (typeof window.startNewRound === 'function') window.startNewRound(); } catch(e) {}
+      });
+    }
+    const rClose = document.getElementById('resultModalClose');
+    if (rClose) rClose.addEventListener('click', () => {
+      try { if (typeof window.closeResultModal === 'function') window.closeResultModal(); } catch(e) {}
+    });
+  } catch(e) {}
 
 
 }
